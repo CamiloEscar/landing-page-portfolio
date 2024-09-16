@@ -1,34 +1,182 @@
+"use client"
+import React, { useState } from 'react';
 import { dataContact } from "@/data";
 import Title from "./shared/title";
 import Link from "next/link";
-import ContactForm from "./contact-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { motion, AnimatePresence } from "framer-motion";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Check } from "lucide-react";
+
+const formSchema = z.object({
+  username: z.string().min(2, "Name must be at least 2 characters").max(50, "Name must be less than 50 characters"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(2, "Message must be at least 2 characters").max(200, "Message must be less than 200 characters"),
+});
+
+const ContactForm = () => {
+  const [successForm, setSuccessForm] = useState(false);
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      message: "",
+    },
+  });
+
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setSuccessForm(true);
+  };
+
+  return (
+    <Card className="bg-white dark:bg-gray-800 shadow-xl transition-colors duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <CardContent className="p-8">
+        <Form {...form}>
+          <AnimatePresence mode="wait">
+            {successForm ? (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-center py-8"
+              >
+                <div className="bg-green-100 dark:bg-green-900 rounded-full p-4 inline-block mb-6">
+                  <Check className="w-12 h-12 text-green-500 dark:text-green-300" />
+                </div>
+                <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Message Sent Successfully!</h4>
+                <p className="text-gray-600 dark:text-gray-400 mb-8">Thank you for reaching out. Ill get back to you soon.</p>
+                <Button 
+                  onClick={() => {
+                    setSuccessForm(false);
+                    form.reset();
+                  }}
+                  className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
+                >
+                  Send Another Message
+                </Button>
+              </motion.div>
+            ) : (
+              <motion.form
+                key="form"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Name</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Your name"
+                          {...field}
+                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Your email"
+                          type="email"
+                          {...field}
+                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Your message"
+                          {...field}
+                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg resize-none h-40"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-500" />
+                    </FormItem>
+                  )}
+                />
+                <Button 
+                  type="submit"
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
+                >
+                  Send Message
+                </Button>
+              </motion.form>
+            )}
+          </AnimatePresence>
+        </Form>
+      </CardContent>
+    </Card>
+  );
+};
 
 const Contact = () => {
   return (
-    <div className="p-6 md:px-12 md:py-44 max-w-5xl mx-auto" id="contact">
-      <Title title="contacta conmigo" subtitle="ponte en contacto conmigo" />
+    <section className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300" id="contact">
+      <div className="container mx-auto px-4">
+        <Title title="Contacta conmigo" subtitle="Ponte en contacto conmigo" />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 md:gap-7 mt-8">
-        <div>
-          {dataContact.map((data) => (
-            <div
-              key={data.id}
-              className="flex flex-col items-center dark:bg-slate-800 rounded-lg mb-5 p-8"
-            >
-              {data.icon}
-              <p>{data.title}</p>
-              <p>{data.subtitle}</p>
-              <Link href={data.link} target="_blank">
-                Enviar mensaje
-              </Link>
-            </div>
-          ))}
-        </div>
-        <div className="col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+          <div className="space-y-6">
+            {dataContact.map((data) => (
+              <Card
+                key={data.id}
+                className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 border border-gray-200 dark:border-gray-700"
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="text-primary mb-4 text-3xl">{data.icon}</div>
+                  <h3 className="text-xl font-semibold mb-2">{data.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">{data.subtitle}</p>
+                  <Link
+                    href={data.link}
+                    target="_blank"
+                    className="text-primary hover:text-primary/80 transition-colors duration-300"
+                  >
+                    Enviar mensaje
+                  </Link>
+                </div>
+              </Card>
+            ))}
+          </div>
+          <div className="md:col-span-2">
             <ContactForm />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

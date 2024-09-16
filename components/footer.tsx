@@ -1,23 +1,30 @@
+import React from 'react';
 import Link from "next/link";
 import { Separator } from "./ui/separator";
 
 const Footer = () => {
   return (
-    <footer className="max-w-3xl mx-auto">
-      <div className="md:flex md:justify-between">
-        <div>
-          <h4 className="text-3xl font-bold my-6 md:my-0">Escar Camilo</h4>
-        </div>
-        <div className="px-2 flex justify-between md:gap-8 items-center">
-          <Link href="#about-me">Sobre Mi</Link>
-          <Link href="#skills">Skills</Link>
-          <Link href="#services">Servicios</Link>
-          <Link href="#portfolio">Portfolio</Link>
-          <Link href="#contact">Contacto</Link>
+    <footer className="bg-gray-100 dark:bg-gray-900 py-12 transition-colors duration-300">
+      <div className="container mx-auto px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="md:flex md:justify-between items-center">
+            <div>
+              <h4 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 md:mb-0">Escar Camilo</h4>
+            </div>
+            <nav className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
+              <Link href="#about-me" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Sobre Mi</Link>
+              <Link href="#skills" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Skills</Link>
+              <Link href="#services" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Servicios</Link>
+              <Link href="#portfolio" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Portfolio</Link>
+              <Link href="#contact" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Contacto</Link>
+            </nav>
+          </div>
+          <Separator className="my-8 bg-gray-300 dark:bg-gray-700" />
+          <div className="text-center text-gray-600 dark:text-gray-400">
+            &copy; {new Date().getFullYear()} | Landing Page by CamiloEscar
+          </div>
         </div>
       </div>
-      <Separator className="my-4" />
-      <div className="text-center">&copy; 2024 | Landing Page by CamiloEscar</div>
     </footer>
   );
 };

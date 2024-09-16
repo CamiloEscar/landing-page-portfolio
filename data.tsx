@@ -20,14 +20,14 @@ export const dataAboutMe = [
     id: 1,
     name: "Experiencia",
     icon: <Briefcase />,
-    description: "+4 años de experiencia",
+    description: "+2 años de experiencia",
   },
-  {
-    id: 2,
-    name: "Clientes",
-    icon: <UsersRound />,
-    description: "+200 clientes satisfechos",
-  },
+  // {
+  //   id: 2,
+  //   name: "Clientes",
+  //   icon: <UsersRound />,
+  //   description: "+200 clientes satisfechos",
+  // },
   {
     id: 3,
     name: "Proyectos",
@@ -91,44 +91,93 @@ export const dataSlider = [
 export const dataPortfolio = [
   {
     id: 1,
-    title: "Web Pro",
-    image: "/image-1.jpg",
-    urlGithub: "#!",
-    urlDemo: "#!",
+    title: "Pizzeria Web",
+    image: "/pizzeriadonatello.png",
+    urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
+    urlDemo: "https://pizzeria-donatello.vercel.app/",
   },
   {
     id: 2,
-    title: "Desarrollo Web Ágil",
-    image: "/image-2.jpg",
-    urlGithub: "#!",
-    urlDemo: "#!",
+    title: "Reclamos App",
+    image: "/VDappsheets.png",
+    urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
+    urlDemo: "https://pizzeria-donatello.vercel.app/",
   },
   {
     id: 3,
-    title: "Estrategias Web",
-    image: "/image-3.jpg",
-    urlGithub: "#!",
+    title: "Sala de chat",
+    image: "/image-2.jpg",
+    urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
     urlDemo: "#!",
   },
   {
     id: 4,
-    title: "Navegando Ideas Creativas",
-    image: "/image-4.jpg",
-    urlGithub: "#!",
+    title: "MERN CRUD",
+    image: "/image-3.jpg",
+    urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
     urlDemo: "#!",
   },
   {
     id: 5,
-    title: "Sitios Web Impactantes",
-    image: "/image-5.jpg",
-    urlGithub: "#!",
+    title: "CHAT PDF",
+    image: "/image-4.jpg",
+    urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
     urlDemo: "#!",
   },
   {
     id: 6,
-    title: "Proyectos Web Dinámicos",
+    title: "Google Traductor",
+    image: "/image-5.jpg",
+    urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 7,
+    title: "Reserva Futbol 5",
     image: "/image-6.jpg",
-    urlGithub: "#!",
+    urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 8,
+    title: "Arquitecto Page",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 9,
+    title: "Ambo Web",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
+    urlDemo: "https://ambo-app.vercel.app/",
+  },
+  {
+    id: 10,
+    title: "FlyBondi",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 11,
+    title: "Listado de CryptoCoin",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 12,
+    title: "Listado de CryptoCoin",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
+    urlDemo: "#!",
+  },
+  {
+    id: 13,
+    title: "Trello Clone",
+    image: "/image-6.jpg",
+    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
   },
 ];
@@ -142,31 +191,43 @@ export const dataExperience = [
         name: "HTML",
         subtitle: "Experimentado",
         value: 80,
+        experience: "Más de 5 años de experiencia creando estructuras web semánticas y accesibles.",
+        technologies: ["html5", "semantic-ui", "accessibility"]
       },
       {
         name: "CSS",
         subtitle: "Intermedio",
         value: 75,
+        experience: "Amplio conocimiento en diseño responsivo y animaciones CSS.",
+        technologies: ["css3", "sass", "less", "styled-components"]
       },
       {
         name: "JavaScript",
         subtitle: "Experimentado",
         value: 60,
+        experience: "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA.",
+        technologies: ["javascript", "es6", "typescript", "webpack"]
       },
       {
         name: "Tailwind CSS",
         subtitle: "Experimentado",
         value: 30,
+        experience: "Uso extensivo de Tailwind CSS en proyectos recientes para un desarrollo rápido y eficiente.",
+        technologies: ["tailwindcss", "postcss"]
       },
       {
         name: "React",
         subtitle: "Experimentado",
         value: 60,
+        experience: "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+        technologies: ["react", "redux", "next-js", "gatsby"]
       },
       {
         name: "Bootstrap",
         subtitle: "Basic",
         value: 50,
+        experience: "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
+        technologies: ["bootstrap", "jquery"]
       },
     ],
   },
@@ -178,31 +239,43 @@ export const dataExperience = [
         name: "Node JS",
         subtitle: "Experimentado",
         value: 80,
+        experience: "Desarrollo de APIs RESTful y aplicaciones en tiempo real con Node.js y Express.",
+        technologies: ["nodejs", "express", "socket-io", "npm"]
       },
       {
         name: "Mongo DB",
         subtitle: "Intermedio",
         value: 75,
+        experience: "Diseño e implementación de bases de datos NoSQL para aplicaciones web escalables.",
+        technologies: ["mongodb", "mongoose", "atlas"]
       },
       {
         name: "Python",
         subtitle: "Basic",
         value: 60,
+        experience: "Uso de Python para scripts de automatización y análisis de datos.",
+        technologies: ["python", "pandas", "numpy"]
       },
       {
         name: "MySQL",
         subtitle: "Experimentado",
         value: 60,
+        experience: "Diseño de esquemas de bases de datos relacionales y optimización de consultas.",
+        technologies: ["mysql", "mariadb", "sequelize"]
       },
       {
         name: "PHP",
         subtitle: "Experimentado",
         value: 60,
+        experience: "Desarrollo de aplicaciones web dinámicas y CMS personalizados con PHP.",
+        technologies: ["php", "laravel", "wordpress"]
       },
       {
         name: "Django",
         subtitle: "Basic",
         value: 60,
+        experience: "Creación de aplicaciones web robustas utilizando el framework Django de Python.",
+        technologies: ["django", "python", "postgresql"]
       },
     ],
   },

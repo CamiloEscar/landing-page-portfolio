@@ -1,16 +1,16 @@
-interface TitleProps {
-    title: string;
-    subtitle: string;
+import React from 'react'
+
+export interface TitleProps {
+  title: string
+  subtitle: string
+  className?: string
 }
 
-const Title = (props: TitleProps) => {
-    const {title, subtitle} = props
-    return ( 
-        <div className="flex flex-col items-center">
-            <h3 className="text-gray-400">{title}</h3>
-            <h2 className="text-3xl">{subtitle}</h2>
-        </div>
-     );
+export default function Title({ title, subtitle, className = '' }: TitleProps) {
+  return (
+    <div className={`mb-12 ${className}`}>
+      <h2 className="text-3xl font-bold mb-4">{title}</h2>
+      <p className="text-xl text-gray-600 dark:text-gray-400">{subtitle}</p>
+    </div>
+  )
 }
- 
-export default Title;

@@ -9,6 +9,7 @@ import Services from "@/components/services";
 import Testimonials from "@/components/testimonials";
 import Image from "next/image";
 
+
 export default function Home() {
   return (
     <main className="pb-40">
@@ -18,7 +19,7 @@ export default function Home() {
       <Experience />
       <Services />
       <Portfolio />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <Contact />
       <Footer />
     </main>

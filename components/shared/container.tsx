@@ -1,12 +1,13 @@
+import React from 'react';
+
 interface ContainerProps {
   children: React.ReactNode;
+  className?: string;
 }
 
-const Container = (props: ContainerProps) => {
-  const { children } = props
-  
+const Container: React.FC<ContainerProps> = ({ children, className = '' }) => {
   return (
-    <div className="px-12 py-20 md:px-40 md:py-36 max-w-3xl mx-auto">
+    <div className={`container mx-auto px-4 ${className}`}>
       {children}
     </div>
   );
