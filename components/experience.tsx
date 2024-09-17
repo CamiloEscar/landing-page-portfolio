@@ -153,11 +153,7 @@ export default function Experience() {
                           transition={{ delay: 0.2 }}
                         >
                           <p className="text-sm text-gray-600 dark:text-gray-400">{item.experience}</p>
-                          <ChevronRight className="text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </motion.div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-800 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                          <p className="text-sm text-primary font-medium">Ver más detalles</p>
-                        </div>
                       </CardContent>
                     </Card>
                   ))}

@@ -48,7 +48,7 @@ export default function AboutMe() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="p-6 md:px-12 md:py-20 max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg transition-colors duration-300"
+          className="p-6 md:px-12 md:py-20 max-w-8xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
           <Title title="Sobre mí" subtitle="Conóceme" />
@@ -127,7 +127,7 @@ export default function AboutMe() {
                   <Phone size={20} className="mr-2" /> Contáctame
                 </Button>
                 <Button variant="outline" className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
-                  <ExternalLink size={20} className="mr-2" /> Ver proyectos
+                  <ExternalLink size={20} className="mr-2" href='#portfolio' /> Ver proyectos
                 </Button>
               </motion.div>
             </motion.div>

@@ -22,17 +22,17 @@ export const dataAboutMe = [
     icon: <Briefcase />,
     description: "+2 años de experiencia",
   },
-  // {
-  //   id: 2,
-  //   name: "Clientes",
-  //   icon: <UsersRound />,
-  //   description: "+200 clientes satisfechos",
-  // },
+  {
+    id: 2,
+    name: "Clientes",
+    icon: <UsersRound />,
+    description: "2 clientes satisfechos",
+  },
   {
     id: 3,
     name: "Proyectos",
     icon: <Wrench />,
-    description: "+50 completados",
+    description: "+20 completados",
   },
 ];
 
@@ -191,7 +191,7 @@ export const dataExperience = [
         name: "HTML",
         subtitle: "Experimentado",
         value: 80,
-        experience: "Más de 5 años de experiencia creando estructuras web semánticas y accesibles.",
+        experience: "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
         technologies: ["html5", "semantic-ui", "accessibility"]
       },
       {
