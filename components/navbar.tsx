@@ -1,15 +1,15 @@
 "use client"
-
 import React, { useState, useEffect } from "react";
 import { itemsNavbar } from "@/data";
 import Link from "next/link";
-import { ToogleTheme } from "./toggle-theme";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Sun, Moon, Monitor } from 'lucide-react';
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const { setTheme, theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +20,26 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const cycleTheme = () => {
+    const themes = ['light', 'dark', 'system'] as const;
+    const currentIndex = themes.indexOf(theme as typeof themes[number]);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+  };
+
+  const getThemeIcon = () => {
+    switch (theme) {
+      case 'light':
+        return <Sun className="h-5 w-5" />;
+      case 'dark':
+        return <Moon className="h-5 w-5" />;
+      case 'system':
+        return <Monitor className="h-5 w-5" />;
+      default:
+        return <Sun className="h-5 w-5" />;
+    }
+  };
+
   return (
     <>
       <motion.div
@@ -29,21 +49,28 @@ const Navbar = () => {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         <Button asChild variant="outline" size="icon" className="bg-white/20 hover:bg-white/40 dark:bg-gray-800/20 dark:hover:bg-gray-800/40">
-          <Link href="https://github.com/your-username" target="_blank" rel="noopener noreferrer">
+          <Link href="https://github.com/CamiloEscar" target="_blank" rel="noopener noreferrer">
             <Github className="h-5 w-5" />
           </Link>
         </Button>
         <Button asChild variant="outline" size="icon" className="bg-white/20 hover:bg-white/40 dark:bg-gray-800/20 dark:hover:bg-gray-800/40">
-          <Link href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.linkedin.com/in/camiloescar/" target="_blank" rel="noopener noreferrer">
             <Linkedin className="h-5 w-5" />
           </Link>
         </Button>
         <Button asChild variant="outline" size="icon" className="bg-white/20 hover:bg-white/40 dark:bg-gray-800/20 dark:hover:bg-gray-800/40">
-          <Link href="mailto:your.email@example.com">
+          <Link href="mailto:camiloescar1995@gmail.com">
             <Mail className="h-5 w-5" />
           </Link>
         </Button>
-        <ToogleTheme />
+        <Button
+          variant="outline"
+          size="icon"
+          className="bg-white/20 hover:bg-white/40 dark:bg-gray-800/20 dark:hover:bg-gray-800/40"
+          onClick={cycleTheme}
+        >
+          {getThemeIcon()}
+        </Button>
       </motion.div>
 
       <motion.nav

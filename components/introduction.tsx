@@ -97,7 +97,7 @@ export default function Introduction() {
           >
             <animated.h3
               style={{ transform, opacity }}
-              className="text-2xl mb-4 text-gray-600 dark:text-gray-400 font-light"
+              className="text-2xl mb-4 text-gray-900 dark:text-gray-100 font-light"
             >
               {greetings[currentGreeting]}
             </animated.h3>
@@ -106,12 +106,12 @@ export default function Introduction() {
               Camilo Escar{" "}
               <span className="animate-bounce inline-block">💻</span>
             </h1>
-            <h2 className="text-3xl text-gray-700 dark:text-gray-300 mb-8">
+            <h2 className="text-3xl text-gray-900 dark:text-gray-100 mb-8">
               <Typewriter
                 words={[
                   "Frontend Developer",
                   "Estudiante de Licenciatura en Sistemas",
-                  "Tecnico electricista",
+                  "Tecnico",
                   "Deportista",
                 ]}
                 loop={true}
@@ -122,7 +122,7 @@ export default function Introduction() {
                 delaySpeed={1000}
               />
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-10 max-w-2xl">
+            <p className="text-xl text-gray-900 dark:text-gray-100 mb-10 max-w-2xl">
               Apasionado por crear experiencias web increíbles y funcionales.
               Especializado en React y siempre en busca de nuevos desafíos
               tecnológicos. Transformando ideas en código, un píxel a la vez.
