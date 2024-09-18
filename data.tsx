@@ -88,20 +88,34 @@ export const dataSlider = [
   },
 ];
 
-export const dataPortfolio = [
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  image: string;
+  urlGithub: string;
+  urlDemo: string;
+  description: string;
+  technologies: string[];
+}
+
+export const dataPortfolio: PortfolioItem[] = [
   {
     id: 1,
     title: "Pizzeria Web",
     image: "/pizzeriadonatello.png",
     urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
     urlDemo: "https://pizzeria-donatello.vercel.app/",
+    description: "Una aplicación web moderna para una pizzería, permitiendo a los usuarios explorar el menú y realizar pedidos en línea.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"]
   },
   {
     id: 2,
     title: "Reclamos App",
     image: "/VDappsheets.png",
-    urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
-    urlDemo: "https://pizzeria-donatello.vercel.app/",
+    urlGithub: "#!",
+    urlDemo: "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["AppSheets"]
   },
   {
     id: 3,
@@ -109,6 +123,8 @@ export const dataPortfolio = [
     image: "/image-2.jpg",
     urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"]
   },
   {
     id: 4,
@@ -116,6 +132,8 @@ export const dataPortfolio = [
     image: "/image-3.jpg",
     urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"]
   },
   {
     id: 5,
@@ -123,6 +141,8 @@ export const dataPortfolio = [
     image: "/image-4.jpg",
     urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "HTML", "CSS"]
   },
   {
     id: 6,
@@ -130,6 +150,8 @@ export const dataPortfolio = [
     image: "/image-5.jpg",
     urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["TypeScript", "JavaScript", "CSS", "HTML"]
   },
   {
     id: 7,
@@ -137,6 +159,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"]
   },
   {
     id: 8,
@@ -144,6 +168,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"]
   },
   {
     id: 9,
@@ -151,6 +177,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
     urlDemo: "https://ambo-app.vercel.app/",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"]
   },
   {
     id: 10,
@@ -158,6 +186,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML"]
   },
   {
     id: 11,
@@ -165,6 +195,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML"]
   },
   {
     id: 12,
@@ -172,6 +204,8 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML"]
   },
   {
     id: 13,
@@ -179,13 +213,29 @@ export const dataPortfolio = [
     image: "/image-6.jpg",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
+    description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"]
   },
 ];
 
-export const dataExperience = [
+export interface ExperienceItem {
+  name: string;
+  subtitle: string;
+  value: number;
+  experience: string;
+  technologies: string[];
+}
+
+export interface ExperienceCategory {
+  id: number;
+  title: string;
+  experience: ExperienceItem[];
+}
+
+export const dataExperience: ExperienceCategory[] = [
   {
     id: 1,
-    title: "Frontend Development  💄",
+    title: "Frontend Development 💄",
     experience: [
       {
         name: "HTML",
@@ -233,7 +283,7 @@ export const dataExperience = [
   },
   {
     id: 2,
-    title: "Backend Development  🥷",
+    title: "Backend Development 💻",
     experience: [
       {
         name: "Node JS",
@@ -372,22 +422,22 @@ export const dataContact = [
   {
     id: 1,
     title: "Teléfono",
-    subtitle: "+34 677 66 66 33",
-    link: "tel:+34677666633",
+    subtitle: "+54 9 3442475466",
+    link: "tel:5493442475466",
     icon: <Phone />,
   },
   {
     id: 2,
     title: "Github",
-    subtitle: "github.com/ratasi",
-    link: "github.com/ratasi",
+    subtitle: "github.com/CamiloEscar",
+    link: "github.com/CamiloEscar",
     icon: <Code2 />,
   },
   {
     id: 3,
     title: "Email",
-    subtitle: "email@email.com",
-    link: "mailto:test@test.com",
+    subtitle: "camiloescar1995@gmail.com",
+    link: "mailto:camiloescar1995@gmail.com",
     icon: <Inbox />,
   },
 ];

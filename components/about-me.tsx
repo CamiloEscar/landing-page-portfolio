@@ -41,14 +41,14 @@ export default function AboutMe() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <section className="py-16 md:py-24 bg-transparent transition-colors duration-300">
       <div className="container mx-auto px-4">
         <motion.div 
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="p-6 md:px-12 md:py-20 max-w-8xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-lg transition-colors duration-300"
+          className="p-6 md:px-12 md:py-20 max-w-8xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
           <Title title="Sobre mí" subtitle="Conóceme" />
@@ -97,7 +97,7 @@ export default function AboutMe() {
                     key={data.id}
                     variants={itemVariants}
                     whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
-                    className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-md bg-gray-50 dark:bg-gray-800 transition-all duration-300"
+                    className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-md bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm transition-all duration-300"
                   >
                     <div className="text-green-500 dark:text-green-400 mb-2">{data.icon}</div>
                     <h3 className="font-semibold mb-2 text-sm text-gray-800 dark:text-white">{data.name}</h3>
@@ -127,7 +127,7 @@ export default function AboutMe() {
                   <Phone size={20} className="mr-2" /> Contáctame
                 </Button>
                 <Button variant="outline" className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
-                  <ExternalLink size={20} className="mr-2" href='#portfolio' /> Ver proyectos
+                  <ExternalLink size={20} className="mr-2" /> Ver proyectos
                 </Button>
               </motion.div>
             </motion.div>

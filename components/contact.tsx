@@ -38,7 +38,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="bg-white dark:bg-gray-800 shadow-xl transition-colors duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-xl transition-colors duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
       <CardContent className="p-8">
         <Form {...form}>
           <AnimatePresence mode="wait">
@@ -51,7 +51,7 @@ const ContactForm = () => {
                 transition={{ duration: 0.5 }}
                 className="text-center py-8"
               >
-                <div className="bg-green-100 dark:bg-green-900 rounded-full p-4 inline-block mb-6">
+                <div className="bg-green-100/80 dark:bg-green-900/80 backdrop-blur-sm rounded-full p-4 inline-block mb-6">
                   <Check className="w-12 h-12 text-green-500 dark:text-green-300" />
                 </div>
                 <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Message Sent Successfully!</h4>
@@ -86,7 +86,7 @@ const ContactForm = () => {
                         <Input
                           placeholder="Your name"
                           {...field}
-                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
+                          className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -104,7 +104,7 @@ const ContactForm = () => {
                           placeholder="Your email"
                           type="email"
                           {...field}
-                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
+                          className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -121,7 +121,7 @@ const ContactForm = () => {
                         <Textarea
                           placeholder="Your message"
                           {...field}
-                          className="bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg resize-none h-40"
+                          className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg resize-none h-40"
                         />
                       </FormControl>
                       <FormMessage className="text-red-500" />
@@ -145,7 +145,7 @@ const ContactForm = () => {
 
 const Contact = () => {
   return (
-    <section className="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300" id="contact">
+    <section className="bg-transparent text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300" id="contact">
       <div className="container mx-auto px-4">
         <Title title="Contacta conmigo" subtitle="Ponte en contacto conmigo" />
 
@@ -154,7 +154,7 @@ const Contact = () => {
             {dataContact.map((data) => (
               <Card
                 key={data.id}
-                className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 border border-gray-200 dark:border-gray-700"
+                className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-900 dark:text-white p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 border border-gray-200 dark:border-gray-700"
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="text-primary mb-4 text-3xl">{data.icon}</div>
