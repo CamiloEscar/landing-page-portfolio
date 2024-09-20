@@ -15,13 +15,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
 
 const formSchema = z.object({
-  username: z.string().min(2, "Name must be at least 2 characters").max(50, "Name must be less than 50 characters"),
-  email: z.string().email("Invalid email address"),
-  message: z.string().min(2, "Message must be at least 2 characters").max(200, "Message must be less than 200 characters"),
+  username: z.string().min(2, "El nombre debe tener al menos 2 caracteres").max(50, "El nombre debe tener menos de 50 caracteres"),
+  email: z.string().email("Dirección de correo electrónico inválida"),
+  message: z.string().min(2, "El mensaje debe tener al menos 2 caracteres").max(200, "El mensaje debe tener menos de 200 caracteres"),
 });
 
 const ContactForm = () => {
   const [successForm, setSuccessForm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,8 +34,26 @@ const ContactForm = () => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSuccessForm(true);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        setSuccessForm(true);
+      } else {
+        console.error('Error al enviar el correo electrónico');
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo electrónico:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -54,8 +73,8 @@ const ContactForm = () => {
                 <div className="bg-green-100/80 dark:bg-green-900/80 backdrop-blur-sm rounded-full p-4 inline-block mb-6">
                   <Check className="w-12 h-12 text-green-500 dark:text-green-300" />
                 </div>
-                <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">Message Sent Successfully!</h4>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">Thank you for reaching out. Ill get back to you soon.</p>
+                <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">¡Mensaje Enviado Exitosamente!</h4>
+                <p className="text-gray-600 dark:text-gray-400 mb-8">Gracias por contactarme. Me pondré en contacto contigo pronto.</p>
                 <Button 
                   onClick={() => {
                     setSuccessForm(false);
@@ -63,7 +82,7 @@ const ContactForm = () => {
                   }}
                   className="bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
                 >
-                  Send Another Message
+                  Enviar Otro Mensaje
                 </Button>
               </motion.div>
             ) : (
@@ -81,10 +100,10 @@ const ContactForm = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Name</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Nombre</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Your name"
+                          placeholder="Tu nombre"
                           {...field}
                           className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
                         />
@@ -98,10 +117,10 @@ const ContactForm = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Email</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Correo Electrónico</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Your email"
+                          placeholder="Tu correo electrónico"
                           type="email"
                           {...field}
                           className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg"
@@ -116,10 +135,10 @@ const ContactForm = () => {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Message</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Mensaje</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="Your message"
+                          placeholder="Tu mensaje"
                           {...field}
                           className="bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white focus:ring-primary focus:border-primary rounded-lg py-3 text-lg resize-none h-40"
                         />
@@ -131,8 +150,9 @@ const ContactForm = () => {
                 <Button 
                   type="submit"
                   className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
+                  disabled={isSubmitting}
                 >
-                  Send Message
+                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
                 </Button>
               </motion.form>
             )}
@@ -147,7 +167,7 @@ const Contact = () => {
   return (
     <section className="bg-transparent text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300" id="contact">
       <div className="container mx-auto px-4">
-        <Title title="Contacta conmigo" subtitle="Ponte en contacto conmigo" />
+        <Title title="Contáctame" subtitle="Ponte en contacto conmigo" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           <div className="space-y-6">

@@ -10,8 +10,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, Code, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
-import { FaReact, FaNodeJs } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiVercel } from 'react-icons/si';
+import { FaReact, FaNodeJs, FaPaperPlane } from 'react-icons/fa';
+import { SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiVercel, SiJavascript, SiTypescript, SiCss3, SiHtml5 } from 'react-icons/si';
 
 const getTechIcon = (tech: string) => {
   const iconMap: { [key: string]: JSX.Element } = {
@@ -21,7 +21,14 @@ const getTechIcon = (tech: string) => {
     'Node.js': <FaNodeJs />,
     'MongoDB': <SiMongodb />,
     'Express': <SiExpress />,
-    'Vercel': <SiVercel />
+    'Vercel': <SiVercel />,
+    'JavaScript': <SiJavascript />,
+    'TypeScript': <SiTypescript />,
+    'CSS': <SiCss3 />,
+    'HTML': <SiHtml5 />,
+    'React Native': <SiNextdotjs />,
+    'AppSheets': <FaPaperPlane />
+
   };
   return iconMap[tech] || <Code size={12} />;
 };

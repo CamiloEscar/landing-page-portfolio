@@ -170,7 +170,7 @@ export default function Introduction() {
             </div>
             <div className="flex gap-4 text-gray-600 dark:text-gray-400 items-center">
               <Code size={24} className="text-green-500" />
-              <Cpu size={24} className="text-green-500" />
+              {/* <Cpu size={24} className="text-green-500" /> */}
               <span className="text-lg font-semibold">
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -194,10 +194,10 @@ export default function Introduction() {
           >
             <div className="relative w-100 h-100 mx-auto">
               <Image
-                src="/profile.png?height=480&width=480"
+                src="/profile.webp?height=360&width=360"
                 alt="Profile pic"
-                width={480}
-                height={480}
+                width={300}
+                height={360}
                 className="rounded-full shadow-2xl"
               />
             </div>
