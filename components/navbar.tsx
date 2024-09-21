@@ -1,57 +1,44 @@
 "use client"
+import React, { useState, useEffect } from "react";
+import { itemsNavbar } from "@/data";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin, Mail, Sun, Moon, Monitor } from 'lucide-react';
+import { useTheme } from "next-themes";
 
-import React, { useState, useEffect } from "react"
-import { itemsNavbar } from "@/data"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Sun, Moon, Monitor, Globe } from 'lucide-react'
-import { useTheme } from "next-themes"
-import { useRouter, usePathname } from 'next/navigation'
-import { useLocale, useTranslations } from 'next-intl'
-
-export default function Navbar() {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const { setTheme, theme } = useTheme()
-  const router = useRouter()
-  const pathname = usePathname()
-  const t = useTranslations('Navbar')
-  const locale = useLocale()
+const Navbar = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const { setTheme, theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY)
-    }
+      setScrollPosition(window.scrollY);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const cycleTheme = () => {
-    const themes = ['light', 'dark', 'system'] as const
-    const currentIndex = themes.indexOf(theme as typeof themes[number])
-    const nextIndex = (currentIndex + 1) % themes.length
-    setTheme(themes[nextIndex])
-  }
+    const themes = ['light', 'dark', 'system'] as const;
+    const currentIndex = themes.indexOf(theme as typeof themes[number]);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+  };
 
   const getThemeIcon = () => {
     switch (theme) {
       case 'light':
-        return <Sun className="h-5 w-5" />
+        return <Sun className="h-5 w-5" />;
       case 'dark':
-        return <Moon className="h-5 w-5" />
+        return <Moon className="h-5 w-5" />;
       case 'system':
-        return <Monitor className="h-5 w-5" />
+        return <Monitor className="h-5 w-5" />;
       default:
-        return <Sun className="h-5 w-5" />
+        return <Sun className="h-5 w-5" />;
     }
-  }
-
-  const toggleLanguage = () => {
-    const newLocale = locale === 'en' ? 'es' : 'en'
-    const newPathname = pathname.replace(`/${locale}`, `/${newLocale}`)
-    router.push(newPathname)
-  }
+  };
 
   return (
     <>
@@ -83,14 +70,6 @@ export default function Navbar() {
           onClick={cycleTheme}
         >
           {getThemeIcon()}
-        </Button>
-        <Button
-          variant="outline"
-          size="icon"
-          className="bg-white/20 hover:bg-white/40 dark:bg-gray-800/20 dark:hover:bg-gray-800/40"
-          onClick={toggleLanguage}
-        >
-          <Globe className="h-5 w-5" />
         </Button>
       </motion.div>
 
@@ -129,5 +108,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
     </>
-  )
-}
+  );
+};
+
+export default Navbar;

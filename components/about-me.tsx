@@ -1,12 +1,10 @@
-"use client"
-
 import React, { useEffect, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import useEmblaCarousel from 'embla-carousel-react'
 import Image from "next/image"
 import { useTheme } from "next-themes"
-import { Phone, ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
+import {ChevronDown, ChevronUp, Monitor, Globe, Phone, ExternalLink, Calendar, Building } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Title from "./shared/title"
 import {
@@ -20,13 +18,13 @@ import {
 type Skill = {
   id: string | number;
   name: string;
-  icon: string | React.ReactNode;
+  icon: React.ReactNode;
   description: string;
 }
 
 const additionalSkills: Skill[] = [
-  { id: 'skill-pc-repair', name: 'Reparación de PC', icon: '🖥️', description: 'Experiencia en diagnóstico y reparación de computadoras' },
-  { id: 'skill-english', name: 'Inglés', icon: '🌐', description: 'Nivel básico (Lecto comprensión)' },
+  { id: 'skill-pc-repair', name: 'Reparación de PC', icon: <Monitor className="w-6 h-6 text-green-500" />, description: 'Experiencia en diagnóstico y reparación de computadoras' },
+  { id: 'skill-english', name: 'Inglés', icon: <Globe className="w-6 h-6 text-green-500" />, description: 'Nivel básico (Lecto comprensión)' },
 ]
 
 const allSkills: Skill[] = [...dataAboutMe as Skill[], ...additionalSkills]
@@ -75,6 +73,35 @@ const SectionToggle: React.FC<SectionToggleProps> = ({ title, section, expandedS
       <ChevronDown className="w-5 h-5" aria-hidden="true" />
     )}
   </button>
+)
+
+interface TimelineItemProps {
+  title: string;
+  subtitle: string;
+  period: string;
+  description: string;
+  isEducation?: boolean;
+}
+
+const TimelineItem: React.FC<TimelineItemProps> = ({ title, subtitle, period, description, isEducation }) => (
+  <div className="mb-6 relative">
+    <div className="absolute left-0 top-0 w-0.5 h-full bg-green-200 dark:bg-green-800"></div>
+    <div className="flex items-center mb-2 ml-6">
+      <div className="absolute left-0 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+        {isEducation ? (
+          <Calendar className="w-3 h-3 text-white" />
+        ) : (
+          <Building className="w-3 h-3 text-white" />
+        )}
+      </div>
+      <h3 className="font-bold text-gray-800 dark:text-white text-base ml-4">{title}</h3>
+    </div>
+    <div className="ml-10">
+      <h4 className="text-green-600 dark:text-green-400 text-sm font-semibold">{subtitle}</h4>
+      <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">{period}</p>
+      <p className="text-gray-700 dark:text-gray-300 text-sm">{description}</p>
+    </div>
+  </div>
 )
 
 export default function AboutMe() {
@@ -131,7 +158,7 @@ export default function AboutMe() {
           className="p-4 md:p-8 max-w-7xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
-          <Title title="Sobre mí" subtitle="" className="mb-6" />
+          <Title title="Sobre mí" subtitle="Mis actividades:" className="mb-6" />
 
           <div className="flex flex-col lg:flex-row gap-6">
             <motion.div variants={itemVariants} className="lg:w-1/3">
@@ -205,95 +232,62 @@ export default function AboutMe() {
               </div>
 
               <div className="space-y-4">
-                <SectionToggle 
-                  title="Educación" 
-                  section="education"
+                {/* <SectionToggle 
+                  title="Educación y Experiencia Laboral" 
+                  section="education-experience"
                   expandedSection={expandedSection}
                   toggleSection={toggleSection}
-                />
+                /> */}
                 <AnimatePresence initial={false}>
-                  {expandedSection === "education" && (
+                  {/* {expandedSection === "education-experience" && ( */}
                     <motion.div
-                      key="education"
+                      key="education-experience"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="overflow-hidden bg-white dark:bg-gray-800 p-4 rounded-lg mt-2"
-                      id="education-content"
+                      className="overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-lg mt-2"
+                      id="education-experience-content"
                     >
-                      <div className="space-y-4">
-                        {educationTimeline.map((edu) => (
-                          <div
-                            key={edu.id}
-                            className="border-l-2 border-green-500 pl-3"
-                          >
-                            <h4 className="font-semibold text-gray-800 dark:text-white text-sm">
-                              {edu.title}
-                            </h4>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              {edu.institution} | {edu.period}
-                            </p>
-                            <p className="text-xs text-gray-700 dark:text-gray-300">
-                              {edu.description}
-                            </p>
-                          </div>
-                        ))}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="relative">
+                          <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <Calendar className="w-5 h-5 mr-2 text-green-500" />
+                            Educación
+                          </h3>
+                          {educationTimeline.map((edu) => (
+                            <TimelineItem
+                              key={edu.id}
+                              title={edu.title}
+                              subtitle={edu.institution}
+                              period={edu.period}
+                              description={edu.description}
+                              isEducation={true}
+                            />
+                          ))}
+                        </div>
+                        <div className="relative">
+                          <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                            <Building className="w-5 h-5 mr-2 text-green-500" />
+                            Experiencia Laboral
+                          </h3>
+                          {workExperience.map((exp) => (
+                            <TimelineItem
+                              key={exp.id}
+                              title={exp.position}
+                              subtitle={exp.company}
+                              period={exp.period}
+                              description={exp.description}
+                              isEducation={false}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </motion.div>
-                  )}
+                    
+                  {/* ) */}
+                  
                 </AnimatePresence>
-
-                <SectionToggle 
-                  title="Experiencia Laboral" 
-                  section="experience"
-                  expandedSection={expandedSection}
-                  toggleSection={toggleSection}
-                />
-                <AnimatePresence initial={false}>
-                  {expandedSection === "experience" && (
-                    <motion.div
-                      key="experience"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden bg-white dark:bg-gray-800 p-4 rounded-lg mt-2"
-                      id="experience-content"
-                    >
-                      <div className="space-y-4">
-                        {workExperience.map((exp) => (
-                          <div
-                            key={exp.id}
-                            className="border-l-2 border-green-500 pl-3"
-                          >
-                            <h4 className="font-semibold text-gray-800 dark:text-white text-sm">
-                              {exp.position}
-                            </h4>
-                            <p className="text-xs text-gray-600 dark:text-gray-400">
-                              {exp.company} | {exp.period}
-                            </p>
-                            <p className="text-xs text-gray-700 dark:text-gray-300">
-                              {exp.description}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-green-500 hover:bg-green-600 text-white transition-all duration-300 transform hover:scale-105 w-full sm:w-auto">
-                  <Phone size={16} className="mr-2" aria-hidden="true" /> Contáctame
-                </Button>
-                <Button
-                  variant="outline"
-                  className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
-                >
-                  <ExternalLink size={16} className="mr-2" aria-hidden="true" /> Ver proyectos
-                </Button>
               </div>
             </motion.div>
           </div>
