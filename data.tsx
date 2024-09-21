@@ -13,6 +13,7 @@ import {
   UserRound,
   UsersRound,
   Wrench,
+  GraduationCap
 } from "lucide-react";
 
 export const dataAboutMe = [
@@ -20,19 +21,66 @@ export const dataAboutMe = [
     id: 1,
     name: "Experiencia",
     icon: <Briefcase />,
-    description: "+2 años de experiencia",
+    description: "+6 años de experiencia",
   },
   {
     id: 2,
     name: "Clientes",
     icon: <UsersRound />,
-    description: "2 clientes satisfechos",
+    description: "Múltiples clientes satisfechos",
   },
   {
     id: 3,
     name: "Proyectos",
     icon: <Wrench />,
     description: "+20 completados",
+  },
+  {
+    id: 4,
+    name: "Educación",
+    icon: <GraduationCap />,
+    description: "Lic. en Sistemas de Información (en curso)",
+  },
+];
+
+export const educationTimeline = [
+  {
+    id: 1,
+    title: "Lic. en Sistemas de Información",
+    institution: "UADER FCyT",
+    period: "2021 - Actualidad",
+    description: "Estudios universitarios en curso",
+  },
+  {
+    id: 2,
+    title: "Técnico electricista con orientación a electrónica industrial",
+    institution: "EET N°2 'Francisco Ramirez'",
+    period: "Graduado en 2013",
+    description: "Educación secundaria técnica",
+  },
+];
+
+export const workExperience = [
+  {
+    id: 1,
+    position: "Técnico Instalador de Fibra Óptica",
+    company: "Video Digital SRL",
+    period: "2018 - Actualidad",
+    description: "Instalación y servicio técnico de fibra óptica FTTH, a cargo de la red in situ. Conocimientos en OLT y Mikrotik. Experiencia en atención al cliente y manejo de software de gestión.",
+  },
+  {
+    id: 2,
+    position: "Reposición y Ventas",
+    company: "Coca Cola Andina",
+    period: "2017 - 2018",
+    description: "Experiencia en reposición y ventas. Habilidad en gestión de inventario y atención al cliente. Logros en ventas y servicio.",
+  },
+  {
+    id: 3,
+    position: "Instalador de Aires Acondicionados y Montajes Eléctricos",
+    company: "MABSER",
+    period: "2016 - 2018",
+    description: "Experiencia en instalación de aires acondicionados, redes y montajes eléctricos.",
   },
 ];
 
@@ -88,6 +136,12 @@ export const dataSlider = [
   },
 ];
 
+export const aboutMe = {
+  age: 29,
+  location: "Concepción del Uruguay, Entre Ríos, Argentina",
+  description: "Técnico y estudiante de Sistemas con un enfoque proactivo, organizado y responsable. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad de prácticas laborales en un entorno desafiante, donde pueda seguir expandiendo mis conocimientos y aplicando mis habilidades en Tecnología de la Información.",
+};
+
 export interface PortfolioItem {
   id: number;
   title: string;
@@ -120,7 +174,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 3,
     title: "Sala de chat",
-    image: "/image-2.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -129,7 +183,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 4,
     title: "MERN CRUD",
-    image: "/image-3.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -138,7 +192,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 5,
     title: "CHAT PDF",
-    image: "/image-4.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -147,7 +201,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 6,
     title: "Google Traductor",
-    image: "/image-5.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -156,7 +210,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 7,
     title: "Reserva Futbol 5",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -165,7 +219,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 8,
     title: "Arquitecto Page",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -174,7 +228,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 9,
     title: "Ambo Web",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
     urlDemo: "https://ambo-app.vercel.app/",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -183,7 +237,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 10,
     title: "FlyBondi",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -192,7 +246,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 11,
     title: "Listado de CryptoCoin",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -201,7 +255,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 12,
     title: "Listado de CryptoCoin",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
@@ -210,7 +264,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 13,
     title: "Trello Clone",
-    image: "/image-6.jpg",
+    image: "/",
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "#!",
     description: "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",

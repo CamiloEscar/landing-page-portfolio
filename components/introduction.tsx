@@ -194,11 +194,12 @@ export default function Introduction() {
           >
             <div className="relative w-100 h-100 mx-auto">
               <Image
-                src="/profile.webp?height=360&width=360"
-                alt="Profile pic"
-                width={300}
-                height={360}
-                className="rounded-full shadow-2xl"
+                src="/profile.webp"
+                width={240}
+                height={240}
+                style={{ width: "auto", height: "auto" }}
+                alt="Profile"
+                priority
               />
             </div>
           </motion.div>
