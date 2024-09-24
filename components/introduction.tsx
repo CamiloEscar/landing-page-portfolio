@@ -16,7 +16,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
 import { Typewriter } from "react-simple-typewriter";
-import { useSpring, animated } from "@react-spring/web";
 import {
   Dialog,
   DialogContent,
@@ -45,26 +44,12 @@ const skills = [
 
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
-  const [currentGreeting, setCurrentGreeting] = useState(0);
+  const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const { theme } = useTheme();
 
-  const { transform, opacity } = useSpring({
-    transform: `translateY(0%)`,
-    opacity: 1,
-    from: { transform: `translateY(-50%)`, opacity: 0 },
-    reset: true,
-    config: { duration: 800 },
-  });
-
   const cycleGreeting = useCallback(() => {
-    setCurrentGreeting((prevIndex) => {
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * greetings.length);
-      } while (newIndex === prevIndex);
-      return newIndex;
-    });
+    setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
   }, []);
 
   useEffect(() => {
@@ -102,12 +87,18 @@ export default function Introduction() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <animated.h3
-              style={{ transform, opacity }}
-              className="text-xl sm:text-2xl mb-4 text-gray-700 dark:text-gray-300 font-light"
-            >
-              {greetings[currentGreeting]}
-            </animated.h3>
+            <AnimatePresence mode="wait">
+              <motion.h3
+                key={currentGreetingIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-xl sm:text-2xl mb-4 text-gray-700 dark:text-gray-300 font-light"
+              >
+                {greetings[currentGreetingIndex]}
+              </motion.h3>
+            </AnimatePresence>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-green-600 via-green-500 to-teal-400 text-transparent bg-clip-text">
               Camilo Escar{" "}
@@ -130,9 +121,10 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl">
-              Desarrollador web y técnico en sistemas con experiencia en 
-              React, Node.js y bases de datos. Especializado en soluciones 
-              eficientes y mejora continua de habilidades técnicas.
+              Desarrollador web full stack con sólida experiencia en React, Node.js y bases de datos. 
+              Especializado en crear soluciones eficientes y escalables, con un enfoque en la mejora 
+              continua y la adopción de nuevas tecnologías. Comprometido con la entrega de proyectos 
+              de alta calidad que satisfacen las necesidades del cliente y mejoran la experiencia del usuario.
             </p>
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
               <motion.div variants={buttonVariants} whileHover="hover">

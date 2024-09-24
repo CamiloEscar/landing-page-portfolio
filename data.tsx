@@ -141,19 +141,19 @@ export const itemsNavbar = [
 export const dataSlider = [
   {
     id: 1,
-    url: "/slider-1.jpg",
+    url: "/slider-1.webp",
   },
   {
     id: 2,
-    url: "/slider-2.jpg",
+    url: "/slider-2.webp",
   },
   {
     id: 3,
-    url: "/slider-3.jpg",
+    url: "/slider-3.webp",
   },
   {
     id: 4,
-    url: "/slider-4.jpg",
+    url: "/slider-4.webp",
   },
 ];
 
@@ -178,7 +178,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 1,
     title: "Pizzeria Web",
-    image: "/pizzeriadonatello.png",
+    image: "/pizzeriadonatello.webp",
     urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
     urlDemo: "https://pizzeria-donatello.vercel.app/",
     description:
@@ -188,7 +188,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 2,
     title: "Reclamos App",
-    image: "/VDappsheets.png",
+    image: "/VDappsheets.webp",
     urlGithub: "#!",
     urlDemo:
       "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481",
@@ -199,7 +199,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 3,
     title: "Sala de chat",
-    image: "/",
+    image: "/chattiemporealnode.webp",
     urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
     urlDemo: "#!",
     description:
@@ -209,7 +209,7 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 4,
     title: "MERN CRUD",
-    image: "/",
+    image: "/MERNCRUDAUTH.webp",
     urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
     urlDemo: "#!",
     description:
@@ -219,27 +219,27 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 5,
     title: "CHAT PDF",
-    image: "/",
-    urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
+    image: "/chatpdf.webp",
+    urlGithub: "https://github.com/CamiloEscar/chat-con-pdf.git",
     urlDemo: "#!",
     description:
       "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["JavaScript", "HTML", "CSS"],
+    technologies: ["Svelte", "Astro", "TypeScript", "JavaScript"],
   },
   {
     id: 6,
-    title: "Google Traductor",
-    image: "/",
+    title: "Google Traductor Clon",
+    image: "/googletraductor.webp",
     urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
     urlDemo: "#!",
     description:
       "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["TypeScript", "JavaScript", "CSS", "HTML"],
+    technologies: ["Vite", "OpenAI", "TypeScript"],
   },
   {
     id: 7,
     title: "Reserva Futbol 5",
-    image: "/",
+    image: "/bookingappf5.webp",
     urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
     urlDemo: "#!",
     description:
@@ -249,17 +249,67 @@ export const dataPortfolio: PortfolioItem[] = [
   {
     id: 8,
     title: "Arquitecto Page",
-    image: "/",
+    image: "/arquitectolanding.webp",
     urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
-    urlDemo: "#!",
+    urlDemo: "https://landing-page-arquitecto.vercel.app/",
     description:
       "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+    technologies: [ "Vercel","Tailwind CSS", "Astro", "Vite", "bun"],
   },
   {
     id: 9,
+    title: "FlyBondi",
+    image: "/flybondi.webp",
+    urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
+    urlDemo: "https://flybondi-challenge.netlify.app/",
+    description:
+    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML", "React", "Axios", "Vite"],
+  },
+  {
+    id: 10,
+    title: "Listado de CryptoCoin",
+    image: "/spavanillacoin.webp",
+    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
+    urlDemo: "https://spavanillacoin.netlify.app/",
+    description:
+    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML"],
+  },
+  {
+    id: 11,
+    title: "Imagen Compresor",
+    image: "/imagencompressor.webp",
+    urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
+    urlDemo: "https://imagencompressor.netlify.app/",
+    description:
+    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["JavaScript", "CSS", "HTML"],
+  },
+  {
+    id: 12,
+    title: "Trello Clone",
+    image: "/trelloClon.webp",
+    urlGithub: "#!",
+    urlDemo: "https://prueba-trello.vercel.app/",
+    description:
+    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
+    id: 13,
+    title: "Fulbito-F5",
+    image: "/fulbitof5.webp",
+    urlGithub: "#!",
+    urlDemo: "https://fulbito-f5.vercel.app/",
+    description:
+    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
+    id: 14,
     title: "Ambo Web",
-    image: "/",
+    image: "/ambo.webp",
     urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
     urlDemo: "https://ambo-app.vercel.app/",
     description:
@@ -267,41 +317,11 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
   },
   {
-    id: 10,
-    title: "FlyBondi",
-    image: "/",
-    urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
-    urlDemo: "#!",
-    description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["JavaScript", "CSS", "HTML"],
-  },
-  {
-    id: 11,
-    title: "Listado de CryptoCoin",
-    image: "/",
-    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
-    urlDemo: "#!",
-    description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["JavaScript", "CSS", "HTML"],
-  },
-  {
-    id: 12,
-    title: "Listado de CryptoCoin",
-    image: "/",
-    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
-    urlDemo: "#!",
-    description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
-    technologies: ["JavaScript", "CSS", "HTML"],
-  },
-  {
-    id: 13,
-    title: "Trello Clone",
-    image: "/",
-    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
-    urlDemo: "#!",
+    id: 15,
+    title: "Clima Json",
+    image: "/clima.webp",
+    urlGithub: "#!",
+    urlDemo: "https://pruebaclima-api.netlify.app/",
     description:
       "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
@@ -355,12 +375,7 @@ export const dataExperience: ExperienceCategory[] = [
         value: 60,
         experience:
           "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
-        technologies: [
-          "javascript",
-          "typescript",
-          "webpack",
-          "babel",
-        ],
+        technologies: ["javascript", "typescript", "webpack", "babel"],
       },
       {
         name: "React",
@@ -460,13 +475,7 @@ export const dataExperience: ExperienceCategory[] = [
         value: 60,
         experience:
           "Uso de Python para desarrollo de web con Django y Flask, scripts de automatización y análisis de datos.",
-        technologies: [
-          "python",
-          "django",
-          "flask",
-          "pandas",
-          "numpy",
-        ],
+        technologies: ["python", "django", "flask", "pandas", "numpy"],
       },
       {
         name: "PHP",
@@ -482,12 +491,14 @@ export const dataExperience: ExperienceCategory[] = [
         value: 20,
         experience:
           "Desarrollo de aplicaciones empresariales y microservicios con Spring Boot y JPA.",
-        technologies: ["java",
-          "socket", 
-          "spring", 
+        technologies: [
+          "java",
+          "socket",
+          "spring",
           "hibernate",
-          "maven", 
-          "junit"],
+          "maven",
+          "junit",
+        ],
       },
       {
         name: "DevOps",
@@ -510,10 +521,7 @@ export const dataExperience: ExperienceCategory[] = [
         value: 20,
         experience:
           "Implementación de prácticas de seguridad web, autenticación y autorización en aplicaciones.",
-        technologies: [
-          "oauth",
-          "jwt",
-        ],
+        technologies: ["oauth", "jwt"],
       },
     ],
   },
