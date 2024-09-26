@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Github, ExternalLink, Code, ChevronDown, ChevronUp, Search } from "lucide-react";
 import { useTheme } from "next-themes";
 import { FaReact, FaNodeJs, FaPaperPlane } from 'react-icons/fa';
-import { SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiVercel, SiJavascript, SiTypescript, SiCss3, SiHtml5, SiOpenai, SiAstro, SiSvelte, SiVite, SiBun, SiAxios} from 'react-icons/si';
+import { SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiVercel, SiJavascript, SiTypescript, SiCss3, SiHtml5, SiOpenai, SiAstro, SiSvelte, SiVite, SiBun, SiAxios, SiNativescript, SiFlutter, SiKotlin} from 'react-icons/si';
 import { Input } from "@/components/ui/input";
 
 const ITEMS_PER_PAGE = 6;
@@ -35,7 +35,10 @@ const iconMap: { [key: string]: JSX.Element } = {
   'Svelte': <SiSvelte />,
   'Vite': <SiVite />,
   'bun': <SiBun />,
-  'Axios': <SiAxios />
+  'Axios': <SiAxios />,
+  'react-native': <SiNativescript />,
+  'flutter': <SiFlutter />,
+  'kotlin': <SiKotlin />,
 };
 
 const getTechIcon = (tech: string) => {

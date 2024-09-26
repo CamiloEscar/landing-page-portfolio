@@ -25,7 +25,7 @@ export const dataAboutMe = [
     id: 1,
     name: "Experiencia",
     icon: <Briefcase />,
-    description: "+6 años de experiencia",
+    description: "+2 años de experiencia",
   },
   {
     id: 2,
@@ -37,7 +37,7 @@ export const dataAboutMe = [
     id: 3,
     name: "Proyectos",
     icon: <Wrench />,
-    description: "+20 completados",
+    description: "+10 completados",
   },
   {
     id: 4,
@@ -114,25 +114,25 @@ export const itemsNavbar = [
   },
   {
     id: 2,
-    title: "User",
+    title: "Sobre Mi",
     icon: <UserRound size={20} />,
     link: "#about-me",
   },
   {
     id: 3,
-    title: "Book",
-    icon: <BookText size={20} />,
-    link: "#services",
-  },
-  {
-    id: 4,
-    title: "Target",
+    title: "Proyectos",
     icon: <CodeSquare size={20} />,
     link: "#portfolio",
   },
   {
+    id: 4,
+    title: "Servicio",
+    icon: <BookText size={20} />,
+    link: "#services",
+  },
+  {
     id: 5,
-    title: "Home",
+    title: "Contacto",
     icon: <Mail size={20} />,
     link: "#contact",
   },
@@ -358,7 +358,7 @@ export const dataExperience: ExperienceCategory[] = [
       {
         name: "CSS",
         subtitle: "Intermedio",
-        value: 75,
+        value: 60,
         experience:
           "Amplio conocimiento en diseño responsivo y animaciones CSS.",
         technologies: [
@@ -390,22 +390,22 @@ export const dataExperience: ExperienceCategory[] = [
           // "gatsby"
         ],
       },
-      {
-        name: "Bootstrap",
-        subtitle: "Basic",
-        value: 50,
-        experience:
-          "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
-        technologies: ["bootstrap", "jquery"],
-      },
-      {
-        name: "Pascal",
-        subtitle: "Basic",
-        value: 50,
-        experience:
-          "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
-        technologies: ["bootstrap", "jquery"],
-      },
+      // {
+      //   name: "Bootstrap",
+      //   subtitle: "Basic",
+      //   value: 50,
+      //   experience:
+      //     "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
+      //   technologies: ["bootstrap", "jquery"],
+      // },
+      // {
+      //   name: "Pascal",
+      //   subtitle: "Basic",
+      //   value: 50,
+      //   experience:
+      //     "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
+      //   technologies: ["bootstrap", "jquery"],
+      // },
 
       // {
       //   name: "Vue.js",
@@ -455,7 +455,7 @@ export const dataExperience: ExperienceCategory[] = [
       {
         name: "Bases de Datos",
         subtitle: "Intermedio",
-        value: 75,
+        value: 50,
         experience:
           "Diseño e implementación de bases de datos SQL y NoSQL, optimización de consultas y modelado de datos.",
         technologies: [
@@ -472,7 +472,7 @@ export const dataExperience: ExperienceCategory[] = [
       {
         name: "Python",
         subtitle: "Basic",
-        value: 60,
+        value: 40,
         experience:
           "Uso de Python para desarrollo de web con Django y Flask, scripts de automatización y análisis de datos.",
         technologies: ["python", "django", "flask", "pandas", "numpy"],
@@ -485,36 +485,36 @@ export const dataExperience: ExperienceCategory[] = [
           "Desarrollo de aplicaciones web dinámicas y CMS personalizados con PHP.",
         technologies: ["php", "laravel", "wordpress"],
       },
-      {
-        name: "Java",
-        subtitle: "Basico",
-        value: 20,
-        experience:
-          "Desarrollo de aplicaciones empresariales y microservicios con Spring Boot y JPA.",
-        technologies: [
-          "java",
-          "socket",
-          "spring",
-          "hibernate",
-          "maven",
-          "junit",
-        ],
-      },
-      {
-        name: "DevOps",
-        subtitle: "Basico",
-        value: 20,
-        experience:
-          "Implementación de CI/CD, containerización de aplicaciones y despliegue en la nube.",
-        technologies: [
-          "docker",
-          "kubernetes",
-          "jenkins",
-          "aws",
-          "azure",
-          "gitlab-ci",
-        ],
-      },
+      // {
+      //   name: "Java",
+      //   subtitle: "Basico",
+      //   value: 20,
+      //   experience:
+      //     "Desarrollo de aplicaciones empresariales y microservicios con Spring Boot y JPA.",
+      //   technologies: [
+      //     "java",
+      //     "socket",
+      //     "spring",
+      //     "hibernate",
+      //     "maven",
+      //     "junit",
+      //   ],
+      // },
+      // {
+      //   name: "DevOps",
+      //   subtitle: "Basico",
+      //   value: 20,
+      //   experience:
+      //     "Implementación de CI/CD, containerización de aplicaciones y despliegue en la nube.",
+      //   technologies: [
+      //     "docker",
+      //     "kubernetes",
+      //     "jenkins",
+      //     "aws",
+      //     "azure",
+      //     "gitlab-ci",
+      //   ],
+      // },
       {
         name: "Seguridad Web",
         subtitle: "Básico",

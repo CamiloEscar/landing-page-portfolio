@@ -83,6 +83,9 @@ import {
   SiJunit5,
   SiAuth0,
   SiJsonwebtokens,
+  SiFlutter,
+  SiKotlin,
+  SiReact,
 } from "react-icons/si";
 
 type IconMapKey =
@@ -146,6 +149,10 @@ type IconMapKey =
   | "babel"
   | "jwt"
   | "socket"
+  | "react-native"
+  | "kotlin"
+  | "flutter"
+
 
 
 const iconMap: Record<IconMapKey, React.ReactElement> = {
@@ -208,7 +215,10 @@ const iconMap: Record<IconMapKey, React.ReactElement> = {
   oauth: <SiAuth0 className="w-5 h-5" />,
   babel: <SiBabel className="w-5 h-5" />,
   jwt: <SiJsonwebtokens className="w-5 h-5" />,
-  socket: <SiSocketdotio className="w-5 h-5" />
+  socket: <SiSocketdotio className="w-5 h-5" />,
+  "react-native": <SiReact className="w-5 h-5" />,
+  flutter: <SiFlutter className="w-5 h-5" />,
+  kotlin: <SiKotlin className="w-5 h-5" />,
 
 };
 

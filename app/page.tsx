@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import React, { Suspense, lazy } from 'react';
-import AnimatedBackground from '@/components/AnimatedBackground';
+import React, { Suspense, lazy } from "react";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import Navbar from "@/components/navbar";
 import Introduction from "@/components/introduction";
 import Loading from "@/components/loading"; // You'll need to create this component
@@ -24,13 +24,13 @@ export default function Home() {
           <AboutMe />
         </Suspense>
         <Suspense fallback={<Loading />}>
+          <Portfolio />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
           <Experience />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <Services />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <Portfolio />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <Contact />

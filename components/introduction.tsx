@@ -109,7 +109,6 @@ export default function Introduction() {
                 words={[
                   "Frontend Developer",
                   "Estudiante de Sistemas",
-                  "Técnico en Fibra Óptica",
                   "Full Stack Developer",
                 ]}
                 loop={true}
@@ -121,10 +120,9 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl">
-              Desarrollador web full stack con sólida experiencia en React, Node.js y bases de datos. 
+              Desarrollador web full stack con experiencia en React, Node.js y bases de datos. 
               Especializado en crear soluciones eficientes y escalables, con un enfoque en la mejora 
-              continua y la adopción de nuevas tecnologías. Comprometido con la entrega de proyectos 
-              de alta calidad que satisfacen las necesidades del cliente y mejoran la experiencia del usuario.
+              continua y la adopción de nuevas tecnologías.
             </p>
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
               <motion.div variants={buttonVariants} whileHover="hover">
