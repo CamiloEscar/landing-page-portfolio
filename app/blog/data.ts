@@ -579,6 +579,15 @@ export const dataBlog: BlogPost[] = [
   {
     slug: "integrar-postgresql-con-react",
     title: "Cómo integrar PostgreSQL con una aplicación React",
+    image: "/blog/react-postgresql.webp",
+    date: "2024-09-26",
+    tags: ["React", "PostgreSQL", "API", "Node.js", "Fullstack"],
+    type: "tutorial",
+    author: {
+      name: "Camilo Escar",
+      avatar: "/camilo-avatar.webp",
+    },
+    readingTime: "8 min",
     excerpt:
       "Aprende a conectar tu aplicación React con una base de datos PostgreSQL utilizando una API REST.",
     content: `
@@ -687,15 +696,7 @@ export const dataBlog: BlogPost[] = [
       <h3>Conclusión</h3>
       <p>¡Felicidades! Ahora tienes una aplicación React que está conectada a una base de datos PostgreSQL a través de una API Node.js. Este enfoque es ideal para aplicaciones modernas donde el frontend y el backend están desacoplados, permitiendo un desarrollo más ágil y escalable.</p>
     `,
-    image: "/react-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["React", "PostgreSQL", "API", "Node.js", "Fullstack"],
-    type: "tutorial",
-    author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
-    },
-    readingTime: "8 min",
+
   },
   //control-versiones-bd-postgresql
   {

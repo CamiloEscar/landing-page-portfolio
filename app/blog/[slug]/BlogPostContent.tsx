@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -42,10 +43,6 @@ interface TocItem {
   level: number;
 }
 
-interface BlogPostContentProps {
-  post: BlogPost;
-}
-
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -53,6 +50,39 @@ function slugify(text: string): string {
     .replace(/[\s_-]+/g, "-")
     .trim();
 }
+
+const useProcessedContent = (content: string) => {
+  const [processedContent, setProcessedContent] = useState(content);
+
+  useEffect(() => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/html');
+    
+    doc.querySelectorAll('h2, h3').forEach((heading) => {
+      const id = slugify(heading.textContent || '');
+      heading.id = id;
+    });
+
+    doc.querySelectorAll('img').forEach((img, index) => {
+      const src = img.getAttribute('src') || '';
+      const alt = img.getAttribute('alt') || `Image ${index + 1}`;
+      const wrapper = doc.createElement('div');
+      wrapper.className = 'image-wrapper';
+      wrapper.innerHTML = `
+        <div class="relative w-full max-w-3xl mx-auto">
+          <div class="aspect-w-16 aspect-h-9">
+            <img src="${src}" alt="${alt}" class="rounded-lg object-cover" />
+          </div>
+        </div>
+      `;
+      img.parentNode?.replaceChild(wrapper, img);
+    });
+
+    setProcessedContent(doc.body.innerHTML);
+  }, [content]);
+
+  return processedContent;
+};
 
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
@@ -63,6 +93,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   const { ref: contentStartRef, inView: contentStartInView } = useInView({
     threshold: 0,
   });
+
+  const processedContent = useProcessedContent(post.content);
 
   const generateToc = useCallback(() => {
     if (contentRef.current) {
@@ -110,28 +142,12 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   }, [contentStartInView]);
 
   const scrollToHeading = useCallback((id: string) => {
-    console.log(`Scrolling to heading with ID: ${id}`);
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      console.log(`Element found. Scrolling to Y position: ${y}`);
       window.scrollTo({ top: y, behavior: "smooth" });
-    } else {
-      console.warn(`Element with ID: ${id} not found`);
     }
-  }, []);
-
-  const processContent = useCallback((content: string) => {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    
-    doc.querySelectorAll('h2, h3').forEach((heading) => {
-      const id = slugify(heading.textContent || '');
-      heading.id = id;
-    });
-
-    return doc.body.innerHTML;
   }, []);
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -157,32 +173,27 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
         )}&title=${encodeURIComponent(post.title)}`;
         break;
     }
-    window.open(url, "_blank");
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const getTagColor = (tag: string) => {
     const colors: { [key: string]: string } = {
-      "Node.js": "bg-green-100 text-green-800",
-      API: "bg-blue-100 text-blue-800",
-      Express: "bg-yellow-100 text-yellow-800",
-      Backend: "bg-purple-100 text-purple-800",
-      React: "bg-cyan-100 text-cyan-800",
-      JavaScript: "bg-yellow-100 text-yellow-800",
-      Hooks: "bg-pink-100 text-pink-800",
-      Frontend: "bg-orange-100 text-orange-800",
+      "Node.js": "bg-primary/10 text-primary",
+      API: "bg-secondary/10 text-secondary",
+      Express: "bg-accent/10 text-accent",
+      Backend: "bg-muted/10 text-muted-foreground",
+      React: "bg-primary/10 text-primary",
+      JavaScript: "bg-secondary/10 text-secondary",
+      Hooks: "bg-accent/10 text-accent",
+      Frontend: "bg-muted/10 text-muted-foreground",
     };
-    return colors[tag] || "bg-gray-100 text-gray-800";
+    return colors[tag] || "bg-primary/10 text-primary";
   };
 
   return (
     <>
       <Navbar />
-      <motion.article
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="py-8 md:py-16 bg-gradient-to-b from-background to-background/80 transition-colors duration-300"
-      >
+      <main className="py-8 md:py-16 bg-gradient-to-b from-background to-background/80 transition-colors duration-300">
         <div className="container mx-auto px-4 max-w-5xl">
           <Card className="overflow-hidden shadow-2xl mb-8">
             <CardHeader className="p-0 relative">
@@ -209,7 +220,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                 >
                   <Link href="/blog">
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Blog
+                    <span className="sr-only">Back to Blog</span>
+                    <span aria-hidden="true">Back to Blog</span>
                   </Link>
                 </Button>
                 <Title
@@ -220,7 +232,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               </motion.div>
             </CardHeader>
             <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 space-y-4 md:space-y-0">
                 <div className="flex items-center space-x-4">
                   <Avatar>
                     {post.author.avatar ? (
@@ -237,7 +249,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                   <div>
                     <p className="text-sm font-medium">{post.author.name}</p>
                     <div className="flex items-center text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4 mr-2" />
+                      <Calendar className="w-4 h-4 mr-2" aria-hidden="true" />
                       <time dateTime={post.date}>
                         {new Date(post.date).toLocaleDateString("es-AR", {
                           year: "numeric",
@@ -245,8 +257,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                           day: "numeric",
                         })}
                       </time>
-                      <span className="mx-2">•</span>
-                      <Clock className="w-4 h-4 mr-2" />
+                      <span className="mx-2" aria-hidden="true">•</span>
+                      <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
                       <span>{post.readingTime}</span>
                     </div>
                   </div>
@@ -257,7 +269,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon">
+                            <Button variant="outline" size="icon" aria-label="Share post">
                               <Share2 className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
@@ -292,13 +304,11 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               </div>
 
               <div className="flex flex-wrap gap-2 mb-8">
-                <Tag className="w-4 h-4 mr-2 text-muted-foreground" />
+                <Tag className="w-4 h-4 mr-2 text-muted-foreground" aria-hidden="true" />
                 {post.tags.map((tag, index) => (
                   <Badge
                     key={index}
-                    className={`${getTagColor(
-                      tag
-                    )} transition-colors duration-200`}
+                    className={`${getTagColor(tag)} transition-colors duration-200`}
                   >
                     {tag}
                   </Badge>
@@ -313,12 +323,12 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="prose dark:prose-invert max-w-none blog-content"
-                dangerouslySetInnerHTML={{ __html: processContent(post.content) }}
+                dangerouslySetInnerHTML={{ __html: processedContent }}
               />
             </CardContent>
           </Card>
         </div>
-      </motion.article>
+      </main>
       <AnimatePresence>
         {showFloatingToc && (
           <motion.div
@@ -399,7 +409,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           margin: 1.5em 0;
         }
         .blog-content pre {
-          background-color: #2d2d2d;
+          background-color: var(--code-bg);
           border-radius: 8px;
           padding: 1em;
           overflow-x: auto;
@@ -410,10 +420,13 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
           font-size: 0.9em;
         }
         .blog-content :not(pre) > code {
-          background-color: rgba(var(--primary-rgb), 0.1);
-          color: var(--primary);
+          background-color: var(--code-inline-bg);
+          color: var(--code-inline-color);
           padding: 0.2em 0.4em;
           border-radius: 4px;
+        }
+        .image-wrapper {
+          margin: 2rem 0;
         }
       `}</style>
     </>
