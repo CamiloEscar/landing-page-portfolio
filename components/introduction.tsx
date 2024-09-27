@@ -39,7 +39,7 @@ const skills = [
   "Node.js",
   "Tailwind CSS",
   "PostgreSQL",
-  "GIT"
+  "GIT",
 ];
 
 export default function Introduction() {
@@ -119,11 +119,20 @@ export default function Introduction() {
                 delaySpeed={1000}
               />
             </h2>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl">
-              Desarrollador web full stack con experiencia en React, Node.js y bases de datos. 
-              Especializado en crear soluciones eficientes y escalables, con un enfoque en la mejora 
-              continua y la adopción de nuevas tecnologías.
+            <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
+              Hola, soy Camilo, un {" "}
+              <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
+                 desarrollador web con experiencia en React y Node.js.
+              </strong> {" "}
+              Actualmente trabajo en FTTH, di el salto a la programación en 2020
+              y desde entonces me he enfocado al desarrollo web, siempre
+              buscando ofrecer la mejor experiencia a los usuarios. Creo
+              firmemente en el aprendizaje continuo. Disfruto ayudar a amigos y
+              familia a entender y aprovechar las herramientas tecnológicas,
+              contribuyendo así a que la tecnología sea más accesible para
+              todos.
             </p>
+
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
               <motion.div variants={buttonVariants} whileHover="hover">
                 <Button

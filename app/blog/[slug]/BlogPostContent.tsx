@@ -421,6 +421,37 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
         )}
       </AnimatePresence>
       <style jsx global>{`
+        :root {
+          --primary: #61afef; /* Color azul claro */
+          --primary-dark: #528bff; /* Color azul oscuro */
+          --muted-foreground: #abb2bf; /* Color de texto atenuado */
+          --code-bg: #3e4451; /* Fondo de bloques de código */
+          --code-inline-bg: #3e4451; /* Fondo de código en línea */
+          --code-inline-color: #c678dd; /* Color de texto de código en línea */
+          --keyword-color: #c678dd; /* Color para palabras clave */
+          --string-color: #98c379; /* Color para strings */
+          --comment-color: #5c6370; /* Color para comentarios */
+        }
+
+        @media (prefers-color-scheme: dark) {
+          :root {
+            --primary: #61afef;
+            --primary-dark: #528bff;
+            --muted-foreground: #abb2bf;
+            --code-bg: #282c34;
+            --code-inline-bg: #3e4451;
+            --code-inline-color: #c678dd;
+            --keyword-color: #c678dd;
+            --string-color: #98c379;
+            --comment-color: #5c6370;
+          }
+        }
+
+        .highlight {
+          color: var(--keyword-color); /* Aplica el color de palabras clave */
+          font-weight: bold;
+        }
+
         .toc {
           font-size: 0.9em;
           line-height: 1.2;

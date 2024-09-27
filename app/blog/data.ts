@@ -72,8 +72,133 @@ export const dataBlog: BlogPost[] = [
       <p>Finalmente, comenzamos a implementar la base de datos según el modelo aprobado. Este paso involucró la creación de tablas, relaciones y optimizaciones para asegurar que la aplicación fuera eficiente y escalable.</p>
       <img src="/blog/base-datos-final.jpg" alt="Base de datos implementada">
       
-      <h3>Conclusión</h3>
-      <p>Este proyecto representó una colaboración efectiva entre el cliente y el equipo de desarrollo. A lo largo del proceso, seguimos una metodología estructurada que nos permitió cumplir con los plazos y entregar un producto de calidad que satisfizo todas las necesidades del cliente.</p>
+      
+      `,
+  },
+  //crear-api-publica-gratis-productos
+  {
+    slug: "crear-api-publica-gratis-productos",
+    title: "Cómo crear una API pública y gratuita para tus productos",
+    image: "/blog/api-publica-productos.webp",
+    date: "2024-09-27",
+    tags: ["API", "Node.js", "Express", "MongoDB", "Fullstack"],
+    type: "tutorial",
+    author: {
+      name: "Camilo Escar",
+      avatar: "/profile.webp",
+    },
+    readingTime: "10 min",
+    excerpt:
+      "Aprende a crear una API pública y gratuita para tus productos utilizando Node.js, Express y MongoDB. Ideal para proyectos que quieran compartir información de manera abierta.",
+    content: `
+      <h2>Cómo crear una API pública y gratuita para tus productos</h2>
+      <p>¿Quieres compartir tu catálogo de productos con el mundo? En este tutorial te mostraré cómo crear una <strong>API pública y gratuita</strong> utilizando <strong>Node.js</strong>, <strong>Express</strong> y <strong>MongoDB</strong>. Aprenderás cómo estructurar tu API, conectar una base de datos, y finalmente desplegarla para que cualquiera pueda acceder a ella desde cualquier lugar del mundo.</p>
+
+      <h3>¿Por qué crear una API pública?</h3>
+      <p>Las APIs públicas permiten compartir datos de manera abierta, lo que es útil si quieres que otros desarrolladores, aplicaciones o servicios puedan acceder a tu catálogo de productos para integrarlos en sus proyectos o simplemente para proporcionar información a los usuarios de forma dinámica.</p>
+
+      <h3>Requisitos previos</h3>
+      <p>Para seguir este tutorial, necesitarás lo siguiente:</p>
+      <ul>
+        <li><strong>Node.js</strong> y <strong>npm</strong> instalados en tu máquina.</li>
+        <li>Una cuenta de <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a> (es gratuito y fácil de usar).</li>
+        <li>Una plataforma gratuita para desplegar la API como <strong>Heroku</strong> o <strong>Render</strong>.</li>
+      </ul>
+
+      <h3>1. Definir la estructura de tus productos</h3>
+      <p>Antes de comenzar a escribir código, define qué datos quieres compartir a través de tu API. Aquí tienes un ejemplo de cómo podría lucir un producto en tu base de datos:</p>
+      <pre><code class="language-json">
+  {
+    "nombre": "Producto X",
+    "precio": 10.99,
+    "descripción": "Este es un producto de ejemplo.",
+    "categoría": "Alimentos"
+  }
+      </code></pre>
+
+      <p>Este ejemplo contiene un nombre, precio, descripción y categoría, pero puedes añadir más campos según las necesidades de tu aplicación.</p>
+
+      <h3>2. Configurar MongoDB Atlas</h3>
+      <p>MongoDB Atlas es una solución gratuita que te permite crear y gestionar bases de datos en la nube. Sigue estos pasos para configurar tu base de datos:</p>
+      <ol>
+        <li>Regístrate en <a href="https://www.mongodb.com/cloud/atlas">MongoDB Atlas</a>.</li>
+        <li>Crea un nuevo cluster y establece las credenciales de usuario.</li>
+        <li>Crea una base de datos llamada <code>tienda</code> y una colección llamada <code>productos</code>.</li>
+        <li>Copia el URI de conexión, lo necesitarás para conectar tu API.</li>
+      </ol>
+
+      <h3>3. Crear una API con Node.js y Express</h3>
+      <p>Una vez configurada la base de datos, el siguiente paso es construir la API. Vamos a usar <strong>Node.js</strong> con <strong>Express</strong> y <strong>Mongoose</strong> (para conectarnos a MongoDB).</p>
+
+      <p>Primero, crea un nuevo proyecto e instala las dependencias necesarias:</p>
+      <pre><code class="language-bash">
+  mkdir api-productos && cd api-productos
+  npm init -y
+  npm install express mongoose cors
+      </code></pre>
+
+      <p>A continuación, crea el archivo <code>index.js</code> que contendrá el código de tu API:</p>
+      <pre><code class="language-javascript">
+  const express = require('express');
+  const mongoose = require('mongoose');
+  const cors = require('cors');
+
+  const app = express();
+  const port = process.env.PORT || 3000;
+
+  // Conexión a MongoDB
+  mongoose.connect('TU_URI_DE_MONGO_ATLAS', { useNewUrlParser: true, useUnifiedTopology: true });
+
+  // Definición del esquema y modelo de producto
+  const productSchema = new mongoose.Schema({
+    nombre: String,
+    precio: Number,
+    descripción: String,
+    categoría: String,
+  });
+
+  const Product = mongoose.model('Product', productSchema);
+
+  // Configuración de CORS y parsing de JSON
+  app.use(cors());
+  app.use(express.json());
+
+  // Ruta para obtener todos los productos
+  app.get('/productos', async (req, res) => {
+    try {
+      const productos = await Product.find();
+      res.json(productos);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al obtener los productos' });
+    }
+  });
+
+  // Iniciar el servidor
+  app.listen(port, () => {
+    console.log(\`API escuchando en http://localhost:\${port}\`);
+  });
+      </code></pre>
+
+      <p>Este código define una API simple que expone una lista de productos almacenados en MongoDB. La ruta <code>/productos</code> devolverá todos los productos disponibles en la base de datos.</p>
+
+      <h3>4. Desplegar la API</h3>
+      <p>Ahora que la API está lista, es momento de hacerla pública. Puedes desplegarla de forma gratuita utilizando plataformas como <strong>Heroku</strong>, <strong>Render</strong> o <strong>Railway</strong>. Aquí te muestro cómo hacerlo en <strong>Render</strong>:</p>
+      <ol>
+        <li>Inicia sesión en <a href="https://render.com">Render</a>.</li>
+        <li>Crea un nuevo proyecto, seleccionando tu repositorio de GitHub donde tienes el código de tu API.</li>
+        <li>Render se encargará de crear un servidor y asignarle una URL pública a tu API.</li>
+      </ol>
+
+      <h3>5. Hacer pública la API y permitir acceso desde cualquier origen</h3>
+      <p>Para que cualquier aplicación pueda consumir tu API, debes configurar <strong>CORS</strong> adecuadamente. Ya lo hicimos previamente usando el middleware <code>cors</code>, lo que permite a cualquier origen hacer solicitudes a tu servidor:</p>
+      <pre><code class="language-javascript">
+  const cors = require('cors');
+  app.use(cors());
+      </code></pre>
+
+      <h3>6. Probar la API</h3>
+      <p>Con la API desplegada, abre la URL pública que Render te asignó en el navegador. Si accedes a la ruta <code>/productos</code>, deberías ver el listado de tus productos en formato JSON.</p>
     `,
   },
   //migraciones-postgresql-sequelize
@@ -196,9 +321,8 @@ export const dataBlog: BlogPost[] = [
 
       <p>De esta manera, todos los miembros del equipo tendrán el esquema de base de datos actualizado, evitando conflictos entre diferentes versiones de la base de datos.</p>
 
-      <h3>Conclusión</h3>
-      <p>El uso de migraciones en PostgreSQL con Sequelize es una excelente manera de mantener el esquema de tu base de datos sincronizado entre todos los miembros del equipo. Esta práctica no solo garantiza la consistencia en los cambios del esquema, sino que también facilita la colaboración y evita errores comunes en entornos de desarrollo y producción.</p>
-    `,
+      
+      `,
   },
   //backups-restauracion-postgresql
   {
@@ -284,9 +408,8 @@ export const dataBlog: BlogPost[] = [
 
       <p>Al utilizar almacenamiento en la nube, puedes acceder a los backups desde cualquier lugar y tener una copia adicional de seguridad en caso de que el servidor local falle.</p>
 
-      <h3>Conclusión</h3>
-      <p>La gestión adecuada de backups y restauraciones en PostgreSQL es una práctica esencial para mantener la integridad de los datos en proyectos colaborativos. La combinación de backups manuales y automáticos, junto con una estrategia de retención y almacenamiento en la nube, asegura que siempre tengas una copia de seguridad en caso de fallos o errores.</p>
-    `,
+      
+      `,
   },
   //gestion-roles-permisos-postgresql
   {
@@ -381,9 +504,8 @@ export const dataBlog: BlogPost[] = [
 
       <p>De esta forma, puedes revisar los logs de auditoría y detectar cualquier acceso no autorizado o acciones sospechosas.</p>
 
-      <h3>Conclusión</h3>
-      <p>Una buena gestión de roles y permisos en PostgreSQL asegura que tu base de datos esté protegida, incluso cuando múltiples usuarios colaboran en el mismo proyecto. Asignar roles adecuados, utilizar grupos de roles y establecer políticas de auditoría son prácticas fundamentales para mantener la seguridad y el control en un entorno colaborativo.</p>
-    `,
+      
+      `,
   },
   //buenas-practicas-proyecto-postgresql
   {
@@ -470,9 +592,8 @@ export const dataBlog: BlogPost[] = [
       <h3>5. Monitoreo y alertas para la base de datos</h3>
       <p>Una vez que tu aplicación está en producción, es crucial monitorear el rendimiento de la base de datos y configurar alertas para detectar problemas antes de que afecten a los usuarios finales. Herramientas como <a href="https://www.datadoghq.com/postgresql-monitoring/" target="_blank" rel="noopener noreferrer">Datadog</a> o <a href="https://www.zabbix.com/" target="_blank" rel="noopener noreferrer">Zabbix</a> te permiten monitorear métricas clave como el uso de CPU, memoria, conexiones activas y tiempos de respuesta.</p>
 
-      <h3>Conclusión</h3>
-      <p>Implementar buenas prácticas como la gestión de migraciones, backups regulares, entornos separados y la automatización de despliegue es clave para mantener el desarrollo de la base de datos eficiente y seguro en un entorno colaborativo. A medida que tu equipo crece, la adopción de estas estrategias garantizará que todos trabajen de manera organizada y productiva.</p>
-    `,
+      
+      `,
   },
   //colaborar-proyecto-postgresql
   {
@@ -571,9 +692,8 @@ export const dataBlog: BlogPost[] = [
 
       <p>Si todos siguen estas buenas prácticas, podrán mantener un flujo de trabajo eficiente y evitar conflictos tanto en el código como en la base de datos.</p>
 
-      <h3>Conclusión</h3>
-      <p>Colaborar en un proyecto que utiliza PostgreSQL requiere buenas prácticas en cuanto al control de versiones del código y la base de datos, comunicación constante, y configuraciones estandarizadas. Siguiendo estos pasos, tú y tu equipo podrán trabajar de manera efectiva en cualquier proyecto.</p>
-    `,
+      
+      `,
   },
   //integrar-postgresql-con-react
   {
@@ -693,10 +813,8 @@ export const dataBlog: BlogPost[] = [
 
       <p>Abre tu navegador en <code>http://localhost:3000</code> para ver la aplicación React, y verifica que los datos se están mostrando correctamente desde PostgreSQL.</p>
 
-      <h3>Conclusión</h3>
-      <p>¡Felicidades! Ahora tienes una aplicación React que está conectada a una base de datos PostgreSQL a través de una API Node.js. Este enfoque es ideal para aplicaciones modernas donde el frontend y el backend están desacoplados, permitiendo un desarrollo más ágil y escalable.</p>
-    `,
-
+      
+      `,
   },
   //control-versiones-bd-postgresql
   {
@@ -848,9 +966,8 @@ export const dataBlog: BlogPost[] = [
     npx sequelize-cli db:migrate
         </code></pre>
   
-        <h3>Conclusión</h3>
-        <p>Ya sea que elijas <strong>Knex.js</strong> o <strong>Sequelize</strong>, ambas herramientas te permiten gestionar migraciones de manera efectiva en entornos colaborativos. Versiona siempre las migraciones en tu repositorio y asegúrate de que tu equipo ejecute los comandos de migración para mantener la estructura de la base de datos sincronizada.</p>
-      `,
+        
+        `,
     image: "/postgresql-migraciones.webp",
     date: "2024-09-26",
     tags: ["PostgreSQL", "Knex.js", "Sequelize", "Migraciones", "Colaboración"],
@@ -944,9 +1061,8 @@ export const dataBlog: BlogPost[] = [
         <h3>5. Persistir datos con volúmenes</h3>
         <p>Observa que hemos incluido una configuración de <code>volumes</code> en el archivo <code>docker-compose.yml</code>. Esto asegura que los datos de tu base de datos se guarden fuera del contenedor, en el directorio <code>./postgres-data</code> de tu máquina. De esta forma, aunque detengas o elimines el contenedor, los datos se mantendrán.</p>
   
-        <h3>Conclusión</h3>
-        <p>Usar Docker para correr PostgreSQL no solo facilita el trabajo en equipo, sino que también garantiza que todos los desarrolladores tengan el mismo entorno de trabajo. Siguiendo estos simples pasos, puedes comenzar a usar PostgreSQL de manera rápida y efectiva en cualquier proyecto de desarrollo colaborativo.</p>
-      `,
+        
+        `,
     image: "/docker-postgresql.webp",
     date: "2024-09-26",
     tags: ["PostgreSQL", "Docker", "DevOps", "Colaboración"],
