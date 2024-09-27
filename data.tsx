@@ -189,7 +189,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
     urlDemo: "https://pizzeria-donatello.vercel.app/",
     description:
-      "Una aplicación web moderna para una pizzería, permitiendo a los usuarios explorar el menú y realizar pedidos en línea.",
+      "Una aplicación web moderna para una pizzería que permite a los usuarios explorar el menú, personalizar sus pedidos y realizar compras en línea, mejorando la experiencia del cliente y la eficiencia del negocio.",
     technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
   },
   {
@@ -200,7 +200,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo:
       "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una aplicación intuitiva diseñada para optimizar la gestión de reclamos de clientes, facilitando el seguimiento, la resolución y el análisis de problemas para mejorar la satisfacción del cliente y la eficiencia operativa.",
     technologies: ["AppSheets"],
   },
   {
@@ -210,7 +210,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
     urlDemo: "#!",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -220,7 +220,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
     urlDemo: "#!",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -230,7 +230,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/chat-con-pdf.git",
     urlDemo: "#!",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una innovadora aplicación que permite a los usuarios interactuar con documentos PDF a través de un chat inteligente, facilitando la extracción de información y la comprensión de documentos extensos.",
     technologies: ["Svelte", "Astro", "TypeScript", "JavaScript"],
   },
   {
@@ -240,7 +240,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
     urlDemo: "#!",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una réplica funcional del popular servicio de Google Traductor, ofreciendo traducciones rápidas y precisas entre múltiples idiomas, con una interfaz limpia y fácil de usar.",
     technologies: ["Vite", "OpenAI", "TypeScript"],
   },
   {
@@ -250,7 +250,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
     urlDemo: "#!",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -260,7 +260,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
     urlDemo: "https://landing-page-arquitecto.vercel.app/",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.",
     technologies: [ "Vercel","Tailwind CSS", "Astro", "Vite", "bun"],
   },
   {
@@ -270,7 +270,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
     urlDemo: "https://flybondi-challenge.netlify.app/",
     description:
-    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    "Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.",
     technologies: ["JavaScript", "CSS", "HTML", "React", "Axios", "Vite"],
   },
   {
@@ -280,7 +280,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "https://spavanillacoin.netlify.app/",
     description:
-    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    "Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.",
     technologies: ["JavaScript", "CSS", "HTML"],
   },
   {
@@ -290,7 +290,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
     urlDemo: "https://imagencompressor.netlify.app/",
     description:
-    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    "Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.",
     technologies: ["JavaScript", "CSS", "HTML"],
   },
   {
@@ -300,7 +300,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "#!",
     urlDemo: "https://prueba-trello.vercel.app/",
     description:
-    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    "Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -310,7 +310,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "#!",
     urlDemo: "https://fulbito-f5.vercel.app/",
     description:
-    "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+    "Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -320,7 +320,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
     urlDemo: "https://ambo-app.vercel.app/",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Tienda en línea especializada en ambos y ropa médica, ofreciendo una experiencia de compra personalizada con opciones de tallas, colores y estilos, además de un sistema de recomendaciones basado en preferencias del usuario.",
     technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
   },
   {
@@ -330,7 +330,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "#!",
     urlDemo: "https://pruebaclima-api.netlify.app/",
     description:
-      "Una aplicación para gestionar y dar seguimiento a reclamos de clientes, mejorando la eficiencia del servicio al cliente.",
+      "Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
 ];
