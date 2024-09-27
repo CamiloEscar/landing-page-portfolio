@@ -11,6 +11,7 @@ import {
   Linkedin,
   Clock,
   ArrowLeft,
+  Menu,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,6 +33,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Title from "@/components/shared/title";
 import Navbar from "@/components/shared/navbar";
 import { BlogPost } from "../data";
@@ -56,18 +58,18 @@ const useProcessedContent = (content: string) => {
 
   useEffect(() => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, 'text/html');
-    
-    doc.querySelectorAll('h2, h3').forEach((heading) => {
-      const id = slugify(heading.textContent || '');
+    const doc = parser.parseFromString(content, "text/html");
+
+    doc.querySelectorAll("h2, h3").forEach((heading) => {
+      const id = slugify(heading.textContent || "");
       heading.id = id;
     });
 
-    doc.querySelectorAll('img').forEach((img, index) => {
-      const src = img.getAttribute('src') || '';
-      const alt = img.getAttribute('alt') || `Image ${index + 1}`;
-      const wrapper = doc.createElement('div');
-      wrapper.className = 'image-wrapper';
+    doc.querySelectorAll("img").forEach((img, index) => {
+      const src = img.getAttribute("src") || "";
+      const alt = img.getAttribute("alt") || `Image ${index + 1}`;
+      const wrapper = doc.createElement("div");
+      wrapper.className = "image-wrapper";
       wrapper.innerHTML = `
         <div class="relative w-full max-w-3xl mx-auto">
           <div class="aspect-w-16 aspect-h-9">
@@ -88,6 +90,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
   const [toc, setToc] = useState<TocItem[]>([]);
   const [showFloatingToc, setShowFloatingToc] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   const { ref: contentStartRef, inView: contentStartInView } = useInView({
@@ -138,14 +141,24 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   }, [generateToc]);
 
   useEffect(() => {
-    setShowFloatingToc(!contentStartInView);
-  }, [contentStartInView]);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    setShowFloatingToc(!contentStartInView && !isMobile);
+  }, [contentStartInView, isMobile]);
 
   const scrollToHeading = useCallback((id: string) => {
     const element = document.getElementById(id);
     if (element) {
       const yOffset = -100;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      const y =
+        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   }, []);
@@ -233,8 +246,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
             </CardHeader>
             <CardContent className="p-8">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 space-y-4 md:space-y-0">
-                <div className="flex items-center space-x-4">
-                  <Avatar>
+                <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                  <Avatar className="w-12 h-12 sm:w-10 sm:h-10">
                     {post.author.avatar ? (
                       <AvatarImage
                         src={post.author.avatar}
@@ -246,20 +259,31 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                       </AvatarFallback>
                     )}
                   </Avatar>
-                  <div>
-                    <p className="text-sm font-medium">{post.author.name}</p>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Calendar className="w-4 h-4 mr-2" aria-hidden="true" />
-                      <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString("es-AR", {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </time>
-                      <span className="mx-2" aria-hidden="true">•</span>
-                      <Clock className="w-4 h-4 mr-2" aria-hidden="true" />
-                      <span>{post.readingTime}</span>
+                  <div className="space-y-1">
+                    <p className="text-sm sm:text-base font-medium">
+                      {post.author.name}
+                    </p>
+                    <div className="flex flex-wrap items-center text-xs sm:text-sm text-muted-foreground">
+                      <div className="flex items-center mr-4 mb-1 sm:mb-0">
+                        <Calendar
+                          className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"
+                          aria-hidden="true"
+                        />
+                        <time dateTime={post.date}>
+                          {new Date(post.date).toLocaleDateString("es-AR", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                        </time>
+                      </div>
+                      <div className="flex items-center">
+                        <Clock
+                          className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"
+                          aria-hidden="true"
+                        />
+                        <span>{post.readingTime}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -269,7 +293,11 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                       <TooltipTrigger asChild>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="icon" aria-label="Share post">
+                            <Button
+                              variant="outline"
+                              size="icon"
+                              aria-label="Share post"
+                            >
                               <Share2 className="h-4 w-4" />
                             </Button>
                           </DropdownMenuTrigger>
@@ -304,11 +332,16 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               </div>
 
               <div className="flex flex-wrap gap-2 mb-8">
-                <Tag className="w-4 h-4 mr-2 text-muted-foreground" aria-hidden="true" />
+                <Tag
+                  className="w-4 h-4 mr-2 text-muted-foreground"
+                  aria-hidden="true"
+                />
                 {post.tags.map((tag, index) => (
                   <Badge
                     key={index}
-                    className={`${getTagColor(tag)} transition-colors duration-200`}
+                    className={`${getTagColor(
+                      tag
+                    )} transition-colors duration-200`}
                   >
                     {tag}
                   </Badge>
@@ -317,19 +350,59 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
               <Separator className="my-8" />
               <div ref={contentStartRef} />
-              <motion.div
-                ref={contentRef}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="prose dark:prose-invert max-w-none blog-content"
-                dangerouslySetInnerHTML={{ __html: processedContent }}
-              />
+              <div className="flex flex-col md:flex-row gap-8">
+                <motion.div
+                  ref={contentRef}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                  className="prose dark:prose-invert max-w-none blog-content md:w-3/4"
+                  dangerouslySetInnerHTML={{ __html: processedContent }}
+                />
+                {!isMobile && (
+                  <div className="md:w-1/4">
+                    <TableOfContents
+                      toc={toc}
+                      activeHeading={activeHeading}
+                      scrollToHeading={scrollToHeading}
+                    />
+                  </div>
+                )}
+              </div>
             </CardContent>
           </Card>
         </div>
       </main>
       <AnimatePresence>
+        {isMobile && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-4 right-4 z-50"
+          >
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full shadow-lg"
+                >
+                  <Menu className="h-4 w-4" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="bottom" className="h-[80vh]">
+                <TableOfContents
+                  toc={toc}
+                  activeHeading={activeHeading}
+                  scrollToHeading={scrollToHeading}
+                  isFloating={true}
+                />
+              </SheetContent>
+            </Sheet>
+          </motion.div>
+        )}
         {showFloatingToc && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}

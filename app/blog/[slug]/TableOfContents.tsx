@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface TocItem {
   id: string;
@@ -19,26 +19,19 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   scrollToHeading,
   isFloating = false,
 }) => {
-  const [isTocVisible, setIsTocVisible] = useState(true);
-
-  const toggleTocVisibility = () => setIsTocVisible(!isTocVisible);
-
   const handleItemClick = (e: React.MouseEvent, id: string) => {
     e.preventDefault();
     scrollToHeading(id);
-    if (isFloating && window.innerWidth < 768) {
-      setIsTocVisible(false);
-    }
   };
 
   return (
     <div className={`toc ${isFloating ? "floating-toc" : ""}`}>
-      <h3 className="font-semibold mb-2">Table of Contents</h3>
-      <ul>
+      <h3 className="font-semibold mb-2 text-lg">Table of Contents</h3>
+      <ul className="space-y-2">
         {toc.map((item) => (
           <li
             key={item.id}
-            style={{ marginLeft: `${(item.level - 1) * 1.5}rem` }}
+            style={{ marginLeft: `${(item.level - 2) * 1}rem` }}
           >
             <a
               href={`#${item.id}`}
