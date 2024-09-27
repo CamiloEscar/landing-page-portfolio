@@ -1,8 +1,7 @@
 "use client";
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowLeft,
   Calendar,
   Tag,
   Share2,
@@ -10,16 +9,11 @@ import {
   Twitter,
   Linkedin,
   Clock,
-  User,
-  X,
+  ArrowLeft,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-jsx";
+import { useInView } from "react-intersection-observer";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -40,35 +34,57 @@ import {
 import Title from "@/components/shared/title";
 import Navbar from "@/components/shared/navbar";
 import { BlogPost } from "../data";
+import TableOfContents from "./TableOfContents";
+
+interface TocItem {
+  id: string;
+  text: string;
+  level: number;
+}
+
+interface BlogPostContentProps {
+  post: BlogPost;
+}
+
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .trim();
+}
 
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
-  const [toc, setToc] = useState<{ id: string; text: string; level: number }[]>(
-    []
-  );
+  const [toc, setToc] = useState<TocItem[]>([]);
+  const [showFloatingToc, setShowFloatingToc] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    Prism.highlightAll();
+  const { ref: contentStartRef, inView: contentStartInView } = useInView({
+    threshold: 0,
+  });
 
+  const generateToc = useCallback(() => {
     if (contentRef.current) {
       const headings = contentRef.current.querySelectorAll("h2, h3");
-      const tocItems = Array.from(headings).map((heading, index) => {
-        const id = `heading-${index}`;
-        heading.id = id;
+      return Array.from(headings).map((heading) => {
+        const element = heading as HTMLElement;
+        const text = element.textContent || "";
+        const id = slugify(text);
+        element.id = id;
         return {
           id,
-          text: heading.textContent || "",
-          level: heading.tagName === "H2" ? 2 : 3,
+          text,
+          level: element.tagName === "H2" ? 2 : 3,
         };
       });
-      setToc(tocItems);
     }
+    return [];
+  }, []);
 
-    const observerOptions = {
-      rootMargin: "-100px 0px -40% 0px",
-      threshold: 1,
-    };
+  useEffect(() => {
+    const tocItems = generateToc();
+    setToc(tocItems);
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
@@ -78,23 +94,51 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       });
     };
 
-    const observer = new IntersectionObserver(
-      observerCallback,
-      observerOptions
-    );
+    const observer = new IntersectionObserver(observerCallback, {
+      rootMargin: "-100px 0px -40% 0px",
+      threshold: 0.5,
+    });
 
-    document
-      .querySelectorAll(".blog-content h2, .blog-content h3")
-      .forEach((heading) => {
-        observer.observe(heading);
-      });
+    const headings = contentRef.current?.querySelectorAll("h2, h3") || [];
+    headings.forEach((heading) => observer.observe(heading));
 
     return () => observer.disconnect();
-  }, [post.content]);
+  }, [generateToc]);
+
+  useEffect(() => {
+    setShowFloatingToc(!contentStartInView);
+  }, [contentStartInView]);
+
+  const scrollToHeading = useCallback((id: string) => {
+    console.log(`Scrolling to heading with ID: ${id}`);
+    const element = document.getElementById(id);
+    if (element) {
+      const yOffset = -100;
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      console.log(`Element found. Scrolling to Y position: ${y}`);
+      window.scrollTo({ top: y, behavior: "smooth" });
+    } else {
+      console.warn(`Element with ID: ${id} not found`);
+    }
+  }, []);
+
+  const processContent = useCallback((content: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(content, 'text/html');
+    
+    doc.querySelectorAll('h2, h3').forEach((heading) => {
+      const id = slugify(heading.textContent || '');
+      heading.id = id;
+    });
+
+    return doc.body.innerHTML;
+  }, []);
 
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
 
-  const shareOnSocialMedia = (platform: string) => {
+  const shareOnSocialMedia = (
+    platform: "facebook" | "twitter" | "linkedin"
+  ) => {
     let url = "";
     switch (platform) {
       case "facebook":
@@ -117,7 +161,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
   };
 
   const getTagColor = (tag: string) => {
-    const colors = {
+    const colors: { [key: string]: string } = {
       "Node.js": "bg-green-100 text-green-800",
       API: "bg-blue-100 text-blue-800",
       Express: "bg-yellow-100 text-yellow-800",
@@ -127,17 +171,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       Hooks: "bg-pink-100 text-pink-800",
       Frontend: "bg-orange-100 text-orange-800",
     };
-    return colors[tag as keyof typeof colors] || "bg-gray-100 text-gray-800";
-  };
-
-  const scrollToHeading = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -80; // Adjust this value to fine-tune the scroll position
-      const y =
-        element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
-    }
+    return colors[tag] || "bg-gray-100 text-gray-800";
   };
 
   return (
@@ -152,30 +186,32 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
         <div className="container mx-auto px-4 max-w-5xl">
           <Card className="overflow-hidden shadow-2xl mb-8">
             <CardHeader className="p-0 relative">
-              <Image
-                src={post.image}
-                alt={post.title}
-                width={1200}
-                height={600}
-                className="w-full h-64 object-cover"
-              />
+              <div className="relative w-full h-64 md:h-96">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-opacity duration-300 hover:opacity-90"
+                />
+              </div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent p-8"
               >
-            <Button
-                variant="outline"
-                size="sm"
-                asChild
-                className="hover:bg-primary/10 transition-colors duration-200"
-              >
-                <Link href="/blog">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Blog
-                </Link>
-              </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="hover:bg-primary/10 transition-colors duration-200 mb-4"
+                >
+                  <Link href="/blog">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Blog
+                  </Link>
+                </Button>
                 <Title
                   title={post.title}
                   subtitle={post.excerpt}
@@ -187,13 +223,16 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center space-x-4">
                   <Avatar>
-                    <AvatarImage
-                      src={post.author.avatar}
-                      alt={post.author.name}
-                    />
-                    <AvatarFallback>
-                      {post.author.name.charAt(0)}
-                    </AvatarFallback>
+                    {post.author.avatar ? (
+                      <AvatarImage
+                        src={post.author.avatar}
+                        alt={post.author.name}
+                      />
+                    ) : (
+                      <AvatarFallback>
+                        {post.author.name.charAt(0)}
+                      </AvatarFallback>
+                    )}
                   </Avatar>
                   <div>
                     <p className="text-sm font-medium">{post.author.name}</p>
@@ -254,7 +293,7 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
               <div className="flex flex-wrap gap-2 mb-8">
                 <Tag className="w-4 h-4 mr-2 text-muted-foreground" />
-                {post.tags.map((tag: string, index: number) => (
+                {post.tags.map((tag, index) => (
                   <Badge
                     key={index}
                     className={`${getTagColor(
@@ -267,80 +306,52 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
               </div>
 
               <Separator className="my-8" />
-
-              <div className="flex flex-col lg:flex-row gap-8">
-                <aside className="lg:w-1/4">
-                  <div className="sticky top-24">
-                    <h2 className="text-lg font-semibold mb-4 flex items-center">
-                      <ArrowLeft className="w-5 h-5 mr-2" />
-                      Table of Contents
-                    </h2>
-                    <nav className="toc">
-                      <ul className="space-y-2">
-                        {toc.map((item) => (
-                          <li
-                            key={item.id}
-                            className={item.level === 3 ? "ml-4" : ""}
-                          >
-                            <button
-                              onClick={() => scrollToHeading(item.id)}
-                              className={`block w-full text-left py-1 px-2 rounded transition-colors duration-200 ${
-                                activeHeading === item.id
-                                  ? "bg-primary/10 text-primary font-medium"
-                                  : "text-muted-foreground hover:text-primary"
-                              }`}
-                            >
-                              {item.text}
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </nav>
-                  </div>
-                </aside>
-                <motion.div
-                  ref={contentRef}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  className="prose dark:prose-invert max-w-none lg:w-3/4 blog-content"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
-              </div>
+              <div ref={contentStartRef} />
+              <motion.div
+                ref={contentRef}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="prose dark:prose-invert max-w-none blog-content"
+                dangerouslySetInnerHTML={{ __html: processContent(post.content) }}
+              />
             </CardContent>
           </Card>
-          <div className="flex justify-between items-center">
-            <Button
-              variant="outline"
-              size="sm"
-              asChild
-              className="hover:bg-primary/10 transition-colors duration-200"
-            >
-              <Link href="/blog">
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Blog
-              </Link>
-            </Button>
-          </div>
         </div>
       </motion.article>
+      <AnimatePresence>
+        {showFloatingToc && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-4 right-4 bg-background border border-border rounded-lg shadow-lg p-4 max-w-xs w-full"
+          >
+            <TableOfContents
+              toc={toc}
+              activeHeading={activeHeading}
+              scrollToHeading={scrollToHeading}
+              isFloating={true}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       <style jsx global>{`
         .toc {
           font-size: 0.9em;
           line-height: 1.2;
           padding-left: 0;
           list-style: none;
+          max-height: calc(100vh - 200px);
+          overflow-y: auto;
         }
 
-        .toc li {
-          margin-bottom: 0.5em;
+        .floating-toc {
+          max-height: 60vh;
+          overflow-y: auto;
         }
 
-        .toc button {
-          padding: 0.2em 0.4em;
-          border-radius: 4px;
-          font-size: 0.9em;
-        }
         .blog-content h2 {
           font-size: 1.8em;
           margin-top: 2em;

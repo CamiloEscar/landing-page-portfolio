@@ -1,34 +1,58 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from "react"
-import { itemsNavbar } from "@/data"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Sun, Moon, Book } from 'lucide-react'
-import { useTheme } from "next-themes"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import React, { useState, useEffect } from "react";
+import { itemsNavbar } from "@/data";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  Sun,
+  Moon,
+  Book,
+  Pen,
+  Minimize2,
+} from "lucide-react";
+import { useTheme } from "next-themes";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Navbar = () => {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const { setTheme, theme } = useTheme()
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const { setTheme, theme } = useTheme();
+  const [showToolTip, setShowToolTip] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY)
-    }
+      setScrollPosition(window.scrollY);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    setShowToolTip(true);
+    const timer = setTimeout(() => {
+      setShowToolTip(false);
+    }, 3000);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const cycleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
 
   const getThemeIcon = () => {
-    return theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />
-  }
+    return theme === "dark" ? (
+      <Sun className="h-5 w-5" />
+    ) : (
+      <Moon className="h-5 w-5" />
+    );
+  };
 
   return (
     <>
@@ -41,14 +65,37 @@ const Navbar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild variant="outline" size="icon" className="bg-background/20 hover:bg-background/40">
-                <Link href="/blog">
-                  <Book className="h-5 w-5" />
+              <Button
+                variant="outline"
+                size="icon"
+                className="bg-background/20 hover:bg-background/40"
+              >
+                <Link href="/minimal">
+                  <Minimize2 className="h-5 w-5" />
                 </Link>
               </Button>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Blog</p>
+              <p>Version Minimalista!</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip open={showToolTip} onOpenChange={setShowToolTip}>
+            <TooltipTrigger asChild>
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="bg-background/20 hover:bg-background/40 transition-transform transform hover:scale-105"
+              >
+                <Link href="/blog">
+                  <Pen className="h-5 w-5" />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>¡Descubre historias y aprendizajes en mi blog!</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
@@ -56,8 +103,17 @@ const Navbar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild variant="outline" size="icon" className="bg-background/20 hover:bg-background/40">
-                <Link href="https://github.com/CamiloEscar" target="_blank" rel="noopener noreferrer">
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="bg-background/20 hover:bg-background/40"
+              >
+                <Link
+                  href="https://github.com/CamiloEscar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Github className="h-5 w-5" />
                 </Link>
               </Button>
@@ -71,8 +127,17 @@ const Navbar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild variant="outline" size="icon" className="bg-background/20 hover:bg-background/40">
-                <Link href="https://www.linkedin.com/in/camiloescar/" target="_blank" rel="noopener noreferrer">
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="bg-background/20 hover:bg-background/40"
+              >
+                <Link
+                  href="https://www.linkedin.com/in/camiloescar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Linkedin className="h-5 w-5" />
                 </Link>
               </Button>
@@ -86,7 +151,12 @@ const Navbar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button asChild variant="outline" size="icon" className="bg-background/20 hover:bg-background/40">
+              <Button
+                asChild
+                variant="outline"
+                size="icon"
+                className="bg-background/20 hover:bg-background/40"
+              >
                 <Link href="mailto:camiloescar1995@gmail.com">
                   <Mail className="h-5 w-5" />
                 </Link>
@@ -160,7 +230,7 @@ const Navbar = () => {
         </div>
       </motion.nav>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
