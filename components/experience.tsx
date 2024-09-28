@@ -11,6 +11,7 @@ import {
   Database,
   Server,
   Globe,
+  Brain,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -66,7 +67,6 @@ import {
   SiNumpy,
   SiPandas,
   SiPostcss,
-  SiMockserviceworker,
   SiBabel,
   SiAngular,
   SiSpring,
@@ -294,9 +294,22 @@ export default function Experience() {
   const defaultTabValue = dataExperience[0]?.id.toString() || "0";
 
   return (
-    <section className="py-16 md:py-24 bg-transparent transition-colors duration-300">
+    <motion.section 
+      className="py-16 md:py-24 bg-transparent transition-colors duration-300"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
-        <Title title="Experiencia" subtitle="Mis habilidades y conocimientos" />
+        <motion.div 
+          className="flex items-center justify-center mb-12"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Brain className="w-10 h-10 mr-3 text-primary" />
+          <Title title="Experiencia" subtitle="Mis habilidades y conocimientos" />
+        </motion.div>
 
         <Tabs defaultValue={defaultTabValue} className="mt-12">
           <TabsList className="inline-flex h-auto p-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg mb-8 overflow-x-auto">
@@ -337,6 +350,6 @@ export default function Experience() {
           </AnimatePresence>
         </Tabs>
       </div>
-    </section>
+    </motion.section>
   );
 }

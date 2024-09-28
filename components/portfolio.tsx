@@ -46,43 +46,58 @@ const getTechIcon = (tech: string) => {
 };
 
 const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
-  <Card className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
-    <CardHeader>
-      <Image
-        src={project.image}
-        alt={project.title}
-        width={400}
-        height={300}
-        className="rounded-t-xl object-cover w-full h-48"
-      />
-    </CardHeader>
-    <CardContent>
-      <CardTitle className="text-xl mb-2 text-gray-800 dark:text-white">{project.title}</CardTitle>
-      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{project.description}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {project.technologies.map((tech: string, techIndex: number) => (
-          <span key={techIndex} className="bg-gray-200/80 dark:bg-gray-700/80 text-primary text-xs px-2 py-1 rounded-full flex items-center gap-1">
-            {getTechIcon(tech)}
-            {tech}
-          </span>
-        ))}
-      </div>
-    </CardContent>
-    <CardFooter className="flex justify-between">
-      <Button variant="outline" size="sm" asChild>
-        <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
-          <Github className="mr-2 h-4 w-4" />
-          Github
-        </Link>
-      </Button>
-      <Button size="sm" asChild>
-        <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
-          <ExternalLink className="mr-2 h-4 w-4" />
-          Demo
-        </Link>
-      </Button>
-    </CardFooter>
-  </Card>
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    whileTap={{ scale: 0.98 }}
+    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+  >
+    <Card className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+      <CardHeader className="p-0">
+        <Image
+          src={project.image}
+          alt={project.title}
+          width={400}
+          height={300}
+          className="rounded-t-xl object-cover w-full h-48"
+        />
+      </CardHeader>
+      <CardContent className="p-4">
+        <CardTitle className="text-xl mb-2 text-gray-800 dark:text-white">{project.title}</CardTitle>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{project.description}</p>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {project.technologies.map((tech: string, techIndex: number) => (
+            <motion.span
+              key={techIndex}
+              className="bg-gray-200/80 dark:bg-gray-700/80 text-primary text-xs px-2 py-1 rounded-full flex items-center gap-1"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {getTechIcon(tech)}
+              {tech}
+            </motion.span>
+          ))}
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-between p-4">
+        <Button variant="outline" size="sm" asChild>
+        {project.urlGithub && (
+          <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
+            <Github className="mr-2 h-4 w-4" />
+            Github
+          </Link>
+          )}
+        </Button>
+        <Button size="sm" asChild>
+        {project.urlDemo && (
+          <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Demo
+          </Link>
+          )}
+        </Button>
+      </CardFooter>
+    </Card>
+  </motion.div>
 );
 
 const Portfolio: React.FC = () => {
@@ -104,31 +119,46 @@ const Portfolio: React.FC = () => {
   }, [searchTerm]);
 
   const toggleProjects = () => {
-    if (visibleProjects === ITEMS_PER_PAGE) {
-      setVisibleProjects(filteredProjects.length);
-    } else {
-      setVisibleProjects(ITEMS_PER_PAGE);
-    }
+    setVisibleProjects(prev => prev === ITEMS_PER_PAGE ? filteredProjects.length : ITEMS_PER_PAGE);
   };
 
   if (!mounted) return null;
 
   return (
-    <section className="py-16 md:py-24 bg-transparent transition-colors duration-300" id="portfolio">
+    <motion.section 
+      className="py-16 md:py-24 bg-transparent transition-colors duration-300" 
+      id="portfolio"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
-        <Title title="Portfolio" subtitle="Trabajos Recientes" />
+        <motion.div 
+          className="flex items-center justify-center mb-12"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Code className="w-10 h-10 mr-3 text-primary" />
+          <Title title="Portfolio" subtitle="Chequea mis proyectos" />
+        </motion.div>
 
-        <div className="mb-6 relative">
+        <motion.div 
+          className="mb-8 relative max-w-md mx-auto"
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <Input
             type="text"
-            placeholder="Buscar proyectos por título, descripción o tecnología..."
+            placeholder="Busca proyectos por titulo, descripcion o tecnologia..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full max-w-md pl-10"
-            aria-label="Buscar proyectos"
+            className="w-full pl-10 pr-4 py-2 rounded-full border-2 border-gray-300 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
+            aria-label="Search projects"
           />
-          <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-        </div>
+          <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+        </motion.div>
 
         <AnimatePresence>
           <motion.div 
@@ -155,7 +185,7 @@ const Portfolio: React.FC = () => {
 
         {filteredProjects.length > ITEMS_PER_PAGE && (
           <motion.div 
-            className="mt-8 text-center"
+            className="mt-12 text-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -164,11 +194,11 @@ const Portfolio: React.FC = () => {
               onClick={toggleProjects} 
               variant="outline" 
               size="lg" 
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-800 dark:text-white hover:bg-gray-100/80 dark:hover:bg-gray-700/80"
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm text-gray-800 dark:text-white hover:bg-gray-100/80 dark:hover:bg-gray-700/80 transition-all duration-300 transform hover:scale-105"
             >
               {visibleProjects === ITEMS_PER_PAGE ? (
                 <>
-                  Ver más
+                  Ver mas
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </>
               ) : (
@@ -181,7 +211,7 @@ const Portfolio: React.FC = () => {
           </motion.div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -2,6 +2,8 @@ import React from "react";
 import Link from "next/link";
 import { BlogPost } from "@/app/blog/data";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { Book } from "lucide-react";
 
 interface RecentPostsProps {
   posts: BlogPost[];
@@ -11,8 +13,22 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
   const recentPosts = posts.slice(0, 3);
 
   return (
-    <section className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-lg p-6 mb-8 max-w-3xl mx-auto" id="blog">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 dark:text-white">Últimos posts</h2>
+    <motion.section 
+      className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm shadow-lg rounded-lg p-6 mb-8 max-w-3xl mx-auto" 
+      id="blog"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="flex items-center mb-4"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        <Book className="w-8 h-8 mr-3 text-primary" />
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Últimos posts</h2>
+      </motion.div>
       <ul className="space-y-4">
         {recentPosts.map((post) => (
           <li key={post.title} className="flex items-start space-x-4">
@@ -52,8 +68,7 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
           </button>
         </Link>
       </div>
-    </section>
-
+    </motion.section>
   );
 };
 

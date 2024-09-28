@@ -120,17 +120,17 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
-              Hola, soy Camilo, un {" "}
+              Actualmente trabajo en FTTH, di el paso a la programación en el
+              año 2020 y desde entonces me he enfocado al desarrollo web
+              obteniendo experiencia en
               <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
-                 desarrollador web con experiencia en React y Node.js.
-              </strong> {" "}
-              Actualmente trabajo en FTTH, di el salto a la programación en 2020
-              y desde entonces me he enfocado al desarrollo web, siempre
-              buscando ofrecer la mejor experiencia a los usuarios. Creo
-              firmemente en el aprendizaje continuo. Disfruto ayudar a amigos y
-              familia a entender y aprovechar las herramientas tecnológicas,
-              contribuyendo así a que la tecnología sea más accesible para
-              todos.
+                {" "}
+                React y Node.js.
+              </strong>{" "}
+              Siempre busco ofrecer la mejor experiencia a los clientes. Creo en
+              el aprendizaje continuo. Disfruto ayudar a amigos y familia a
+              entender y aprovechar las herramientas tecnológicas, contribuyendo
+              así a que sea más accesible para todos.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">

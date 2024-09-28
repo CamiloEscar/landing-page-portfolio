@@ -3,15 +3,29 @@
 import React from 'react'
 import { dataServices } from "@/data"
 import Title from "./shared/title"
-import { Check } from "lucide-react"
+import { Briefcase, Check } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { motion } from "framer-motion"
 
 const Services = () => {
   return (
-    <section className="py-16 md:py-24 bg-transparent transition-colors duration-300" id="services">
+    <motion.section 
+      className="py-16 md:py-24 bg-transparent transition-colors duration-300" 
+      id="services"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="container mx-auto px-4">
-        <Title title="Servicios" subtitle="Lo que ofrezco" />
+        <motion.div 
+          className="flex items-center justify-center mb-12"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Briefcase className="w-10 h-10 mr-3 text-primary" />
+          <Title title="Servicios" subtitle="Lo que ofrezco" />
+        </motion.div>
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           {dataServices.map((service, index) => (
             <motion.div
@@ -42,7 +56,7 @@ const Services = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

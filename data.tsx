@@ -196,7 +196,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 2,
     title: "Reclamos App",
     image: "/VDappsheets.webp",
-    urlGithub: "#!",
+    urlGithub: "",
     urlDemo:
       "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481",
     description:
@@ -208,7 +208,7 @@ export const dataPortfolio: PortfolioItem[] = [
     title: "Sala de chat",
     image: "/chattiemporealnode.webp",
     urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
-    urlDemo: "#!",
+    urlDemo: "",
     description:
       "Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
@@ -218,7 +218,7 @@ export const dataPortfolio: PortfolioItem[] = [
     title: "MERN CRUD",
     image: "/MERNCRUDAUTH.webp",
     urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
-    urlDemo: "#!",
+    urlDemo: "",
     description:
       "Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
@@ -228,7 +228,7 @@ export const dataPortfolio: PortfolioItem[] = [
     title: "CHAT PDF",
     image: "/chatpdf.webp",
     urlGithub: "https://github.com/CamiloEscar/chat-con-pdf.git",
-    urlDemo: "#!",
+    urlDemo: "",
     description:
       "Una innovadora aplicación que permite a los usuarios interactuar con documentos PDF a través de un chat inteligente, facilitando la extracción de información y la comprensión de documentos extensos.",
     technologies: ["Svelte", "Astro", "TypeScript", "JavaScript"],
@@ -238,7 +238,7 @@ export const dataPortfolio: PortfolioItem[] = [
     title: "Google Traductor Clon",
     image: "/googletraductor.webp",
     urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
-    urlDemo: "#!",
+    urlDemo: "",
     description:
       "Una réplica funcional del popular servicio de Google Traductor, ofreciendo traducciones rápidas y precisas entre múltiples idiomas, con una interfaz limpia y fácil de usar.",
     technologies: ["Vite", "OpenAI", "TypeScript"],
@@ -248,7 +248,7 @@ export const dataPortfolio: PortfolioItem[] = [
     title: "Reserva Futbol 5",
     image: "/bookingappf5.webp",
     urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
-    urlDemo: "#!",
+    urlDemo: "",
     description:
       "Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
@@ -297,7 +297,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 12,
     title: "Trello Clone",
     image: "/trelloClon.webp",
-    urlGithub: "#!",
+    urlGithub: "",
     urlDemo: "https://prueba-trello.vercel.app/",
     description:
     "Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.",
@@ -307,27 +307,27 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 13,
     title: "Fulbito-F5",
     image: "/fulbitof5.webp",
-    urlGithub: "#!",
+    urlGithub: "",
     urlDemo: "https://fulbito-f5.vercel.app/",
     description:
     "Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
-  {
-    id: 14,
-    title: "Ambo Web",
-    image: "/ambo.webp",
-    urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
-    urlDemo: "https://ambo-app.vercel.app/",
-    description:
-      "Tienda en línea especializada en ambos y ropa médica, ofreciendo una experiencia de compra personalizada con opciones de tallas, colores y estilos, además de un sistema de recomendaciones basado en preferencias del usuario.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-  },
+  // {
+  //   id: 14,
+  //   title: "Ambo Web",
+  //   image: "/ambo.webp",
+  //   urlGithub: "https://github.com/CamiloEscar/Ambo-Nextjs.git",
+  //   urlDemo: "https://ambo-app.vercel.app/",
+  //   description:
+  //     "Tienda en línea especializada en ambos y ropa médica, ofreciendo una experiencia de compra personalizada con opciones de tallas, colores y estilos, además de un sistema de recomendaciones basado en preferencias del usuario.",
+  //   technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+  // },
   {
     id: 15,
     title: "Clima Json",
     image: "/clima.webp",
-    urlGithub: "#!",
+    urlGithub: "",
     urlDemo: "https://pruebaclima-api.netlify.app/",
     description:
       "Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.",
