@@ -26,7 +26,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 
   return (
     <div className={`toc ${isFloating ? "floating-toc" : ""}`}>
-      <h3 className="font-semibold mb-2 text-lg">Table of Contents</h3>
+      <h3 className="font-semibold mb-2 text-lg">Contenido</h3>
       <ul className="space-y-2">
         {toc.map((item) => (
           <li

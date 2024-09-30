@@ -114,16 +114,16 @@ export const itemsNavbar = [
     link: "#home",
   },
   {
-    id: 2,
-    title: "Sobre Mi",
-    icon: <UserRound size={20} />,
-    link: "#about-me",
-  },
-  {
     id: 3,
     title: "Proyectos",
     icon: <CodeSquare size={20} />,
     link: "#portfolio",
+  },
+  {
+    id: 2,
+    title: "Sobre Mi",
+    icon: <UserRound size={20} />,
+    link: "#about-me",
   },
   {
     id: 4,
@@ -150,10 +150,10 @@ export const dataSlider = [
     id: 1,
     url: "/slider-1.webp",
   },
-  {
-    id: 2,
-    url: "/slider-2.webp",
-  },
+  // {
+  //   id: 2,
+  //   url: "/slider-2.webp",
+  // },
   {
     id: 3,
     url: "/slider-3.webp",
@@ -168,7 +168,7 @@ export const aboutMe = {
   age: 29,
   location: "Concepción del Uruguay, Entre Ríos, Argentina",
   description:
-    "Técnico y estudiante de Sistemas con un enfoque proactivo, organizado y responsable. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad de prácticas laborales en un entorno desafiante, donde pueda seguir expandiendo mis conocimientos y aplicando mis habilidades en Tecnología de la Información.",
+    "Técnico electricista, actualmente me desempeño como tecnico en fibra optica, soy estudiante de Sistemas de Informacion. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad para trabajar en un entorno tanto amigable como desafiante, donde pueda seguir aprendiendo y aplicando mis habilidades.",
 };
 
 export interface PortfolioItem {
@@ -356,8 +356,8 @@ export const dataExperience: ExperienceCategory[] = [
     experience: [
       {
         name: "HTML",
-        subtitle: "Experimentado",
-        value: 80,
+        subtitle: "Intermedio",
+        value: 60,
         experience:
           "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
         technologies: ["html5", "semantic-ui", "accessibility"],
@@ -378,7 +378,7 @@ export const dataExperience: ExperienceCategory[] = [
       },
       {
         name: "JavaScript",
-        subtitle: "Experimentado",
+        subtitle: "Intermedio",
         value: 60,
         experience:
           "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
@@ -386,7 +386,7 @@ export const dataExperience: ExperienceCategory[] = [
       },
       {
         name: "React",
-        subtitle: "Experimentado",
+        subtitle: "Intermedio",
         value: 60,
         experience:
           "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
@@ -397,6 +397,14 @@ export const dataExperience: ExperienceCategory[] = [
           // "gatsby"
         ],
       },
+      {
+        name: "Vue.js",
+        subtitle: "Basico",
+        value: 10,
+        experience:
+          "Experiencia en el desarrollo de aplicaciones de una sola página utilizando Vue.js y Vuex para la gestión del estado.",
+        technologies: ["vue", "vuex", "nuxt-js", "vue-router"],
+      },
       // {
       //   name: "Bootstrap",
       //   subtitle: "Basic",
@@ -404,23 +412,6 @@ export const dataExperience: ExperienceCategory[] = [
       //   experience:
       //     "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
       //   technologies: ["bootstrap", "jquery"],
-      // },
-      // {
-      //   name: "Pascal",
-      //   subtitle: "Basic",
-      //   value: 50,
-      //   experience:
-      //     "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
-      //   technologies: ["bootstrap", "jquery"],
-      // },
-
-      // {
-      //   name: "Vue.js",
-      //   subtitle: "Basico",
-      //   value: 10,
-      //   experience:
-      //     "Experiencia en el desarrollo de aplicaciones de una sola página utilizando Vue.js y Vuex para la gestión del estado.",
-      //   technologies: ["vue", "vuex", "nuxt-js", "vue-router"],
       // },
       // {
       //   name: "Angular",

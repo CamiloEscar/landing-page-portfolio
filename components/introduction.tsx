@@ -11,6 +11,7 @@ import {
   Code,
   Download,
   X,
+  Layers,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -106,11 +107,7 @@ export default function Introduction() {
             </h1>
             <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200 mb-6 lg:mb-8">
               <Typewriter
-                words={[
-                  "Frontend Developer",
-                  "Estudiante de Sistemas",
-                  "Full Stack Developer",
-                ]}
+                words={["Developer Web", "Estudiante de Sistemas"]}
                 loop={true}
                 cursor
                 cursorStyle="|"
@@ -120,21 +117,18 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
-              Actualmente trabajo en FTTH, di el paso a la programación en el
-              año 2020 y desde entonces me he enfocado al desarrollo web
-              obteniendo experiencia en
+              Hace 4 años di el paso a la programación y desde entonces me he
+              enfocado al desarrollo web, centrandome en tecnologias como
               <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
                 {" "}
                 React y Node.js.
               </strong>{" "}
-              Siempre busco ofrecer la mejor experiencia a los clientes. Creo en
-              el aprendizaje continuo. Disfruto ayudar a amigos y familia a
-              entender y aprovechar las herramientas tecnológicas, contribuyendo
-              así a que sea más accesible para todos.
+              Mi objetivo es ofrecer la mejor experiencia a los clientes,
+              teniendo un aprendizaje continuo para mejorar dia a dia.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
-              <motion.div variants={buttonVariants} whileHover="hover">
+            <motion.div variants={buttonVariants} whileHover="hover">
                 <Button
                   size="lg"
                   asChild
@@ -147,12 +141,23 @@ export default function Introduction() {
               </motion.div>
               <motion.div variants={buttonVariants} whileHover="hover">
                 <Button
+                  size="lg"
+                  asChild
+                  className="transition-all bg-blue-500 hover:bg-blue-600 text-white shadow-md hover:shadow-xl"
+                >
+                  <Link href="/minimal">
+                    <Layers className="mr-2" size={20} /> Mini Portfolio
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div variants={buttonVariants} whileHover="hover">
+                <Button
                   variant="outline"
                   size="lg"
                   onClick={() => setIsCVOpen(true)}
                   className="transition-all border-green-500 text-green-500 hover:bg-green-500 hover:text-white shadow-md hover:shadow-xl"
                 >
-                  <FileText className="mr-2" size={20} /> Ver CV
+                  <Download className="mr-2" size={20} /> CV
                 </Button>
               </motion.div>
             </div>

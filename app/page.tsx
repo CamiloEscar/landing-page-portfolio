@@ -23,13 +23,13 @@ export default function Home() {
         <Navbar />
         <Introduction />
         <Suspense fallback={<Loading />}>
-          <AboutMe />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
           <Portfolio />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <Experience />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          <AboutMe />
         </Suspense>
         <Suspense fallback={<Loading />}>
           <Services />

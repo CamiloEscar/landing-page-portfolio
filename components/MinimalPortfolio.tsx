@@ -88,7 +88,7 @@ const ProfessionalMinimalPortfolio = () => {
             <div>
               <h1 className="text-3xl font-bold">Camilo Escar</h1>
               <h2 className="text-xl text-gray-600 dark:text-gray-400 print:text-gray-600">
-                Desarrollador Full Stack
+                Desarrollador Web
               </h2>
             </div>
           </div>

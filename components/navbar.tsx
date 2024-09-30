@@ -62,7 +62,7 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
-        <TooltipProvider>
+        {/* <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -79,7 +79,7 @@ const Navbar = () => {
               <p>Version Minimalista!</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
+        </TooltipProvider> */}
         <TooltipProvider>
           <Tooltip open={showToolTip} onOpenChange={setShowToolTip}>
             <TooltipTrigger asChild>
