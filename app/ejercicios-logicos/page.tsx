@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react"
+import Link from "next/link"
 import {
   ArrowLeft,
   Code,
@@ -13,61 +13,64 @@ import {
   BookOpen,
   List,
   ChevronDown,
-} from "lucide-react";
-import { motion } from "framer-motion";
-import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-python";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-markup";
-import "prismjs/components/prism-css";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
+  Menu,
+} from "lucide-react"
+import { motion } from "framer-motion"
+import Prism from "prismjs"
+import "prismjs/themes/prism-tomorrow.css"
+import "prismjs/components/prism-javascript"
+import "prismjs/components/prism-python"
+import "prismjs/components/prism-java"
+import "prismjs/components/prism-markup"
+import "prismjs/components/prism-css"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-} from "@/components/ui/breadcrumb";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import Title from "@/components/shared/title";
-import Navbar from "@/components/shared/navbar";
+} from "@/components/ui/breadcrumb"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Textarea } from "@/components/ui/textarea"
+import Title from "@/components/shared/title"
+import Navbar from "@/components/shared/navbar"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 interface Item {
-  name: string;
-  path: string;
-  type: "file" | "dir";
-  content?: string;
-  items?: Item[];
-  url: string;
-  isOpen?: boolean;
+  name: string
+  path: string
+  type: "file" | "dir"
+  content?: string
+  items?: Item[]
+  url: string
+  isOpen?: boolean
 }
 
 const REPO_URL =
-  "https://api.github.com/repos/CamiloEscar/EjerciciosLogicos/contents";
+  "https://api.github.com/repos/CamiloEscar/EjerciciosLogicos/contents"
 
 export default function EjerciciosLogicos() {
-  const [categories, setCategories] = useState<Item[]>([]);
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  const [currentPath, setCurrentPath] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [htmlContent, setHtmlContent] = useState<string>("");
-  const [showPreview, setShowPreview] = useState(false);
+  const [categories, setCategories] = useState<Item[]>([])
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null)
+  const [currentPath, setCurrentPath] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [htmlContent, setHtmlContent] = useState<string>("")
+  const [showPreview, setShowPreview] = useState(false)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
     const fetchCategories = async () => {
-      setIsLoading(true);
-      setError(null);
+      setIsLoading(true)
+      setError(null)
       try {
-        const response = await fetch(REPO_URL);
+        const response = await fetch(REPO_URL)
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del repositorio");
+          throw new Error("No se pudo cargar el contenido del repositorio")
         }
-        const data = await response.json();
+        const data = await response.json()
 
         const categoriesData = data
           .filter((item: any) => item.type === "dir")
@@ -77,98 +80,99 @@ export default function EjerciciosLogicos() {
             type: item.type,
             url: item.url,
             isOpen: false,
-          }));
+          }))
 
-        setCategories(categoriesData);
+        setCategories(categoriesData)
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error("Error fetching categories:", error)
         setError(
           "No se pudo cargar las categorías. Por favor, intenta de nuevo más tarde."
-        );
+        )
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchCategories();
-  }, []);
+    fetchCategories()
+  }, [])
 
   useEffect(() => {
     if (selectedItem && selectedItem.type === "file" && selectedItem.content) {
-      Prism.highlightAll();
+      Prism.highlightAll()
     }
-  }, [selectedItem]);
+  }, [selectedItem])
 
   const loadItemContent = async (item: Item) => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
     try {
       if (item.type === "file" && !item.content) {
-        const response = await fetch(item.url);
+        const response = await fetch(item.url)
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del archivo");
+          throw new Error("No se pudo cargar el contenido del archivo")
         }
-        const data = await response.json();
-        item.content = atob(data.content);
+        const data = await response.json()
+        item.content = atob(data.content)
       } else if (item.type === "dir" && !item.items) {
-        const response = await fetch(item.url);
+        const response = await fetch(item.url)
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del directorio");
+          throw new Error("No se pudo cargar el contenido del directorio")
         }
-        const data = await response.json();
+        const data = await response.json()
         item.items = data.map((subItem: any) => ({
           name: subItem.name,
           path: subItem.path,
           type: subItem.type,
           url: subItem.url,
           isOpen: false,
-        }));
+        }))
       }
-      return item;
+      return item
     } catch (error) {
-      console.error("Error loading item content:", error);
+      console.error("Error loading item content:", error)
       setError(
         `Error al cargar el contenido de ${item.name}. Por favor, intenta de nuevo.`
-      );
-      return null;
+      )
+      return null
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const toggleFolder = async (item: Item) => {
-    let updatedItem = item;
+    let updatedItem = item
     if (!item.items) {
-      updatedItem = (await loadItemContent(item)) || item;
+      updatedItem = (await loadItemContent(item)) || item
     }
-    updatedItem.isOpen = !updatedItem.isOpen;
+    updatedItem.isOpen = !updatedItem.isOpen
 
     const updateCategories = (categories: Item[]): Item[] => {
       return categories.map((category) => {
         if (category.path === updatedItem.path) {
-          return updatedItem;
+          return updatedItem
         }
         if (category.items) {
-          return { ...category, items: updateCategories(category.items) };
+          return { ...category, items: updateCategories(category.items) }
         }
-        return category;
-      });
-    };
+        return category
+      })
+    }
 
-    setCategories(updateCategories(categories));
-  };
+    setCategories(updateCategories(categories))
+  }
 
   const selectItem = async (item: Item) => {
     if (item.type === "dir") {
-      await toggleFolder(item);
+      await toggleFolder(item)
     } else {
-      const loadedItem = await loadItemContent(item);
+      const loadedItem = await loadItemContent(item)
       if (loadedItem) {
-        setSelectedItem(loadedItem);
-        setCurrentPath(loadedItem.path.split("/"));
+        setSelectedItem(loadedItem)
+        setCurrentPath(loadedItem.path.split("/"))
       }
     }
-  };
+    setIsSidebarOpen(false)
+  }
 
   const renderDirectoryContent = (items: Item[], depth = 0) => (
     <ul
@@ -203,49 +207,49 @@ export default function EjerciciosLogicos() {
         </li>
       ))}
     </ul>
-  );
+  )
 
   const getLanguage = (fileName: string) => {
-    const extension = fileName.split(".").pop()?.toLowerCase();
+    const extension = fileName.split(".").pop()?.toLowerCase()
     switch (extension) {
       case "js":
-        return "javascript";
+        return "javascript"
       case "py":
-        return "python";
+        return "python"
       case "java":
-        return "java";
+        return "java"
       case "html":
-        return "markup";
+        return "markup"
       case "css":
-        return "css";
+        return "css"
       default:
-        return "markup";
+        return "markup"
     }
-  };
+  }
 
   const renderHTML = () => {
     if (selectedItem && selectedItem.content) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(selectedItem.content, "text/html");
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(selectedItem.content, "text/html")
 
       // Extract CSS
-      const styles = doc.getElementsByTagName("style");
-      let cssContent = "";
+      const styles = doc.getElementsByTagName("style")
+      let cssContent = ""
       for (let i = 0; i < styles.length; i++) {
-        cssContent += styles[i].textContent;
-        styles[i].remove();
+        cssContent += styles[i].textContent
+        styles[i].remove()
       }
 
       // Extract JavaScript
-      const scripts = doc.getElementsByTagName("script");
-      let jsContent = "";
+      const scripts = doc.getElementsByTagName("script")
+      let jsContent = ""
       for (let i = 0; i < scripts.length; i++) {
-        jsContent += scripts[i].textContent;
-        scripts[i].remove();
+        jsContent += scripts[i].textContent
+        scripts[i].remove()
       }
 
       // Remaining HTML
-      const htmlContent = doc.documentElement.outerHTML;
+      const htmlContent = doc.documentElement.outerHTML
 
       // Combine everything
       const fullContent = `
@@ -258,12 +262,12 @@ export default function EjerciciosLogicos() {
             <script>${jsContent}</script>
           </body>
         </html>
-      `;
+      `
 
-      setHtmlContent(fullContent);
-      setShowPreview(true);
+      setHtmlContent(fullContent)
+      setShowPreview(true)
     }
-  };
+  }
 
   return (
     <>
@@ -290,14 +294,43 @@ export default function EjerciciosLogicos() {
             </Button>
           </motion.div>
 
-          <div className="flex flex-row gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="w-1/3"
+              className="w-full lg:w-1/3"
             >
-              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
+              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 lg:hidden mb-4">
+                <CardHeader className="bg-primary/10 text-primary">
+                  <CardTitle className="text-xl font-semibold flex items-center">
+                    <List className="mr-2 h-5 w-5" />
+                    Categorías
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-2">
+                  <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
+                    <SheetTrigger asChild>
+                      <Button variant="outline" className="w-full">
+                        <Menu className="mr-2 h-4 w-4" />
+                        Abrir Categorías
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent side="left" className="w-[300px] sm:w-[400px]">
+                      <ScrollArea className="h-[calc(100vh-100px)]">
+                        {isLoading && categories.length === 0 ? (
+                          <div className="flex justify-center items-center h-full">
+                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                          </div>
+                        ) : (
+                          renderDirectoryContent(categories)
+                        )}
+                      </ScrollArea>
+                    </SheetContent>
+                  </Sheet>
+                </CardContent>
+              </Card>
+              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 hidden lg:block">
                 <CardHeader className="bg-primary/10 text-primary">
                   <CardTitle className="text-xl font-semibold flex items-center">
                     <List className="mr-2 h-5 w-5" />
@@ -322,7 +355,7 @@ export default function EjerciciosLogicos() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="w-2/3"
+              className="w-full lg:w-2/3"
             >
               <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 rounded-md">
                 <CardHeader className="bg-primary/10 text-primary">
@@ -341,8 +374,8 @@ export default function EjerciciosLogicos() {
                             onClick={() => {
                               const item =
                                 categories.find((c) => c.name === path) ||
-                                selectedItem;
-                              if (item) selectItem(item);
+                                selectedItem
+                              if (item) selectItem(item)
                             }}
                             className="text-primary hover:text-accent transition-colors"
                           >
@@ -426,9 +459,8 @@ export default function EjerciciosLogicos() {
         </div>
       </motion.section>
     </>
-  );
+  )
 }
-
 // Explicación del Código de la Aplicación de Ejercicios Lógicos
 
 // 1. Estructura General:
@@ -474,19 +506,3 @@ export default function EjerciciosLogicos() {
 //    - renderDirectoryContent: Genera la estructura de árbol para la navegación.
 //    - getLanguage: Determina el lenguaje de programación basado en la extensión del archivo.
 //    - renderHTML: Procesa y prepara el contenido HTML para la vista previa.
-
-// 8. Interfaz de Usuario:
-//    - Utiliza componentes de la biblioteca de UI (probablemente shadcn/ui) como Card, Button, ScrollArea, etc.
-//    - Implementa un diseño responsivo que se adapta a diferentes tamaños de pantalla.
-//    - Usa iconos de Lucide React para mejorar la experiencia visual.
-//    - Incluye animaciones suaves utilizando Framer Motion para las transiciones de estado.
-
-// 9. Navegación:
-//    - Implementa un sistema de migas de pan (Breadcrumb) para mostrar la ruta actual y permitir la navegación rápida.
-//    - Permite volver al blog principal mediante un botón en la parte superior.
-
-// 10. Manejo de Errores:
-//     - Muestra mensajes de error en caso de problemas al cargar contenido.
-//     - Proporciona estados de carga visual (spinner) durante las operaciones asíncronas.
-
-// Esta aplicación ofrece una interfaz interactiva para explorar y visualizar ejercicios de programación almacenados en un repositorio de GitHub, con funcionalidades para navegar por la estructura de archivos, ver el contenido de los archivos y renderizar archivos HTML.
