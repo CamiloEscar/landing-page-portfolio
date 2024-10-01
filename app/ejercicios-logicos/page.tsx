@@ -428,3 +428,65 @@ export default function EjerciciosLogicos() {
     </>
   );
 }
+
+// Explicación del Código de la Aplicación de Ejercicios Lógicos
+
+// 1. Estructura General:
+//    - El componente principal se llama 'EjerciciosLogicos'.
+//    - Utiliza hooks de React (useState, useEffect) para manejar el estado y los efectos secundarios.
+//    - La interfaz se divide en dos secciones principales: un panel izquierdo para la navegación y un panel derecho para mostrar el contenido.
+
+// 2. Carga de Datos:
+//    - Los datos se cargan desde un repositorio de GitHub utilizando la API de GitHub.
+//    - Se realiza una solicitud inicial para obtener las categorías principales (directorios de nivel superior).
+//    - Los contenidos de las subcarpetas se cargan bajo demanda cuando el usuario las expande.
+
+// 3. Estructura de Archivos:
+//    - Los archivos y carpetas se muestran en una estructura de árbol en el panel izquierdo.
+//    - Cada elemento puede ser un archivo o un directorio.
+//    - Los directorios tienen un icono de flecha que indica si están expandidos o contraídos.
+//    - Al hacer clic en un directorio, se alterna su estado (expandido/contraído) y se cargan sus contenidos si aún no se han cargado.
+
+// 4. Selección y Carga de Archivos:
+//    - Al hacer clic en un archivo, su contenido se carga y se muestra en el panel derecho.
+//    - Para archivos de código, se utiliza Prism.js para el resaltado de sintaxis.
+//    - El contenido del archivo se muestra en un área desplazable.
+
+// 5. Renderizado de HTML:
+//    - Para archivos HTML, existe una función especial 'renderHTML'.
+//    - Esta función procesa el contenido HTML, extrae CSS y JavaScript.
+//    - Prepara el contenido para su visualización en un iframe.
+//    - Se proporciona un botón "Renderizar HTML" para activar esta funcionalidad.
+
+// 6. Manejo de Estado:
+//    - categories: Array de objetos que representa la estructura de carpetas y archivos.
+//    - selectedItem: El archivo o carpeta actualmente seleccionado.
+//    - currentPath: Array que representa la ruta actual en la estructura de archivos.
+//    - isLoading: Booleano que indica si se está cargando contenido.
+//    - error: String que contiene mensajes de error, si los hay.
+//    - htmlContent: String que contiene el HTML procesado para la vista previa.
+//    - showPreview: Booleano que controla la visibilidad de la vista previa HTML.
+
+// 7. Funciones Principales:
+//    - loadItemContent: Carga el contenido de un archivo o los elementos de un directorio.
+//    - toggleFolder: Expande o contrae un directorio y carga su contenido si es necesario.
+//    - selectItem: Maneja la selección de archivos y carpetas.
+//    - renderDirectoryContent: Genera la estructura de árbol para la navegación.
+//    - getLanguage: Determina el lenguaje de programación basado en la extensión del archivo.
+//    - renderHTML: Procesa y prepara el contenido HTML para la vista previa.
+
+// 8. Interfaz de Usuario:
+//    - Utiliza componentes de la biblioteca de UI (probablemente shadcn/ui) como Card, Button, ScrollArea, etc.
+//    - Implementa un diseño responsivo que se adapta a diferentes tamaños de pantalla.
+//    - Usa iconos de Lucide React para mejorar la experiencia visual.
+//    - Incluye animaciones suaves utilizando Framer Motion para las transiciones de estado.
+
+// 9. Navegación:
+//    - Implementa un sistema de migas de pan (Breadcrumb) para mostrar la ruta actual y permitir la navegación rápida.
+//    - Permite volver al blog principal mediante un botón en la parte superior.
+
+// 10. Manejo de Errores:
+//     - Muestra mensajes de error en caso de problemas al cargar contenido.
+//     - Proporciona estados de carga visual (spinner) durante las operaciones asíncronas.
+
+// Esta aplicación ofrece una interfaz interactiva para explorar y visualizar ejercicios de programación almacenados en un repositorio de GitHub, con funcionalidades para navegar por la estructura de archivos, ver el contenido de los archivos y renderizar archivos HTML.
