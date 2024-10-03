@@ -407,22 +407,22 @@ export const dataExperience: ExperienceCategory[] = [
           // "gatsby"
         ],
       },
-      {
-        name: "Vue.js",
-        subtitle: "Basico",
-        value: 10,
-        experience:
-          "Experiencia en el desarrollo de aplicaciones de una sola página utilizando Vue.js y Vuex para la gestión del estado.",
-        technologies: ["vue", "vuex", "nuxt-js", "vue-router"],
-      },
-      {
-        name: "Angular",
-        subtitle: "Básico",
-        value: 10,
-        experience:
-          "Familiaridad con el framework Angular para el desarrollo de aplicaciones web robustas y escalables.",
-        technologies: ["angular", "rxjs", "ngrx", "angular-material"],
-      },
+      // {
+      //   name: "Vue.js",
+      //   subtitle: "Basico",
+      //   value: 10,
+      //   experience:
+      //     "Experiencia en el desarrollo de aplicaciones de una sola página utilizando Vue.js y Vuex para la gestión del estado.",
+      //   technologies: ["vue", "vuex", "nuxt-js", "vue-router"],
+      // },
+      // {
+      //   name: "Angular",
+      //   subtitle: "Básico",
+      //   value: 10,
+      //   experience:
+      //     "Familiaridad con el framework Angular para el desarrollo de aplicaciones web robustas y escalables.",
+      //   technologies: ["angular", "rxjs", "ngrx", "angular-material"],
+      // },
       // {
       //   name: "Mobile",
       //   subtitle: "Proximamente",
@@ -559,6 +559,214 @@ export const dataExperience: ExperienceCategory[] = [
     ],
   },
 ];
+
+// export const dataExperience = [
+//   {
+//     id: 1,
+//     title: "Frontend Development 💄",
+//     experience: [
+//       {
+//         category: "Lenguajes",
+//         items: [
+//           {
+//             name: "HTML",
+//             subtitle: "Intermedio",
+//             value: 60,
+//             experience: "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
+//             technologies: ["html5"]
+//           },
+//           {
+//             name: "CSS",
+//             subtitle: "Intermedio",
+//             value: 60,
+//             experience: "Amplio conocimiento en diseño responsivo y animaciones CSS.",
+//             technologies: ["css3"]
+//           },
+//           {
+//             name: "JavaScript",
+//             subtitle: "Intermedio",
+//             value: 60,
+//             experience: "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
+//             technologies: ["javascript", "typescript"]
+//           }
+//         ]
+//       },
+//       {
+//         category: "Frameworks",
+//         items: [
+//           {
+//             name: "React",
+//             subtitle: "Intermedio",
+//             value: 60,
+//             experience: "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+//             technologies: ["react", "redux", "next-js"]
+//           }
+//         ]
+//       },
+//       {
+//         category: "Tecnologías",
+//         items: [
+//           {
+//             name: "Semantic UI",
+//             subtitle: "Intermedio",
+//             technologies: ["semantic-ui"]
+//           },
+//           {
+//             name: "Accessibility",
+//             subtitle: "Intermedio",
+//             technologies: ["accessibility"]
+//           },
+//           {
+//             name: "Styled-components",
+//             subtitle: "Intermedio",
+//             technologies: ["styled-components"]
+//           },
+//           {
+//             name: "Tailwind CSS",
+//             subtitle: "Intermedio",
+//             technologies: ["tailwindcss"]
+//           },
+//           {
+//             name: "Webpack",
+//             subtitle: "Intermedio",
+//             technologies: ["webpack"]
+//           },
+//           {
+//             name: "Babel",
+//             subtitle: "Intermedio",
+//             technologies: ["babel"]
+//           }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     id: 2,
+//     title: "Backend Development 💻",
+//     experience: [
+//       {
+//         category: "Lenguajes",
+//         items: [
+//           {
+//             name: "Node JS",
+//             subtitle: "Básico",
+//             value: 30,
+//             experience: "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
+//             technologies: ["nodejs"]
+//           },
+//           {
+//             name: "Python",
+//             subtitle: "Básico",
+//             value: 40,
+//             experience: "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
+//             technologies: ["python"]
+//           }
+//         ]
+//       },
+//       {
+//         category: "Frameworks",
+//         items: [
+//           {
+//             name: "Express",
+//             subtitle: "Básico",
+//             technologies: ["express"]
+//           },
+//           {
+//             name: "Django",
+//             subtitle: "Básico",
+//             technologies: ["django"]
+//           },
+//           {
+//             name: "Flask",
+//             subtitle: "Básico",
+//             technologies: ["flask"]
+//           }
+//         ]
+//       },
+//       {
+//         category: "Tecnologías",
+//         items: [
+//           {
+//             name: "Socket.io",
+//             subtitle: "Básico",
+//             technologies: ["socket-io"]
+//           },
+//           {
+//             name: "GraphQL",
+//             subtitle: "Básico",
+//             technologies: ["graphql"]
+//           },
+//           {
+//             name: "Docker",
+//             subtitle: "Básico",
+//             technologies: ["docker"]
+//           },
+//           {
+//             name: "OAuth",
+//             subtitle: "Básico",
+//             technologies: ["oauth"]
+//           },
+//           {
+//             name: "JWT",
+//             subtitle: "Básico",
+//             technologies: ["jwt"]
+//           }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     id: 3,
+//     title: "Data Analytics 📊",
+//     experience: [
+//       {
+//         category: "Herramientas",
+//         items: [
+//           {
+//             name: "Power BI",
+//             subtitle: "Básico",
+//             value: 40,
+//             experience: "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
+//             technologies: ["powerbi"]
+//           },
+//           {
+//             name: "Tableau",
+//             subtitle: "Básico",
+//             value: 40,
+//             experience: "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
+//             technologies: ["tableau"]
+//           }
+//         ]
+//       }
+//     ]
+//   },
+//   {
+//     id: 4,
+//     title: "Base de Datos 🗄️",
+//     experience: [
+//       {
+//         category: "Bases de Datos",
+//         items: [
+//           {
+//             name: "PostgreSQL",
+//             subtitle: "Básico",
+//             value: 20,
+//             experience: "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
+//             technologies: ["postgresql"]
+//           },
+//           {
+//             name: "MongoDB",
+//             subtitle: "Básico",
+//             value: 20,
+//             experience: "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
+//             technologies: ["mongodb"]
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// ];
+
 
 export const dataServices = [
   {
