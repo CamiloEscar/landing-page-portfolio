@@ -48,6 +48,16 @@ export const dataAboutMe = [
   },
 ];
 
+export const dataLanguage = [
+  {
+    id: 1,
+    title: "Ingles",
+    institution: "Staff English World",
+    value: 50,
+    period: "2010 - 2014",
+    level: "Lecto compresion",
+  },
+]
 export const educationTimeline = [
   {
     id: 1,
@@ -405,30 +415,22 @@ export const dataExperience: ExperienceCategory[] = [
           "Experiencia en el desarrollo de aplicaciones de una sola página utilizando Vue.js y Vuex para la gestión del estado.",
         technologies: ["vue", "vuex", "nuxt-js", "vue-router"],
       },
-      // {
-      //   name: "Bootstrap",
-      //   subtitle: "Basic",
-      //   value: 50,
-      //   experience:
-      //     "Familiaridad con Bootstrap para la creación rápida de interfaces responsivas.",
-      //   technologies: ["bootstrap", "jquery"],
-      // },
-      // {
-      //   name: "Angular",
-      //   subtitle: "Básico",
-      //   value: 10,
-      //   experience:
-      //     "Familiaridad con el framework Angular para el desarrollo de aplicaciones web robustas y escalables.",
-      //   technologies: ["angular", "rxjs", "ngrx", "angular-material"],
-      // },
       {
-        name: "Mobile",
-        subtitle: "Proximamente",
+        name: "Angular",
+        subtitle: "Básico",
         value: 10,
         experience:
-          "Desarrollo de aplicaciones móviles nativas y híbridas con React Native",
-        technologies: ["react-native", "flutter", "kotlin"],
+          "Familiaridad con el framework Angular para el desarrollo de aplicaciones web robustas y escalables.",
+        technologies: ["angular", "rxjs", "ngrx", "angular-material"],
       },
+      // {
+      //   name: "Mobile",
+      //   subtitle: "Proximamente",
+      //   value: 10,
+      //   experience:
+      //     "Desarrollo de aplicaciones móviles nativas y híbridas con React Native",
+      //   technologies: ["react-native", "flutter", "kotlin"],
+      // },
     ],
   },
   {
@@ -437,8 +439,8 @@ export const dataExperience: ExperienceCategory[] = [
     experience: [
       {
         name: "Node JS",
-        subtitle: "Intermedio",
-        value: 50,
+        subtitle: "Basico",
+        value: 30,
         experience:
           "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
         technologies: [
@@ -451,51 +453,33 @@ export const dataExperience: ExperienceCategory[] = [
         ],
       },
       {
-        name: "Bases de Datos",
-        subtitle: "Intermedio",
-        value: 50,
-        experience:
-          "Diseño e implementación de bases de datos SQL y NoSQL, optimización de consultas y modelado de datos.",
-        technologies: [
-          "mongodb",
-          // "mongoose",
-          "postgresql",
-          "mysql",
-          // "sequelize",
-          // "mariadb",
-          // "redis",
-          // "elasticsearch",
-        ],
-      },
-      {
         name: "Python",
-        subtitle: "Basic",
+        subtitle: "Basico",
         value: 40,
         experience:
           "Uso de Python para desarrollo de web con Django y Flask, scripts de automatización y análisis de datos.",
         technologies: ["python", "django", "flask", "pandas", "numpy"],
       },
-      {
-        name: "PHP",
-        subtitle: "Basico",
-        value: 20,
-        experience:
-          "Desarrollo de aplicaciones web dinámicas y CMS personalizados con PHP.",
-        technologies: ["php", "laravel", "wordpress"],
-      },
       // {
-      //   name: "Java",
+      //   name: "PHP",
       //   subtitle: "Basico",
       //   value: 20,
       //   experience:
+      //     "Desarrollo de aplicaciones web dinámicas y CMS personalizados con PHP.",
+      //   technologies: ["php", "laravel", "wordpress"],
+      // },
+      // {
+      //   name: "Java",
+      //   subtitle: "Basico",
+      //   value: 10,
+      //   experience:
       //     "Desarrollo de aplicaciones empresariales y microservicios con Spring Boot y JPA.",
       //   technologies: [
-      //     "java",
       //     "socket",
-      //     "spring",
-      //     "hibernate",
-      //     "maven",
-      //     "junit",
+      //     // "spring",
+      //     // "hibernate",
+      //     // "maven",
+      //     // "junit",
       //   ],
       // },
       {
@@ -520,6 +504,57 @@ export const dataExperience: ExperienceCategory[] = [
         experience:
           "Implementación de prácticas de seguridad web, autenticación y autorización en aplicaciones.",
         technologies: ["oauth", "jwt"],
+      },
+    ],
+  },{
+    id: 3,
+    title: "Data Analytics 📊",
+    experience: [
+      {
+        name: "Power BI",
+        subtitle: "Basico",
+        value: 40,
+        experience:
+          "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
+        technologies: ["powerbi"],
+      },
+      {
+        name: "Tableau",
+        subtitle: "Basico",
+        value: 40,
+        experience:
+          "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
+        technologies: ["tableau"],
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Base de Datos 🗄️",
+    experience: [
+      {
+        name: "PostgreSQL",
+        subtitle: "Basico",
+        value: 20,
+        experience:
+          "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
+        technologies: ["postgresql"],
+      },
+      // {
+      //   name: "MySQL",
+      //   subtitle: "Intermedio",
+      //   value: 60,
+      //   experience:
+      //     "Implementación de bases de datos relacionales, creación de consultas complejas y mantenimiento de datos.",
+      //   technologies: ["mysql"],
+      // },
+      {
+        name: "MongoDB",
+        subtitle: "Basico",
+        value: 20,
+        experience:
+          "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
+        technologies: ["mongodb"],
       },
     ],
   },
