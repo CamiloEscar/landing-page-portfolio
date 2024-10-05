@@ -75,6 +75,121 @@ export const dataBlog: BlogPost[] = [
       
       `,
   },
+//scraping-nodejs
+{
+  "slug": "scraping-web-cualquier-pagina",
+  "title": "Cómo hacer scraping web de cualquier página con Node.js y Playwright",
+  "image": "/blog/scraping-web.png",
+  "date": "2024-10-05",
+  "tags": ["Node.js", "Playwright", "Web Scraping", "Fullstack"],
+  "type": "tutorial",
+  "author": {
+    "name": "Camilo Escar",
+    "avatar": "/profile.webp"
+  },
+  "readingTime": "7 min",
+  "excerpt": "Aprende a hacer scraping web de cualquier página utilizando Node.js y Playwright, y cómo guardar los datos obtenidos en un archivo JSON.",
+  "content": `
+<h2>Cómo hacer scraping web de cualquier página con Node.js y Playwright</h2>
+
+<p>El scraping web es una técnica muy útil para obtener información de páginas web de manera automatizada. En este tutorial, te mostraré cómo hacer scraping de <strong>cualquier página web</strong> usando <strong>Node.js</strong> y <strong>Playwright</strong>, y guardar los datos en un archivo JSON para su posterior procesamiento.</p>
+
+<h3>¿Por qué usar Playwright?</h3>
+<p>Playwright es una herramienta potente y moderna para controlar navegadores como Chrome, Firefox, y Safari, entre otros. A diferencia de otras herramientas de scraping, Playwright permite interactuar con páginas web que dependen mucho de JavaScript, lo que la hace perfecta para sitios dinámicos.</p>
+
+<h3>Requisitos previos</h3>
+<p>Para este tutorial, necesitarás lo siguiente:</p>
+<ul>
+  <li><strong>Node.js</strong> y <strong>npm</strong> instalados en tu sistema.</li>
+  <li>Instalar <a href="https://playwright.dev/">Playwright</a>.</li>
+</ul>
+
+<h3>1. Configurar el entorno</h3>
+<p>Primero, necesitamos crear un proyecto en Node.js e instalar las dependencias necesarias:</p>
+<pre><code class="language-bash">
+mkdir scraping-web
+cd scraping-web
+npm init -y
+npx playwright install
+npm install @playwright/test fs
+</code></pre>
+
+<p>Esto inicializará un proyecto de Node.js y añadirá las dependencias de <strong>Playwright</strong> y el módulo <strong>fs</strong> para trabajar con archivos.</p>
+
+<h3>2. Escribir el script de scraping</h3>
+<p>El siguiente paso es escribir un script que realice el scraping de cualquier página web. Aquí tienes un ejemplo básico:</p>
+
+<pre><code class="language-javascript">
+import { chromium } from '@playwright/test';
+import fs from 'fs';
+
+(async () => {
+  const url = 'https://ejemplo.com';  // Reemplaza con la URL que desees scrapea​r
+
+  // Iniciar navegador y página
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+
+  // Navegar a la página
+  await page.goto(url);
+
+  // Esperar a que los elementos de interés se carguen (modifica el selector)
+  await page.waitForSelector('selector-del-elemento');
+
+  // Extraer los datos
+  const data = await page.$$eval('selector-del-elemento', items =>
+    items.map(item => {
+      const title = item.querySelector('selector-titulo')?.innerText || 'Sin título';
+      const price = item.querySelector('selector-precio')?.innerText || 'Sin precio';
+      return { title, price };
+    })
+  );
+
+  // Guardar los datos en un archivo JSON
+  fs.writeFileSync('data.json', JSON.stringify(data, null, 2), 'utf-8');
+  console.log('Datos guardados en data.json');
+
+  // Cerrar el navegador
+  await browser.close();
+})();
+</code></pre>
+
+<h3>3. Personalizar los selectores</h3>
+<p>El script es genérico, lo que significa que puedes adaptarlo para cualquier página simplemente cambiando los selectores de los elementos que quieras scrapea​r. Por ejemplo, si estás scrapeando productos de una tienda online, es probable que los selectores de los títulos y precios sean algo como:</p>
+
+<pre><code class="language-javascript">
+const data = await page.$$eval('.product-card', items => 
+  items.map(item => {
+    const title = item.querySelector('.product-title')?.innerText || 'Sin título';
+    const price = item.querySelector('.product-price')?.innerText || 'Sin precio';
+    return { title, price };
+  })
+);
+</code></pre>
+
+<p>Modifica los selectores según la estructura HTML de la página objetivo.</p>
+
+<h3>4. Guardar los datos en un archivo JSON</h3>
+<p>El resultado de la extracción se guarda en un archivo JSON llamado <code>data.json</code>. Este archivo puede ser útil si quieres procesar los datos posteriormente o simplemente mantener un registro de la información scrapeada.</p>
+
+<h3>5. Ejecutar el script</h3>
+<p>Para ejecutar el script, simplemente corre el siguiente comando en la terminal:</p>
+
+<pre><code class="language-bash">
+node index.mjs
+</code></pre>
+
+<p>Esto ejecutará el script de scraping y guardará los datos en el archivo <code>data.json</code>.</p>
+
+<h3>6. Cuidado con los términos de uso</h3>
+<p>Es importante tener en cuenta que algunas páginas web prohíben el scraping en sus términos de uso. Asegúrate de revisar las políticas de cada sitio web antes de realizar scraping masivo.</p>
+
+<h3>Conclusión</h3>
+<p>Con este tutorial, has aprendido cómo hacer scraping de cualquier página web utilizando <strong>Node.js</strong> y <strong>Playwright</strong>, y cómo guardar los datos en un archivo JSON. Esto te permitirá obtener y analizar información de manera automatizada, abriendo las puertas a una gran cantidad de aplicaciones.</p>
+`
+}
+
+  ,
   //tecnologias-js
   {
     "slug": "tecnologias-js-comparativa",

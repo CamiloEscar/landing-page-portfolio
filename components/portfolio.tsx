@@ -63,7 +63,7 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
       </CardHeader>
       <CardContent className="p-4">
         <CardTitle className="text-xl mb-2 text-gray-800 dark:text-white">{project.title}</CardTitle>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{project.description}</p>
+        <p className="text-black dark:text-gray-400 text-sm mb-4">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech: string, techIndex: number) => (
             <motion.span

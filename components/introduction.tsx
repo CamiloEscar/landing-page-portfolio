@@ -31,6 +31,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import GradientName from "./GradientName";
 
 const greetings = [
   "Hola, soy",
@@ -115,8 +116,7 @@ export default function Introduction() {
             </AnimatePresence>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 lg:mb-6 bg-gradient-to-r from-green-600 via-green-500 to-teal-400 text-transparent bg-clip-text">
-              Camilo Escar{" "}
-              <span className="animate-bounce inline-block">💻</span>
+              <GradientName />
             </h1>
             <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200 mb-6 lg:mb-8">
               <Typewriter
@@ -130,7 +130,7 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
-              Con más de 4 años de experiencia en desarrollo web, me he
+              Con más de 2 años de experiencia en desarrollo web, me he
               especializado en tecnologías como
               <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
                 {" "}
