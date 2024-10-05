@@ -52,7 +52,7 @@ const skills = [
 
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
-  const [cvLanguage, setCvLanguage] = useState('es');
+  const [cvLanguage, setCvLanguage] = useState("es");
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const { theme } = useTheme();
@@ -130,13 +130,14 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
-              + 4 años enfocado al desarrollo web, centrandome en tecnologias como
+              Con más de 4 años de experiencia en desarrollo web, me he
+              especializado en tecnologías como
               <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
                 {" "}
                 React y Node.js.
               </strong>{" "}
-              Mi objetivo es ofrecer la mejor experiencia a los clientes,
-              teniendo un aprendizaje continuo para mejorar dia a dia.
+              Mi objetivo es ofrecer la mejor experiencia a mis clientes,
+              manteniendo un aprendizaje continuo para mejorar cada día.
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
@@ -174,7 +175,7 @@ export default function Introduction() {
                 </Button>
               </motion.div>
             </div>
-            
+
             <div className="flex gap-6 mb-8 lg:mb-10 items-center">
               <Link
                 href="https://github.com/CamiloEscar"
@@ -202,10 +203,10 @@ export default function Introduction() {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => handleCVOpen('en')}>
+                  <DropdownMenuItem onClick={() => handleCVOpen("en")}>
                     View CV
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => handleCVOpen('es')}>
+                  <DropdownMenuItem onClick={() => handleCVOpen("es")}>
                     Ver CV
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -256,7 +257,7 @@ export default function Introduction() {
               Curriculum Vitae
             </DialogTitle>
             <DialogDescription className="text-gray-600 dark:text-gray-400">
-              {cvLanguage === 'en' 
+              {cvLanguage === "en"
                 ? "You're viewing the English version. You can download it or switch to Spanish using the buttons below."
                 : "Estás viendo la versión en Español. Puedes descargarla o cambiar a Inglés usando los botones de abajo."}
             </DialogDescription>
@@ -271,10 +272,10 @@ export default function Introduction() {
           <div className="flex justify-between space-x-4 p-4 bg-gray-100 dark:bg-gray-800">
             <Button
               variant="outline"
-              onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
+              onClick={() => setCvLanguage(cvLanguage === "en" ? "es" : "en")}
               className="hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              {cvLanguage === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+              {cvLanguage === "en" ? "Cambiar a Español" : "Switch to English"}
             </Button>
             <div className="flex space-x-4">
               <Button
@@ -282,13 +283,17 @@ export default function Introduction() {
                 onClick={() => setIsCVOpen(false)}
                 className="hover:bg-gray-200 dark:hover:bg-gray-700"
               >
-                <X className="mr-2 h-4 w-4" /> {cvLanguage === 'en' ? 'Close' : 'Cerrar'}
+                <X className="mr-2 h-4 w-4" />{" "}
+                {cvLanguage === "en" ? "Close" : "Cerrar"}
               </Button>
               <Button
-                onClick={() => window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, "_blank")}
+                onClick={() =>
+                  window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, "_blank")
+                }
                 className="bg-green-500 hover:bg-green-600 text-white"
               >
-                <Download className="mr-2 h-4 w-4" /> {cvLanguage === 'en' ? 'Download CV' : 'Descargar CV'}
+                <Download className="mr-2 h-4 w-4" />{" "}
+                {cvLanguage === "en" ? "Download CV" : "Descargar CV"}
               </Button>
             </div>
           </div>
