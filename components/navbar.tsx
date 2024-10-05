@@ -11,7 +11,7 @@ import {
   Mail,
   Sun,
   Moon,
-  Book,
+  Download,
   Pen,
   Minimize2,
 } from "lucide-react";
@@ -22,6 +22,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -62,25 +68,44 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
-        {/* <TooltipProvider>
+        <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-background/20 hover:bg-background/40"
-              >
-                <Link href="/minimal">
-                  <Minimize2 className="h-5 w-5" />
-                </Link>
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="bg-background/20 hover:bg-background/40"
+                  >
+                    <Download className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      window.open("/CVen-CamiloEscar.pdf", "_blank")
+                    }
+                  >
+                    CV Download
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      window.open("/CVes-CamiloEscar.pdf", "_blank")
+                    }
+                  >
+                    Descargar CV
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </TooltipTrigger>
             <TooltipContent>
-              <p>Version Minimalista!</p>
+              <p>Download CV</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider> */}
-        <TooltipProvider>
+        </TooltipProvider>
+
+        {/* <TooltipProvider>
           <Tooltip open={showToolTip} onOpenChange={setShowToolTip}>
             <TooltipTrigger asChild>
               <Button
@@ -98,7 +123,7 @@ const Navbar = () => {
               <p>¡Descubre historias y aprendizajes en mi blog!</p>
             </TooltipContent>
           </Tooltip>
-        </TooltipProvider>
+        </TooltipProvider> */}
 
         <TooltipProvider>
           <Tooltip>

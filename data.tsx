@@ -124,22 +124,22 @@ export const itemsNavbar = [
     link: "#home",
   },
   {
-    id: 3,
+    id: 2,
     title: "Proyectos",
     icon: <CodeSquare size={20} />,
     link: "#portfolio",
   },
   {
-    id: 2,
-    title: "Sobre Mi",
-    icon: <UserRound size={20} />,
-    link: "#about-me",
-  },
-  {
-    id: 4,
+    id: 3,
     title: "Servicio",
     icon: <BookText size={20} />,
     link: "#services",
+  },
+  {
+    id: 4,
+    title: "Sobre Mi",
+    icon: <UserRound size={20} />,
+    link: "#about-me",
   },
   {
     id: 5,
@@ -281,7 +281,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: "https://flybondi-challenge.netlify.app/",
     description:
     "Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.",
-    technologies: ["JavaScript", "CSS", "HTML", "React", "Axios", "Vite"],
+    technologies: ["JavaScript", "CSS", "HTML", "React", "Vite"],
   },
   {
     id: 10,
@@ -345,7 +345,7 @@ export const dataPortfolio: PortfolioItem[] = [
   },
 ];
 
-export interface ExperienceItem {
+export interface ExperienceItemMinimal {
   name: string;
   subtitle: string;
   value: number;
@@ -353,13 +353,13 @@ export interface ExperienceItem {
   technologies: string[];
 }
 
-export interface ExperienceCategory {
+export interface ExperienceCategoryMinimal {
   id: number;
   title: string;
-  experience: ExperienceItem[];
+  experience: ExperienceItemMinimal[];
 }
 
-export const dataExperience: ExperienceCategory[] = [
+export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
   {
     id: 1,
     title: "Frontend Development 💄",
@@ -407,6 +407,14 @@ export const dataExperience: ExperienceCategory[] = [
           // "gatsby"
         ],
       },
+      {
+        name: "Svelte",
+        subtitle: "Basico",
+        value: 20,
+        experience:
+        "Diseño de bases de datos relacionales y no relacionales, optimización de consultas y gestión de transacciones.",
+        technologies: ["svelte, Astro"],
+        },
       // {
       //   name: "Vue.js",
       //   subtitle: "Basico",
@@ -497,14 +505,14 @@ export const dataExperience: ExperienceCategory[] = [
           // "gitlab-ci",
         ],
       },
-      {
-        name: "Seguridad Web",
-        subtitle: "Básico",
-        value: 20,
-        experience:
-          "Implementación de prácticas de seguridad web, autenticación y autorización en aplicaciones.",
-        technologies: ["oauth", "jwt"],
-      },
+      // {
+      //   name: "Seguridad Web",
+      //   subtitle: "Básico",
+      //   value: 20,
+      //   experience:
+      //     "Implementación de prácticas de seguridad web, autenticación y autorización en aplicaciones.",
+      //   technologies: ["oauth", "jwt"],
+      // },
     ],
   },{
     id: 3,
@@ -540,6 +548,7 @@ export const dataExperience: ExperienceCategory[] = [
           "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
         technologies: ["postgresql"],
       },
+      
       // {
       //   name: "MySQL",
       //   subtitle: "Intermedio",
@@ -560,212 +569,231 @@ export const dataExperience: ExperienceCategory[] = [
   },
 ];
 
-// export const dataExperience = [
-//   {
-//     id: 1,
-//     title: "Frontend Development 💄",
-//     experience: [
-//       {
-//         category: "Lenguajes",
-//         items: [
-//           {
-//             name: "HTML",
-//             subtitle: "Intermedio",
-//             value: 60,
-//             experience: "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
-//             technologies: ["html5"]
-//           },
-//           {
-//             name: "CSS",
-//             subtitle: "Intermedio",
-//             value: 60,
-//             experience: "Amplio conocimiento en diseño responsivo y animaciones CSS.",
-//             technologies: ["css3"]
-//           },
-//           {
-//             name: "JavaScript",
-//             subtitle: "Intermedio",
-//             value: 60,
-//             experience: "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
-//             technologies: ["javascript", "typescript"]
-//           }
-//         ]
-//       },
-//       {
-//         category: "Frameworks",
-//         items: [
-//           {
-//             name: "React",
-//             subtitle: "Intermedio",
-//             value: 60,
-//             experience: "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
-//             technologies: ["react", "redux", "next-js"]
-//           }
-//         ]
-//       },
-//       {
-//         category: "Tecnologías",
-//         items: [
-//           {
-//             name: "Semantic UI",
-//             subtitle: "Intermedio",
-//             technologies: ["semantic-ui"]
-//           },
-//           {
-//             name: "Accessibility",
-//             subtitle: "Intermedio",
-//             technologies: ["accessibility"]
-//           },
-//           {
-//             name: "Styled-components",
-//             subtitle: "Intermedio",
-//             technologies: ["styled-components"]
-//           },
-//           {
-//             name: "Tailwind CSS",
-//             subtitle: "Intermedio",
-//             technologies: ["tailwindcss"]
-//           },
-//           {
-//             name: "Webpack",
-//             subtitle: "Intermedio",
-//             technologies: ["webpack"]
-//           },
-//           {
-//             name: "Babel",
-//             subtitle: "Intermedio",
-//             technologies: ["babel"]
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 2,
-//     title: "Backend Development 💻",
-//     experience: [
-//       {
-//         category: "Lenguajes",
-//         items: [
-//           {
-//             name: "Node JS",
-//             subtitle: "Básico",
-//             value: 30,
-//             experience: "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
-//             technologies: ["nodejs"]
-//           },
-//           {
-//             name: "Python",
-//             subtitle: "Básico",
-//             value: 40,
-//             experience: "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
-//             technologies: ["python"]
-//           }
-//         ]
-//       },
-//       {
-//         category: "Frameworks",
-//         items: [
-//           {
-//             name: "Express",
-//             subtitle: "Básico",
-//             technologies: ["express"]
-//           },
-//           {
-//             name: "Django",
-//             subtitle: "Básico",
-//             technologies: ["django"]
-//           },
-//           {
-//             name: "Flask",
-//             subtitle: "Básico",
-//             technologies: ["flask"]
-//           }
-//         ]
-//       },
-//       {
-//         category: "Tecnologías",
-//         items: [
-//           {
-//             name: "Socket.io",
-//             subtitle: "Básico",
-//             technologies: ["socket-io"]
-//           },
-//           {
-//             name: "GraphQL",
-//             subtitle: "Básico",
-//             technologies: ["graphql"]
-//           },
-//           {
-//             name: "Docker",
-//             subtitle: "Básico",
-//             technologies: ["docker"]
-//           },
-//           {
-//             name: "OAuth",
-//             subtitle: "Básico",
-//             technologies: ["oauth"]
-//           },
-//           {
-//             name: "JWT",
-//             subtitle: "Básico",
-//             technologies: ["jwt"]
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 3,
-//     title: "Data Analytics 📊",
-//     experience: [
-//       {
-//         category: "Herramientas",
-//         items: [
-//           {
-//             name: "Power BI",
-//             subtitle: "Básico",
-//             value: 40,
-//             experience: "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
-//             technologies: ["powerbi"]
-//           },
-//           {
-//             name: "Tableau",
-//             subtitle: "Básico",
-//             value: 40,
-//             experience: "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
-//             technologies: ["tableau"]
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     id: 4,
-//     title: "Base de Datos 🗄️",
-//     experience: [
-//       {
-//         category: "Bases de Datos",
-//         items: [
-//           {
-//             name: "PostgreSQL",
-//             subtitle: "Básico",
-//             value: 20,
-//             experience: "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
-//             technologies: ["postgresql"]
-//           },
-//           {
-//             name: "MongoDB",
-//             subtitle: "Básico",
-//             value: 20,
-//             experience: "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
-//             technologies: ["mongodb"]
-//           }
-//         ]
-//       }
-//     ]
-//   }
-// ];
+export interface ExperienceCategory {
+  id: number;
+  title: string;
+  experience: ExperienceGroup[];
+}
+
+export interface ExperienceGroup {
+  category: string;
+  items: ExperienceItem[];
+}
+
+export interface ExperienceItem {
+  name: string;
+  subtitle: string;
+  value?: number;
+  experience?: string;
+  technologies: string[];
+}
+
+export const dataExperience: ExperienceCategory[] = [
+  {
+    id: 1,
+    title: "Frontend Development 💄",
+    experience: [
+      {
+        category: "Lenguajes",
+        items: [
+          {
+            name: "HTML",
+            subtitle: "Intermedio",
+            value: 60,
+            experience: "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
+            technologies: ["html5"]
+          },
+          {
+            name: "CSS",
+            subtitle: "Intermedio",
+            value: 60,
+            experience: "Amplio conocimiento en diseño responsivo y animaciones CSS.",
+            technologies: ["css3"]
+          },
+          {
+            name: "JavaScript",
+            subtitle: "Intermedio",
+            value: 60,
+            experience: "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
+            technologies: ["javascript", "typescript"]
+          }
+        ]
+      },
+      {
+        category: "Frameworks",
+        items: [
+          {
+            name: "React",
+            subtitle: "Intermedio",
+            value: 60,
+            experience: "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+            technologies: ["react", "redux", "next-js"]
+          }
+        ]
+      },
+      {
+        category: "Tecnologías",
+        items: [
+          {
+            name: "Semantic UI",
+            subtitle: "Intermedio",
+            technologies: ["semantic-ui"]
+          },
+          {
+            name: "Accessibility",
+            subtitle: "Intermedio",
+            technologies: ["accessibility"]
+          },
+          {
+            name: "Styled-components",
+            subtitle: "Intermedio",
+            technologies: ["styled-components"]
+          },
+          {
+            name: "Tailwind CSS",
+            subtitle: "Intermedio",
+            technologies: ["tailwindcss"]
+          },
+          {
+            name: "Webpack",
+            subtitle: "Intermedio",
+            technologies: ["webpack"]
+          },
+          {
+            name: "Babel",
+            subtitle: "Intermedio",
+            technologies: ["babel"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Backend Development 💻",
+    experience: [
+      {
+        category: "Lenguajes",
+        items: [
+          {
+            name: "Node JS",
+            subtitle: "Básico",
+            value: 30,
+            experience: "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
+            technologies: ["nodejs"]
+          },
+          {
+            name: "Python",
+            subtitle: "Básico",
+            value: 40,
+            experience: "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
+            technologies: ["python"]
+          }
+        ]
+      },
+      {
+        category: "Frameworks",
+        items: [
+          {
+            name: "Express",
+            subtitle: "Básico",
+            technologies: ["express"]
+          },
+          {
+            name: "Django",
+            subtitle: "Básico",
+            technologies: ["django"]
+          },
+          {
+            name: "Flask",
+            subtitle: "Básico",
+            technologies: ["flask"]
+          }
+        ]
+      },
+      {
+        category: "Tecnologías",
+        items: [
+          {
+            name: "Socket.io",
+            subtitle: "Básico",
+            technologies: ["socket-io"]
+          },
+          {
+            name: "GraphQL",
+            subtitle: "Básico",
+            technologies: ["graphql"]
+          },
+          {
+            name: "Docker",
+            subtitle: "Básico",
+            technologies: ["docker"]
+          },
+          {
+            name: "OAuth",
+            subtitle: "Básico",
+            technologies: ["oauth"]
+          },
+          {
+            name: "JWT",
+            subtitle: "Básico",
+            technologies: ["jwt"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Data Analytics 📊",
+    experience: [
+      {
+        category: "Herramientas",
+        items: [
+          {
+            name: "Power BI",
+            subtitle: "Básico",
+            value: 40,
+            experience: "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
+            technologies: ["powerbi"]
+          },
+          {
+            name: "Tableau",
+            subtitle: "Básico",
+            value: 40,
+            experience: "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
+            technologies: ["tableau"]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Base de Datos 🗄️",
+    experience: [
+      {
+        category: "Bases de Datos",
+        items: [
+          {
+            name: "PostgreSQL",
+            subtitle: "Básico",
+            value: 20,
+            experience: "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
+            technologies: ["postgresql"]
+          },
+          {
+            name: "MongoDB",
+            subtitle: "Básico",
+            value: 20,
+            experience: "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
+            technologies: ["mongodb"]
+          }
+        ]
+      }
+    ]
+  }
+];
 
 
 export const dataServices = [

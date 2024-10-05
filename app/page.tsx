@@ -31,9 +31,9 @@ export default function Home() {
         <Suspense fallback={<Loading />}>
           <AboutMe />
         </Suspense>
-        <Suspense fallback={<Loading />}>
+        {/* <Suspense fallback={<Loading />}>
           <Services />
-        </Suspense>
+        </Suspense> */}
         <Suspense fallback={<Loading />}>
           <RecentPosts posts={dataBlog} />
         </Suspense>

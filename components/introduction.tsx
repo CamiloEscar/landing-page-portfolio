@@ -12,6 +12,7 @@ import {
   Download,
   X,
   Layers,
+  Pen,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const greetings = [
   "Hola, soy",
@@ -45,6 +52,7 @@ const skills = [
 
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
+  const [cvLanguage, setCvLanguage] = useState('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const { theme } = useTheme();
@@ -73,6 +81,11 @@ export default function Introduction() {
         yoyo: Infinity,
       },
     },
+  };
+
+  const handleCVOpen = (language: any) => {
+    setCvLanguage(language);
+    setIsCVOpen(true);
   };
 
   return (
@@ -117,8 +130,7 @@ export default function Introduction() {
               />
             </h2>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 lg:mb-10 max-w-2xl order-2 md:order-1">
-              Hace 4 años di el paso a la programación y desde entonces me he
-              enfocado al desarrollo web, centrandome en tecnologias como
+              + 4 años enfocado al desarrollo web, centrandome en tecnologias como
               <strong className="text-yellow-300 dark:text-yellow-400 font-bold font-mono">
                 {" "}
                 React y Node.js.
@@ -128,7 +140,7 @@ export default function Introduction() {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-8 lg:mb-10">
-            <motion.div variants={buttonVariants} whileHover="hover">
+              <motion.div variants={buttonVariants} whileHover="hover">
                 <Button
                   size="lg"
                   asChild
@@ -152,16 +164,18 @@ export default function Introduction() {
               </motion.div>
               <motion.div variants={buttonVariants} whileHover="hover">
                 <Button
-                  variant="outline"
                   size="lg"
-                  onClick={() => setIsCVOpen(true)}
-                  className="transition-all border-green-500 text-green-500 hover:bg-green-500 hover:text-white shadow-md hover:shadow-xl"
+                  asChild
+                  className="transition-all bg-purple-500 hover:bg-purple-600 text-white shadow-md hover:shadow-xl"
                 >
-                  <Download className="mr-2" size={20} /> CV
+                  <Link href="/blog">
+                    <Pen className="mr-2" size={20} /> Blog
+                  </Link>
                 </Button>
               </motion.div>
             </div>
-            <div className="flex gap-6 mb-8 lg:mb-10">
+            
+            <div className="flex gap-6 mb-8 lg:mb-10 items-center">
               <Link
                 href="https://github.com/CamiloEscar"
                 target="_blank"
@@ -178,7 +192,26 @@ export default function Introduction() {
               >
                 <Linkedin size={28} />
               </Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="transition-all border-green-500 text-green-500 hover:bg-green-500 hover:text-white shadow-md hover:shadow-xl"
+                  >
+                    <Download className="mr-2" size={20} /> CV
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem onClick={() => handleCVOpen('en')}>
+                    View CV
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleCVOpen('es')}>
+                    Ver CV
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
+
             <div className="flex gap-4 text-gray-700 dark:text-gray-300 items-center">
               <Code size={20} className="text-green-500" />
               <span className="text-base sm:text-lg font-semibold">
@@ -223,31 +256,41 @@ export default function Introduction() {
               Curriculum Vitae
             </DialogTitle>
             <DialogDescription className="text-gray-600 dark:text-gray-400">
-              Aquí puedes ver mi CV completo. Puedes descargarlo o cerrarlo
-              usando los botones de abajo.
+              {cvLanguage === 'en' 
+                ? "You're viewing the English version. You can download it or switch to Spanish using the buttons below."
+                : "Estás viendo la versión en Español. Puedes descargarla o cambiar a Inglés usando los botones de abajo."}
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 overflow-hidden">
             <iframe
-              src="/cv-camilo.pdf"
+              src={`/CV${cvLanguage}-CamiloEscar.pdf`}
               className="w-full h-[calc(90vh-180px)]"
               title="CV"
             />
           </div>
-          <div className="flex justify-end space-x-4 p-4 bg-gray-100 dark:bg-gray-800">
+          <div className="flex justify-between space-x-4 p-4 bg-gray-100 dark:bg-gray-800">
             <Button
               variant="outline"
-              onClick={() => setIsCVOpen(false)}
+              onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
               className="hover:bg-gray-200 dark:hover:bg-gray-700"
             >
-              <X className="mr-2 h-4 w-4" /> Cerrar
+              {cvLanguage === 'en' ? 'Cambiar a Español' : 'Switch to English'}
             </Button>
-            <Button
-              onClick={() => window.open("/cv-camilo.pdf", "_blank")}
-              className="bg-green-500 hover:bg-green-600 text-white"
-            >
-              <Download className="mr-2 h-4 w-4" /> Descargar CV
-            </Button>
+            <div className="flex space-x-4">
+              <Button
+                variant="outline"
+                onClick={() => setIsCVOpen(false)}
+                className="hover:bg-gray-200 dark:hover:bg-gray-700"
+              >
+                <X className="mr-2 h-4 w-4" /> {cvLanguage === 'en' ? 'Close' : 'Cerrar'}
+              </Button>
+              <Button
+                onClick={() => window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, "_blank")}
+                className="bg-green-500 hover:bg-green-600 text-white"
+              >
+                <Download className="mr-2 h-4 w-4" /> {cvLanguage === 'en' ? 'Download CV' : 'Descargar CV'}
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

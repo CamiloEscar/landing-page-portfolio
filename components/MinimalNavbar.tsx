@@ -24,7 +24,7 @@ const ProfessionalNavbar = () => {
         <Button variant="ghost" size="icon" onClick={cycleTheme}>
           {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
-        <Button variant="ghost" size="icon" onClick={() => window.open("/cv-camilo.pdf", "_blank")}>
+        <Button variant="ghost" size="icon" onClick={() => window.open("/CVes-CamiloEscar.pdf", "_blank")}>
           <Download className="h-5 w-5" />
         </Button>
       </div>

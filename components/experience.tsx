@@ -1,355 +1,220 @@
-"use client";
+"use client"
 
-import React from "react";
-import { dataExperience, ExperienceItem } from "@/data";
-import Title from "./shared/title";
-import {
-  BadgeCheck,
-  Star,
-  Coffee,
-  Code,
-  Database,
-  Server,
-  Globe,
-  Brain,
-} from "lucide-react";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-  FaHtml5,
-  FaCss3Alt,
-  FaSass,
-  FaLess,
-  FaJs,
-  FaReact,
-  FaNodeJs,
-  FaNpm,
-  FaBootstrap,
-  FaPython,
-  FaPhp,
-  FaWordpress,
-  FaUniversalAccess,
-  FaVuejs,
-  FaJava,
-  FaDocker,
-  FaAws,
-  FaGitlab,
-} from "react-icons/fa";
-import {
-  SiTypescript,
-  SiWebpack,
-  SiTailwindcss,
-  SiRedux,
-  SiNextdotjs,
-  SiGatsby,
-  SiJquery,
-  SiExpress,
-  SiSocketdotio,
-  SiMongodb,
-  SiMongoose,
-  SiMysql,
-  SiMariadb,
-  SiSequelize,
-  SiLaravel,
-  SiDjango,
-  SiPostgresql,
-  SiSemanticuireact,
-  SiStyledcomponents,
-  SiNuxtdotjs,
-  SiNumpy,
-  SiPandas,
-  SiPostcss,
-  SiBabel,
-  SiAngular,
-  SiSpring,
-  SiKubernetes,
-  SiJenkins,
-  SiAzuredevops,
-  SiGraphql,
-  SiApollographql,
-  SiElasticsearch,
-  SiRedis,
-  SiHibernate,
-  SiApachemaven,
-  SiFlask,
-  SiJunit5,
-  SiAuth0,
-  SiJsonwebtokens,
-  SiFlutter,
-  SiKotlin,
-  SiReact,
-} from "react-icons/si";
-
-type IconMapKey =
-  | "html5"
-  | "semantic-ui"
-  | "accessibility"
-  | "css3"
-  | "sass"
-  | "less"
-  | "styled-components"
-  | "javascript"
-  | "es6"
-  | "typescript"
-  | "webpack"
-  | "tailwindcss"
-  | "postcss"
-  | "react"
-  | "redux"
-  | "next-js"
-  | "gatsby"
-  | "bootstrap"
-  | "jquery"
-  | "nodejs"
-  | "express"
-  | "socket-io"
-  | "npm"
-  | "mongodb"
-  | "mongoose"
-  | "atlas"
-  | "python"
-  | "pandas"
-  | "numpy"
-  | "mysql"
-  | "mariadb"
-  | "sequelize"
-  | "php"
-  | "laravel"
-  | "wordpress"
-  | "django"
-  | "postgresql"
-  | "nuxt"
-  | "vue"
-  | "angular"
-  | "java"
-  | "spring"
-  | "docker"
-  | "kubernetes"
-  | "jenkins"
-  | "aws"
-  | "azure"
-  | "gitlab-ci"
-  | "graphql"
-  | "apollo"
-  | "elasticsearch"
-  | "redis"
-  | "hibernate"
-  | "maven"
-  | "flask"
-  | "junit"
-  | "oauth"
-  | "babel"
-  | "jwt"
-  | "socket"
-  | "react-native"
-  | "kotlin"
-  | "flutter"
-
-
-
-const iconMap: Record<IconMapKey, React.ReactElement> = {
-  html5: <FaHtml5 className="w-5 h-5" />,
-  "semantic-ui": <SiSemanticuireact className="w-5 h-5" />,
-  accessibility: <FaUniversalAccess className="w-5 h-5" />,
-  css3: <FaCss3Alt className="w-5 h-5" />,
-  sass: <FaSass className="w-5 h-5" />,
-  less: <FaLess className="w-5 h-5" />,
-  "styled-components": <SiStyledcomponents className="w-5 h-5" />,
-  javascript: <FaJs className="w-5 h-5" />,
-  es6: <FaJs className="w-5 h-5" />,
-  typescript: <SiTypescript className="w-5 h-5" />,
-  webpack: <SiWebpack className="w-5 h-5" />,
-  tailwindcss: <SiTailwindcss className="w-5 h-5" />,
-  postcss: <SiPostcss className="w-5 h-5" />,
-  react: <FaReact className="w-5 h-5" />,
-  redux: <SiRedux className="w-5 h-5" />,
-  "next-js": <SiNextdotjs className="w-5 h-5" />,
-  nuxt: <SiNuxtdotjs className="w-5 h-5" />,
-  gatsby: <SiGatsby className="w-5 h-5" />,
-  bootstrap: <FaBootstrap className="w-5 h-5" />,
-  jquery: <SiJquery className="w-5 h-5" />,
-  nodejs: <FaNodeJs className="w-5 h-5" />,
-  express: <SiExpress className="w-5 h-5" />,
-  "socket-io": <SiSocketdotio className="w-5 h-5" />,
-  npm: <FaNpm className="w-5 h-5" />,
-  mongodb: <SiMongodb className="w-5 h-5" />,
-  mongoose: <SiMongoose className="w-5 h-5" />,
-  atlas: <SiMongodb className="w-5 h-5" />,
-  python: <FaPython className="w-5 h-5" />,
-  pandas: <SiPandas className="w-5 h-5" />,
-  numpy: <SiNumpy className="w-5 h-5" />,
-  mysql: <SiMysql className="w-5 h-5" />,
-  mariadb: <SiMariadb className="w-5 h-5" />,
-  sequelize: <SiSequelize className="w-5 h-5" />,
-  php: <FaPhp className="w-5 h-5" />,
-  laravel: <SiLaravel className="w-5 h-5" />,
-  wordpress: <FaWordpress className="w-5 h-5" />,
-  django: <SiDjango className="w-5 h-5" />,
-  postgresql: <SiPostgresql className="w-5 h-5" />,
-  vue: <FaVuejs className="w-5 h-5" />,
-  angular: <SiAngular className="w-5 h-5" />,
-  java: <FaJava className="w-5 h-5" />,
-  spring: <SiSpring className="w-5 h-5" />,
-  hibernate: <SiHibernate className="w-5 h-5" />,
-  docker: <FaDocker className="w-5 h-5" />,
-  kubernetes: <SiKubernetes className="w-5 h-5" />,
-  jenkins: <SiJenkins className="w-5 h-5" />,
-  aws: <FaAws className="w-5 h-5" />,
-  azure: <SiAzuredevops className="w-5 h-5" />,
-  "gitlab-ci": <FaGitlab className="w-5 h-5" />,
-  graphql: <SiGraphql className="w-5 h-5" />,
-  apollo: <SiApollographql className="w-5 h-5" />,
-  elasticsearch: <SiElasticsearch className="w-5 h-5" />,
-  redis: <SiRedis className="w-5 h-5" />,
-  maven: <SiApachemaven className="w-5 h-5" />,
-  flask: <SiFlask className="w-5 h-5" />,
-  junit: <SiJunit5 className="w-5 h-5" />,
-  oauth: <SiAuth0 className="w-5 h-5" />,
-  babel: <SiBabel className="w-5 h-5" />,
-  jwt: <SiJsonwebtokens className="w-5 h-5" />,
-  socket: <SiSocketdotio className="w-5 h-5" />,
-  "react-native": <SiReact className="w-5 h-5" />,
-  flutter: <SiFlutter className="w-5 h-5" />,
-  kotlin: <SiKotlin className="w-5 h-5" />,
-
-};
+import React, { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Briefcase, BadgeCheck, Coffee, ChevronDown, ChevronRight, Code, Layers, Zap } from "lucide-react"
+import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Badge } from "@/components/ui/badge"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { dataServices, dataExperience, ExperienceItem } from "@/data"
+import type { ExperienceGroup, ExperienceCategory } from "@/data"
+import { iconMap, IconMapKey } from "./iconMap"
 
 const getIcon = (tech: string): React.ReactElement => {
-  const key = tech.toLowerCase() as IconMapKey;
-  return key in iconMap ? iconMap[key] : <Coffee className="w-5 h-5" />;
-};
+  const key = tech.toLowerCase() as IconMapKey
+  return key in iconMap ? iconMap[key] : <Coffee className="w-5 h-5" />
+}
+
+const ServiceCard: React.FC<{ service: typeof dataServices[number] }> = ({ service }) => (
+  <Card className="group h-full bg-card hover:bg-card/90 transition-colors duration-300">
+    <CardHeader className="pb-2">
+      <CardTitle className="text-lg font-semibold flex items-center gap-2 text-card-foreground">
+        {service.icon}
+        {service.title}
+      </CardTitle>
+    </CardHeader>
+    <CardContent className="pt-4">
+      <ul className="space-y-2">
+        {service.features.map((feature, index) => (
+          <li key={index} className="flex items-start gap-2">
+            <BadgeCheck className="text-primary mt-1 flex-shrink-0" size={16} />
+            <span className="text-sm text-muted-foreground">{feature.name}</span>
+          </li>
+        ))}
+      </ul>
+    </CardContent>
+  </Card>
+)
+
+const TechnologyBadge: React.FC<{ tech: string }> = ({ tech }) => (
+  <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Badge variant="secondary" className="flex items-center gap-1 px-2 py-1 rounded-full hover:bg-secondary/80 transition-colors duration-200">
+          {getIcon(tech)}
+          <span className="text-xs font-medium">{tech}</span>
+        </Badge>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Experiencia en {tech}</p>
+      </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
+)
 
 const ExperienceCard: React.FC<{ item: ExperienceItem }> = ({ item }) => (
-  <Card className="group h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+  <Card className="group h-full bg-card hover:bg-card/90 transition-colors duration-300">
     <CardHeader className="pb-2">
-      <CardTitle className="text-lg font-semibold flex items-center gap-2 text-gray-800 dark:text-white">
+      <CardTitle className="text-lg font-semibold flex items-center gap-2 text-card-foreground">
         <BadgeCheck className="text-primary" />
         {item.name}
       </CardTitle>
     </CardHeader>
     <CardContent className="pt-4 relative">
-      <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+      <p className="text-sm text-muted-foreground mb-3">
         {item.subtitle}
       </p>
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-1">
-          {[...Array(5)].map((_, i) => (
-            <Star
-              key={i}
-              size={18}
-              className={`${
-                i < Math.round(item.value / 20)
-                  ? "text-yellow-400 fill-yellow-400"
-                  : "text-gray-300 dark:text-gray-600"
-              } transition-colors duration-300`}
-            />
-          ))}
+      {item.value !== undefined && (
+        <div className="mb-3">
+          <Progress value={item.value} className="h-2" />
+          <p className="text-xs text-right mt-1 text-muted-foreground">{item.value}%</p>
         </div>
-        <div className="flex flex-wrap gap-2 justify-end">
-          {item.technologies.map((tech, index) => (
-            <TooltipProvider key={index}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="text-primary bg-primary/10 p-1 rounded-full hover:bg-primary/20 transition-colors duration-200">
-                    {getIcon(tech)}
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>{tech}</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          ))}
-        </div>
+      )}
+      <div className="mt-4 flex flex-wrap gap-2">
+        {item.technologies.map((tech, index) => (
+          <TechnologyBadge key={index} tech={tech} />
+        ))}
       </div>
-      <Progress value={item.value} className="h-2 bg-gray-200 dark:bg-gray-700">
-        <div
-          className="h-full bg-gradient-to-r from-primary to-primary/80 rounded-full"
-          style={{ width: `${item.value}%` }}
-        />
-      </Progress>
-      <motion.div
-        className="mt-4 flex justify-between items-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-      >
-        <p className="text-sm text-gray-600 dark:text-gray-400">
-          {item.experience}
-        </p>
-      </motion.div>
+      {item.experience && (
+        <motion.div
+          className="mt-4 flex justify-between items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <p className="text-sm text-muted-foreground">
+            {item.experience}
+          </p>
+        </motion.div>
+      )}
     </CardContent>
   </Card>
-);
+)
 
-export default function Experience() {
-  const defaultTabValue = dataExperience[0]?.id.toString() || "0";
+const ExperienceGroup: React.FC<{ group: ExperienceGroup }> = ({ group }) => {
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
+    <div className="mb-6">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center w-full text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200 mb-2 bg-muted p-2 rounded-lg"
+      >
+        {isOpen ? <ChevronDown className="mr-2" /> : <ChevronRight className="mr-2" />}
+        {group.category}
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {group.items.map((item) => (
+              <ExperienceCard key={item.name} item={item} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
+
+const ExperienceCategory: React.FC<{ category: ExperienceCategory }> = ({ category }) => {
+  return (
+    <div className="mb-8">
+      <h2 className="text-2xl font-bold mb-4 text-foreground border-b pb-2">{category.title}</h2>
+      <div className="space-y-4">
+        {category.experience.map((group) => (
+          <ExperienceGroup key={group.category} group={group} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default function ServicesAndExperience() {
+  return (
     <motion.section 
-      className="py-16 md:py-24 bg-transparent transition-colors duration-300"
+      className="py-12 md:py-20 transition-colors duration-300"
+      id="services"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4">
         <motion.div 
-          className="flex items-center justify-center mb-12"
+          className="text-center mb-12 md:mb-16"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Brain className="w-10 h-10 mr-3 text-primary" />
-          <Title title="Experiencia" subtitle="Mis habilidades y conocimientos" />
+          <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">
+            <Briefcase className="w-10 h-10 md:w-12 md:h-12 text-primary" />
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Servicios y Experiencia</h2>
+          <p className="text-lg md:text-xl text-muted-foreground">Descubre mi trayectoria profesional y habilidades</p>
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <div className="flex items-center gap-2">
+              <Code className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium">Desarrollo</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Layers className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium">Diseño</span>
+            </div>
+            {/* <div className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-primary" />
+              <span className="text-sm font-medium">Innovación</span>
+            </div> */}
+          </div>
         </motion.div>
 
-        <Tabs defaultValue={defaultTabValue} className="mt-12">
-          <TabsList className="inline-flex h-auto p-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg mb-8 overflow-x-auto">
-            {dataExperience.map((data) => (
-              <TabsTrigger
-                key={data.id}
-                value={data.id.toString()}
-                className="px-4 py-2 text-sm md:text-base rounded-md transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-sm whitespace-nowrap flex items-center gap-2"
-              >
-                {data.title === "Frontend Development" && (
-                  <Code className="w-4 h-4" />
-                )}
-                {data.title === "Backend Development" && (
-                  <Server className="w-4 h-4" />
-                )}
-                {data.title === "Database" && <Database className="w-4 h-4" />}
-                {data.title === "DevOps" && <Globe className="w-4 h-4" />}
-                {data.title}
+        <Tabs defaultValue="services" className="w-full">
+          <TabsList className="flex flex-auto justify-center gap-2 mb-8 md:mb-8">
+            <TabsTrigger value="services" className="px-4 py-2 rounded-full transition-all text-sm md:text-base">
+              Servicios
+            </TabsTrigger>
+            {dataExperience.map((category) => (
+              <TabsTrigger key={category.id} value={category.id.toString()} className="px-4 py-2 rounded-full transition-all text-sm md:text-base">
+                {category.title}
               </TabsTrigger>
             ))}
           </TabsList>
-          <AnimatePresence mode="wait">
-            {dataExperience.map((data) => (
-              <TabsContent key={data.id} value={data.id.toString()}>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                  {data.experience.map((item) => (
-                    <ExperienceCard key={item.name} item={item} />
-                  ))}
-                </motion.div>
-              </TabsContent>
-            ))}
-          </AnimatePresence>
+          <div className="min-h-[800px]">
+          <TabsContent value="services">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+            >
+              {dataServices.map((service) => (
+                <ServiceCard key={service.id} service={service} />
+              ))}
+            </motion.div>
+          </TabsContent>
+
+          {dataExperience.map((category) => (
+            <TabsContent key={category.id} value={category.id.toString()}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ExperienceCategory category={category} />
+              </motion.div>
+            </TabsContent>
+          ))}
+          </div>
         </Tabs>
       </div>
     </motion.section>
-  );
+  )
 }

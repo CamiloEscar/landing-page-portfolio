@@ -155,10 +155,10 @@ export default function AboutMe() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="p-4 md:p-8 max-w-7xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
+          className="p-4 md:p-8 max-w-8xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
-          <Title title="Sobre mí" subtitle="Mis actividades:" className="mb-6" />
+          {/* <Title title="Sobre mí" subtitle="Mis actividades:" className="mb-6" /> */}
 
           <div className="flex flex-col lg:flex-row gap-6">
             <motion.div variants={itemVariants} className="lg:w-1/3">
@@ -221,7 +221,7 @@ export default function AboutMe() {
             >
               <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                 <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 dark:text-white">
-                  Sobre mí
+                   Sobre Mí
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-2">
                   {aboutMe.description}

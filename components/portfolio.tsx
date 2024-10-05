@@ -8,7 +8,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, Code, ChevronDown, ChevronUp, Search } from "lucide-react";
+import { Github, ExternalLink, Code, ChevronDown, ChevronUp, Search, Database, Monitor } from "lucide-react";
 import { useTheme } from "next-themes";
 import { FaReact, FaNodeJs, FaPaperPlane } from 'react-icons/fa';
 import { SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiVercel, SiJavascript, SiTypescript, SiCss3, SiHtml5, SiOpenai, SiAstro, SiSvelte, SiVite, SiBun, SiAxios, SiNativescript, SiFlutter, SiKotlin} from 'react-icons/si';
@@ -125,40 +125,44 @@ const Portfolio: React.FC = () => {
   if (!mounted) return null;
 
   return (
-    <motion.section 
-      className="py-16 md:py-24 bg-transparent transition-colors duration-300" 
-      id="portfolio"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+<motion.section 
+  className="py-12 md:py-20 transition-colors duration-300"
+  id="portfolio"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+>
+  <div className="container mx-auto px-4">
+    <motion.div 
+      className="text-center mb-12 md:mb-16"
+      initial={{ y: -50, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="flex items-center justify-center mb-12"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Code className="w-10 h-10 mr-3 text-primary" />
-          <Title title="Portfolio" subtitle="Chequea mis proyectos" />
-        </motion.div>
-
-        <motion.div 
-          className="mb-8 relative max-w-md mx-auto"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <Input
-            type="text"
-            placeholder="Busca proyectos por titulo, descripcion o tecnologia..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-full border-2 border-gray-300 focus:border-primary focus:ring focus:ring-primary focus:ring-opacity-50"
-            aria-label="Search projects"
-          />
-          <Search className="w-5 h-5 text-gray-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
-        </motion.div>
+      <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">
+        <Code className="w-10 h-10 md:w-12 md:h-12 text-primary" />
+      </div>
+      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Portfolio</h2>
+      <p className="text-lg md:text-xl text-muted-foreground">Chequea mis proyectos</p>
+      <div className="flex justify-center items-center gap-4 mt-6">
+        <div className="flex items-center gap-2">
+          <Monitor className="w-5 h-5 text-primary" />
+          <span className="text-sm font-medium">Web</span>
+        </div>
+        {/* <div className="flex items-center gap-2">
+          <Smartphone className="w-5 h-5 text-primary" />
+          <span className="text-sm font-medium">Móvil</span>
+        </div> */}
+        <div className="flex items-center gap-2">
+          <Database className="w-5 h-5 text-primary" />
+          <span className="text-sm font-medium">Back-end</span>
+        </div>
+        {/* <div className="flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary" />
+          <span className="text-sm font-medium"></span>
+        </div> */}
+      </div>
+    </motion.div>
 
         <AnimatePresence>
           <motion.div 

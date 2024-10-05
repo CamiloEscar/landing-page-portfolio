@@ -29,10 +29,11 @@ import {
   SiTableau,
   SiPowerbi,
   SiAngular,
+  SiSvelte,
 } from "react-icons/si";
 import {
   dataPortfolio,
-  dataExperience,
+  dataExperienceMinimal,
   educationTimeline,
   workExperience,
   aboutMe,
@@ -80,6 +81,8 @@ const ProfessionalMinimalPortfolio = () => {
         return <SiPowerbi {...iconProps} />;
       case "angular":
         return <SiAngular {...iconProps} />;
+      case "svelte":
+        return <SiSvelte {...iconProps} />;
 
       default:
         return null;
@@ -310,7 +313,7 @@ const ProfessionalMinimalPortfolio = () => {
               Tecnologias
             </h2>
             <div className="grid grid-cols-1 gap-1.5">
-              {dataExperience.flatMap((category) =>
+              {dataExperienceMinimal.flatMap((category) =>
                 category.experience.map((skill) => (
                   <div
                     key={skill.name}

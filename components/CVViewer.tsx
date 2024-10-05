@@ -37,7 +37,7 @@ const CVViewer: React.FC<CVViewerProps> = ({ isOpen, onClose }) => {
             </div>
             <div className="flex-grow p-4 overflow-auto">
               <iframe
-                src="/cv-camilo.pdf"
+                src="/CVes-CamiloEscar.pdf"
                 title="CV de Camilo"
                 className="w-full h-full border-none"
               />
