@@ -14,6 +14,7 @@ import {
   workExperience,
   aboutMe,
 } from "@/data"
+import GradientName from "./GradientName"
 
 type Skill = {
   id: string | number;
@@ -221,7 +222,10 @@ export default function AboutMe() {
             >
               <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg">
                 <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 dark:text-white">
+                   <GradientName>
                    Sobre Mí
+
+                   </GradientName>
                 </h3>
                 <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-2">
                   {aboutMe.description}

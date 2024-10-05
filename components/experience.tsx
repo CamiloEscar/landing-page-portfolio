@@ -25,6 +25,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dataServices, dataExperience, ExperienceItem } from "@/data";
 import type { ExperienceGroup, ExperienceCategory } from "@/data";
 import { iconMap, IconMapKey } from "./iconMap";
+import GradientName from "./GradientName";
 
 const getIcon = (tech: string): React.ReactElement => {
   const key = tech.toLowerCase() as IconMapKey;
@@ -45,7 +46,10 @@ const ServiceCard: React.FC<{ service: (typeof dataServices)[number] }> = ({
       <ul className="space-y-2">
         {service.features.map((feature, index) => (
           <li key={index} className="flex items-start gap-2 ">
-            <BadgeCheck className="text-primary mt-1 flex-shrink-0 " size={16} />
+            <BadgeCheck
+              className="text-primary mt-1 flex-shrink-0 "
+              size={16}
+            />
             <span className="text-sm text-black-foreground ">
               {feature.name}
             </span>
@@ -184,7 +188,7 @@ export default function ServicesAndExperience() {
             <Briefcase className="w-10 h-10 md:w-12 md:h-12 text-primary" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-            Servicios y Experiencia
+            <GradientName>Servicios y Experiencia</GradientName>
           </h2>
           <p className="text-lg md:text-xl text-black-foreground">
             Descubre mi trayectoria profesional y habilidades

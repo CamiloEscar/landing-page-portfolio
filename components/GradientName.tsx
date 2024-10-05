@@ -1,15 +1,25 @@
 import React from 'react';
 
-export default function GradientName() {
+interface GradientNameProps {
+  children: React.ReactNode;
+  size?: 'small' | 'medium' | 'large';
+  className?: string;
+}
+
+export default function GradientName({ children, size = 'medium', className = '' }: GradientNameProps) {
+  const sizeClasses = {
+    small: 'text-lg sm:text-xl lg:text-2xl',
+    medium: 'text-2xl sm:text-3xl lg:text-4xl',
+    large: 'text-4xl sm:text-5xl lg:text-7xl',
+  };
+
   return (
-    <div className="relative">
-      <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 lg:mb-6">
-        <span className="animate-gradient bg-gradient-to-r bg-clip-text text-transparent 
-          from-green-500 via-blue-500 to-purple-500
-          animate-gradient bg-[length:200%_auto]">
-          Camilo Escar
-        </span>
-      </h1>
+    <span className={`relative inline-block ${sizeClasses[size]} ${className}`}>
+      <span className="animate-gradient bg-gradient-to-r bg-clip-text text-transparent 
+        from-green-500 via-blue-500 to-purple-500
+        animate-gradient bg-[length:200%_auto]">
+        {children}
+      </span>
       <style jsx>{`
         @keyframes gradient {
           0% { background-position: 0% 50%; }
@@ -20,6 +30,6 @@ export default function GradientName() {
           animation: gradient 8s ease infinite;
         }
       `}</style>
-    </div>
+    </span>
   );
 }

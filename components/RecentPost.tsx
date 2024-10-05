@@ -4,6 +4,7 @@ import { BlogPost } from "@/app/blog/data";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Book } from "lucide-react";
+import GradientName from "./GradientName";
 
 interface RecentPostsProps {
   posts: BlogPost[];
@@ -30,7 +31,7 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
           >
             <Book className="w-8 h-8 mr-3 text-primary" />
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white">
-              Últimos posts
+              <GradientName>Últimos posts</GradientName>
             </h2>
           </motion.div>
           <ul className="space-y-4">

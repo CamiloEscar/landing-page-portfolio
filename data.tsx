@@ -57,7 +57,7 @@ export const dataLanguage = [
     period: "2010 - 2014",
     level: "Lecto compresion",
   },
-]
+];
 export const educationTimeline = [
   {
     id: 1,
@@ -271,7 +271,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: "https://landing-page-arquitecto.vercel.app/",
     description:
       "Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.",
-    technologies: [ "Vercel","Tailwind CSS", "Astro", "Vite", "bun"],
+    technologies: ["Vercel", "Tailwind CSS", "Astro", "Vite", "bun"],
   },
   {
     id: 9,
@@ -280,7 +280,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
     urlDemo: "https://flybondi-challenge.netlify.app/",
     description:
-    "Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.",
+      "Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.",
     technologies: ["JavaScript", "CSS", "HTML", "React", "Vite"],
   },
   {
@@ -290,7 +290,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
     urlDemo: "https://spavanillacoin.netlify.app/",
     description:
-    "Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.",
+      "Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.",
     technologies: ["JavaScript", "CSS", "HTML"],
   },
   {
@@ -300,7 +300,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
     urlDemo: "https://imagencompressor.netlify.app/",
     description:
-    "Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.",
+      "Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.",
     technologies: ["JavaScript", "CSS", "HTML"],
   },
   {
@@ -310,7 +310,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "",
     urlDemo: "https://prueba-trello.vercel.app/",
     description:
-    "Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.",
+      "Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   {
@@ -320,7 +320,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlGithub: "",
     urlDemo: "https://fulbito-f5.vercel.app/",
     description:
-    "Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.",
+      "Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.",
     technologies: ["React", "Node.js", "Express", "MongoDB"],
   },
   // {
@@ -399,10 +399,10 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         subtitle: "Intermedio",
         value: 60,
         experience:
-          "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+          "Desarrollo de aplicaciones utilizando React y su ecosistema.",
         technologies: [
           "react",
-          "redux",
+          // "redux",
           "next-js",
           // "gatsby"
         ],
@@ -411,10 +411,9 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         name: "Svelte",
         subtitle: "Basico",
         value: 20,
-        experience:
-        "Diseño de bases de datos relacionales y no relacionales, optimización de consultas y gestión de transacciones.",
+        experience: "Diseño de web simulando a Google Translate.",
         technologies: ["svelte, Astro"],
-        },
+      },
       // {
       //   name: "Vue.js",
       //   subtitle: "Basico",
@@ -495,7 +494,7 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         subtitle: "Basico",
         value: 20,
         experience:
-          "Implementación de CI/CD, containerización de aplicaciones y despliegue en la nube.",
+          "Implementación, containerización de aplicaciones y despliegue en la nube.",
         technologies: [
           "docker",
           // "kubernetes",
@@ -514,7 +513,8 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
       //   technologies: ["oauth", "jwt"],
       // },
     ],
-  },{
+  },
+  {
     id: 3,
     title: "Data Analytics 📊",
     experience: [
@@ -523,15 +523,14 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         subtitle: "Basico",
         value: 40,
         experience:
-          "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
+          "Creación de dashboards y visualizaciones de datos para la toma de decisiones.",
         technologies: ["powerbi"],
       },
       {
         name: "Tableau",
         subtitle: "Basico",
         value: 40,
-        experience:
-          "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
+        experience: "Desarrollo de visualizaciones y análisis de datos.",
         technologies: ["tableau"],
       },
     ],
@@ -548,7 +547,7 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
           "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
         technologies: ["postgresql"],
       },
-      
+
       // {
       //   name: "MySQL",
       //   subtitle: "Intermedio",
@@ -561,8 +560,7 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         name: "MongoDB",
         subtitle: "Basico",
         value: 20,
-        experience:
-          "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
+        experience: "Diseño y modelado de datos en bases de datos NoSQL.",
         technologies: ["mongodb"],
       },
     ],
@@ -600,24 +598,27 @@ export const dataExperience: ExperienceCategory[] = [
             name: "HTML",
             subtitle: "Intermedio",
             value: 60,
-            experience: "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
-            technologies: ["html5"]
+            experience:
+              "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
+            technologies: ["html5"],
           },
           {
             name: "CSS",
             subtitle: "Intermedio",
             value: 60,
-            experience: "Amplio conocimiento en diseño responsivo y animaciones CSS.",
-            technologies: ["css3"]
+            experience:
+              "Amplio conocimiento en diseño responsivo y animaciones CSS.",
+            technologies: ["css3"],
           },
           {
             name: "JavaScript",
             subtitle: "Intermedio",
             value: 60,
-            experience: "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
-            technologies: ["javascript", "typescript"]
-          }
-        ]
+            experience:
+              "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
+            technologies: ["javascript", "typescript"],
+          },
+        ],
       },
       {
         category: "Frameworks",
@@ -626,10 +627,15 @@ export const dataExperience: ExperienceCategory[] = [
             name: "React",
             subtitle: "Intermedio",
             value: 60,
-            experience: "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
-            technologies: ["react", "redux", "next-js"]
-          }
-        ]
+            experience:
+              "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+            technologies: [
+              "react",
+              // "redux",
+              "next-js",
+            ],
+          },
+        ],
       },
       {
         category: "Tecnologías",
@@ -637,36 +643,36 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: "Semantic UI",
             subtitle: "Intermedio",
-            technologies: ["semantic-ui"]
+            technologies: ["semantic-ui"],
           },
           {
             name: "Accessibility",
             subtitle: "Intermedio",
-            technologies: ["accessibility"]
+            technologies: ["accessibility"],
           },
           {
             name: "Styled-components",
             subtitle: "Intermedio",
-            technologies: ["styled-components"]
+            technologies: ["styled-components"],
           },
           {
             name: "Tailwind CSS",
             subtitle: "Intermedio",
-            technologies: ["tailwindcss"]
+            technologies: ["tailwindcss"],
           },
           {
             name: "Webpack",
             subtitle: "Intermedio",
-            technologies: ["webpack"]
+            technologies: ["webpack"],
           },
           {
             name: "Babel",
             subtitle: "Intermedio",
-            technologies: ["babel"]
-          }
-        ]
-      }
-    ]
+            technologies: ["babel"],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 2,
@@ -679,17 +685,19 @@ export const dataExperience: ExperienceCategory[] = [
             name: "Node JS",
             subtitle: "Básico",
             value: 30,
-            experience: "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
-            technologies: ["nodejs"]
+            experience:
+              "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
+            technologies: ["nodejs"],
           },
           {
             name: "Python",
             subtitle: "Básico",
             value: 40,
-            experience: "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
-            technologies: ["python"]
-          }
-        ]
+            experience:
+              "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
+            technologies: ["python"],
+          },
+        ],
       },
       {
         category: "Frameworks",
@@ -697,19 +705,19 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: "Express",
             subtitle: "Básico",
-            technologies: ["express"]
+            technologies: ["express"],
           },
           {
             name: "Django",
             subtitle: "Básico",
-            technologies: ["django"]
+            technologies: ["django"],
           },
           {
             name: "Flask",
             subtitle: "Básico",
-            technologies: ["flask"]
-          }
-        ]
+            technologies: ["flask"],
+          },
+        ],
       },
       {
         category: "Tecnologías",
@@ -717,31 +725,31 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: "Socket.io",
             subtitle: "Básico",
-            technologies: ["socket-io"]
+            technologies: ["socket-io"],
           },
           {
             name: "GraphQL",
             subtitle: "Básico",
-            technologies: ["graphql"]
+            technologies: ["graphql"],
           },
           {
             name: "Docker",
             subtitle: "Básico",
-            technologies: ["docker"]
+            technologies: ["docker"],
           },
-          {
-            name: "OAuth",
-            subtitle: "Básico",
-            technologies: ["oauth"]
-          },
+          // {
+          //   name: "OAuth",
+          //   subtitle: "Básico",
+          //   technologies: ["oauth"],
+          // },
           {
             name: "JWT",
             subtitle: "Básico",
-            technologies: ["jwt"]
-          }
-        ]
-      }
-    ]
+            technologies: ["jwt"],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
@@ -754,19 +762,21 @@ export const dataExperience: ExperienceCategory[] = [
             name: "Power BI",
             subtitle: "Básico",
             value: 40,
-            experience: "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
-            technologies: ["powerbi"]
+            experience:
+              "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
+            technologies: ["powerbi"],
           },
           {
             name: "Tableau",
             subtitle: "Básico",
             value: 40,
-            experience: "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
-            technologies: ["tableau"]
-          }
-        ]
-      }
-    ]
+            experience:
+              "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
+            technologies: ["tableau"],
+          },
+        ],
+      },
+    ],
   },
   {
     id: 4,
@@ -779,22 +789,23 @@ export const dataExperience: ExperienceCategory[] = [
             name: "PostgreSQL",
             subtitle: "Básico",
             value: 20,
-            experience: "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
-            technologies: ["postgresql"]
+            experience:
+              "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
+            technologies: ["postgresql"],
           },
           {
             name: "MongoDB",
             subtitle: "Básico",
             value: 20,
-            experience: "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
-            technologies: ["mongodb"]
-          }
-        ]
-      }
-    ]
-  }
+            experience:
+              "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
+            technologies: ["mongodb"],
+          },
+        ],
+      },
+    ],
+  },
 ];
-
 
 export const dataServices = [
   {
