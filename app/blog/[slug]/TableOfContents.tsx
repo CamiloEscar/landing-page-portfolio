@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable no-unused-vars */
+import React from 'react';
 
 interface TocItem {
   id: string;
@@ -25,7 +26,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   };
 
   return (
-    <div className={`toc ${isFloating ? "floating-toc" : ""}`}>
+    <div className={`toc ${isFloating ? 'floating-toc' : ''}`}>
       <h3 className="font-semibold mb-2 text-lg">Contenido</h3>
       <ul className="space-y-2">
         {toc.map((item) => (
@@ -38,8 +39,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
               onClick={(e) => handleItemClick(e, item.id)}
               className={`block py-1 px-2 rounded transition-colors duration-200 ${
                 activeHeading === item.id
-                  ? "bg-primary/10 text-primary font-medium"
-                  : "text-muted-foreground hover:text-primary"
+                  ? 'bg-primary/10 text-primary font-medium'
+                  : 'text-muted-foreground hover:text-primary'
               }`}
             >
               {item.text}

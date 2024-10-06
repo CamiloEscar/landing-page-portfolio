@@ -1,8 +1,8 @@
+/* eslint-disable no-undef */
 'use client';
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { dataPortfolio, PortfolioItem } from '@/data';
-import Title from './shared/title';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from './ui/button';
@@ -20,7 +20,6 @@ import {
   Code,
   ChevronDown,
   ChevronUp,
-  Search,
   Database,
   Monitor,
 } from 'lucide-react';
@@ -148,8 +147,8 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
 
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);
-  const [searchTerm, setSearchTerm] = useState('');
-  const { theme } = useTheme();
+  const [searchTerm] = useState('');
+  useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

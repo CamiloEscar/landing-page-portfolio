@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -38,9 +39,6 @@ const Navbar = () => {
     };
 
     setShowToolTip(true);
-    const timer = setTimeout(() => {
-      setShowToolTip(false);
-    }, 3000);
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
   Tag,
@@ -12,32 +12,32 @@ import {
   Clock,
   ArrowLeft,
   Menu,
-} from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import { useInView } from "react-intersection-observer";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from 'lucide-react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import Title from "@/components/shared/title";
-import Navbar from "@/components/shared/navbar";
-import { BlogPost } from "../data";
-import TableOfContents from "./TableOfContents";
+} from '@/components/ui/dropdown-menu';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import Title from '@/components/shared/title';
+import Navbar from '@/components/shared/navbar';
+import { BlogPost } from '../data';
+import TableOfContents from './TableOfContents';
 
 interface TocItem {
   id: string;
@@ -48,8 +48,8 @@ interface TocItem {
 function slugify(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/[\s_-]+/g, "-")
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
     .trim();
 }
 
@@ -58,18 +58,18 @@ const useProcessedContent = (content: string) => {
 
   useEffect(() => {
     const parser = new DOMParser();
-    const doc = parser.parseFromString(content, "text/html");
+    const doc = parser.parseFromString(content, 'text/html');
 
-    doc.querySelectorAll("h2, h3").forEach((heading) => {
-      const id = slugify(heading.textContent || "");
+    doc.querySelectorAll('h2, h3').forEach((heading) => {
+      const id = slugify(heading.textContent || '');
       heading.id = id;
     });
 
-    doc.querySelectorAll("img").forEach((img, index) => {
-      const src = img.getAttribute("src") || "";
-      const alt = img.getAttribute("alt") || `Image ${index + 1}`;
-      const wrapper = doc.createElement("div");
-      wrapper.className = "image-wrapper";
+    doc.querySelectorAll('img').forEach((img, index) => {
+      const src = img.getAttribute('src') || '';
+      const alt = img.getAttribute('alt') || `Image ${index + 1}`;
+      const wrapper = doc.createElement('div');
+      wrapper.className = 'image-wrapper';
       wrapper.innerHTML = `
         <div class="relative w-full max-w-3xl mx-auto">
           <div class="aspect-w-16 aspect-h-9">
@@ -101,16 +101,16 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
 
   const generateToc = useCallback(() => {
     if (contentRef.current) {
-      const headings = contentRef.current.querySelectorAll("h2, h3");
+      const headings = contentRef.current.querySelectorAll('h2, h3');
       return Array.from(headings).map((heading) => {
         const element = heading as HTMLElement;
-        const text = element.textContent || "";
+        const text = element.textContent || '';
         const id = slugify(text);
         element.id = id;
         return {
           id,
           text,
-          level: element.tagName === "H2" ? 2 : 3,
+          level: element.tagName === 'H2' ? 2 : 3,
         };
       });
     }
@@ -130,11 +130,11 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
     };
 
     const observer = new IntersectionObserver(observerCallback, {
-      rootMargin: "-100px 0px -40% 0px",
+      rootMargin: '-100px 0px -40% 0px',
       threshold: 0.5,
     });
 
-    const headings = contentRef.current?.querySelectorAll("h2, h3") || [];
+    const headings = contentRef.current?.querySelectorAll('h2, h3') || [];
     headings.forEach((heading) => observer.observe(heading));
 
     return () => observer.disconnect();
@@ -145,8 +145,8 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   useEffect(() => {
@@ -159,48 +159,48 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
       const yOffset = -100;
       const y =
         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      window.scrollTo({ top: y, behavior: 'smooth' });
     }
   }, []);
 
-  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   const shareOnSocialMedia = (
-    platform: "facebook" | "twitter" | "linkedin"
+    platform: 'facebook' | 'twitter' | 'linkedin'
   ) => {
-    let url = "";
+    let url = '';
     switch (platform) {
-      case "facebook":
+      case 'facebook':
         url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
           shareUrl
         )}`;
         break;
-      case "twitter":
+      case 'twitter':
         url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
           shareUrl
         )}&text=${encodeURIComponent(post.title)}`;
         break;
-      case "linkedin":
+      case 'linkedin':
         url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
           shareUrl
         )}&title=${encodeURIComponent(post.title)}`;
         break;
     }
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const getTagColor = (tag: string) => {
     const colors: { [key: string]: string } = {
-      "Node.js": "bg-primary/10 text-primary",
-      API: "bg-secondary/10 text-secondary",
-      Express: "bg-accent/10 text-accent",
-      Backend: "bg-muted/10 text-muted-foreground",
-      React: "bg-primary/10 text-primary",
-      JavaScript: "bg-secondary/10 text-secondary",
-      Hooks: "bg-accent/10 text-accent",
-      Frontend: "bg-muted/10 text-muted-foreground",
+      'Node.js': 'bg-primary/10 text-primary',
+      API: 'bg-secondary/10 text-secondary',
+      Express: 'bg-accent/10 text-accent',
+      Backend: 'bg-muted/10 text-muted-foreground',
+      React: 'bg-primary/10 text-primary',
+      JavaScript: 'bg-secondary/10 text-secondary',
+      Hooks: 'bg-accent/10 text-accent',
+      Frontend: 'bg-muted/10 text-muted-foreground',
     };
-    return colors[tag] || "bg-primary/10 text-primary";
+    return colors[tag] || 'bg-primary/10 text-primary';
   };
 
   return (
@@ -270,10 +270,10 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                           aria-hidden="true"
                         />
                         <time dateTime={post.date}>
-                          {new Date(post.date).toLocaleDateString("es-AR", {
-                            year: "numeric",
-                            month: "long",
-                            day: "numeric",
+                          {new Date(post.date).toLocaleDateString('es-AR', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
                           })}
                         </time>
                       </div>
@@ -303,19 +303,19 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
                             <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia("facebook")}
+                              onClick={() => shareOnSocialMedia('facebook')}
                             >
                               <Facebook className="mr-2 h-4 w-4" />
                               <span>Facebook</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia("twitter")}
+                              onClick={() => shareOnSocialMedia('twitter')}
                             >
                               <Twitter className="mr-2 h-4 w-4" />
                               <span>Twitter</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia("linkedin")}
+                              onClick={() => shareOnSocialMedia('linkedin')}
                             >
                               <Linkedin className="mr-2 h-4 w-4" />
                               <span>LinkedIn</span>

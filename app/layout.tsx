@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
-import { Urbanist } from "next/font/google";
-import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+import type { Metadata } from 'next';
+import { Urbanist } from 'next/font/google';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
+import React from 'react';
 
-const urbanist = Urbanist({ subsets: ["latin"] });
+const urbanist = Urbanist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Camilo Escar",
-  description: "Landing page by me",
+  title: 'Portfolio - Camilo Escar',
+  description: 'Landing page by me',
 };
 
 export default function RootLayout({

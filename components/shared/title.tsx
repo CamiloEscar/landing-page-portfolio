@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export interface TitleProps {
   title: string
@@ -12,5 +12,5 @@ export default function Title({ title, subtitle, className = '' }: TitleProps) {
       <h2 className="text-3xl font-bold mb-4">{title}</h2>
       <p className="text-xl text-gray-600 dark:text-gray-400">{subtitle}</p>
     </div>
-  )
+  );
 }

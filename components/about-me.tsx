@@ -1,20 +1,19 @@
-import React, { useEffect, useState, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import useEmblaCarousel from 'embla-carousel-react'
-import Image from "next/image"
-import { useTheme } from "next-themes"
-import {ChevronDown, ChevronUp, Monitor, Globe, Phone, ExternalLink, Calendar, Building } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Title from "./shared/title"
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import useEmblaCarousel from 'embla-carousel-react';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
+import {ChevronDown, ChevronUp, Monitor, Globe, Calendar, Building } from 'lucide-react';
 import {
   dataAboutMe,
   dataSlider,
   educationTimeline,
   workExperience,
   aboutMe,
-} from "@/data"
-import GradientName from "./GradientName"
+} from '@/data';
+import GradientName from './GradientName';
 
 type Skill = {
   id: string | number;
@@ -26,9 +25,9 @@ type Skill = {
 const additionalSkills: Skill[] = [
   { id: 'skill-pc-repair', name: 'Reparación de PC', icon: <Monitor className="w-6 h-6 text-green-500" />, description: 'Experiencia en diagnóstico y reparación de computadoras' },
   { id: 'skill-english', name: 'Inglés', icon: <Globe className="w-6 h-6 text-green-500" />, description: 'Nivel básico (Lecto comprensión)' },
-]
+];
 
-const allSkills: Skill[] = [...dataAboutMe as Skill[], ...additionalSkills]
+const allSkills: Skill[] = [...dataAboutMe as Skill[], ...additionalSkills];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -36,11 +35,11 @@ const containerVariants = {
     opacity: 1,
     transition: {
       duration: 0.5,
-      when: "beforeChildren",
+      when: 'beforeChildren',
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -49,7 +48,7 @@ const itemVariants = {
     opacity: 1,
     transition: { duration: 0.5 },
   },
-}
+};
 
 interface SectionToggleProps {
   title: string;
@@ -74,7 +73,7 @@ const SectionToggle: React.FC<SectionToggleProps> = ({ title, section, expandedS
       <ChevronDown className="w-5 h-5" aria-hidden="true" />
     )}
   </button>
-)
+);
 
 interface TimelineItemProps {
   title: string;
@@ -103,50 +102,50 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, subtitle, period, de
       <p className="text-gray-700 dark:text-gray-300 text-sm">{description}</p>
     </div>
   </div>
-)
+);
 
 export default function AboutMe() {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
-  })
+  });
 
-  const { theme } = useTheme()
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true })
-  const [expandedSection, setExpandedSection] = useState<string | null>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const { theme } = useTheme();
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const onSelect = useCallback(() => {
-    if (!emblaApi) return
-    setCurrentSlide(emblaApi.selectedScrollSnap())
-  }, [emblaApi])
+    if (!emblaApi) return;
+    setCurrentSlide(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
 
   useEffect(() => {
-    if (!emblaApi) return
-    onSelect()
-    emblaApi.on('select', onSelect)
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
     return () => {
-      emblaApi.off('select', onSelect)
-    }
-  }, [emblaApi, onSelect])
+      emblaApi.off('select', onSelect);
+    };
+  }, [emblaApi, onSelect]);
 
   useEffect(() => {
-    if (!emblaApi) return
+    if (!emblaApi) return;
 
     const autoplay = setInterval(() => {
       if (emblaApi.canScrollNext()) {
-        emblaApi.scrollNext()
+        emblaApi.scrollNext();
       } else {
-        emblaApi.scrollTo(0)
+        emblaApi.scrollTo(0);
       }
-    }, 4000) // Change slide every 4 seconds
+    }, 4000); // Change slide every 4 seconds
 
-    return () => clearInterval(autoplay)
-  }, [emblaApi])
+    return () => clearInterval(autoplay);
+  }, [emblaApi]);
 
   const toggleSection = (section: string) => {
-    setExpandedSection(expandedSection === section ? null : section)
-  }
+    setExpandedSection(expandedSection === section ? null : section);
+  };
 
   return (
     <section className="py-8 md:py-16 bg-transparent transition-colors duration-300">
@@ -155,7 +154,7 @@ export default function AboutMe() {
           ref={ref}
           variants={containerVariants}
           initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          animate={inView ? 'visible' : 'hidden'}
           className="p-4 md:p-8 max-w-8xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
@@ -173,7 +172,7 @@ export default function AboutMe() {
                           alt={`Imagen ${data.id}`}
                           fill
                           sizes="(max-width: 1024px) 100vw, 33vw"
-                          style={{ objectFit: "cover" }}
+                          style={{ objectFit: 'cover' }}
                           priority={index === 0}
                         />
                       </div>
@@ -247,7 +246,7 @@ export default function AboutMe() {
                     <motion.div
                       key="education-experience"
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
+                      animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-lg mt-2"
@@ -298,5 +297,5 @@ export default function AboutMe() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { Resend } from "resend";
-import { EmailTemplate } from "@/components/ui/email-template";
+import { Resend } from 'resend';
+import { EmailTemplate } from '@/components/ui/email-template';
 
 const resend = new Resend(process.env.RESEND_APIKEY);
 
@@ -8,9 +8,9 @@ export async function POST(req: Request) {
     const dataForm = await req.json();
     try {
       const data = await resend.emails.send({
-        from: "Portfolio <onboarding@resend.dev>",
-        to: ["camiloescar1995@gmail.com"],
-        subject: "Nuevo Mensaje del Formulario de Contacto",
+        from: 'Portfolio <onboarding@resend.dev>',
+        to: ['camiloescar1995@gmail.com'],
+        subject: 'Nuevo Mensaje del Formulario de Contacto',
         react: EmailTemplate({
           firstName: dataForm.username,
           message: dataForm.message,
@@ -19,10 +19,10 @@ export async function POST(req: Request) {
       });
       return Response.json({ success: true, data });
     } catch (error) {
-      return Response.json({ success: false, error: "Error al enviar el correo electrónico" }, { status: 500 });
+      return Response.json({ success: false, error: 'Error al enviar el correo electrónico' }, { status: 500 });
     }
   } catch (error) {
-    return Response.json({ success: false, error: "Datos de solicitud inválidos" }, { status: 400 });
+    return Response.json({ success: false, error: 'Datos de solicitud inválidos' }, { status: 400 });
   }
 }
 

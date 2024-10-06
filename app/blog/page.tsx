@@ -1,30 +1,30 @@
-"use client"
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { Calendar, ArrowLeft, Code } from "lucide-react";
-import { motion } from "framer-motion";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Calendar, ArrowLeft, Code } from 'lucide-react';
+import { motion } from 'framer-motion';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import Title from "@/components/shared/title";
-import { dataBlog, BlogPost } from "./data";
-import Navbar from "@/components/shared/navbar";
+} from '@/components/ui/select';
+import Title from '@/components/shared/title';
+import { dataBlog, BlogPost } from './data';
+import Navbar from '@/components/shared/navbar';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -75,15 +75,15 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => (
 
   export default function BlogIndex() {
     const [visiblePosts, setVisiblePosts] = React.useState(ITEMS_PER_PAGE);
-    const [searchTerm, setSearchTerm] = React.useState("");
-    const [selectedTag, setSelectedTag] = React.useState("all");
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [selectedTag, setSelectedTag] = React.useState('all');
   
     const filteredPosts = React.useMemo(() => {
       return dataBlog.filter(
         (post) =>
           (post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             post.excerpt.toLowerCase().includes(searchTerm.toLowerCase())) &&
-          (selectedTag === "all" || post.tags.includes(selectedTag))
+          (selectedTag === 'all' || post.tags.includes(selectedTag))
       );
     }, [searchTerm, selectedTag]);
   
@@ -203,8 +203,8 @@ const BlogPostCard = ({ post, index }: { post: BlogPost; index: number }) => (
                   className="bg-background hover:bg-accent"
                 >
                   {visiblePosts === ITEMS_PER_PAGE
-                    ? "Ver más artículos"
-                    : "Ver menos artículos"}
+                    ? 'Ver más artículos'
+                    : 'Ver menos artículos'}
                 </Button>
               </motion.div>
             )}

@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+/* eslint-disable no-import-assign */
 'use client';
 
 import React, { useState } from 'react';

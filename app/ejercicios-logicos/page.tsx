@@ -1,10 +1,9 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from "react"
-import Link from "next/link"
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import {
   ArrowLeft,
-  Code,
   Folder,
   FileCode,
   ChevronRight,
@@ -14,34 +13,33 @@ import {
   List,
   ChevronDown,
   Menu,
-} from "lucide-react"
-import { motion } from "framer-motion"
-import Prism from "prismjs"
-import "prismjs/themes/prism-tomorrow.css"
-import "prismjs/components/prism-javascript"
-import "prismjs/components/prism-python"
-import "prismjs/components/prism-java"
-import "prismjs/components/prism-markup"
-import "prismjs/components/prism-css"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
+} from 'lucide-react';
+import { motion } from 'framer-motion';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-python';
+import 'prismjs/components/prism-java';
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-css';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-} from "@/components/ui/breadcrumb"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Textarea } from "@/components/ui/textarea"
-import Title from "@/components/shared/title"
-import Navbar from "@/components/shared/navbar"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+} from '@/components/ui/breadcrumb';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import Title from '@/components/shared/title';
+import Navbar from '@/components/shared/navbar';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 interface Item {
   name: string
   path: string
-  type: "file" | "dir"
+  type: 'file' | 'dir'
   content?: string
   items?: Item[]
   url: string
@@ -49,207 +47,207 @@ interface Item {
 }
 
 const REPO_URL =
-  "https://api.github.com/repos/CamiloEscar/EjerciciosLogicos/contents"
+  'https://api.github.com/repos/CamiloEscar/EjerciciosLogicos/contents';
 
 export default function EjerciciosLogicos() {
-  const [categories, setCategories] = useState<Item[]>([])
-  const [selectedItem, setSelectedItem] = useState<Item | null>(null)
-  const [currentPath, setCurrentPath] = useState<string[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [htmlContent, setHtmlContent] = useState<string>("")
-  const [showPreview, setShowPreview] = useState(false)
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+  const [categories, setCategories] = useState<Item[]>([]);
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [currentPath, setCurrentPath] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [htmlContent, setHtmlContent] = useState<string>('');
+  const [showPreview, setShowPreview] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      setIsLoading(true)
-      setError(null)
+      setIsLoading(true);
+      setError(null);
       try {
-        const response = await fetch(REPO_URL)
+        const response = await fetch(REPO_URL);
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del repositorio")
+          throw new Error('No se pudo cargar el contenido del repositorio');
         }
-        const data = await response.json()
+        const data = await response.json();
 
         const categoriesData = data
-          .filter((item: any) => item.type === "dir")
+          .filter((item: any) => item.type === 'dir')
           .map((item: any) => ({
             name: item.name,
             path: item.path,
             type: item.type,
             url: item.url,
             isOpen: false,
-          }))
+          }));
 
-        setCategories(categoriesData)
+        setCategories(categoriesData);
       } catch (error) {
-        console.error("Error fetching categories:", error)
+        console.error('Error fetching categories:', error);
         setError(
-          "No se pudo cargar las categorías. Por favor, intenta de nuevo más tarde."
-        )
+          'No se pudo cargar las categorías. Por favor, intenta de nuevo más tarde.'
+        );
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
+    };
 
-    fetchCategories()
-  }, [])
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-    if (selectedItem && selectedItem.type === "file" && selectedItem.content) {
-      Prism.highlightAll()
+    if (selectedItem && selectedItem.type === 'file' && selectedItem.content) {
+      Prism.highlightAll();
     }
-  }, [selectedItem])
+  }, [selectedItem]);
 
   const loadItemContent = async (item: Item) => {
-    setIsLoading(true)
-    setError(null)
+    setIsLoading(true);
+    setError(null);
     try {
-      if (item.type === "file" && !item.content) {
-        const response = await fetch(item.url)
+      if (item.type === 'file' && !item.content) {
+        const response = await fetch(item.url);
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del archivo")
+          throw new Error('No se pudo cargar el contenido del archivo');
         }
-        const data = await response.json()
-        item.content = atob(data.content)
-      } else if (item.type === "dir" && !item.items) {
-        const response = await fetch(item.url)
+        const data = await response.json();
+        item.content = atob(data.content);
+      } else if (item.type === 'dir' && !item.items) {
+        const response = await fetch(item.url);
         if (!response.ok) {
-          throw new Error("No se pudo cargar el contenido del directorio")
+          throw new Error('No se pudo cargar el contenido del directorio');
         }
-        const data = await response.json()
+        const data = await response.json();
         item.items = data.map((subItem: any) => ({
           name: subItem.name,
           path: subItem.path,
           type: subItem.type,
           url: subItem.url,
           isOpen: false,
-        }))
+        }));
       }
-      return item
+      return item;
     } catch (error) {
-      console.error("Error loading item content:", error)
+      console.error('Error loading item content:', error);
       setError(
         `Error al cargar el contenido de ${item.name}. Por favor, intenta de nuevo.`
-      )
-      return null
+      );
+      return null;
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const toggleFolder = async (item: Item) => {
-    let updatedItem = item
+    let updatedItem = item;
     if (!item.items) {
-      updatedItem = (await loadItemContent(item)) || item
+      updatedItem = (await loadItemContent(item)) || item;
     }
-    updatedItem.isOpen = !updatedItem.isOpen
+    updatedItem.isOpen = !updatedItem.isOpen;
 
     const updateCategories = (categories: Item[]): Item[] => {
       return categories.map((category) => {
         if (category.path === updatedItem.path) {
-          return updatedItem
+          return updatedItem;
         }
         if (category.items) {
-          return { ...category, items: updateCategories(category.items) }
+          return { ...category, items: updateCategories(category.items) };
         }
-        return category
-      })
-    }
+        return category;
+      });
+    };
 
-    setCategories(updateCategories(categories))
-  }
+    setCategories(updateCategories(categories));
+  };
 
   const selectItem = async (item: Item) => {
-    if (item.type === "dir") {
-      await toggleFolder(item)
+    if (item.type === 'dir') {
+      await toggleFolder(item);
     } else {
-      const loadedItem = await loadItemContent(item)
+      const loadedItem = await loadItemContent(item);
       if (loadedItem) {
-        setSelectedItem(loadedItem)
-        setCurrentPath(loadedItem.path.split("/"))
+        setSelectedItem(loadedItem);
+        setCurrentPath(loadedItem.path.split('/'));
       }
     }
-    setIsSidebarOpen(false)
-  }
+    setIsSidebarOpen(false);
+  };
 
   const renderDirectoryContent = (items: Item[], depth = 0) => (
     <ul
       className={`space-y-1 ${
-        depth > 0 ? "border-l border-gray-200 dark:border-gray-700" : ""
+        depth > 0 ? 'border-l border-gray-200 dark:border-gray-700' : ''
       }`}
     >
       {items.map((item) => (
-        <li key={item.path} className={`${depth > 0 ? "ml-4" : ""}`}>
+        <li key={item.path} className={`${depth > 0 ? 'ml-4' : ''}`}>
           <Button
             variant="ghost"
             className="w-full text-left hover:bg-accent hover:text-accent-foreground transition-colors"
             onClick={() => selectItem(item)}
           >
-            {item.type === "dir" &&
+            {item.type === 'dir' &&
               (item.isOpen ? (
                 <ChevronDown className="mr-2 h-4 w-4" />
               ) : (
                 <ChevronRight className="mr-2 h-4 w-4" />
               ))}
-            {item.type === "file" ? (
+            {item.type === 'file' ? (
               <FileCode className="mr-2 h-4 w-4" />
             ) : (
               <Folder className="mr-2 h-4 w-4" />
             )}
             {item.name}
           </Button>
-          {item.type === "dir" &&
+          {item.type === 'dir' &&
             item.isOpen &&
             item.items &&
             renderDirectoryContent(item.items, depth + 1)}
         </li>
       ))}
     </ul>
-  )
+  );
 
   const getLanguage = (fileName: string) => {
-    const extension = fileName.split(".").pop()?.toLowerCase()
+    const extension = fileName.split('.').pop()?.toLowerCase();
     switch (extension) {
-      case "js":
-        return "javascript"
-      case "py":
-        return "python"
-      case "java":
-        return "java"
-      case "html":
-        return "markup"
-      case "css":
-        return "css"
+      case 'js':
+        return 'javascript';
+      case 'py':
+        return 'python';
+      case 'java':
+        return 'java';
+      case 'html':
+        return 'markup';
+      case 'css':
+        return 'css';
       default:
-        return "markup"
+        return 'markup';
     }
-  }
+  };
 
   const renderHTML = () => {
     if (selectedItem && selectedItem.content) {
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(selectedItem.content, "text/html")
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(selectedItem.content, 'text/html');
 
       // Extract CSS
-      const styles = doc.getElementsByTagName("style")
-      let cssContent = ""
+      const styles = doc.getElementsByTagName('style');
+      let cssContent = '';
       for (let i = 0; i < styles.length; i++) {
-        cssContent += styles[i].textContent
-        styles[i].remove()
+        cssContent += styles[i].textContent;
+        styles[i].remove();
       }
 
       // Extract JavaScript
-      const scripts = doc.getElementsByTagName("script")
-      let jsContent = ""
+      const scripts = doc.getElementsByTagName('script');
+      let jsContent = '';
       for (let i = 0; i < scripts.length; i++) {
-        jsContent += scripts[i].textContent
-        scripts[i].remove()
+        jsContent += scripts[i].textContent;
+        scripts[i].remove();
       }
 
       // Remaining HTML
-      const htmlContent = doc.documentElement.outerHTML
+      const htmlContent = doc.documentElement.outerHTML;
 
       // Combine everything
       const fullContent = `
@@ -262,12 +260,12 @@ export default function EjerciciosLogicos() {
             <script>${jsContent}</script>
           </body>
         </html>
-      `
+      `;
 
-      setHtmlContent(fullContent)
-      setShowPreview(true)
+      setHtmlContent(fullContent);
+      setShowPreview(true);
     }
-  }
+  };
 
   return (
     <>
@@ -363,7 +361,7 @@ export default function EjerciciosLogicos() {
                     <BookOpen className="mr-2 h-5 w-5" />
                     {selectedItem
                       ? selectedItem.name
-                      : "Selecciona una categoría"}
+                      : 'Selecciona una categoría'}
                   </CardTitle>
                   {currentPath.length > 0 && (
                     <Breadcrumb>
@@ -374,8 +372,8 @@ export default function EjerciciosLogicos() {
                             onClick={() => {
                               const item =
                                 categories.find((c) => c.name === path) ||
-                                selectedItem
-                              if (item) selectItem(item)
+                                selectedItem;
+                              if (item) selectItem(item);
                             }}
                             className="text-primary hover:text-accent transition-colors"
                           >
@@ -397,11 +395,11 @@ export default function EjerciciosLogicos() {
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   ) : selectedItem ? (
-                    selectedItem.type === "file" ? (
+                    selectedItem.type === 'file' ? (
                       <Tabs defaultValue="code" className="w-full">
                         <TabsList>
                           <TabsTrigger value="code">Código</TabsTrigger>
-                          {selectedItem.name.endsWith(".html") && (
+                          {selectedItem.name.endsWith('.html') && (
                             <TabsTrigger value="preview">
                               Vista previa
                             </TabsTrigger>
@@ -420,7 +418,7 @@ export default function EjerciciosLogicos() {
                             </pre>
                           </ScrollArea>
                         </TabsContent>
-                        {selectedItem.name.endsWith(".html") && (
+                        {selectedItem.name.endsWith('.html') && (
                           <TabsContent value="preview">
                             <div className="space-y-4">
                               <Button onClick={renderHTML}>
@@ -459,7 +457,7 @@ export default function EjerciciosLogicos() {
         </div>
       </motion.section>
     </>
-  )
+  );
 }
 // Explicación del Código de la Aplicación de Ejercicios Lógicos
 

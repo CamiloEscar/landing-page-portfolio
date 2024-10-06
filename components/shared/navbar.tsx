@@ -1,34 +1,34 @@
-'use client'
+/* eslint-disable no-unused-vars */
+'use client';
 
-import React, { useState, useEffect } from "react"
-import { itemsNavbar } from "@/data"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Github, Linkedin, Mail, Sun, Moon, Book, Home } from 'lucide-react'
-import { useTheme } from "next-themes"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Github, Linkedin, Mail, Sun, Moon, Home } from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const Navbar = () => {
-  const [scrollPosition, setScrollPosition] = useState(0)
-  const { setTheme, theme } = useTheme()
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const { setTheme, theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY)
-    }
+      setScrollPosition(window.scrollY);
+    };
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const cycleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
 
   const getThemeIcon = () => {
-    return theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />
-  }
+    return theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />;
+  };
 
   return (
     <>
@@ -36,7 +36,7 @@ const Navbar = () => {
         className="fixed z-50 top-4 right-4 flex space-x-2"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <TooltipProvider>
           <Tooltip>
@@ -117,7 +117,7 @@ const Navbar = () => {
         </TooltipProvider>
       </motion.div>
       </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
