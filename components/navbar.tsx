@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { itemsNavbar } from "@/data";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import React, { useState, useEffect } from 'react';
+import { itemsNavbar } from '@/data';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
 import {
   Github,
   Linkedin,
@@ -12,22 +12,20 @@ import {
   Sun,
   Moon,
   Download,
-  Pen,
-  Minimize2,
-} from "lucide-react";
-import { useTheme } from "next-themes";
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu';
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -44,16 +42,16 @@ const Navbar = () => {
       setShowToolTip(false);
     }, 3000);
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const cycleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const getThemeIcon = () => {
-    return theme === "dark" ? (
+    return theme === 'dark' ? (
       <Sun className="h-5 w-5" />
     ) : (
       <Moon className="h-5 w-5" />
@@ -66,7 +64,7 @@ const Navbar = () => {
         className="fixed z-50 top-4 right-4 flex space-x-2"
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <TooltipProvider>
           <Tooltip>
@@ -84,14 +82,14 @@ const Navbar = () => {
                 <DropdownMenuContent>
                   <DropdownMenuItem
                     onClick={() =>
-                      window.open("/CVen-CamiloEscar.pdf", "_blank")
+                      window.open('/CVen-CamiloEscar.pdf', '_blank')
                     }
                   >
                     CV Download
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() =>
-                      window.open("/CVes-CamiloEscar.pdf", "_blank")
+                      window.open('/CVes-CamiloEscar.pdf', '_blank')
                     }
                   >
                     Descargar CV
@@ -216,14 +214,14 @@ const Navbar = () => {
         className="fixed z-50 w-full bottom-20"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center">
             <motion.div
               className="flex items-center gap-2 px-6 py-3 bg-background/10 backdrop-blur-md rounded-full shadow-lg"
               whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
             >
               {itemsNavbar.map((item) => (
                 <TooltipProvider key={item.id}>

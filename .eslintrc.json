@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "eslint:recommended"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",  // Si estás usando React 17 o superior
+    "semi": ["error", "always"],
+    "quotes": ["error", "single"]
+  }
 }

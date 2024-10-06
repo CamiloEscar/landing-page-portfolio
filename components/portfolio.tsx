@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect, useMemo } from "react";
-import { dataPortfolio, PortfolioItem } from "@/data";
-import Title from "./shared/title";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "./ui/button";
+import React, { useState, useEffect, useMemo } from 'react';
+import { dataPortfolio, PortfolioItem } from '@/data';
+import Title from './shared/title';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Button } from './ui/button';
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { motion, AnimatePresence } from "framer-motion";
+} from '@/components/ui/card';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Github,
   ExternalLink,
@@ -23,9 +23,9 @@ import {
   Search,
   Database,
   Monitor,
-} from "lucide-react";
-import { useTheme } from "next-themes";
-import { FaReact, FaNodeJs, FaPaperPlane } from "react-icons/fa";
+} from 'lucide-react';
+import { useTheme } from 'next-themes';
+import { FaReact, FaNodeJs, FaPaperPlane } from 'react-icons/fa';
 import {
   SiNextdotjs,
   SiTailwindcss,
@@ -45,17 +45,16 @@ import {
   SiNativescript,
   SiFlutter,
   SiKotlin,
-} from "react-icons/si";
-import { Input } from "@/components/ui/input";
-import GradientName from "./GradientName";
+} from 'react-icons/si';
+import GradientName from './GradientName';
 
 const ITEMS_PER_PAGE = 6;
 
 const iconMap: { [key: string]: JSX.Element } = {
   React: <FaReact />,
-  "Next.js": <SiNextdotjs />,
-  "Tailwind CSS": <SiTailwindcss />,
-  "Node.js": <FaNodeJs />,
+  'Next.js': <SiNextdotjs />,
+  'Tailwind CSS': <SiTailwindcss />,
+  'Node.js': <FaNodeJs />,
   MongoDB: <SiMongodb />,
   Express: <SiExpress />,
   Vercel: <SiVercel />,
@@ -63,7 +62,7 @@ const iconMap: { [key: string]: JSX.Element } = {
   TypeScript: <SiTypescript />,
   CSS: <SiCss3 />,
   HTML: <SiHtml5 />,
-  "React Native": <SiNextdotjs />,
+  'React Native': <SiNextdotjs />,
   AppSheets: <FaPaperPlane />,
   OpenAI: <SiOpenai />,
   Astro: <SiAstro />,
@@ -71,7 +70,7 @@ const iconMap: { [key: string]: JSX.Element } = {
   Vite: <SiVite />,
   bun: <SiBun />,
   Axios: <SiAxios />,
-  "react-native": <SiNativescript />,
+  'react-native': <SiNativescript />,
   flutter: <SiFlutter />,
   kotlin: <SiKotlin />,
 };
@@ -84,7 +83,7 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
     whileTap={{ scale: 0.98 }}
-    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+    transition={{ type: 'spring', stiffness: 300, damping: 10 }}
   >
     <Card className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
       <CardHeader className="p-0">
@@ -149,7 +148,7 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
 
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 

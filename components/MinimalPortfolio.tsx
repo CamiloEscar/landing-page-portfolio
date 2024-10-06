@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Printer,
   Mail,
@@ -9,9 +9,8 @@ import {
   Linkedin,
   Github as GithubIcon,
   Link,
-  Globe,
   Star,
-} from "lucide-react";
+} from 'lucide-react';
 import {
   SiHtml5,
   SiCss3,
@@ -30,7 +29,7 @@ import {
   SiPowerbi,
   SiAngular,
   SiSvelte,
-} from "react-icons/si";
+} from 'react-icons/si';
 import {
   dataPortfolio,
   dataExperienceMinimal,
@@ -38,8 +37,8 @@ import {
   workExperience,
   aboutMe,
   dataLanguage,
-} from "../data";
-import Image from "next/image";
+} from '../data';
+import Image from 'next/image';
 
 const ProfessionalMinimalPortfolio = () => {
   const handlePrint = () => {
@@ -47,41 +46,41 @@ const ProfessionalMinimalPortfolio = () => {
   };
 
   const getIconForSkill = (skillName: string) => {
-    const iconProps = { className: "h-4 w-4" };
+    const iconProps = { className: 'h-4 w-4' };
     switch (skillName.toLowerCase()) {
-      case "html":
+      case 'html':
         return <SiHtml5 {...iconProps} />;
-      case "css":
+      case 'css':
         return <SiCss3 {...iconProps} />;
-      case "javascript":
+      case 'javascript':
         return <SiJavascript {...iconProps} />;
-      case "react":
+      case 'react':
         return <SiReact {...iconProps} />;
-      case "node js":
+      case 'node js':
         return <SiNodedotjs {...iconProps} />;
-      case "postgresql":
+      case 'postgresql':
         return <SiPostgresql {...iconProps} />;
-      case "mongodb":
+      case 'mongodb':
         return <SiMongodb {...iconProps} />;
-      case "python":
+      case 'python':
         return <SiPython {...iconProps} />;
-      case "php":
+      case 'php':
         return <SiPhp {...iconProps} />;
-      case "devops":
+      case 'devops':
         return <SiDocker {...iconProps} />;
-      case "seguridad web":
+      case 'seguridad web':
         return <SiJsonwebtokens {...iconProps} />;
-      case "mobile":
+      case 'mobile':
         return <SiFlutter {...iconProps} />;
-      case "vue.js":
+      case 'vue.js':
         return <SiVuedotjs {...iconProps} />;
-      case "tableau":
+      case 'tableau':
         return <SiTableau {...iconProps} />;
-      case "power bi":
+      case 'power bi':
         return <SiPowerbi {...iconProps} />;
-      case "angular":
+      case 'angular':
         return <SiAngular {...iconProps} />;
-      case "svelte":
+      case 'svelte':
         return <SiSvelte {...iconProps} />;
 
       default:
@@ -100,8 +99,8 @@ const ProfessionalMinimalPortfolio = () => {
             size={16}
             className={`${
               star <= rating
-                ? "text-blue-400 fill-blue-400"
-                : "text-gray-300 dark:text-gray-600"
+                ? 'text-blue-400 fill-blue-400'
+                : 'text-gray-300 dark:text-gray-600'
             }`}
           />
         ))}

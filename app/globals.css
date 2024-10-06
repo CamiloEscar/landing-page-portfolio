@@ -77,7 +77,24 @@ html, body {
     100% { background-position: 0% 50%; }
   }
 }
+.scrolling-touch {
+  -webkit-overflow-scrolling: touch;
+}
 
+.scrolling-gpu {
+  -webkit-overflow-scrolling: auto;
+  -webkit-transform: translateZ(0);
+}
+
+/* Opcional: Ocultar la barra de desplazamiento en algunos navegadores */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 @layer base {
   * {
     @apply border-border;

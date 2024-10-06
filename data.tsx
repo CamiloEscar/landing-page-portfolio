@@ -1,5 +1,4 @@
 import {
-  BellPlus,
   BookText,
   Briefcase,
   Brush,
@@ -19,146 +18,146 @@ import {
   Cpu,
   Database,
   Pen,
-} from "lucide-react";
+} from 'lucide-react';
 
 export const dataAboutMe = [
   {
     id: 1,
-    name: "Experiencia",
+    name: 'Experiencia',
     icon: <Briefcase />,
-    description: "+2 años de experiencia",
+    description: '+2 años de experiencia',
   },
   {
     id: 2,
-    name: "Clientes",
+    name: 'Clientes',
     icon: <UsersRound />,
-    description: "Múltiples clientes satisfechos",
+    description: 'Múltiples clientes satisfechos',
   },
   {
     id: 3,
-    name: "Proyectos",
+    name: 'Proyectos',
     icon: <Wrench />,
-    description: "+10 completados",
+    description: '+10 completados',
   },
   {
     id: 4,
-    name: "Educación",
+    name: 'Educación',
     icon: <GraduationCap />,
-    description: "Lic. en Sistemas de Información (en curso)",
+    description: 'Lic. en Sistemas de Información (en curso)',
   },
 ];
 
 export const dataLanguage = [
   {
     id: 1,
-    title: "Ingles",
-    institution: "Staff English World",
+    title: 'Ingles',
+    institution: 'Staff English World',
     value: 50,
-    period: "2010 - 2014",
-    level: "Lecto compresion",
+    period: '2010 - 2014',
+    level: 'Lecto compresion',
   },
 ];
 export const educationTimeline = [
   {
     id: 1,
-    title: "Lic. en Sistemas de Información",
-    institution: "UADER FCyT",
-    period: "2021 - Actualidad",
-    description: "Estudios universitarios en curso",
+    title: 'Lic. en Sistemas de Información',
+    institution: 'UADER FCyT',
+    period: '2021 - Actualidad',
+    description: 'Estudios universitarios en curso',
   },
   {
     id: 2,
-    title: "Maestro Mayor de Obras",
-    institution: "EET N°13 H. B. Sauret",
-    period: "2017 - 2019",
-    description: "Estudio completado",
+    title: 'Maestro Mayor de Obras',
+    institution: 'EET N°13 H. B. Sauret',
+    period: '2017 - 2019',
+    description: 'Estudio completado',
   },
   {
     id: 3,
-    title: "Ing. Civil",
-    institution: "UTN FRCU",
-    period: "2014 - 2016",
-    description: "Estudios universitarios interrumpido",
+    title: 'Ing. Civil',
+    institution: 'UTN FRCU',
+    period: '2014 - 2016',
+    description: 'Estudios universitarios interrumpido',
   },
   {
     id: 4,
-    title: "Técnico electricista con orientación a electrónica industrial",
-    institution: "EET N°2 'Francisco Ramirez'",
-    period: "Graduado en 2013",
-    description: "Educación secundaria técnica",
+    title: 'Técnico electricista con orientación a electrónica industrial',
+    institution: 'EET N°2 \'Francisco Ramirez\'',
+    period: 'Graduado en 2013',
+    description: 'Educación secundaria técnica',
   },
 ];
 
 export const workExperience = [
   {
     id: 1,
-    position: "Técnico Instalador de Fibra Óptica",
-    company: "Video Digital SRL",
-    period: "2018 - Actualidad",
+    position: 'Técnico Instalador de Fibra Óptica',
+    company: 'Video Digital SRL',
+    period: '2018 - Actualidad',
     description:
-      "Instalación y servicio técnico de fibra óptica FTTH, a cargo de la red in situ. Conocimientos en OLT y Mikrotik. Experiencia en atención al cliente y manejo de software de gestión.",
+      'Instalación y servicio técnico de fibra óptica FTTH, a cargo de la red in situ. Conocimientos en OLT y Mikrotik. Experiencia en atención al cliente y manejo de software de gestión.',
   },
   {
     id: 2,
-    position: "Reposición y Ventas",
-    company: "Coca Cola Andina",
-    period: "2017 - 2018",
+    position: 'Reposición y Ventas',
+    company: 'Coca Cola Andina',
+    period: '2017 - 2018',
     description:
-      "Experiencia en reposición y ventas. Habilidad en gestión de inventario y atención al cliente. Logros en ventas y servicio.",
+      'Experiencia en reposición y ventas. Habilidad en gestión de inventario y atención al cliente. Logros en ventas y servicio.',
   },
   {
     id: 3,
-    position: "Instalador de Aires Acondicionados y Montajes Eléctricos",
-    company: "MABSER",
-    period: "2016 - 2018",
+    position: 'Instalador de Aires Acondicionados y Montajes Eléctricos',
+    company: 'MABSER',
+    period: '2016 - 2018',
     description:
-      "Experiencia en instalación de aires acondicionados, redes y montajes eléctricos.",
+      'Experiencia en instalación de aires acondicionados, redes y montajes eléctricos.',
   },
 ];
 
 export const itemsNavbar = [
   {
     id: 1,
-    title: "Home",
+    title: 'Home',
     icon: <Home size={20} />,
-    link: "#home",
+    link: '#home',
   },
   {
     id: 2,
-    title: "Proyectos",
+    title: 'Proyectos',
     icon: <CodeSquare size={20} />,
-    link: "#portfolio",
+    link: '#portfolio',
   },
   {
     id: 3,
-    title: "Servicio",
+    title: 'Servicio',
     icon: <BookText size={20} />,
-    link: "#services",
+    link: '#services',
   },
   {
     id: 4,
-    title: "Sobre Mi",
+    title: 'Sobre Mi',
     icon: <UserRound size={20} />,
-    link: "#about-me",
+    link: '#about-me',
   },
   {
     id: 5,
-    title: "Blog",
+    title: 'Blog',
     icon: <Pen size={20} />,
-    link: "#blog",
+    link: '#blog',
   },
   {
     id: 6,
-    title: "Contacto",
+    title: 'Contacto',
     icon: <Mail size={20} />,
-    link: "#contact",
+    link: '#contact',
   },
 ];
 
 export const dataSlider = [
   {
     id: 1,
-    url: "/slider-1.webp",
+    url: '/slider-1.webp',
   },
   // {
   //   id: 2,
@@ -166,19 +165,19 @@ export const dataSlider = [
   // },
   {
     id: 3,
-    url: "/slider-3.webp",
+    url: '/slider-3.webp',
   },
   {
     id: 4,
-    url: "/slider-4.webp",
+    url: '/slider-4.webp',
   },
 ];
 
 export const aboutMe = {
   age: 29,
-  location: "Concepción del Uruguay, Entre Ríos, Argentina",
+  location: 'Concepción del Uruguay, Entre Ríos, Argentina',
   description:
-    "Técnico electricista, actualmente me desempeño como tecnico en fibra optica, soy estudiante de Sistemas de Informacion. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad para trabajar en un entorno tanto amigable como desafiante, donde pueda seguir aprendiendo y aplicando mis habilidades.",
+    'Técnico electricista, actualmente me desempeño como tecnico en fibra optica, soy estudiante de Sistemas de Informacion. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad para trabajar en un entorno tanto amigable como desafiante, donde pueda seguir aprendiendo y aplicando mis habilidades.',
 };
 
 export interface PortfolioItem {
@@ -194,134 +193,134 @@ export interface PortfolioItem {
 export const dataPortfolio: PortfolioItem[] = [
   {
     id: 1,
-    title: "Pizzeria Web",
-    image: "/pizzeriadonatello.webp",
-    urlGithub: "https://github.com/CamiloEscar/pizzeria-landing.git",
-    urlDemo: "https://pizzeria-donatello.vercel.app/",
+    title: 'Pizzeria Web',
+    image: '/pizzeriadonatello.webp',
+    urlGithub: 'https://github.com/CamiloEscar/pizzeria-landing.git',
+    urlDemo: 'https://pizzeria-donatello.vercel.app/',
     description:
-      "Una aplicación web moderna para una pizzería que permite a los usuarios explorar el menú, personalizar sus pedidos y realizar compras en línea, mejorando la experiencia del cliente y la eficiencia del negocio.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+      'Una aplicación web moderna para una pizzería que permite a los usuarios explorar el menú, personalizar sus pedidos y realizar compras en línea, mejorando la experiencia del cliente y la eficiencia del negocio.',
+    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Vercel'],
   },
   {
     id: 2,
-    title: "Reclamos App",
-    image: "/VDappsheets.webp",
-    urlGithub: "",
+    title: 'Reclamos App',
+    image: '/VDappsheets.webp',
+    urlGithub: '',
     urlDemo:
-      "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481",
+      'https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481',
     description:
-      "Una aplicación intuitiva diseñada para optimizar la gestión de reclamos de clientes, facilitando el seguimiento, la resolución y el análisis de problemas para mejorar la satisfacción del cliente y la eficiencia operativa.",
-    technologies: ["AppSheets"],
+      'Una aplicación intuitiva diseñada para optimizar la gestión de reclamos de clientes, facilitando el seguimiento, la resolución y el análisis de problemas para mejorar la satisfacción del cliente y la eficiencia operativa.',
+    technologies: ['AppSheets'],
   },
   {
     id: 3,
-    title: "Sala de chat",
-    image: "/chattiemporealnode.webp",
-    urlGithub: "https://github.com/CamiloEscar/chat-tiempo-real-Node.git",
-    urlDemo: "",
+    title: 'Sala de chat',
+    image: '/chattiemporealnode.webp',
+    urlGithub: 'https://github.com/CamiloEscar/chat-tiempo-real-Node.git',
+    urlDemo: '',
     description:
-      "Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   {
     id: 4,
-    title: "MERN CRUD",
-    image: "/MERNCRUDAUTH.webp",
-    urlGithub: "https://github.com/CamiloEscar/MERN-CRUD-AUTH.git",
-    urlDemo: "",
+    title: 'MERN CRUD',
+    image: '/MERNCRUDAUTH.webp',
+    urlGithub: 'https://github.com/CamiloEscar/MERN-CRUD-AUTH.git',
+    urlDemo: '',
     description:
-      "Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   {
     id: 5,
-    title: "CHAT PDF",
-    image: "/chatpdf.webp",
-    urlGithub: "https://github.com/CamiloEscar/chat-con-pdf.git",
-    urlDemo: "",
+    title: 'CHAT PDF',
+    image: '/chatpdf.webp',
+    urlGithub: 'https://github.com/CamiloEscar/chat-con-pdf.git',
+    urlDemo: '',
     description:
-      "Una innovadora aplicación que permite a los usuarios interactuar con documentos PDF a través de un chat inteligente, facilitando la extracción de información y la comprensión de documentos extensos.",
-    technologies: ["Svelte", "Astro", "TypeScript", "JavaScript"],
+      'Una innovadora aplicación que permite a los usuarios interactuar con documentos PDF a través de un chat inteligente, facilitando la extracción de información y la comprensión de documentos extensos.',
+    technologies: ['Svelte', 'Astro', 'TypeScript', 'JavaScript'],
   },
   {
     id: 6,
-    title: "Google Traductor Clon",
-    image: "/googletraductor.webp",
-    urlGithub: "https://github.com/CamiloEscar/google-translate-clone.git",
-    urlDemo: "",
+    title: 'Google Traductor Clon',
+    image: '/googletraductor.webp',
+    urlGithub: 'https://github.com/CamiloEscar/google-translate-clone.git',
+    urlDemo: '',
     description:
-      "Una réplica funcional del popular servicio de Google Traductor, ofreciendo traducciones rápidas y precisas entre múltiples idiomas, con una interfaz limpia y fácil de usar.",
-    technologies: ["Vite", "OpenAI", "TypeScript"],
+      'Una réplica funcional del popular servicio de Google Traductor, ofreciendo traducciones rápidas y precisas entre múltiples idiomas, con una interfaz limpia y fácil de usar.',
+    technologies: ['Vite', 'OpenAI', 'TypeScript'],
   },
   {
     id: 7,
-    title: "Reserva Futbol 5",
-    image: "/bookingappf5.webp",
-    urlGithub: "https://github.com/CamiloEscar/bookingapp-f5.git",
-    urlDemo: "",
+    title: 'Reserva Futbol 5',
+    image: '/bookingappf5.webp',
+    urlGithub: 'https://github.com/CamiloEscar/bookingapp-f5.git',
+    urlDemo: '',
     description:
-      "Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   {
     id: 8,
-    title: "Arquitecto Page",
-    image: "/arquitectolanding.webp",
-    urlGithub: "https://github.com/CamiloEscar/Landing-page-arquitecto.git",
-    urlDemo: "https://landing-page-arquitecto.vercel.app/",
+    title: 'Arquitecto Page',
+    image: '/arquitectolanding.webp',
+    urlGithub: 'https://github.com/CamiloEscar/Landing-page-arquitecto.git',
+    urlDemo: 'https://landing-page-arquitecto.vercel.app/',
     description:
-      "Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.",
-    technologies: ["Vercel", "Tailwind CSS", "Astro", "Vite", "bun"],
+      'Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.',
+    technologies: ['Vercel', 'Tailwind CSS', 'Astro', 'Vite', 'bun'],
   },
   {
     id: 9,
-    title: "FlyBondi",
-    image: "/flybondi.webp",
-    urlGithub: "https://github.com/CamiloEscar/FlyBondi-PA23.git",
-    urlDemo: "https://flybondi-challenge.netlify.app/",
+    title: 'FlyBondi',
+    image: '/flybondi.webp',
+    urlGithub: 'https://github.com/CamiloEscar/FlyBondi-PA23.git',
+    urlDemo: 'https://flybondi-challenge.netlify.app/',
     description:
-      "Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.",
-    technologies: ["JavaScript", "CSS", "HTML", "React", "Vite"],
+      'Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.',
+    technologies: ['JavaScript', 'CSS', 'HTML', 'React', 'Vite'],
   },
   {
     id: 10,
-    title: "Listado de CryptoCoin",
-    image: "/spavanillacoin.webp",
-    urlGithub: "https://github.com/CamiloEscar/SPA-VanillaCoin.git",
-    urlDemo: "https://spavanillacoin.netlify.app/",
+    title: 'Listado de CryptoCoin',
+    image: '/spavanillacoin.webp',
+    urlGithub: 'https://github.com/CamiloEscar/SPA-VanillaCoin.git',
+    urlDemo: 'https://spavanillacoin.netlify.app/',
     description:
-      "Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.",
-    technologies: ["JavaScript", "CSS", "HTML"],
+      'Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.',
+    technologies: ['JavaScript', 'CSS', 'HTML'],
   },
   {
     id: 11,
-    title: "Imagen Compresor",
-    image: "/imagencompressor.webp",
-    urlGithub: "https://github.com/CamiloEscar/imagen-compresor.git",
-    urlDemo: "https://imagencompressor.netlify.app/",
+    title: 'Imagen Compresor',
+    image: '/imagencompressor.webp',
+    urlGithub: 'https://github.com/CamiloEscar/imagen-compresor.git',
+    urlDemo: 'https://imagencompressor.netlify.app/',
     description:
-      "Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.",
-    technologies: ["JavaScript", "CSS", "HTML"],
+      'Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.',
+    technologies: ['JavaScript', 'CSS', 'HTML'],
   },
   {
     id: 12,
-    title: "Trello Clone",
-    image: "/trelloClon.webp",
-    urlGithub: "",
-    urlDemo: "https://prueba-trello.vercel.app/",
+    title: 'Trello Clone',
+    image: '/trelloClon.webp',
+    urlGithub: '',
+    urlDemo: 'https://prueba-trello.vercel.app/',
     description:
-      "Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   {
     id: 13,
-    title: "Fulbito-F5",
-    image: "/fulbitof5.webp",
-    urlGithub: "",
-    urlDemo: "https://fulbito-f5.vercel.app/",
+    title: 'Fulbito-F5',
+    image: '/fulbitof5.webp',
+    urlGithub: '',
+    urlDemo: 'https://fulbito-f5.vercel.app/',
     description:
-      "Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
   // {
   //   id: 14,
@@ -335,13 +334,13 @@ export const dataPortfolio: PortfolioItem[] = [
   // },
   {
     id: 15,
-    title: "Clima Json",
-    image: "/clima.webp",
-    urlGithub: "",
-    urlDemo: "https://pruebaclima-api.netlify.app/",
+    title: 'Clima Json',
+    image: '/clima.webp',
+    urlGithub: '',
+    urlDemo: 'https://pruebaclima-api.netlify.app/',
     description:
-      "Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.",
-    technologies: ["React", "Node.js", "Express", "MongoDB"],
+      'Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.',
+    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
   },
 ];
 
@@ -362,57 +361,57 @@ export interface ExperienceCategoryMinimal {
 export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
   {
     id: 1,
-    title: "Frontend Development 💄",
+    title: 'Frontend Development 💄',
     experience: [
       {
-        name: "HTML",
-        subtitle: "Intermedio",
+        name: 'HTML',
+        subtitle: 'Intermedio',
         value: 60,
         experience:
-          "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
-        technologies: ["html5", "semantic-ui", "accessibility"],
+          'Más de 2 años de experiencia creando estructuras web semánticas y accesibles.',
+        technologies: ['html5', 'semantic-ui', 'accessibility'],
       },
       {
-        name: "CSS",
-        subtitle: "Intermedio",
+        name: 'CSS',
+        subtitle: 'Intermedio',
         value: 60,
         experience:
-          "Amplio conocimiento en diseño responsivo y animaciones CSS.",
+          'Amplio conocimiento en diseño responsivo y animaciones CSS.',
         technologies: [
-          "css3",
+          'css3',
           // "sass",
           // "less",
-          "styled-components",
-          "tailwindcss",
+          'styled-components',
+          'tailwindcss',
         ],
       },
       {
-        name: "JavaScript",
-        subtitle: "Intermedio",
+        name: 'JavaScript',
+        subtitle: 'Intermedio',
         value: 60,
         experience:
-          "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
-        technologies: ["javascript", "typescript", "webpack", "babel"],
+          'Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.',
+        technologies: ['javascript', 'typescript', 'webpack', 'babel'],
       },
       {
-        name: "React",
-        subtitle: "Intermedio",
+        name: 'React',
+        subtitle: 'Intermedio',
         value: 60,
         experience:
-          "Desarrollo de aplicaciones utilizando React y su ecosistema.",
+          'Desarrollo de aplicaciones utilizando React y su ecosistema.',
         technologies: [
-          "react",
+          'react',
           // "redux",
-          "next-js",
+          'next-js',
           // "gatsby"
         ],
       },
       {
-        name: "Svelte",
-        subtitle: "Basico",
+        name: 'Svelte',
+        subtitle: 'Basico',
         value: 20,
-        experience: "Diseño de web simulando a Google Translate.",
-        technologies: ["svelte, Astro"],
+        experience: 'Diseño de web simulando a Google Translate.',
+        technologies: ['svelte', 'Astro'],
       },
       // {
       //   name: "Vue.js",
@@ -442,30 +441,30 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
   },
   {
     id: 2,
-    title: "Backend Development 💻",
+    title: 'Backend Development 💻',
     experience: [
       {
-        name: "Node JS",
-        subtitle: "Basico",
+        name: 'Node JS',
+        subtitle: 'Basico',
         value: 30,
         experience:
-          "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
+          'Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.',
         technologies: [
-          "nodejs",
-          "express",
-          "socket-io",
-          "npm",
-          "graphql",
+          'nodejs',
+          'express',
+          'socket-io',
+          'npm',
+          'graphql',
           // "apollo-server",
         ],
       },
       {
-        name: "Python",
-        subtitle: "Basico",
+        name: 'Python',
+        subtitle: 'Basico',
         value: 40,
         experience:
-          "Uso de Python para desarrollo de web con Django y Flask, scripts de automatización y análisis de datos.",
-        technologies: ["python", "django", "flask", "pandas", "numpy"],
+          'Uso de Python para desarrollo de web con Django y Flask, scripts de automatización y análisis de datos.',
+        technologies: ['python', 'django', 'flask', 'pandas', 'numpy'],
       },
       // {
       //   name: "PHP",
@@ -489,21 +488,21 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
       //     // "junit",
       //   ],
       // },
-      {
-        name: "DevOps",
-        subtitle: "Basico",
-        value: 20,
-        experience:
-          "Implementación, containerización de aplicaciones y despliegue en la nube.",
-        technologies: [
-          "docker",
-          // "kubernetes",
-          // "jenkins",
-          // "aws",
-          // "azure",
-          // "gitlab-ci",
-        ],
-      },
+      // {
+      //   name: 'DevOps',
+      //   subtitle: 'Basico',
+      //   value: 20,
+      //   experience:
+      //     'Implementación, containerización de aplicaciones y despliegue en la nube.',
+      //   technologies: [
+      //     'docker',
+      //     // "kubernetes",
+      //     // "jenkins",
+      //     // "aws",
+      //     // "azure",
+      //     // "gitlab-ci",
+      //   ],
+      // },
       // {
       //   name: "Seguridad Web",
       //   subtitle: "Básico",
@@ -516,36 +515,36 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
   },
   {
     id: 3,
-    title: "Data Analytics 📊",
+    title: 'Data Analytics 📊',
     experience: [
       {
-        name: "Power BI",
-        subtitle: "Basico",
+        name: 'Power BI',
+        subtitle: 'Basico',
         value: 40,
         experience:
-          "Creación de dashboards y visualizaciones de datos para la toma de decisiones.",
-        technologies: ["powerbi"],
+          'Creación de dashboards y visualizaciones de datos para la toma de decisiones.',
+        technologies: ['powerbi'],
       },
       {
-        name: "Tableau",
-        subtitle: "Basico",
+        name: 'Tableau',
+        subtitle: 'Basico',
         value: 40,
-        experience: "Desarrollo de visualizaciones y análisis de datos.",
-        technologies: ["tableau"],
+        experience: 'Desarrollo de visualizaciones y análisis de datos.',
+        technologies: ['tableau'],
       },
     ],
   },
   {
     id: 4,
-    title: "Base de Datos 🗄️",
+    title: 'Base de Datos 🗄️',
     experience: [
       {
-        name: "PostgreSQL",
-        subtitle: "Basico",
+        name: 'PostgreSQL',
+        subtitle: 'Basico',
         value: 20,
         experience:
-          "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
-        technologies: ["postgresql"],
+          'Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.',
+        technologies: ['postgresql'],
       },
 
       // {
@@ -557,16 +556,15 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
       //   technologies: ["mysql"],
       // },
       {
-        name: "MongoDB",
-        subtitle: "Basico",
+        name: 'MongoDB',
+        subtitle: 'Basico',
         value: 20,
-        experience: "Diseño y modelado de datos en bases de datos NoSQL.",
-        technologies: ["mongodb"],
+        experience: 'Diseño y modelado de datos en bases de datos NoSQL.',
+        technologies: ['mongodb'],
       },
     ],
   },
 ];
-
 export interface ExperienceCategory {
   id: number;
   title: string;
@@ -589,86 +587,101 @@ export interface ExperienceItem {
 export const dataExperience: ExperienceCategory[] = [
   {
     id: 1,
-    title: "Frontend Development 💄",
+    title: 'Frontend Development 💄',
     experience: [
       {
-        category: "Lenguajes",
+        category: 'Lenguajes',
         items: [
           {
-            name: "HTML",
-            subtitle: "Intermedio",
+            name: 'HTML',
+            subtitle: 'Intermedio',
             value: 60,
             experience:
-              "Más de 2 años de experiencia creando estructuras web semánticas y accesibles.",
-            technologies: ["html5"],
+              'Más de 2 años de experiencia creando estructuras web semánticas y accesibles.',
+            technologies: ['html5'],
           },
           {
-            name: "CSS",
-            subtitle: "Intermedio",
+            name: 'CSS',
+            subtitle: 'Intermedio',
             value: 60,
             experience:
-              "Amplio conocimiento en diseño responsivo y animaciones CSS.",
-            technologies: ["css3"],
+              'Amplio conocimiento en diseño responsivo y animaciones CSS.',
+            technologies: ['css3'],
           },
           {
-            name: "JavaScript",
-            subtitle: "Intermedio",
+            name: 'JavaScript',
+            subtitle: 'Intermedio',
             value: 60,
             experience:
-              "Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.",
-            technologies: ["javascript", "typescript"],
+              'Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.',
+            technologies: ['javascript', 'typescript'],
+          },
+          {
+            name: 'TypeScript',
+            subtitle: 'Basico',
+            value: 40,
+            experience:
+            'Conocimiento básico de TypeScript y experiencia en desarrollo de aplicaciones.',
+            technologies: ['javascript', 'typescript'],
           },
         ],
       },
       {
-        category: "Frameworks",
+        category: 'Frameworks',
         items: [
           {
-            name: "React",
-            subtitle: "Intermedio",
+            name: 'React',
+            subtitle: 'Intermedio',
             value: 60,
             experience:
-              "Desarrollo de aplicaciones complejas utilizando React y su ecosistema.",
+              'Desarrollo de aplicaciones complejas utilizando React y su ecosistema.',
             technologies: [
-              "react",
+              'react',
               // "redux",
-              "next-js",
+              'next-js',
             ],
           },
+          {
+            name: 'Svelte',
+            subtitle: 'Basico',
+            value: 20,
+            experience: 'Diseño de web simulando a Google Translate.',
+            technologies: ['svelte', 'Astro'],
+          },
         ],
       },
       {
-        category: "Tecnologías",
+        category: 'Tecnologías',
         items: [
+          // {
+          //   name: 'Semantic UI',
+          //   subtitle: 'Intermedio',
+          //   technologies: ['semantic-ui'],
+          // },
+          // {
+          //   name: 'Accessibility',
+          //   subtitle: 'Intermedio',
+          //   technologies: ['accessibility'],
+          // },
+          // {
+          //   name: 'Styled-components',
+          //   subtitle: 'Intermedio',
+          //   technologies: ['styled-components'],
+          // },
           {
-            name: "Semantic UI",
-            subtitle: "Intermedio",
-            technologies: ["semantic-ui"],
+            name: 'Tailwind CSS',
+            subtitle: 'Intermedio',
+            technologies: ['tailwindcss'],
           },
           {
-            name: "Accessibility",
-            subtitle: "Intermedio",
-            technologies: ["accessibility"],
+            name: 'Webpack',
+            subtitle: 'Basico',
+            technologies: ['webpack'],
           },
           {
-            name: "Styled-components",
-            subtitle: "Intermedio",
-            technologies: ["styled-components"],
-          },
-          {
-            name: "Tailwind CSS",
-            subtitle: "Intermedio",
-            technologies: ["tailwindcss"],
-          },
-          {
-            name: "Webpack",
-            subtitle: "Intermedio",
-            technologies: ["webpack"],
-          },
-          {
-            name: "Babel",
-            subtitle: "Intermedio",
-            technologies: ["babel"],
+            name: 'Babel',
+            subtitle: 'Basico',
+            technologies: ['babel'],
           },
         ],
       },
@@ -676,76 +689,81 @@ export const dataExperience: ExperienceCategory[] = [
   },
   {
     id: 2,
-    title: "Backend Development 💻",
+    title: 'Backend Development 💻',
     experience: [
       {
-        category: "Lenguajes",
+        category: 'Lenguajes',
         items: [
           {
-            name: "Node JS",
-            subtitle: "Básico",
+            name: 'Node JS',
+            subtitle: 'Básico',
             value: 30,
             experience:
-              "Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.",
-            technologies: ["nodejs"],
+              'Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.',
+            technologies: ['nodejs'],
           },
           {
-            name: "Python",
-            subtitle: "Básico",
+            name: 'Python',
+            subtitle: 'Básico',
             value: 40,
             experience:
-              "Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.",
-            technologies: ["python"],
+              'Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.',
+            technologies: ['python'],
           },
         ],
       },
       {
-        category: "Frameworks",
+        category: 'Frameworks',
         items: [
           {
-            name: "Express",
-            subtitle: "Básico",
-            technologies: ["express"],
+            name: 'Express',
+            subtitle: 'Básico',
+            technologies: ['express'],
           },
           {
-            name: "Django",
-            subtitle: "Básico",
-            technologies: ["django"],
+            name: 'Django',
+            subtitle: 'Básico',
+            technologies: ['django'],
           },
           {
-            name: "Flask",
-            subtitle: "Básico",
-            technologies: ["flask"],
+            name: 'Flask',
+            subtitle: 'Básico',
+            technologies: ['flask'],
           },
         ],
       },
       {
-        category: "Tecnologías",
+        category: 'Tecnologías',
         items: [
           {
-            name: "Socket.io",
-            subtitle: "Básico",
-            technologies: ["socket-io"],
+            name: 'Socket.io',
+            subtitle: 'Básico',
+            technologies: ['socket-io'],
           },
           {
-            name: "GraphQL",
-            subtitle: "Básico",
-            technologies: ["graphql"],
+            name: 'GraphQL',
+            subtitle: 'Básico',
+            technologies: ['graphql'],
           },
           {
-            name: "Docker",
-            subtitle: "Básico",
-            technologies: ["docker"],
+            name: 'Axios',
+            subtitle: 'Basico',
+            technologies: ['axios'],
           },
+          // {
+          //   name: 'Docker',
+          //   subtitle: 'Básico',
+          //   technologies: ['docker'],
+          // },
           // {
           //   name: "OAuth",
           //   subtitle: "Básico",
           //   technologies: ["oauth"],
           // },
           {
-            name: "JWT",
-            subtitle: "Básico",
-            technologies: ["jwt"],
+            name: 'JWT',
+            subtitle: 'Básico',
+            technologies: ['jwt'],
           },
         ],
       },
@@ -753,26 +771,26 @@ export const dataExperience: ExperienceCategory[] = [
   },
   {
     id: 3,
-    title: "Data Analytics 📊",
+    title: 'Data Analytics 📊',
     experience: [
       {
-        category: "Herramientas",
+        category: 'Herramientas',
         items: [
           {
-            name: "Power BI",
-            subtitle: "Básico",
+            name: 'Power BI',
+            subtitle: 'Básico',
             value: 40,
             experience:
-              "Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.",
-            technologies: ["powerbi"],
+              'Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.',
+            technologies: ['powerbi'],
           },
           {
-            name: "Tableau",
-            subtitle: "Básico",
+            name: 'Tableau',
+            subtitle: 'Básico',
             value: 40,
             experience:
-              "Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.",
-            technologies: ["tableau"],
+              'Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.',
+            technologies: ['tableau'],
           },
         ],
       },
@@ -780,26 +798,26 @@ export const dataExperience: ExperienceCategory[] = [
   },
   {
     id: 4,
-    title: "Base de Datos 🗄️",
+    title: 'Base de Datos 🗄️',
     experience: [
       {
-        category: "Bases de Datos",
+        category: 'Bases de Datos',
         items: [
           {
-            name: "PostgreSQL",
-            subtitle: "Básico",
+            name: 'PostgreSQL',
+            subtitle: 'Básico',
             value: 20,
             experience:
-              "Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.",
-            technologies: ["postgresql"],
+              'Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.',
+            technologies: ['postgresql'],
           },
           {
-            name: "MongoDB",
-            subtitle: "Básico",
+            name: 'MongoDB',
+            subtitle: 'Básico',
             value: 20,
             experience:
-              "Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.",
-            technologies: ["mongodb"],
+              'Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.',
+            technologies: ['mongodb'],
           },
         ],
       },
@@ -810,133 +828,133 @@ export const dataExperience: ExperienceCategory[] = [
 export const dataServices = [
   {
     id: 1,
-    title: "Desarrollo Web",
+    title: 'Desarrollo Web',
     icon: <PanelsTopLeft />,
     features: [
       {
-        name: "Desarrollo de sitios web con HTML5, CSS3, JavaScript y React",
+        name: 'Desarrollo de sitios web con HTML5, CSS3, JavaScript y React',
       },
       {
-        name: "Programación en Python, Java, y TypeScript",
+        name: 'Programación en Python, Java, y TypeScript',
       },
       {
-        name: "Diseño y desarrollo responsive",
+        name: 'Diseño y desarrollo responsive',
       },
       {
-        name: "Optimización SEO",
+        name: 'Optimización SEO',
       },
       {
-        name: "Desarrollo de aplicaciones web",
+        name: 'Desarrollo de aplicaciones web',
       },
       {
-        name: "Gestión de contenido",
+        name: 'Gestión de contenido',
       },
       {
-        name: "Comercio electrónico",
+        name: 'Comercio electrónico',
       },
       {
-        name: "Mantenimiento y soporte continuo",
+        name: 'Mantenimiento y soporte continuo',
       },
     ],
   },
   {
     id: 2,
-    title: "UI/UX Design",
+    title: 'UI/UX Design',
     icon: <Brush />,
     features: [
       {
-        name: "Diseño intuitivo para una experiencia de usuario fluida",
+        name: 'Diseño intuitivo para una experiencia de usuario fluida',
       },
       {
-        name: "Prototipado interactivo para visualizar la interfaz",
+        name: 'Prototipado interactivo para visualizar la interfaz',
       },
       {
-        name: "Investigación de usuarios para comprender necesidades y expectativas",
+        name: 'Investigación de usuarios para comprender necesidades y expectativas',
       },
       {
-        name: "Optimización de la usabilidad para mejorar la accesibilidad",
+        name: 'Optimización de la usabilidad para mejorar la accesibilidad',
       },
       {
-        name: "Pruebas de usabilidad para evaluar la experiencia",
+        name: 'Pruebas de usabilidad para evaluar la experiencia',
       },
       {
-        name: "Diseño responsive para adaptarse a diferentes dispositivos",
+        name: 'Diseño responsive para adaptarse a diferentes dispositivos',
       },
     ],
   },
   {
     id: 3,
-    title: "Bases de Datos y Análisis de Datos",
+    title: 'Bases de Datos y Análisis de Datos',
     icon: <Database />,
     features: [
       {
-        name: "Diseño y gestión de bases de datos PostgreSQL y MySQL",
+        name: 'Diseño y gestión de bases de datos PostgreSQL y MySQL',
       },
       {
-        name: "Análisis de datos con Power BI y Tableau",
+        name: 'Análisis de datos con Power BI y Tableau',
       },
       {
-        name: "Creación de informes y dashboards interactivos",
+        name: 'Creación de informes y dashboards interactivos',
       },
       {
-        name: "Optimización de consultas y rendimiento de bases de datos",
+        name: 'Optimización de consultas y rendimiento de bases de datos',
       },
     ],
   },
   {
     id: 4,
-    title: "Soporte Técnico y Reparación",
+    title: 'Soporte Técnico y Reparación',
     icon: <Cpu />,
     features: [
       {
-        name: "Reparación y mantenimiento de PC",
+        name: 'Reparación y mantenimiento de PC',
       },
       {
-        name: "Instalación y configuración de software",
+        name: 'Instalación y configuración de software',
       },
       {
-        name: "Diagnóstico y solución de problemas de hardware",
+        name: 'Diagnóstico y solución de problemas de hardware',
       },
       {
-        name: "Optimización del rendimiento de sistemas",
+        name: 'Optimización del rendimiento de sistemas',
       },
     ],
   },
   {
     id: 5,
-    title: "Instalación de Redes y Fibra Óptica",
+    title: 'Instalación de Redes y Fibra Óptica',
     icon: <Network />,
     features: [
       {
-        name: "Instalación y servicio técnico de fibra óptica FTTH",
+        name: 'Instalación y servicio técnico de fibra óptica FTTH',
       },
       {
-        name: "Configuración de OLT y Mikrotik",
+        name: 'Configuración de OLT y Mikrotik',
       },
       {
-        name: "Montajes eléctricos",
+        name: 'Montajes eléctricos',
       },
       {
-        name: "Instalación de aires acondicionados",
+        name: 'Instalación de aires acondicionados',
       },
     ],
   },
   {
     id: 6,
-    title: "Gestión de Proyectos y Atención al Cliente",
+    title: 'Gestión de Proyectos y Atención al Cliente',
     icon: <BarChart />,
     features: [
       {
-        name: "Gestión de inventario y abastecimiento",
+        name: 'Gestión de inventario y abastecimiento',
       },
       {
-        name: "Atención al cliente y servicio post-venta",
+        name: 'Atención al cliente y servicio post-venta',
       },
       {
-        name: "Colaboración efectiva en equipos de trabajo",
+        name: 'Colaboración efectiva en equipos de trabajo',
       },
       {
-        name: "Organización y planificación de proyectos",
+        name: 'Organización y planificación de proyectos',
       },
     ],
   },
@@ -945,23 +963,23 @@ export const dataServices = [
 export const dataContact = [
   {
     id: 1,
-    title: "Teléfono",
-    subtitle: "+54 9 3442475466",
-    link: "tel:5493442475466",
+    title: 'Teléfono',
+    subtitle: '+54 9 3442475466',
+    link: 'tel:5493442475466',
     icon: <Phone />,
   },
   {
     id: 2,
-    title: "Github",
-    subtitle: "github.com/CamiloEscar",
-    link: "github.com/CamiloEscar",
+    title: 'Github',
+    subtitle: 'github.com/CamiloEscar',
+    link: 'github.com/CamiloEscar',
     icon: <Code2 />,
   },
   {
     id: 3,
-    title: "Email",
-    subtitle: "camiloescar1995@gmail.com",
-    link: "mailto:camiloescar1995@gmail.com",
+    title: 'Email',
+    subtitle: 'camiloescar1995@gmail.com',
+    link: 'mailto:camiloescar1995@gmail.com',
     icon: <Inbox />,
   },
 ];

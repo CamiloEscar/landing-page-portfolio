@@ -1,23 +1,36 @@
-"use client"
+'use client';
 import React, { useState } from 'react';
-import { dataContact } from "@/data";
-import Title from "./shared/title";
-import Link from "next/link";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { motion, AnimatePresence } from "framer-motion";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Check } from "lucide-react";
+import { dataContact } from '@/data';
+import Title from './shared/title';
+import Link from 'next/link';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Check } from 'lucide-react';
 
 const formSchema = z.object({
-  username: z.string().min(2, "El nombre debe tener al menos 2 caracteres").max(50, "El nombre debe tener menos de 50 caracteres"),
-  email: z.string().email("Dirección de correo electrónico inválida"),
-  message: z.string().min(2, "El mensaje debe tener al menos 2 caracteres").max(200, "El mensaje debe tener menos de 200 caracteres"),
+  username: z
+    .string()
+    .min(2, 'El nombre debe tener al menos 2 caracteres')
+    .max(50, 'El nombre debe tener menos de 50 caracteres'),
+  email: z.string().email('Dirección de correo electrónico inválida'),
+  message: z
+    .string()
+    .min(2, 'El mensaje debe tener al menos 2 caracteres')
+    .max(200, 'El mensaje debe tener menos de 200 caracteres'),
 });
 
 const ContactForm = () => {
@@ -27,9 +40,9 @@ const ContactForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
-      email: "",
-      message: "",
+      username: '',
+      email: '',
+      message: '',
     },
   });
 
@@ -73,9 +86,13 @@ const ContactForm = () => {
                 <div className="bg-green-100/80 dark:bg-green-900/80 backdrop-blur-sm rounded-full p-4 inline-block mb-6">
                   <Check className="w-12 h-12 text-green-500 dark:text-green-300" />
                 </div>
-                <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">¡Mensaje Enviado Exitosamente!</h4>
-                <p className="text-gray-600 dark:text-gray-400 mb-8">Gracias por contactarme. Me pondré en contacto contigo pronto.</p>
-                <Button 
+                <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-4">
+                  ¡Mensaje Enviado Exitosamente!
+                </h4>
+                <p className="text-gray-600 dark:text-gray-400 mb-8">
+                  Gracias por contactarme. Me pondré en contacto contigo pronto.
+                </p>
+                <Button
                   onClick={() => {
                     setSuccessForm(false);
                     form.reset();
@@ -100,7 +117,9 @@ const ContactForm = () => {
                   name="username"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Nombre</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                        Nombre
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Tu nombre"
@@ -117,7 +136,9 @@ const ContactForm = () => {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Correo Electrónico</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                        Correo Electrónico
+                      </FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Tu correo electrónico"
@@ -135,7 +156,9 @@ const ContactForm = () => {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">Mensaje</FormLabel>
+                      <FormLabel className="text-gray-700 dark:text-gray-300 text-lg">
+                        Mensaje
+                      </FormLabel>
                       <FormControl>
                         <Textarea
                           placeholder="Tu mensaje"
@@ -147,7 +170,7 @@ const ContactForm = () => {
                     </FormItem>
                   )}
                 />
-                <Button 
+                <Button
                   type="submit"
                   className="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 text-lg"
                   disabled={isSubmitting}
@@ -165,7 +188,10 @@ const ContactForm = () => {
 
 const Contact = () => {
   return (
-    <section className="bg-transparent text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300" id="contact">
+    <section
+      className="bg-transparent text-gray-900 dark:text-white py-16 md:py-24 transition-colors duration-300"
+      id="contact"
+    >
       <div className="container mx-auto px-4">
         <Title title="Contáctame" subtitle="Ponte en contacto conmigo" />
 
@@ -179,7 +205,9 @@ const Contact = () => {
                 <div className="flex flex-col items-center text-center">
                   <div className="text-primary mb-4 text-3xl">{data.icon}</div>
                   <h3 className="text-xl font-semibold mb-2">{data.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">{data.subtitle}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-4">
+                    {data.subtitle}
+                  </p>
                   <Link
                     href={data.link}
                     target="_blank"

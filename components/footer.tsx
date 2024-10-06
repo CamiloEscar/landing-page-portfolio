@@ -1,6 +1,6 @@
 import React from 'react';
-import Link from "next/link";
-import { Separator } from "./ui/separator";
+import Link from 'next/link';
+import { Separator } from './ui/separator';
 
 const Footer = () => {
   return (
@@ -9,14 +9,41 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto">
           <div className="md:flex md:justify-between items-center">
             <div>
-              <h4 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 md:mb-0">Escar Camilo</h4>
+              <h4 className="text-3xl font-bold text-gray-800 dark:text-white mb-6 md:mb-0">
+                Escar Camilo
+              </h4>
             </div>
             <nav className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
-              <Link href="#about-me" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Sobre Mi</Link>
-              <Link href="#skills" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Skills</Link>
-              <Link href="#services" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Servicios</Link>
-              <Link href="#portfolio" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Portfolio</Link>
-              <Link href="#contact" className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300">Contacto</Link>
+              <Link
+                href="#about-me"
+                className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
+              >
+                Sobre Mi
+              </Link>
+              <Link
+                href="#skills"
+                className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
+              >
+                Skills
+              </Link>
+              <Link
+                href="#services"
+                className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
+              >
+                Servicios
+              </Link>
+              <Link
+                href="#portfolio"
+                className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
+              >
+                Portfolio
+              </Link>
+              <Link
+                href="#contact"
+                className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
+              >
+                Contacto
+              </Link>
             </nav>
           </div>
           <Separator className="my-8 bg-gray-300 dark:bg-gray-700" />

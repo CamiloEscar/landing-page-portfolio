@@ -1,32 +1,32 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState, useCallback, ReactNode } from "react";
+import React, { useEffect, useState, useCallback, ReactNode } from 'react';
 import {
   motion,
   useScroll,
   useTransform,
   useSpring,
   AnimatePresence,
-} from "framer-motion";
-import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
+} from 'framer-motion';
+import { useTheme } from 'next-themes';
+import dynamic from 'next/dynamic';
 
-const Cloud = dynamic(() => import("lucide-react").then((mod) => mod.Cloud), {
+const Cloud = dynamic(() => import('lucide-react').then((mod) => mod.Cloud), {
   ssr: false,
 });
-const Sun = dynamic(() => import("lucide-react").then((mod) => mod.Sun), {
+const Sun = dynamic(() => import('lucide-react').then((mod) => mod.Sun), {
   ssr: false,
 });
-const Moon = dynamic(() => import("lucide-react").then((mod) => mod.Moon), {
+const Moon = dynamic(() => import('lucide-react').then((mod) => mod.Moon), {
   ssr: false,
 });
-const Trees = dynamic(() => import("lucide-react").then((mod) => mod.Trees), {
+const Trees = dynamic(() => import('lucide-react').then((mod) => mod.Trees), {
   ssr: false,
 });
-const Star = dynamic(() => import("lucide-react").then((mod) => mod.Star), {
+const Star = dynamic(() => import('lucide-react').then((mod) => mod.Star), {
   ssr: false,
 });
-const Rocket = dynamic(() => import("lucide-react").then((mod) => mod.Rocket), {
+const Rocket = dynamic(() => import('lucide-react').then((mod) => mod.Rocket), {
   ssr: false,
 });
 
@@ -56,13 +56,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   const { scrollYProgress } = useScroll();
   const { theme, systemTheme } = useTheme();
 
-  const currentTheme = theme === "system" ? systemTheme : theme;
-  const isDark = currentTheme === "dark";
+  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const isDark = currentTheme === 'dark';
 
   const skyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const grassOpacity = useTransform(scrollYProgress, [0.6, 1], [0, 1]);
   const sunMoonY = useSpring(
-    useTransform(scrollYProgress, [0, 1], ["20%", "80%"]),
+    useTransform(scrollYProgress, [0, 1], ['20%', '80%']),
     {
       stiffness: 100,
       damping: 30,
@@ -131,9 +131,9 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         generateElements();
       }
     };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
     handleResize();
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [generateElements]);
 
   useEffect(() => {
@@ -148,11 +148,11 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       <div className="fixed inset-0 w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
-            key={isDark ? "dark" : "light"}
+            key={isDark ? 'dark' : 'light'}
             className={`absolute inset-0 w-full h-full transition-colors duration-500 ${
               isDark
-                ? "bg-gradient-to-b from-blue-950 via-indigo-950 to-purple-950"
-                : "bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400"
+                ? 'bg-gradient-to-b from-blue-950 via-indigo-950 to-purple-950'
+                : 'bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400'
             }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -183,8 +183,8 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                   transition={{
                     duration: 2 + Math.random() * 3,
                     repeat: Infinity,
-                    repeatType: "reverse",
-                    ease: "easeInOut",
+                    repeatType: 'reverse',
+                    ease: 'easeInOut',
                   }}
                 />
               ))}
@@ -204,7 +204,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                   transition={{
                     duration: 2 + Math.random() * 2,
                     repeat: Infinity,
-                    repeatType: "reverse",
+                    repeatType: 'reverse',
                   }}
                 >
                   <Star />
@@ -226,7 +226,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                   transition={{
                     duration: 20 + Math.random() * 10,
                     repeat: Infinity,
-                    repeatType: "reverse",
+                    repeatType: 'reverse',
                   }}
                 >
                   <Rocket />
@@ -249,8 +249,8 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                 transition={{
                   duration: 30 + Math.random() * 20,
                   repeat: Infinity,
-                  repeatType: "mirror",
-                  ease: "linear",
+                  repeatType: 'mirror',
+                  ease: 'linear',
                 }}
               >
                 <Cloud />
@@ -277,7 +277,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
               transition={{
                 duration: 2 + Math.random() * 2,
                 repeat: Infinity,
-                repeatType: "reverse",
+                repeatType: 'reverse',
               }}
             >
               <Trees />
@@ -288,9 +288,9 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         <motion.div
           className="absolute text-yellow-400 dark:text-yellow-200 transition-colors duration-500 pointer-events-none"
           style={{
-            right: "10%",
+            right: '10%',
             top: sunMoonY,
-            fontSize: "4rem",
+            fontSize: '4rem',
           }}
         >
           {isDark ? <Moon /> : <Sun />}

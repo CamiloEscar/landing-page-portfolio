@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback, FC } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import React, { useState, useEffect, useCallback, FC } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   Mail,
   Github,
@@ -11,81 +11,31 @@ import {
   X,
   ChevronRight,
   ExternalLink,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Typewriter } from "react-simple-typewriter";
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Typewriter } from 'react-simple-typewriter';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import GradientName from "./GradientName";
-import { FaReact, FaNodeJs } from "react-icons/fa";
-import {
-  SiGithub,
-  SiNextdotjs,
-  SiPostgresql,
-  SiTailwindcss,
-  SiTypescript,
-} from "react-icons/si";
-import TechStack from "./TechStack";
+} from '@/components/ui/dropdown-menu';
+import { Card, CardContent } from '@/components/ui/card';
+import GradientName from './GradientName';
+import TechStack from './TechStack';
 
 const greetings = [
-  "Hola, soy",
-  "Hello, I am",
-  "Bonjour, je suis",
-  "Olá, eu sou",
-  "Ciao, sono",
-];
-
-const skills = [
-  {
-    name: "React",
-    icon: <FaReact />,
-    color: "bg-blue-500/10 text-blue-500 dark:bg-blue-500/20",
-  },
-  {
-    name: "Next.js",
-    icon: <SiNextdotjs />,
-    color:
-      "bg-gray-500/10 text-gray-700 dark:bg-gray-400/20 dark:text-gray-400",
-  },
-  {
-    name: "TypeScript",
-    icon: <SiTypescript />,
-    color: "bg-blue-600/10 text-blue-600 dark:bg-blue-500/20",
-  },
-  {
-    name: "Node.js",
-    icon: <FaNodeJs />,
-    color: "bg-green-500/10 text-green-600 dark:bg-green-500/20",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss />,
-    color: "bg-cyan-500/10 text-cyan-600 dark:bg-cyan-500/20",
-  },
-  {
-    name: "PostgreSQL",
-    icon: <SiPostgresql />,
-    color: "bg-blue-400/10 text-blue-600 dark:bg-blue-400/20",
-  },
-  {
-    name: "GIT",
-    icon: <SiGithub />,
-    color: "bg-orange-500/10 text-orange-600 dark:bg-orange-500/20",
-  },
+  'Hola 👋, soy',
+  'Hello 👋, I am',
+  'Olá 👋, eu sou',
 ];
 
 interface ActionButtonProps {
@@ -101,8 +51,8 @@ const ActionButton: FC<ActionButtonProps> = ({
   color,
   href,
 }) => (
-  <motion.div 
-    whileHover={{ scale: 1.05 }} 
+  <motion.div
+    whileHover={{ scale: 1.05 }}
     whileTap={{ scale: 0.95 }}
     className="w-full sm:w-auto"
   >
@@ -116,16 +66,16 @@ const ActionButton: FC<ActionButtonProps> = ({
         px-4 sm:px-6
         py-2 sm:py-3
         ${
-          color === "green" &&
-          "bg-green-500 hover:bg-green-600 text-white shadow-green-200/50 dark:shadow-green-900/50"
+          color === 'green' &&
+          'bg-green-500 hover:bg-green-600 text-white shadow-green-200/50 dark:shadow-green-900/50'
         }
         ${
-          color === "blue" &&
-          "bg-blue-500 hover:bg-blue-600 text-white shadow-blue-200/50 dark:shadow-blue-900/50"
+          color === 'blue' &&
+          'bg-blue-500 hover:bg-blue-600 text-white shadow-blue-200/50 dark:shadow-blue-900/50'
         }
         ${
-          color === "purple" &&
-          "bg-purple-500 hover:bg-purple-600 text-white shadow-purple-200/50 dark:shadow-purple-900/50"
+          color === 'purple' &&
+          'bg-purple-500 hover:bg-purple-600 text-white shadow-purple-200/50 dark:shadow-purple-900/50'
         }
         shadow-lg hover:shadow-xl
       `}
@@ -160,12 +110,12 @@ const SocialLink: FC<SocialLinkProps> = ({
       className={`
         inline-flex items-center px-4 py-2 rounded-lg transition-all duration-300 group
         ${
-          color === "gray" &&
-          "bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300"
+          color === 'gray' &&
+          'bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300'
         }
         ${
-          color === "blue" &&
-          "bg-blue-100 hover:bg-blue-200 text-blue-700 dark:bg-blue-900/50 dark:hover:bg-blue-800/50 dark:text-blue-300"
+          color === 'blue' &&
+          'bg-blue-100 hover:bg-blue-200 text-blue-700 dark:bg-blue-900/50 dark:hover:bg-blue-800/50 dark:text-blue-300'
         }
       `}
     >
@@ -178,9 +128,8 @@ const SocialLink: FC<SocialLinkProps> = ({
 
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
-  const [cvLanguage, setCvLanguage] = useState("es");
+  const [cvLanguage, setCvLanguage] = useState('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
-  const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const cycleGreeting = useCallback(() => {
@@ -189,13 +138,11 @@ export default function Introduction() {
 
   useEffect(() => {
     const greetingInterval = setInterval(cycleGreeting, 3000);
-    const skillInterval = setInterval(() => {
-      setCurrentSkillIndex((prev) => (prev + 1) % skills.length);
-    }, 2000);
+
 
     return () => {
       clearInterval(greetingInterval);
-      clearInterval(skillInterval);
+
     };
   }, [cycleGreeting]);
 
@@ -236,19 +183,19 @@ export default function Introduction() {
                 <div className="h-[40px] mb-6">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200">
                     <Typewriter
-                      words={["Developer Web", "Estudiante de Sistemas"]}
+                      words={['Developer Web 💻', 'Estudiante de Sistemas 📚']}
                       loop={true}
                       cursor
                       cursorStyle="|"
                       typeSpeed={70}
                       deleteSpeed={50}
-                      delaySpeed={1000}
+                      delaySpeed={1500}
                     />
                   </h2>
                 </div>
 
                 <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                  Con más de 2 años de experiencia en desarrollo web, me he
+                  Más de 2 años de experiencia en desarrollo web, me he
                   enfocado en tecnologías como
                   <GradientName
                     size="small"
@@ -318,37 +265,17 @@ export default function Introduction() {
                       </motion.div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                      <DropdownMenuItem onClick={() => handleCVOpen("en")}>
+                      <DropdownMenuItem onClick={() => handleCVOpen('en')}>
                         View CV in English
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleCVOpen("es")}>
+                      <DropdownMenuItem onClick={() => handleCVOpen('es')}>
                         Ver CV en Español
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </div>
 
-
                 <div className="flex flex-wrap gap-3">
-                  {/* <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentSkillIndex}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Badge
-                        variant="outline"
-                        className={`py-2 px-4 text-sm font-medium ${skills[currentSkillIndex].color}`}
-                      >
-                        <span className="mr-2">
-                          {skills[currentSkillIndex].icon}
-                        </span>
-                        {skills[currentSkillIndex].name}
-                      </Badge>
-                    </motion.div>
-                  </AnimatePresence> */}
                   <TechStack />
                 </div>
               </CardContent>
@@ -372,7 +299,7 @@ export default function Introduction() {
                   src="/profile.webp"
                   alt="Profile"
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: 'cover' }}
                   className="rounded-xl z-0"
                   priority
                   onLoadingComplete={() => setIsImageLoaded(true)}
@@ -390,9 +317,9 @@ export default function Introduction() {
               Curriculum Vitae
             </DialogTitle>
             <DialogDescription className="text-gray-600 dark:text-gray-400">
-              {cvLanguage === "en"
-                ? "You're viewing the English version. Switch language or download using the buttons below."
-                : "Estás viendo la versión en Español. Cambia el idioma o descarga usando los botones debajo."}
+              {cvLanguage === 'en'
+                ? 'You\'re viewing the English version. Switch language or download using the buttons below.'
+                : 'Estás viendo la versión en Español. Cambia el idioma o descarga usando los botones debajo.'}
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 bg-gray-100 dark:bg-gray-800">
@@ -405,10 +332,10 @@ export default function Introduction() {
           <div className="flex justify-between items-center gap-4 p-4 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-t border-gray-200/20 dark:border-gray-700/20">
             <Button
               variant="outline"
-              onClick={() => setCvLanguage(cvLanguage === "en" ? "es" : "en")}
+              onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
               className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              {cvLanguage === "en" ? "Cambiar a Español" : "Switch to English"}
+              {cvLanguage === 'en' ? 'Cambiar a Español' : 'Switch to English'}
             </Button>
             <div className="flex items-center gap-4">
               <Button
@@ -417,16 +344,16 @@ export default function Introduction() {
                 className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <X className="mr-2 h-4 w-4" />
-                {cvLanguage === "en" ? "Close" : "Cerrar"}
+                {cvLanguage === 'en' ? 'Close' : 'Cerrar'}
               </Button>
               <Button
                 onClick={() =>
-                  window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, "_blank")
+                  window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, '_blank')
                 }
                 className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white hover:opacity-90 transition-opacity"
               >
                 <Download className="mr-2 h-4 w-4" />
-                {cvLanguage === "en" ? "Download CV" : "Descargar CV"}
+                {cvLanguage === 'en' ? 'Download CV' : 'Descargar CV'}
               </Button>
             </div>
           </div>

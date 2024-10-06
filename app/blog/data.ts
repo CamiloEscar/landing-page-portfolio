@@ -17,20 +17,20 @@ export interface BlogPost {
 export const dataBlog: BlogPost[] = [
   //trabajo-integrador-desarrollo-app
   {
-    slug: "trabajo-integrador-desarrollo-app",
+    slug: 'trabajo-integrador-desarrollo-app',
     title:
-      "Proceso de Desarrollo de la Aplicación: Desde la Entrevista Inicial hasta la Aprobación Final",
-    image: "/blog/logometa.png",
-    date: "2024-09-26",
-    tags: ["Desarrollo", "Aplicación", "Base de Datos", "Funkos", "Ecommerce"],
-    type: "Caso de estudio",
+      'Proceso de Desarrollo de la Aplicación: Desde la Entrevista Inicial hasta la Aprobación Final',
+    image: '/blog/logometa.png',
+    date: '2024-09-26',
+    tags: ['Desarrollo', 'Aplicación', 'Base de Datos', 'Funkos', 'Ecommerce'],
+    type: 'Caso de estudio',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "7 min",
+    readingTime: '7 min',
     excerpt:
-      "En este blog, te llevamos a través de cada paso del desarrollo de una aplicación para el cliente Logos Funkos, desde la primera entrevista hasta la aprobación final del modelo de base de datos.",
+      'En este blog, te llevamos a través de cada paso del desarrollo de una aplicación para el cliente Logos Funkos, desde la primera entrevista hasta la aprobación final del modelo de base de datos.',
     content: `
       <h2>Proceso de Desarrollo de la Aplicación: Desde la Entrevista Inicial hasta la Aprobación Final</h2>
       <p>En este proyecto integrador, trabajamos en conjunto con Logos Funkos para desarrollar una aplicación que cubriera las necesidades específicas de su emprendimiento. A continuación, detallamos las etapas clave del desarrollo.</p>
@@ -75,21 +75,23 @@ export const dataBlog: BlogPost[] = [
       
       `,
   },
-//scraping-nodejs
-{
-  "slug": "scraping-web-cualquier-pagina",
-  "title": "Cómo hacer scraping web de cualquier página con Node.js y Playwright",
-  "image": "/blog/scraping-web.png",
-  "date": "2024-10-05",
-  "tags": ["Node.js", "Playwright", "Web Scraping", "Fullstack"],
-  "type": "tutorial",
-  "author": {
-    "name": "Camilo Escar",
-    "avatar": "/profile.webp"
-  },
-  "readingTime": "7 min",
-  "excerpt": "Aprende a hacer scraping web de cualquier página utilizando Node.js y Playwright, y cómo guardar los datos obtenidos en un archivo JSON.",
-  "content": `
+  //scraping-nodejs
+  {
+    slug: 'scraping-web-cualquier-pagina',
+    title:
+      'Cómo hacer scraping web de cualquier página con Node.js y Playwright',
+    image: '/blog/scraping-web.png',
+    date: '2024-10-05',
+    tags: ['Node.js', 'Playwright', 'Web Scraping', 'Fullstack'],
+    type: 'tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
+    },
+    readingTime: '7 min',
+    excerpt:
+      'Aprende a hacer scraping web de cualquier página utilizando Node.js y Playwright, y cómo guardar los datos obtenidos en un archivo JSON.',
+    content: `
 <h2>Cómo hacer scraping web de cualquier página con Node.js y Playwright</h2>
 
 <p>El scraping web es una técnica muy útil para obtener información de páginas web de manera automatizada. En este tutorial, te mostraré cómo hacer scraping de <strong>cualquier página web</strong> usando <strong>Node.js</strong> y <strong>Playwright</strong>, y guardar los datos en un archivo JSON para su posterior procesamiento.</p>
@@ -124,7 +126,7 @@ import { chromium } from '@playwright/test';
 import fs from 'fs';
 
 (async () => {
-  const url = 'https://ejemplo.com';  // Reemplaza con la URL que desees scrapea​r
+  const url = 'https://ejemplo.com';  // Reemplaza con la URL que desees scrapear
 
   // Iniciar navegador y página
   const browser = await chromium.launch({ headless: true });
@@ -155,7 +157,7 @@ import fs from 'fs';
 </code></pre>
 
 <h3>3. Personalizar los selectores</h3>
-<p>El script es genérico, lo que significa que puedes adaptarlo para cualquier página simplemente cambiando los selectores de los elementos que quieras scrapea​r. Por ejemplo, si estás scrapeando productos de una tienda online, es probable que los selectores de los títulos y precios sean algo como:</p>
+<p>El script es genérico, lo que significa que puedes adaptarlo para cualquier página simplemente cambiando los selectores de los elementos que quieras scrapear. Por ejemplo, si estás scrapeando productos de una tienda online, es probable que los selectores de los títulos y precios sean algo como:</p>
 
 <pre><code class="language-javascript">
 const data = await page.$$eval('.product-card', items => 
@@ -186,25 +188,160 @@ node index.mjs
 
 <h3>Conclusión</h3>
 <p>Con este tutorial, has aprendido cómo hacer scraping de cualquier página web utilizando <strong>Node.js</strong> y <strong>Playwright</strong>, y cómo guardar los datos en un archivo JSON. Esto te permitirá obtener y analizar información de manera automatizada, abriendo las puertas a una gran cantidad de aplicaciones.</p>
-`
-}
+`,
+  },
+  //guia-tecnologias
+  {
+    slug: 'tecnologias-desarrollo-web',
+    title: 'Guía Completa de Tecnologías para el Desarrollo Web',
+    image: '/blog/desarrollo-web.png',
+    date: '2024-10-06',
+    tags: ['Desarrollo Web', 'Frontend', 'Backend', 'DevOps'],
+    type: 'tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
+    },
+    readingTime: '10 min',
+    excerpt:
+      'Explora el vasto ecosistema del desarrollo web, desde el frontend hasta el backend y DevOps, con esta guía completa de tecnologías y herramientas.',
+    content: `
+<h2>Guía Completa de Tecnologías para el Desarrollo Web</h2>
 
-  ,
+<p>El desarrollo web es un campo en constante evolución, lleno de herramientas y tecnologías que permiten crear aplicaciones y sitios web modernos. En esta guía, exploraremos las principales tecnologías utilizadas en el desarrollo web, organizadas por categorías, para que puedas orientarte y elegir las herramientas que mejor se adapten a tus necesidades.</p>
+
+<h3>1. Frontend</h3>
+
+<h4>Lenguajes de Programación</h4>
+<ul>
+  <li><strong>HTML</strong>: Estructura básica de cualquier página web.</li>
+  <li><strong>CSS</strong>: Controla el diseño y la presentación visual.</li>
+  <li><strong>JavaScript</strong>: Agrega interactividad y lógica en el navegador.</li>
+  <li><strong>TypeScript</strong>: Un superconjunto de JavaScript que añade tipado estático.</li>
+</ul>
+
+<h4>Frameworks y Bibliotecas</h4>
+<ul>
+  <li><strong>React</strong>: Popular para construir interfaces de usuario interactivas.</li>
+  <li><strong>Vue.js</strong>: Framework progresivo para crear interfaces.</li>
+  <li><strong>Angular</strong>: Solución integral para aplicaciones web complejas.</li>
+  <li><strong>Svelte</strong>: Compila los componentes en código optimizado.</li>
+</ul>
+
+<h4>Herramientas de Construcción</h4>
+<ul>
+  <li><strong>Vite</strong>: Un entorno de desarrollo rápido y optimizado.</li>
+  <li><strong>Webpack</strong>: Herramienta para empaquetar módulos de JavaScript.</li>
+  <li><strong>Parcel</strong>: Empaquetador web sin configuración.</li>
+  <li><strong>Rollup</strong>: Enfocado en bibliotecas y módulos.</li>
+</ul>
+
+<h4>Gestores de Estado</h4>
+<ul>
+  <li><strong>Redux</strong>: Gestión de estado en aplicaciones React.</li>
+  <li><strong>MobX</strong>: Gestión de estado reactivo.</li>
+  <li><strong>Vuex</strong>: Para la gestión de estado en aplicaciones Vue.</li>
+</ul>
+
+<h4>Frameworks de CSS</h4>
+<ul>
+  <li><strong>Bootstrap</strong>: Framework para diseños responsivos.</li>
+  <li><strong>Tailwind CSS</strong>: CSS utilitario para estilos personalizados.</li>
+</ul>
+
+<h3>2. Backend</h3>
+
+<h4>Lenguajes de Programación</h4>
+<ul>
+  <li><strong>JavaScript (Node.js)</strong>: Permite JavaScript en el servidor.</li>
+  <li><strong>Python</strong>: Con frameworks como Django y Flask.</li>
+  <li><strong>Ruby</strong>: Principalmente con Ruby on Rails.</li>
+  <li><strong>PHP</strong>: Usado en plataformas como Laravel.</li>
+  <li><strong>Java</strong>: Con Spring y Jakarta EE.</li>
+  <li><strong>Go</strong>: Con frameworks como Gin y Echo.</li>
+</ul>
+
+<h4>Bases de Datos</h4>
+<ul>
+  <li><strong>Relacionales</strong>: MySQL, PostgreSQL.</li>
+  <li><strong>NoSQL</strong>: MongoDB, Firebase.</li>
+</ul>
+
+<h4>APIs y Microservicios</h4>
+<ul>
+  <li><strong>RESTful APIs</strong>: Estándar para comunicación entre servicios.</li>
+  <li><strong>GraphQL</strong>: Lenguaje de consulta para APIs.</li>
+</ul>
+
+<h3>3. DevOps y Herramientas de Implementación</h3>
+
+<h4>Contenedores</h4>
+<ul>
+  <li><strong>Docker</strong>: Para crear contenedores ligeros y portables.</li>
+  <li><strong>Kubernetes</strong>: Orquestación de contenedores a gran escala.</li>
+</ul>
+
+<h4>CI/CD</h4>
+<ul>
+  <li><strong>GitHub Actions</strong>: Automatización de flujos de trabajo.</li>
+  <li><strong>GitLab CI</strong>: Integración continua en GitLab.</li>
+  <li><strong>Jenkins</strong>: Herramienta de automatización de código abierto.</li>
+</ul>
+
+<h4>Hosting y Servidores</h4>
+<ul>
+  <li><strong>Netlify</strong>: Para desplegar sitios estáticos.</li>
+  <li><strong>Vercel</strong>: Ideal para aplicaciones React y Next.js.</li>
+  <li><strong>AWS</strong>: Servicios en la nube para cualquier tipo de aplicación.</li>
+</ul>
+
+<h4>Monitoreo y Rendimiento</h4>
+<ul>
+  <li><strong>Prometheus</strong>: Monitoreo de sistemas y servicios.</li>
+  <li><strong>Grafana</strong>: Visualización de datos de monitoreo.</li>
+</ul>
+
+<h3>4. Otros Componentes</h3>
+
+<h4>SEO y Analítica</h4>
+<ul>
+  <li><strong>Google Analytics</strong>: Seguimiento de tráfico y comportamiento de usuarios.</li>
+  <li><strong>Ahrefs</strong>: Herramienta para análisis SEO.</li>
+</ul>
+
+<h4>Testing</h4>
+<ul>
+  <li><strong>Jest</strong>: Framework de pruebas para JavaScript.</li>
+  <li><strong>Cypress</strong>: Pruebas end-to-end para aplicaciones web.</li>
+</ul>
+
+<h4>Gestión de Proyectos</h4>
+<ul>
+  <li><strong>Trello</strong>: Herramienta para gestionar tareas.</li>
+  <li><strong>Jira</strong>: Software de gestión ágil.</li>
+</ul>
+
+<h3>Conclusión</h3>
+<p>El ecosistema del desarrollo web es amplio y diverso, y hay muchas herramientas y tecnologías disponibles para ayudar a los desarrolladores a crear aplicaciones efectivas. Esta guía es solo un punto de partida; te animamos a explorar cada una de estas tecnologías para encontrar las que mejor se adapten a tus proyectos y estilo de trabajo.</p>
+`,
+  },
   //tecnologias-js
   {
-    "slug": "tecnologias-js-comparativa",
-    "title": "Comparativa de Tecnologías JavaScript: Elegir la Mejor Opción para tu Proyecto",
-    "image": "/blog/javascript-tecnologias.webp",
-    "date": "2024-09-26",
-    "tags": ["JavaScript", "Frameworks", "Desarrollo", "Frontend", "Comparativa"],
-    "type": "Guía",
-    "author": {
-      "name": "Camilo Escar",
-      "avatar": "/camilo-avatar.webp"
+    slug: 'tecnologias-js-comparativa',
+    title:
+      'Comparativa de Tecnologías JavaScript: Elegir la Mejor Opción para tu Proyecto',
+    image: '/blog/javascript-tecnologias.webp',
+    date: '2024-09-26',
+    tags: ['JavaScript', 'Frameworks', 'Desarrollo', 'Frontend', 'Comparativa'],
+    type: 'Guía',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    "readingTime": "8 min",
-    "excerpt": "En esta guía, exploramos las características y mejores usos de tecnologías populares de JavaScript como React, Vue, Svelte y Angular, ayudándote a tomar decisiones informadas para tus proyectos.",
-    "content": `
+    readingTime: '8 min',
+    excerpt:
+      'En esta guía, exploramos las características y mejores usos de tecnologías populares de JavaScript como React, Vue, Svelte y Angular, ayudándote a tomar decisiones informadas para tus proyectos.',
+    content: `
       <h2>Comparativa de Tecnologías JavaScript: Elegir la Mejor Opción para tu Proyecto</h2>
       <p>En el mundo del desarrollo web, elegir la tecnología adecuada puede ser crucial para el éxito de un proyecto. Con tantas opciones disponibles, cada una con sus características y enfoques, es importante entender cuándo y por qué usar cada una. A continuación, analizaremos algunas de las tecnologías más populares de JavaScript: React, Vue.js, Svelte y Angular.</p>
   
@@ -266,23 +403,23 @@ node index.mjs
   
       <h2>Conclusión</h2>
       <p>La elección de la tecnología adecuada depende de diversos factores como la complejidad del proyecto, la experiencia del equipo y las necesidades específicas del cliente. React y Angular son excelentes para proyectos grandes, mientras que Vue y Svelte pueden ser ideales para desarrollos más rápidos y simples. Next.js y Nuxt.js son opciones sobresalientes cuando se necesita optimizar el rendimiento y el SEO. Considera estos aspectos al tomar tu decisión para asegurar el éxito de tu proyecto.</p>
-    `
+    `,
   },
   //crear-api-publica-gratis-productos
   {
-    slug: "crear-api-publica-gratis-productos",
-    title: "Cómo crear una API pública y gratuita para tus productos",
-    image: "/blog/api-publica-productos.webp",
-    date: "2024-09-27",
-    tags: ["API", "Node.js", "Express", "MongoDB", "Fullstack"],
-    type: "tutorial",
+    slug: 'crear-api-publica-gratis-productos',
+    title: 'Cómo crear una API pública y gratuita para tus productos',
+    image: '/blog/api-publica-productos.webp',
+    date: '2024-09-27',
+    tags: ['API', 'Node.js', 'Express', 'MongoDB', 'Fullstack'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/profile.webp",
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
     },
-    readingTime: "10 min",
+    readingTime: '10 min',
     excerpt:
-      "Aprende a crear una API pública y gratuita para tus productos utilizando Node.js, Express y MongoDB. Ideal para proyectos que quieran compartir información de manera abierta.",
+      'Aprende a crear una API pública y gratuita para tus productos utilizando Node.js, Express y MongoDB. Ideal para proyectos que quieran compartir información de manera abierta.',
     content: `
       <h2>Cómo crear una API pública y gratuita para tus productos</h2>
       <p>¿Quieres compartir tu catálogo de productos con el mundo? En este tutorial te mostraré cómo crear una <strong>API pública y gratuita</strong> utilizando <strong>Node.js</strong>, <strong>Express</strong> y <strong>MongoDB</strong>. Aprenderás cómo estructurar tu API, conectar una base de datos, y finalmente desplegarla para que cualquiera pueda acceder a ella desde cualquier lugar del mundo.</p>
@@ -396,19 +533,19 @@ node index.mjs
   },
   //migraciones-postgresql-sequelize
   {
-    slug: "migraciones-postgresql-sequelize",
-    title: "Manejando Migraciones en PostgreSQL con Sequelize",
-    image: "/blog/migraciones-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Migraciones", "Sequelize", "Colaboración"],
-    type: "tutorial",
+    slug: 'migraciones-postgresql-sequelize',
+    title: 'Manejando Migraciones en PostgreSQL con Sequelize',
+    image: '/blog/migraciones-postgresql.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Migraciones', 'Sequelize', 'Colaboración'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "8 min",
+    readingTime: '8 min',
     excerpt:
-      "Aprende a manejar migraciones en PostgreSQL utilizando Sequelize, asegurando que los cambios en el esquema de la base de datos sean consistentes entre los miembros del equipo.",
+      'Aprende a manejar migraciones en PostgreSQL utilizando Sequelize, asegurando que los cambios en el esquema de la base de datos sean consistentes entre los miembros del equipo.',
     content: `
       <h2>Manejando Migraciones en PostgreSQL con Sequelize</h2>
       <p>Cuando trabajas en un proyecto colaborativo con PostgreSQL, es crucial que todos los desarrolladores mantengan el esquema de la base de datos actualizado de manera uniforme. Una herramienta eficaz para esto es Sequelize, un ORM (Object-Relational Mapping) que te permite gestionar migraciones en tu base de datos. En este artículo, aprenderás a crear, ejecutar y revertir migraciones usando Sequelize en un proyecto de equipo.</p>
@@ -519,19 +656,19 @@ node index.mjs
   },
   //backups-restauracion-postgresql
   {
-    slug: "backups-restauracion-postgresql",
-    title: "Backups y restauración en PostgreSQL para proyectos colaborativos",
-    image: "/blog/backups-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Backups", "Restauración", "Seguridad"],
-    type: "tutorial",
+    slug: 'backups-restauracion-postgresql',
+    title: 'Backups y restauración en PostgreSQL para proyectos colaborativos',
+    image: '/blog/backups-postgresql.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Backups', 'Restauración', 'Seguridad'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "7 min",
+    readingTime: '7 min',
     excerpt:
-      "Asegura la integridad de tu base de datos en PostgreSQL aprendiendo cómo realizar backups regulares y restauraciones en caso de fallos.",
+      'Asegura la integridad de tu base de datos en PostgreSQL aprendiendo cómo realizar backups regulares y restauraciones en caso de fallos.',
     content: `
       <h2>Backups y restauración en PostgreSQL para proyectos colaborativos</h2>
       <p>En cualquier proyecto colaborativo, mantener copias de seguridad regulares de la base de datos es esencial para evitar pérdidas de datos ante fallos inesperados. PostgreSQL ofrece varias maneras de realizar backups y restaurar los datos en caso necesario. En este artículo, aprenderás cómo realizar backups automáticos y manuales, así como los pasos para restaurar tu base de datos en caso de emergencias.</p>
@@ -606,20 +743,20 @@ node index.mjs
   },
   //gestion-roles-permisos-postgresql
   {
-    slug: "gestion-roles-permisos-postgresql",
+    slug: 'gestion-roles-permisos-postgresql',
     title:
-      "Gestión de roles y permisos en PostgreSQL para proyectos colaborativos",
-    image: "/blog/gestion-roles-permisos.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Roles", "Permisos", "Seguridad"],
-    type: "tutorial",
+      'Gestión de roles y permisos en PostgreSQL para proyectos colaborativos',
+    image: '/blog/gestion-roles-permisos.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Roles', 'Permisos', 'Seguridad'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "6 min",
+    readingTime: '6 min',
     excerpt:
-      "Aprende cómo gestionar roles y permisos en PostgreSQL para asegurar la seguridad y control de acceso en proyectos donde múltiples usuarios colaboran.",
+      'Aprende cómo gestionar roles y permisos en PostgreSQL para asegurar la seguridad y control de acceso en proyectos donde múltiples usuarios colaboran.',
     content: `
       <h2>Gestión de roles y permisos en PostgreSQL para proyectos colaborativos</h2>
       <p>En un entorno de desarrollo colaborativo, es fundamental gestionar los roles y permisos de los diferentes usuarios que interactúan con la base de datos. PostgreSQL proporciona un sistema robusto para manejar roles y asegurar que cada miembro del equipo tenga solo el acceso necesario para realizar su trabajo. En este artículo, aprenderás cómo implementar roles y permisos de forma efectiva en PostgreSQL.</p>
@@ -702,20 +839,20 @@ node index.mjs
   },
   //buenas-practicas-proyecto-postgresql
   {
-    slug: "buenas-practicas-proyecto-postgresql",
+    slug: 'buenas-practicas-proyecto-postgresql',
     title:
-      "Buenas prácticas para mantener el desarrollo de base de datos en un proyecto colaborativo con PostgreSQL",
+      'Buenas prácticas para mantener el desarrollo de base de datos en un proyecto colaborativo con PostgreSQL',
     excerpt:
-      "Descubre cómo implementar estrategias y herramientas clave para asegurar un desarrollo eficiente en un proyecto que utiliza PostgreSQL en equipo.",
-    image: "/blog/buenas-practicas-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Colaboración", "Migraciones", "CI/CD"],
-    type: "tutorial",
+      'Descubre cómo implementar estrategias y herramientas clave para asegurar un desarrollo eficiente en un proyecto que utiliza PostgreSQL en equipo.',
+    image: '/blog/buenas-practicas-postgresql.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Colaboración', 'Migraciones', 'CI/CD'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "8 min",
+    readingTime: '8 min',
     content: `
       <h2>Buenas prácticas para mantener el desarrollo de base de datos en un proyecto colaborativo con PostgreSQL</h2>
       <p>Una base de datos es una parte crucial en el desarrollo de cualquier aplicación. Cuando varios desarrolladores trabajan en un mismo proyecto que utiliza PostgreSQL, es necesario seguir una serie de buenas prácticas para evitar problemas de sincronización, datos inconsistentes o errores en producción. Aquí te mostramos algunos pasos clave para mantener el control de tu base de datos en equipo.</p>
@@ -790,19 +927,19 @@ node index.mjs
   },
   //colaborar-proyecto-postgresql
   {
-    slug: "colaborar-proyecto-postgresql",
-    title: "Cómo trabajar de manera colaborativa en un proyecto con PostgreSQL",
+    slug: 'colaborar-proyecto-postgresql',
+    title: 'Cómo trabajar de manera colaborativa en un proyecto con PostgreSQL',
     excerpt:
-      "Aprende a colaborar en un proyecto utilizando PostgreSQL, Git, y estrategias de manejo de base de datos en equipo.",
-    image: "/blog/postgresql-collaboration.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Colaboración", "Git", "Backend"],
-    type: "tutorial",
+      'Aprende a colaborar en un proyecto utilizando PostgreSQL, Git, y estrategias de manejo de base de datos en equipo.',
+    image: '/blog/postgresql-collaboration.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Colaboración', 'Git', 'Backend'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "10 min",
+    readingTime: '10 min',
     content: `
       <h2>Cómo trabajar de manera colaborativa en un proyecto con PostgreSQL</h2>
       <p>Cuando trabajas en equipo en un proyecto que utiliza PostgreSQL, necesitas una estrategia clara para compartir el esquema de la base de datos, mantener la consistencia entre los entornos y colaborar de manera eficiente. En este artículo, exploramos las mejores prácticas para colaborar en un proyecto con PostgreSQL.</p>
@@ -890,19 +1027,19 @@ node index.mjs
   },
   //integrar-postgresql-con-react
   {
-    slug: "integrar-postgresql-con-react",
-    title: "Cómo integrar PostgreSQL con una aplicación React",
-    image: "/blog/react-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["React", "PostgreSQL", "API", "Node.js", "Fullstack"],
-    type: "tutorial",
+    slug: 'integrar-postgresql-con-react',
+    title: 'Cómo integrar PostgreSQL con una aplicación React',
+    image: '/blog/react-postgresql.webp',
+    date: '2024-09-26',
+    tags: ['React', 'PostgreSQL', 'API', 'Node.js', 'Fullstack'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/camilo-avatar.webp",
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
     },
-    readingTime: "8 min",
+    readingTime: '8 min',
     excerpt:
-      "Aprende a conectar tu aplicación React con una base de datos PostgreSQL utilizando una API REST.",
+      'Aprende a conectar tu aplicación React con una base de datos PostgreSQL utilizando una API REST.',
     content: `
       <h2>Cómo integrar PostgreSQL con una aplicación React</h2>
       <p>En este tutorial, vamos a conectar una base de datos PostgreSQL con una aplicación React a través de una API REST. Este enfoque te permite separar el frontend (React) del backend (Node.js con PostgreSQL), lo que facilita la escalabilidad y el mantenimiento de tu aplicación.</p>
@@ -1011,10 +1148,10 @@ node index.mjs
   },
   //control-versiones-bd-postgresql
   {
-    slug: "control-versiones-bd-postgresql",
-    title: "Control de versiones colaborativo en PostgreSQL con migraciones",
+    slug: 'control-versiones-bd-postgresql',
+    title: 'Control de versiones colaborativo en PostgreSQL con migraciones',
     excerpt:
-      "Aprende a usar Knex.js o Sequelize para manejar migraciones y mantener tu base de datos sincronizada de manera colaborativa en proyectos con PostgreSQL.",
+      'Aprende a usar Knex.js o Sequelize para manejar migraciones y mantener tu base de datos sincronizada de manera colaborativa en proyectos con PostgreSQL.',
     content: `
         <h2>Control de versiones colaborativo en PostgreSQL con migraciones</h2>
         <p>Trabajar en equipo con una base de datos puede ser complicado, especialmente cuando necesitas mantener sincronizada su estructura entre varios desarrolladores. Usar migraciones es la clave para gestionar los cambios en la base de datos de manera eficiente y asegurarte de que todos los miembros del equipo estén en la misma página.</p>
@@ -1161,22 +1298,22 @@ node index.mjs
   
         
         `,
-    image: "/postgresql-migraciones.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Knex.js", "Sequelize", "Migraciones", "Colaboración"],
-    type: "tutorial",
+    image: '/postgresql-migraciones.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Knex.js', 'Sequelize', 'Migraciones', 'Colaboración'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/profile.webp",
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
     },
-    readingTime: "7 min",
+    readingTime: '7 min',
   },
   //configurar-docker-postgresql
   {
-    slug: "configurar-docker-postgresql",
-    title: "Cómo configurar PostgreSQL en Docker para desarrollo colaborativo",
+    slug: 'configurar-docker-postgresql',
+    title: 'Cómo configurar PostgreSQL en Docker para desarrollo colaborativo',
     excerpt:
-      "Aprende a configurar PostgreSQL en un contenedor Docker para facilitar el desarrollo y la colaboración en tu equipo de trabajo.",
+      'Aprende a configurar PostgreSQL en un contenedor Docker para facilitar el desarrollo y la colaboración en tu equipo de trabajo.',
     content: `
         <h2>Cómo configurar PostgreSQL en Docker para desarrollo colaborativo</h2>
         <p>Configurar PostgreSQL dentro de un contenedor Docker es una excelente manera de asegurar que todos los miembros de tu equipo de desarrollo trabajen con el mismo entorno, evitando problemas de compatibilidad. En este tutorial, te mostraremos cómo levantar una instancia de PostgreSQL usando Docker en solo unos pasos.</p>
@@ -1256,22 +1393,22 @@ node index.mjs
   
         
         `,
-    image: "/docker-postgresql.webp",
-    date: "2024-09-26",
-    tags: ["PostgreSQL", "Docker", "DevOps", "Colaboración"],
-    type: "tutorial",
+    image: '/docker-postgresql.webp',
+    date: '2024-09-26',
+    tags: ['PostgreSQL', 'Docker', 'DevOps', 'Colaboración'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/profile.webp",
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
     },
-    readingTime: "6 min",
+    readingTime: '6 min',
   },
   //crear-api-restful-nodejs
   {
-    slug: "crear-api-restful-nodejs",
-    title: "Cómo crear una API RESTful con Node.js",
+    slug: 'crear-api-restful-nodejs',
+    title: 'Cómo crear una API RESTful con Node.js',
     excerpt:
-      "Aprende a crear una API RESTful utilizando Node.js y Express en este tutorial paso a paso.",
+      'Aprende a crear una API RESTful utilizando Node.js y Express en este tutorial paso a paso.',
     content: `
         <h2>Cómo crear una API RESTful con Node.js</h2>
         <p>En este tutorial, aprenderás a crear una API RESTful usando Node.js y Express. Seguiremos un enfoque paso a paso para que puedas comprender cada parte del proceso.</p>
@@ -1318,22 +1455,22 @@ node index.mjs
         
         <p>Para más información, puedes consultar la <a href="https://expressjs.com/" target="_blank" rel="noopener noreferrer">documentación oficial de Express</a>.</p>
       `,
-    image: "/APIRESTfulNode.webp",
-    date: "2023-05-15",
-    tags: ["Node.js", "API", "Express", "Backend"],
-    type: "tutorial",
+    image: '/APIRESTfulNode.webp',
+    date: '2023-05-15',
+    tags: ['Node.js', 'API', 'Express', 'Backend'],
+    type: 'tutorial',
     author: {
-      name: "Camilo Escar",
-      avatar: "/profile.webp",
+      name: 'Camilo Escar',
+      avatar: '/profile.webp',
     },
-    readingTime: "5 min",
+    readingTime: '5 min',
   },
   //introduccion-a-react-hooks
   {
-    slug: "introduccion-a-react-hooks",
-    title: "Introducción a React Hooks",
+    slug: 'introduccion-a-react-hooks',
+    title: 'Introducción a React Hooks',
     excerpt:
-      "Descubre cómo los React Hooks simplifican el desarrollo de componentes funcionales en React.",
+      'Descubre cómo los React Hooks simplifican el desarrollo de componentes funcionales en React.',
     content: `
         <h2>Introducción a React Hooks</h2>
         <p>Los React Hooks son una característica introducida en React 16.8 que permite usar el estado y otras características de React sin escribir una clase. En este artículo, exploraremos los hooks más comunes y cómo pueden mejorar tu código.</p>
@@ -1377,14 +1514,14 @@ node index.mjs
         
         <p>Para más información, consulta la <a href="https://reactjs.org/docs/hooks-intro.html" target="_blank" rel="noopener noreferrer">documentación oficial de React Hooks</a>.</p>
       `,
-    image: "/react-hooks.webp",
-    date: "2023-06-01",
-    tags: ["React", "JavaScript", "Hooks", "Frontend"],
-    type: "tutorial",
+    image: '/react-hooks.webp',
+    date: '2023-06-01',
+    tags: ['React', 'JavaScript', 'Hooks', 'Frontend'],
+    type: 'tutorial',
     author: {
-      name: "Carlos Rodríguez",
-      avatar: "/profile.webp",
+      name: 'Carlos Rodríguez',
+      avatar: '/profile.webp',
     },
-    readingTime: "7 min",
+    readingTime: '7 min',
   },
 ];

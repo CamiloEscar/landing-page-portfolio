@@ -1,23 +1,23 @@
-"use client"
+'use client';
 
-import React from 'react'
-import { dataServices } from "@/data"
-import Title from "./shared/title"
-import { Briefcase, Check } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { motion } from "framer-motion"
+import React from 'react';
+import { dataServices } from '@/data';
+import Title from './shared/title';
+import { Briefcase, Check } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 
 const Services = () => {
   return (
-    <motion.section 
-      className="py-16 md:py-24 bg-transparent transition-colors duration-300" 
+    <motion.section
+      className="py-16 md:py-24 bg-transparent transition-colors duration-300"
       id="services"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4">
-        <motion.div 
+        <motion.div
           className="flex items-center justify-center mb-12"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -46,7 +46,9 @@ const Services = () => {
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start gap-3">
                         <Check className="mt-1 text-primary" size={18} />
-                        <span className="text-gray-600 dark:text-gray-400">{feature.name}</span>
+                        <span className="text-gray-600 dark:text-gray-400">
+                          {feature.name}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -57,7 +59,7 @@ const Services = () => {
         </div>
       </div>
     </motion.section>
-  )
-}
+  );
+};
 
-export default Services
+export default Services;
