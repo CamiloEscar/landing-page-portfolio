@@ -6,19 +6,23 @@ interface GradientNameProps {
   className?: string;
 }
 
-// Paletas de colores predefinidas que son coherentes entre sí
-const COLOR_PALETTES = [
-  ['#FF6B6B', '#4ECDC4', '#45B7D1'], // Rojo, turquesa, azul claro
-  ['#FFB347', '#FF7F50', '#FF4500'], // Naranjas
-  ['#8A2BE2', '#9370DB', '#BA55D3'], // Púrpuras
-  ['#3498db', '#2980b9', '#1abc9c'], // Azules y verde azulado
-  ['#2ecc71', '#27ae60', '#f1c40f'], // Verdes y amarillo
-  ['#e74c3c', '#c0392b', '#f39c12'], // Rojos y naranja
-  ['#2E4053', '#5D6D7E', '#AAB7B8'], // Grises azules
-  ['#1ABC9C', '#16A085', '#F39C12'], // Verde aguamarina y amarillo
-  ['#F1C40F', '#F39C12', '#E67E22'], // Amarillo y naranjas
-  ['#D35400', '#E67E22', '#C0392B']  // Naranjas y rojos oscuros
-];
+// Paletas de colores optimizadas para modo claro y oscuro
+const COLOR_PALETTES = {
+  light: [
+    ['#0366D6', '#2EA043', '#2188FF'], // GitHub azul, verde, azul claro
+    ['#5B4638', '#E36209', '#044289'], // Brown, naranja, azul oscuro
+    ['#4969E1', '#2EA043', '#6F42C1'], // Azul royal, verde, púrpura
+    ['#1A73E8', '#188038', '#A142F4'], // Google blue, green, purple
+    ['#0060B9', '#2EA043', '#5E17EB'], // Azure blue, verde, violeta
+  ],
+  dark: [
+    ['#58A6FF', '#3FB950', '#79C0FF'], // GitHub azul claro, verde claro, celeste
+    ['#FFA657', '#F778BA', '#79C0FF'], // Naranja suave, rosa, celeste
+    ['#79C0FF', '#56D364', '#D2A8FF'], // Celeste, verde claro, lavanda
+    ['#39D353', '#388BFD', '#8957E5'], // Verde neón, azul brillante, púrpura
+    ['#388BFD', '#EC775C', '#8957E5'], // Azul brillante, coral, púrpura
+  ]
+};
 
 export default function GradientName({
   children,
@@ -26,41 +30,54 @@ export default function GradientName({
   className = '',
 }: GradientNameProps) {
   const sizeClasses = {
-    small: 'text-lg sm:text-xl lg:text-xl',
+    small: 'text-lg sm:text-xl lg:text-2xl',
     medium: 'text-2xl sm:text-3xl lg:text-4xl',
     large: 'text-4xl sm:text-5xl lg:text-7xl',
   };
 
-  // Seleccionar una paleta aleatoria al montar el componente
+  return (
+    <span className={`relative inline-block ${sizeClasses[size]} ${className}`}>
+      {/* Versión modo claro */}
+      <span className="dark:hidden">
+        <LightDarkGradient mode="light">{children}</LightDarkGradient>
+      </span>
+      
+      {/* Versión modo oscuro */}
+      <span className="hidden dark:inline">
+        <LightDarkGradient mode="dark">{children}</LightDarkGradient>
+      </span>
+    </span>
+  );
+}
+
+interface LightDarkGradientProps {
+  children: React.ReactNode;
+  mode: 'light' | 'dark';
+}
+
+function LightDarkGradient({ children, mode }: LightDarkGradientProps) {
   const selectedPalette = useMemo(() => {
-    const randomIndex = Math.floor(Math.random() * COLOR_PALETTES.length);
-    return COLOR_PALETTES[randomIndex];
-  }, []);
+    const palettes = COLOR_PALETTES[mode];
+    const randomIndex = Math.floor(Math.random() * palettes.length);
+    return palettes[randomIndex];
+  }, [mode]);
 
   const [fromColor, viaColor, toColor] = selectedPalette;
 
   return (
-    <span className={`relative inline-block ${sizeClasses[size]} ${className}`}>
-      <span
-        className="animate-gradient bg-gradient-to-r bg-clip-text text-transparent 
-        animate-gradient bg-[length:200%_auto]"
-        style={{
-          backgroundImage: `linear-gradient(to right, ${fromColor}, ${viaColor}, ${toColor})`
-        }}
-      >
-        {children}
-      </span>
+    <span
+      className="animate-gradient bg-gradient-to-r bg-clip-text text-transparent 
+      animate-gradient bg-[length:200%_auto]"
+      style={{
+        backgroundImage: `linear-gradient(to right, ${fromColor}, ${viaColor}, ${toColor})`
+      }}
+    >
+      {children}
       <style jsx>{`
         @keyframes gradient {
-          0% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-          100% {
-            background-position: 0% 50%;
-          }
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
         }
         .animate-gradient {
           animation: gradient 8s ease infinite;

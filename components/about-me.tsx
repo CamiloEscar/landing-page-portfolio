@@ -99,7 +99,15 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ title, subtitle, period, de
     <div className="ml-10">
       <h4 className="text-green-600 dark:text-green-400 text-sm font-semibold">{subtitle}</h4>
       <p className="text-gray-600 dark:text-gray-400 text-xs mb-1">{period}</p>
-      <p className="text-gray-700 dark:text-gray-300 text-sm">{description}</p>
+      {isEducation ? (
+        <p className="text-gray-700 dark:text-gray-300 text-sm">{description}</p>
+      ) : (
+        <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
+          {description.split('\n').map((item, index) => (
+            <li key={index} className="mb-1">{item.trim()}</li>
+          ))}
+        </ul>
+      )}
     </div>
   </div>
 );
@@ -158,8 +166,6 @@ export default function AboutMe() {
           className="p-4 md:p-8 max-w-8xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
           id="about-me"
         >
-          {/* <Title title="Sobre mí" subtitle="Mis actividades:" className="mb-6" /> */}
-
           <div className="flex flex-col lg:flex-row gap-6">
             <motion.div variants={itemVariants} className="lg:w-1/3">
               <div className="relative w-full mb-4 h-64 md:h-80 lg:h-96 overflow-hidden rounded-lg">
@@ -226,7 +232,7 @@ export default function AboutMe() {
 
                    </GradientName>
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-2">
+                <p className="text-dark dark:text-gray-300 font-medium text-sm leading-relaxed mb-2">
                   {aboutMe.description}
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
@@ -234,63 +240,53 @@ export default function AboutMe() {
                 </p>
               </div>
 
-              <div className="space-y-4">
-                {/* <SectionToggle 
-                  title="Educación y Experiencia Laboral" 
-                  section="education-experience"
-                  expandedSection={expandedSection}
-                  toggleSection={toggleSection}
-                /> */}
-                <AnimatePresence initial={false}>
-                  {/* {expandedSection === "education-experience" && ( */}
-                    <motion.div
-                      key="education-experience"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-lg mt-2"
-                      id="education-experience-content"
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="relative">
-                          <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
-                            <Calendar className="w-5 h-5 mr-2 text-green-500" />
-                            Educación
-                          </h3>
-                          {educationTimeline.map((edu) => (
-                            <TimelineItem
-                              key={edu.id}
-                              title={edu.title}
-                              subtitle={edu.institution}
-                              period={edu.period}
-                              description={edu.description}
-                              isEducation={true}
-                            />
-                          ))}
-                        </div>
-                        <div className="relative">
-                          <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
-                            <Building className="w-5 h-5 mr-2 text-green-500" />
-                            Experiencia Laboral
-                          </h3>
-                          {workExperience.map((exp) => (
-                            <TimelineItem
-                              key={exp.id}
-                              title={exp.position}
-                              subtitle={exp.company}
-                              period={exp.period}
-                              description={exp.description}
-                              isEducation={false}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                    </motion.div>
-                    
-                  {/* ) */}
-                  
-                </AnimatePresence>
+            <div className="space-y-4">
+              <AnimatePresence initial={false}>
+                <motion.div
+                  key="education-experience"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden bg-white dark:bg-gray-800 p-6 rounded-lg mt-2"
+                  id="education-experience-content"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2">
+                    <div className="relative">
+                      <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                        <Calendar className="w-5 h-5 mr-2 text-green-500" />
+                        Educación
+                      </h3>
+                      {educationTimeline.map((edu) => (
+                        <TimelineItem
+                          key={edu.id}
+                          title={edu.title}
+                          subtitle={edu.institution}
+                          period={edu.period}
+                          description={edu.description}
+                          isEducation={true}
+                        />
+                      ))}
+                    </div>
+                    <div className="relative">
+                      <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white flex items-center">
+                        <Building className="w-5 h-5 mr-2 text-green-500" />
+                        Experiencia Laboral
+                      </h3>
+                      {workExperience.map((exp) => (
+                        <TimelineItem
+                          key={exp.id}
+                          title={exp.position}
+                          subtitle={exp.company}
+                          period={exp.period}
+                          description={exp.description}
+                          isEducation={false}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
               </div>
             </motion.div>
           </div>

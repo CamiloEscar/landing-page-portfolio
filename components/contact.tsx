@@ -1,7 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { dataContact } from '@/data';
-import Title from './shared/title';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -20,6 +19,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
+import GradientName from './GradientName';
 
 const formSchema = z.object({
   username: z
@@ -112,6 +112,9 @@ const ContactForm = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6"
               >
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
+                  <GradientName>Contáctame</GradientName>
+                </h2>
                 <FormField
                   control={form.control}
                   name="username"
@@ -193,8 +196,6 @@ const Contact = () => {
       id="contact"
     >
       <div className="container mx-auto px-4">
-        <Title title="Contáctame" subtitle="Ponte en contacto conmigo" />
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           <div className="space-y-6">
             {dataContact.map((data) => (

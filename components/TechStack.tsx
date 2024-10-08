@@ -16,7 +16,7 @@ const techColors: Record<IconMapKey, string> = {
   css3: '#1572B6',
   sass: '#CC6699',
   less: '#1D365D',
-  javascript: '#F7DF1E',
+  javascript: '#efd81d',
   typescript: '#3178C6',
   react: '#3178C6',
   vue: '#4FC08D',
@@ -75,6 +75,14 @@ const techColors: Record<IconMapKey, string> = {
   pandas: '#150458',
   numpy: '#013243',
   es6: '#239412',
+  vercel: '#000000',
+  appsheets: '#4181ed',
+  openai: '#412991',
+  vite: '#646CFF',
+  svelte: '#FF3E00',
+  bun: '#FBF0DF',
+  astro: '#000000',
+  sheets: '#47A248'
 };
 
 const getAllTechnologies = (): TechInfo[] => {

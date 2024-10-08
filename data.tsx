@@ -2,13 +2,13 @@ import {
   BookText,
   Briefcase,
   Brush,
-  Code2,
+  // Code2,
   CodeSquare,
   Home,
   Inbox,
   Mail,
   PanelsTopLeft,
-  Phone,
+  // Phone,
   UserRound,
   UsersRound,
   Wrench,
@@ -19,6 +19,13 @@ import {
   Database,
   Pen,
 } from 'lucide-react';
+import {
+  // FaFacebookF,
+  //  FaInstagram,
+  // FaLinkedinIn,
+  FaWhatsapp,
+} from 'react-icons/fa';
+import { Github } from 'lucide-react';
 
 export const dataAboutMe = [
   {
@@ -60,33 +67,34 @@ export const dataLanguage = [
 export const educationTimeline = [
   {
     id: 1,
-    title: 'Lic. en Sistemas de Información',
+    title: 'Licenciatura en Sistemas de Información',
     institution: 'UADER FCyT',
     period: '2021 - Actualidad',
-    description: 'Estudios universitarios en curso',
+    description: 'Actualmente cursando estudios universitarios, enfocándome en el desarrollo de habilidades técnicas y analíticas en el ámbito de la tecnología y la información.',
   },
   {
     id: 2,
     title: 'Maestro Mayor de Obras',
     institution: 'EET N°13 H. B. Sauret',
     period: '2017 - 2019',
-    description: 'Estudio completado',
+    description: 'Título obtenido, donde adquirí conocimientos en gestión y planificación de obras, así como habilidades técnicas en construcción.',
   },
   {
     id: 3,
-    title: 'Ing. Civil',
+    title: 'Ingeniería Civil',
     institution: 'UTN FRCU',
     period: '2014 - 2016',
-    description: 'Estudios universitarios interrumpido',
+    description: 'Estudios universitarios interrumpidos. Durante este tiempo, desarrollé una base sólida en principios de ingeniería y diseño estructural.',
   },
   {
     id: 4,
-    title: 'Técnico electricista con orientación a electrónica industrial',
-    institution: 'EET N°2 \'Francisco Ramirez\'',
+    title: 'Técnico Electricista con Orientación a Electrónica Industrial',
+    institution: 'EET N°2 "Francisco Ramírez"',
     period: 'Graduado en 2013',
-    description: 'Educación secundaria técnica',
+    description: 'Educación secundaria técnica.',
   },
 ];
+
 
 export const workExperience = [
   {
@@ -94,26 +102,30 @@ export const workExperience = [
     position: 'Técnico Instalador de Fibra Óptica',
     company: 'Video Digital SRL',
     period: '2018 - Actualidad',
-    description:
-      'Instalación y servicio técnico de fibra óptica FTTH, a cargo de la red in situ. Conocimientos en OLT y Mikrotik. Experiencia en atención al cliente y manejo de software de gestión.',
+    description: `Encargado de instalaciones y mantenimiento de redes de fibra óptica, asegurando una conectividad rápida y confiable para nuestros clientes.
+      Implementé un sistema de gestión de reclamos que redujo los tiempos de respuesta en un 50%, elevando la satisfacción del cliente.
+      Enfoque en la atención al cliente y manejo de software de gestión, contribuyendo a fortalecer las relaciones con los usuarios y garantizar un servicio excepcional.`,
   },
   {
     id: 2,
     position: 'Reposición y Ventas',
     company: 'Coca Cola Andina',
     period: '2017 - 2018',
-    description:
-      'Experiencia en reposición y ventas. Habilidad en gestión de inventario y atención al cliente. Logros en ventas y servicio.',
+    description: `Desarrollé habilidades en reposición y ventas, contribuyendo al crecimiento del equipo.
+      Establecí relaciones sólidas con los clientes, satisfaciendo sus necesidades de manera efectiva.
+      Recibí reconocimiento por parte de la gerencia por mis aportes al equipo de ventas.`,
   },
   {
     id: 3,
     position: 'Instalador de Aires Acondicionados y Montajes Eléctricos',
     company: 'MABSER',
     period: '2016 - 2018',
-    description:
-      'Experiencia en instalación de aires acondicionados, redes y montajes eléctricos.',
+    description: `Responsable de la instalación de sistemas de aire acondicionado y montajes eléctricos.
+      Mantuve un enfoque en la calidad y la seguridad, completando proyectos en tiempo y forma.
+      Aprendí a trabajar bajo presión y a solucionar problemas técnicos de manera eficiente, fortaleciendo mis habilidades prácticas y capacidad de trabajo en equipo.`,
   },
 ];
+
 
 export const itemsNavbar = [
   {
@@ -177,7 +189,7 @@ export const aboutMe = {
   age: 29,
   location: 'Concepción del Uruguay, Entre Ríos, Argentina',
   description:
-    'Técnico electricista, actualmente me desempeño como tecnico en fibra optica, soy estudiante de Sistemas de Informacion. Mis habilidades para relacionarme me permiten colaborar de manera efectiva en equipos. Busco una oportunidad para trabajar en un entorno tanto amigable como desafiante, donde pueda seguir aprendiendo y aplicando mis habilidades.',
+    'Soy técnico electricista con una sólida experiencia en instalación y mantenimiento de fibra óptica. Actualmente, estoy cursando mis estudios en Sistemas de Información, lo que me permite combinar mis conocimientos técnicos con una visión más amplia del mundo digital. Mis habilidades interpersonales me permiten colaborar de manera efectiva en equipos, fomentando un ambiente de trabajo positivo y productivo. Busco una oportunidad en un entorno amigable y desafiante donde pueda seguir aprendiendo y aplicar mis habilidades para contribuir al crecimiento del equipo y la empresa.',
 };
 
 export interface PortfolioItem {
@@ -199,7 +211,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://pizzeria-donatello.vercel.app/',
     description:
       'Una aplicación web moderna para una pizzería que permite a los usuarios explorar el menú, personalizar sus pedidos y realizar compras en línea, mejorando la experiencia del cliente y la eficiencia del negocio.',
-    technologies: ['React', 'Next.js', 'Tailwind CSS', 'Vercel'],
+    technologies: ['React', 'next-js', 'TailwindCSS', 'Vercel', 'Sheets'],
   },
   {
     id: 2,
@@ -220,7 +232,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: '',
     description:
       'Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
   },
   {
     id: 4,
@@ -230,7 +242,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: '',
     description:
       'Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
   },
   {
     id: 5,
@@ -260,7 +272,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: '',
     description:
       'Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
   },
   {
     id: 8,
@@ -270,7 +282,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://landing-page-arquitecto.vercel.app/',
     description:
       'Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.',
-    technologies: ['Vercel', 'Tailwind CSS', 'Astro', 'Vite', 'bun'],
+    technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
   },
   {
     id: 9,
@@ -280,7 +292,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://flybondi-challenge.netlify.app/',
     description:
       'Plataforma de reserva de vuelos inspirada en FlyBondi, ofreciendo búsqueda de vuelos, comparación de precios y proceso de reserva simplificado, con una interfaz intuitiva y responsive.',
-    technologies: ['JavaScript', 'CSS', 'HTML', 'React', 'Vite'],
+    technologies: ['JavaScript', 'CSS3', 'HTML5', 'React', 'Vite'],
   },
   {
     id: 10,
@@ -290,7 +302,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://spavanillacoin.netlify.app/',
     description:
       'Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.',
-    technologies: ['JavaScript', 'CSS', 'HTML'],
+    technologies: ['JavaScript', 'CSS3', 'HTML5'],
   },
   {
     id: 11,
@@ -300,7 +312,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://imagencompressor.netlify.app/',
     description:
       'Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.',
-    technologies: ['JavaScript', 'CSS', 'HTML'],
+    technologies: ['JavaScript', 'CSS3', 'HTML5'],
   },
   {
     id: 12,
@@ -310,7 +322,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://prueba-trello.vercel.app/',
     description:
       'Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
   {
     id: 13,
@@ -320,7 +332,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://fulbito-f5.vercel.app/',
     description:
       'Plataforma dedicada al fútbol 5, facilitando la organización de partidos, gestión de equipos y seguimiento de estadísticas, creando una comunidad en línea para entusiastas del fútbol amateur.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
   // {
   //   id: 14,
@@ -330,7 +342,7 @@ export const dataPortfolio: PortfolioItem[] = [
   //   urlDemo: "https://ambo-app.vercel.app/",
   //   description:
   //     "Tienda en línea especializada en ambos y ropa médica, ofreciendo una experiencia de compra personalizada con opciones de tallas, colores y estilos, además de un sistema de recomendaciones basado en preferencias del usuario.",
-  //   technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
+  //   technologies: ["React", "next-js", "Tailwind CSS", "Vercel"],
   // },
   {
     id: 15,
@@ -340,7 +352,7 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://pruebaclima-api.netlify.app/',
     description:
       'Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.',
-    technologies: ['React', 'Node.js', 'Express', 'MongoDB'],
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
 ];
 
@@ -621,7 +633,7 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Basico',
             value: 40,
             experience:
-            'Conocimiento básico de TypeScript y experiencia en desarrollo de aplicaciones.',
+              'Conocimiento básico de TypeScript y experiencia en desarrollo de aplicaciones.',
             technologies: ['javascript', 'typescript'],
           },
         ],
@@ -961,19 +973,19 @@ export const dataServices = [
 ];
 
 export const dataContact = [
-  {
-    id: 1,
-    title: 'Teléfono',
-    subtitle: '+54 9 3442475466',
-    link: 'tel:5493442475466',
-    icon: <Phone />,
-  },
+  // {
+  //   id: 1,
+  //   title: 'Teléfono',
+  //   subtitle: '+54 9 3442475466',
+  //   link: 'tel:5493442475466',
+  //   icon: <Phone />,
+  // },
   {
     id: 2,
     title: 'Github',
     subtitle: 'github.com/CamiloEscar',
     link: 'github.com/CamiloEscar',
-    icon: <Code2 />,
+    icon: <Github />,
   },
   {
     id: 3,
@@ -982,6 +994,34 @@ export const dataContact = [
     link: 'mailto:camiloescar1995@gmail.com',
     icon: <Inbox />,
   },
+  {
+    id: 4,
+    title: 'Whatsapp',
+    subtitle: '+54 9 3442475466',
+    link: 'https://wa.me/5493442475466',
+    icon: <FaWhatsapp />,
+  },
+  // {
+  //   id: 5,
+  //   title: 'LinkedIn',
+  //   subtitle: 'linkedin.com/in/camiloescar',
+  //   link: 'https://www.linkedin.com/in/camiloescar',
+  //   icon: <FaLinkedinIn />,
+  // },
+  // {
+  //   id: 6,
+  //   title: 'Instagram',
+  //   subtitle: 'instagram.com/camiloescar',
+  //   link: 'https://www.instagram.com/camiloescar',
+  //   icon: <FaInstagram />,
+  // },
+  // {
+  //   id: 7,
+  //   title: 'Facebook',
+  //   subtitle: 'facebook.com/camiloescar',
+  //   link: 'https://www.facebook.com/Camilinnnn/',
+  //   icon: <FaFacebookF />,
+  // }
 ];
 
 // export const dataTestimonials = [

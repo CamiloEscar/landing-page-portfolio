@@ -1,43 +1,28 @@
 'use client';
 
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
-  Tag,
-  Share2,
   Facebook,
   Twitter,
   Linkedin,
-  Clock,
-  ArrowLeft,
   Menu,
+  ArrowLeft,
 } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useInView } from 'react-intersection-observer';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Title from '@/components/shared/title';
 import Navbar from '@/components/shared/navbar';
-import { BlogPost } from '../data';
+import { BlogPost, dataBlog } from '../data';
 import TableOfContents from './TableOfContents';
+import RelatedArticles from './RelatedArticles';
+import FooterBlog from '@/components/FooterBlog';
 
 interface TocItem {
   id: string;
@@ -89,11 +74,12 @@ const useProcessedContent = (content: string) => {
 export default function BlogPostContent({ post }: { post: BlogPost }) {
   const [activeHeading, setActiveHeading] = useState<string | null>(null);
   const [toc, setToc] = useState<TocItem[]>([]);
+  // eslint-disable-next-line no-unused-vars
   const [showFloatingToc, setShowFloatingToc] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  const { ref: contentStartRef, inView: contentStartInView } = useInView({
+  const {inView: contentStartInView } = useInView({
     threshold: 0,
   });
 
@@ -163,374 +149,274 @@ export default function BlogPostContent({ post }: { post: BlogPost }) {
     }
   }, []);
 
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const relatedPostsLeft = dataBlog
+    .filter((p) => p.slug !== post.slug)
+    .slice(0, 2);
 
-  const shareOnSocialMedia = (
-    platform: 'facebook' | 'twitter' | 'linkedin'
-  ) => {
-    let url = '';
-    switch (platform) {
-      case 'facebook':
-        url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          shareUrl
-        )}`;
-        break;
-      case 'twitter':
-        url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
-          shareUrl
-        )}&text=${encodeURIComponent(post.title)}`;
-        break;
-      case 'linkedin':
-        url = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-          shareUrl
-        )}&title=${encodeURIComponent(post.title)}`;
-        break;
-    }
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
+  const shareButtons = [
+    {
+      Icon: Facebook,
+      name: 'Facebook',
+      color: 'bg-[#1877f2] hover:bg-[#1877f2]/90',
+    },
+    {
+      Icon: Twitter,
+      name: 'Twitter',
+      color: 'bg-[#1da1f2] hover:bg-[#1da1f2]/90',
+    },
+    {
+      Icon: Linkedin,
+      name: 'LinkedIn',
+      color: 'bg-[#0a66c2] hover:bg-[#0a66c2]/90',
+    },
+  ];
 
-  const getTagColor = (tag: string) => {
-    const colors: { [key: string]: string } = {
-      'Node.js': 'bg-primary/10 text-primary',
-      API: 'bg-secondary/10 text-secondary',
-      Express: 'bg-accent/10 text-accent',
-      Backend: 'bg-muted/10 text-muted-foreground',
-      React: 'bg-primary/10 text-primary',
-      JavaScript: 'bg-secondary/10 text-secondary',
-      Hooks: 'bg-accent/10 text-accent',
-      Frontend: 'bg-muted/10 text-muted-foreground',
+  const shareOnSocialMedia = (platform: string) => {
+    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
+    const text = encodeURIComponent(post.title);
+
+    const urls: { [key: string]: string } = {
+      Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        shareUrl
+      )}`,
+      Twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+        shareUrl
+      )}&text=${text}`,
+      LinkedIn: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+        shareUrl
+      )}&title=${text}`,
     };
-    return colors[tag] || 'bg-primary/10 text-primary';
+
+    window.open(urls[platform], '_blank', 'noopener,noreferrer');
   };
 
   return (
     <>
       <Navbar />
-      <main className="py-8 md:py-16 bg-gradient-to-b from-background to-background/80 transition-colors duration-300">
-        <div className="container mx-auto px-4 max-w-5xl">
-          <Card className="overflow-hidden shadow-2xl mb-8">
-            <CardHeader className="p-0 relative">
-              <div className="relative w-full h-64 md:h-96">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-opacity duration-300 hover:opacity-90"
-                />
-              </div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background to-transparent p-8"
-              >
+      <main className="py-8 bg-gradient-to-b from-background to-background/80">
+        <article className="max-w-full">
+          {/* Cover Image Section */}
+          <div className="relative h-[40vh] md:h-[50vh] mb-8">
+            <Image
+              src={post.image}
+              alt={post.title}
+              layout="fill"
+              objectFit="cover"
+              className="brightness-50"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="container max-w-7xl px-4">
                 <Button
                   variant="outline"
                   size="sm"
                   asChild
-                  className="hover:bg-primary/10 transition-colors duration-200 mb-4"
+                  className="mb-4 bg-background/80 backdrop-blur-sm hover:bg-background/90"
                 >
                   <Link href="/blog">
                     <ArrowLeft className="mr-2 h-4 w-4" />
-                    <span className="sr-only">Back to Blog</span>
-                    <span aria-hidden="true">Back to Blog</span>
+                    Volver
                   </Link>
                 </Button>
-                <Title
-                  title={post.title}
-                  subtitle={post.excerpt}
-                  className="text-white"
-                />
-              </motion.div>
-            </CardHeader>
-            <CardContent className="p-8">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 space-y-4 md:space-y-0">
-                <div className="flex flex-col sm:flex-row sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
-                  <Avatar className="w-12 h-12 sm:w-10 sm:h-10">
-                    {post.author.avatar ? (
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+                  {post.title}
+                </h1>
+                <p className="text-lg md:text-xl text-white/90 max-w-3xl">
+                  {post.excerpt}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="container max-w-full px-4">
+            <div className="flex flex-col lg:flex-row gap-8">
+              {/* Sidebar */}
+              {/* Left Sidebar - Related Articles */}
+              <aside className="lg:w-64 hidden lg:block">
+                <h3 className="text-xl font-semibold mb-4">
+                  Ver otros Articulos
+                </h3>
+                <div className="space-y-4">
+                  {relatedPostsLeft.map((relatedPost) => (
+                    <Card key={relatedPost.slug}>
+                      <Link href={`/blog/${relatedPost.slug}`}>
+                        <div className="relative h-32">
+                          <Image
+                            src={relatedPost.image}
+                            alt={relatedPost.title}
+                            layout="fill"
+                            objectFit="cover"
+                          />
+                        </div>
+                        <CardContent className="p-4">
+                          <h4 className="font-medium line-clamp-2">
+                            {relatedPost.title}
+                          </h4>
+                        </CardContent>
+                      </Link>
+                    </Card>
+                  ))}
+                </div>
+              </aside>
+
+              {/* Main Content */}
+              <div className="flex-1">
+                <div className="bg-card rounded-lg p-8 shadow-lg mb-8">
+                  {/* Author Info */}
+                  <div className="flex items-center mb-6">
+                    <Avatar className="h-12 w-12 mr-4">
                       <AvatarImage
                         src={post.author.avatar}
                         alt={post.author.name}
                       />
-                    ) : (
                       <AvatarFallback>
                         {post.author.name.charAt(0)}
                       </AvatarFallback>
-                    )}
-                  </Avatar>
-                  <div className="space-y-1">
-                    <p className="text-sm sm:text-base font-medium">
-                      {post.author.name}
-                    </p>
-                    <div className="flex flex-wrap items-center text-xs sm:text-sm text-muted-foreground">
-                      <div className="flex items-center mr-4 mb-1 sm:mb-0">
-                        <Calendar
-                          className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"
-                          aria-hidden="true"
-                        />
+                    </Avatar>
+                    <div>
+                      <p className="font-medium">{post.author.name}</p>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-4 w-4 mr-2" />
                         <time dateTime={post.date}>
-                          {new Date(post.date).toLocaleDateString('es-AR', {
-                            year: 'numeric',
+                          {new Date(post.date).toLocaleDateString('en-US', {
                             month: 'long',
                             day: 'numeric',
+                            year: 'numeric',
                           })}
                         </time>
                       </div>
-                      <div className="flex items-center">
-                        <Clock
-                          className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2"
-                          aria-hidden="true"
-                        />
-                        <span>{post.readingTime}</span>
-                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex space-x-2">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="outline"
-                              size="icon"
-                              aria-label="Share post"
-                            >
-                              <Share2 className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia('facebook')}
-                            >
-                              <Facebook className="mr-2 h-4 w-4" />
-                              <span>Facebook</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia('twitter')}
-                            >
-                              <Twitter className="mr-2 h-4 w-4" />
-                              <span>Twitter</span>
-                            </DropdownMenuItem>
-                            <DropdownMenuItem
-                              onClick={() => shareOnSocialMedia('linkedin')}
-                            >
-                              <Linkedin className="mr-2 h-4 w-4" />
-                              <span>LinkedIn</span>
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Share this post</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-              </div>
 
-              <div className="flex flex-wrap gap-2 mb-8">
-                <Tag
-                  className="w-4 h-4 mr-2 text-muted-foreground"
-                  aria-hidden="true"
-                />
-                {post.tags.map((tag, index) => (
-                  <Badge
-                    key={index}
-                    className={`${getTagColor(
-                      tag
-                    )} transition-colors duration-200`}
-                  >
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
-              <Separator className="my-8" />
-              <div ref={contentStartRef} />
-              <div className="flex flex-col md:flex-row gap-8">
-                <motion.div
-                  ref={contentRef}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  className="prose dark:prose-invert max-w-none blog-content md:w-3/4"
-                  dangerouslySetInnerHTML={{ __html: processedContent }}
-                />
-                {!isMobile && (
-                  <div className="md:w-1/4">
-                    <TableOfContents
-                      toc={toc}
-                      activeHeading={activeHeading}
-                      scrollToHeading={scrollToHeading}
-                    />
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {shareButtons.map(({ Icon, name, color }) => (
+                      <Button
+                        key={name}
+                        variant="default"
+                        className={`${color} text-white`}
+                        onClick={() => shareOnSocialMedia(name)}
+                      >
+                        Compartir en
+                        <Icon className="ml-2 h-4 w-4 mr-2" />
+                      </Button>
+                    ))}
                   </div>
-                )}
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {post.tags.map((tag, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="px-3 py-1 text-sm"
+                      >
+                        #{tag}
+                      </Badge>
+                    ))}
+                  </div>
+
+                  <Separator className="my-8" />
+
+                  {/* Content */}
+                  <div
+                    ref={contentRef}
+                    className="prose dark:prose-invert max-w-none blog-content"
+                    dangerouslySetInnerHTML={{ __html: processedContent }}
+                  />
+                </div>
+
+                <RelatedArticles currentSlug={post.slug} posts={dataBlog} />
               </div>
-            </CardContent>
-          </Card>
-        </div>
+
+              {/* Table of Contents */}
+              {!isMobile && (
+                <aside className="lg:w-64 hidden lg:block sticky top-24 h-fit">
+                  <TableOfContents
+                    toc={toc}
+                    activeHeading={activeHeading}
+                    scrollToHeading={scrollToHeading}
+                  />
+                </aside>
+              )}
+            </div>
+          </div>
+        </article>
       </main>
-      <AnimatePresence>
-        {isMobile && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-4 right-4 z-50"
-          >
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="rounded-full shadow-lg"
-                >
-                  <Menu className="h-4 w-4" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="bottom" className="h-[80vh]">
-                <TableOfContents
-                  toc={toc}
-                  activeHeading={activeHeading}
-                  scrollToHeading={scrollToHeading}
-                  isFloating={true}
-                />
-              </SheetContent>
-            </Sheet>
-          </motion.div>
-        )}
-        {showFloatingToc && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-4 right-4 bg-background border border-border rounded-lg shadow-lg p-4 max-w-xs w-full"
-          >
+
+      {/* Mobile Table of Contents */}
+      {isMobile && (
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="fixed bottom-4 right-4 rounded-full shadow-lg z-50"
+            >
+              <Menu className="h-4 w-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="bottom" className="h-[80vh]">
             <TableOfContents
               toc={toc}
               activeHeading={activeHeading}
               scrollToHeading={scrollToHeading}
               isFloating={true}
             />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </SheetContent>
+        </Sheet>
+      )}
+
+      <FooterBlog />
+
       <style jsx global>{`
-        :root {
-          --primary: #61afef; /* Color azul claro */
-          --primary-dark: #528bff; /* Color azul oscuro */
-          --muted-foreground: #abb2bf; /* Color de texto atenuado */
-          --code-bg: #3e4451; /* Fondo de bloques de código */
-          --code-inline-bg: #3e4451; /* Fondo de código en línea */
-          --code-inline-color: #c678dd; /* Color de texto de código en línea */
-          --keyword-color: #c678dd; /* Color para palabras clave */
-          --string-color: #98c379; /* Color para strings */
-          --comment-color: #5c6370; /* Color para comentarios */
-        }
-
-        @media (prefers-color-scheme: dark) {
-          :root {
-            --primary: #61afef;
-            --primary-dark: #528bff;
-            --muted-foreground: #abb2bf;
-            --code-bg: #282c34;
-            --code-inline-bg: #3e4451;
-            --code-inline-color: #c678dd;
-            --keyword-color: #c678dd;
-            --string-color: #98c379;
-            --comment-color: #5c6370;
-          }
-        }
-
-        .highlight {
-          color: var(--keyword-color); /* Aplica el color de palabras clave */
-          font-weight: bold;
-        }
-
-        .toc {
-          font-size: 0.9em;
-          line-height: 1.2;
-          padding-left: 0;
-          list-style: none;
-          max-height: calc(100vh - 200px);
-          overflow-y: auto;
-        }
-
-        .floating-toc {
-          max-height: 60vh;
-          overflow-y: auto;
+        .blog-content {
+          font-size: 1.1rem;
+          line-height: 1.8;
         }
 
         .blog-content h2 {
-          font-size: 1.8em;
-          margin-top: 2em;
-          margin-bottom: 1em;
-          color: var(--primary);
+          font-size: 2rem;
+          margin-top: 2.5rem;
+          margin-bottom: 1rem;
+          font-weight: 700;
           scroll-margin-top: 100px;
         }
+
         .blog-content h3 {
-          font-size: 1.5em;
-          margin-top: 1.5em;
-          margin-bottom: 0.8em;
+          font-size: 1.5rem;
+          margin-top: 2rem;
+          margin-bottom: 0.75rem;
+          font-weight: 600;
           scroll-margin-top: 100px;
         }
+
         .blog-content p {
-          margin-bottom: 1.2em;
-          line-height: 1.8;
+          margin-bottom: 1.5rem;
         }
-        .blog-content a {
-          color: var(--primary);
-          text-decoration: underline;
-          transition: color 0.2s ease;
-        }
-        .blog-content a:hover {
-          color: var(--primary-dark);
-        }
-        .blog-content ul,
-        .blog-content ol {
-          margin-bottom: 1.2em;
-          padding-left: 1.5em;
-        }
-        .blog-content li {
-          margin-bottom: 0.5em;
-        }
-        .blog-content blockquote {
-          border-left: 4px solid var(--primary);
-          padding-left: 1em;
-          font-style: italic;
-          margin: 1.5em 0;
-          color: var(--muted-foreground);
-        }
-        .blog-content img {
-          max-width: 100%;
-          height: auto;
-          border-radius: 8px;
-          margin: 1.5em 0;
-        }
+
         .blog-content pre {
-          background-color: var(--code-bg);
-          border-radius: 8px;
-          padding: 1em;
+          background-color: hsl(var(--muted));
+          border-radius: 0.5rem;
+          padding: 1rem;
+          margin: 1.5rem 0;
           overflow-x: auto;
-          margin: 1.5em 0;
         }
+
         .blog-content code {
           font-family: "Fira Code", monospace;
           font-size: 0.9em;
         }
-        .blog-content :not(pre) > code {
-          background-color: var(--code-inline-bg);
-          color: var(--code-inline-color);
-          padding: 0.2em 0.4em;
-          border-radius: 4px;
+
+        .blog-content img {
+          border-radius: 0.5rem;
+          margin: 2rem auto;
         }
-        .image-wrapper {
-          margin: 2rem 0;
+
+        .blog-content blockquote {
+          border-left: 4px solid hsl(var(--primary));
+          padding-left: 1rem;
+          margin: 1.5rem 0;
+          font-style: italic;
+          color: hsl(var(--muted-foreground));
         }
       `}</style>
     </>

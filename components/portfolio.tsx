@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-'use client';
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { dataPortfolio, PortfolioItem } from '@/data';
 import Image from 'next/image';
@@ -24,60 +21,56 @@ import {
   Monitor,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { FaReact, FaNodeJs, FaPaperPlane } from 'react-icons/fa';
-import {
-  SiNextdotjs,
-  SiTailwindcss,
-  SiMongodb,
-  SiExpress,
-  SiVercel,
-  SiJavascript,
-  SiTypescript,
-  SiCss3,
-  SiHtml5,
-  SiOpenai,
-  SiAstro,
-  SiSvelte,
-  SiVite,
-  SiBun,
-  SiAxios,
-  SiNativescript,
-  SiFlutter,
-  SiKotlin,
-} from 'react-icons/si';
+import { iconMap, IconMapKey } from './iconMap'; // Import the iconMap and IconMapKey type
 import GradientName from './GradientName';
 
 const ITEMS_PER_PAGE = 6;
 
-const iconMap: { [key: string]: JSX.Element } = {
-  React: <FaReact />,
-  'Next.js': <SiNextdotjs />,
-  'Tailwind CSS': <SiTailwindcss />,
-  'Node.js': <FaNodeJs />,
-  MongoDB: <SiMongodb />,
-  Express: <SiExpress />,
-  Vercel: <SiVercel />,
-  JavaScript: <SiJavascript />,
-  TypeScript: <SiTypescript />,
-  CSS: <SiCss3 />,
-  HTML: <SiHtml5 />,
-  'React Native': <SiNextdotjs />,
-  AppSheets: <FaPaperPlane />,
-  OpenAI: <SiOpenai />,
-  Astro: <SiAstro />,
-  Svelte: <SiSvelte />,
-  Vite: <SiVite />,
-  bun: <SiBun />,
-  Axios: <SiAxios />,
-  'react-native': <SiNativescript />,
-  flutter: <SiFlutter />,
-  kotlin: <SiKotlin />,
+const techColors: Record<string, string> = {
+  html5: '#E34F26',
+  css3: '#1572B6',
+  javascript: '#F7DF1E',
+  typescript: '#3178C6',
+  react: '#61DAFB',
+  'next-js': '#000000',
+  vue: '#4FC08D',
+  angular: '#DD0031',
+  nodejs: '#339933',
+  express: '#000000',
+  mongodb: '#47A248',
+  mysql: '#4479A1',
+  python: '#3776AB',
+  django: '#092E20',
+  php: '#777BB4',
+  laravel: '#FF2D20',
+  java: '#007396',
+  spring: '#6DB33F',
+  docker: '#2496ED',
+  kubernetes: '#326CE5',
+  aws: '#232F3E',
+  vercel: '#000000',
+  tailwindcss: '#06B6D4',
+  appsheets: '#4181ed',
+  openai: '#412991',
+  vite: '#646CFF',
+  svelte: '#FF3E00',
+  bun: '#FBF0DF',
+  astro: '#000000',
+  sheets: '#47A248'
+  
 };
 
 const getTechIcon = (tech: string) => {
-  return iconMap[tech] || <Code size={12} />;
+  const key = tech.toLowerCase().replace(/\s+/g, '-') as IconMapKey;
+  const IconComponent = iconMap[key];
+  
+  if (IconComponent) {
+    const color = techColors[key] || '#718096'; // Color por defecto si no se especifica
+    return React.cloneElement(IconComponent, { style: { color } });
+  }
+  
+  return <Code size={12} />;
 };
-
 const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
@@ -105,12 +98,12 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
           {project.technologies.map((tech: string, techIndex: number) => (
             <motion.span
               key={techIndex}
-              className="bg-gray-200/80 dark:bg-gray-700/80 text-primary text-xs px-2 py-1 rounded-full flex items-center gap-1"
+              className="bg-gray-200/80 dark:bg-gray-700/80 text-xs px-2 py-1 rounded-full flex items-center gap-1"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               {getTechIcon(tech)}
-              {tech}
+              <span className="ml-1">{tech}</span>
             </motion.span>
           ))}
         </div>
@@ -144,6 +137,7 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
     </Card>
   </motion.div>
 );
+
 
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);

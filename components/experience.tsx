@@ -13,7 +13,7 @@ import {
   Code,
   Layers,
 } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
+// import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Tooltip,
@@ -91,14 +91,6 @@ const ExperienceCard: React.FC<{ item: ExperienceItem }> = ({ item }) => (
     </CardHeader>
     <CardContent className="pt-2 sm:pt-4 relative">
       <p className="text-xs sm:text-sm text-black-foreground mb-2 sm:mb-3">{item.subtitle}</p>
-      {item.value !== undefined && (
-        <div className="mb-2 sm:mb-3">
-          <Progress value={item.value} className="h-1 sm:h-2" />
-          <p className="text-[10px] sm:text-xs text-right mt-0.5 sm:mt-1 text-black-foreground">
-            {item.value}%
-          </p>
-        </div>
-      )}
       <div className="mt-2 sm:mt-4 flex flex-wrap gap-1 sm:gap-2">
         {item.technologies.map((tech, index) => (
           <TechnologyBadge key={index} tech={tech} />
@@ -270,9 +262,6 @@ export default function ServicesAndExperience() {
           </div>
         </Tabs>
       </div>
-
-      {/* Añadir margen inferior adicional a la sección */}
-      <div className="h-12 sm:h-16 md:h-20"></div>
     </motion.section>
   );
 }

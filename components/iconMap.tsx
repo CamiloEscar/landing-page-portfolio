@@ -18,6 +18,7 @@ import {
   FaDocker,
   FaAws,
   FaGitlab,
+  FaPaperPlane,
 } from 'react-icons/fa';
 import {
   SiTypescript,
@@ -62,6 +63,13 @@ import {
   SiFlutter,
   SiKotlin,
   SiReact,
+  SiVite,
+  SiSvelte,
+  SiBun,
+  SiVercel,
+  SiAstro,
+  SiGooglesheets,
+  SiOpenai,
 } from 'react-icons/si';
 
 export type IconMapKey =
@@ -127,9 +135,25 @@ export type IconMapKey =
   | 'socket'
   | 'react-native'
   | 'kotlin'
-  | 'flutter';
+  | 'flutter'
+  | 'vite'
+  | 'svelte'
+  | 'astro'
+  | 'bun'
+  | 'vercel'
+  | 'appsheets'
+  | 'sheets'
+  | 'openai'
 
 export const iconMap: Record<IconMapKey, React.ReactElement> = {
+  svelte: <SiSvelte className='w-5 h-5' />,
+  openai: <SiOpenai className='w-5 h-5' />,
+  sheets: <SiGooglesheets className='w-5 h-5'/>,
+  appsheets: <FaPaperPlane className='w-5 h-5' />,
+  astro: <SiAstro className='w-5 h-5' />,
+  bun: <SiBun className='w-5 h-5' />,
+  vercel: <SiVercel className='w-5 h-5' />,
+  vite: <SiVite className='w-5 h-5'/>,
   html5: <FaHtml5 className="w-5 h-5" />,
   'semantic-ui': <SiSemanticuireact className="w-5 h-5" />,
   accessibility: <FaUniversalAccess className="w-5 h-5" />,

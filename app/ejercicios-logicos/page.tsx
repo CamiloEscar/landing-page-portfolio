@@ -35,6 +35,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Title from '@/components/shared/title';
 import Navbar from '@/components/shared/navbar';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import Footer from '@/components/FooterBlog';
 
 interface Item {
   name: string
@@ -454,6 +455,7 @@ export default function EjerciciosLogicos() {
               </Card>
             </motion.div>
           </div>
+            <Footer />
         </div>
       </motion.section>
     </>
