@@ -50,31 +50,6 @@ const itemVariants = {
   },
 };
 
-interface SectionToggleProps {
-  title: string;
-  section: string;
-  expandedSection: string | null;
-  toggleSection: (section: string) => void;
-}
-
-const SectionToggle: React.FC<SectionToggleProps> = ({ title, section, expandedSection, toggleSection }) => (
-  <button
-    onClick={() => toggleSection(section)}
-    className="flex items-center justify-between w-full text-left p-3 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300"
-    aria-expanded={expandedSection === section}
-    aria-controls={`${section}-content`}
-  >
-    <h3 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">
-      {title}
-    </h3>
-    {expandedSection === section ? (
-      <ChevronUp className="w-5 h-5" aria-hidden="true" />
-    ) : (
-      <ChevronDown className="w-5 h-5" aria-hidden="true" />
-    )}
-  </button>
-);
-
 interface TimelineItemProps {
   title: string;
   subtitle: string;
@@ -157,13 +132,13 @@ export default function AboutMe() {
 
   return (
     <section className="py-8 md:py-16 bg-transparent transition-colors duration-300">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <motion.div
           ref={ref}
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="p-4 md:p-8 max-w-8xl mx-auto bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-xl shadow-lg transition-colors duration-300"
+          className="p-4 md:p-8 max-w-8xl mx-auto rounded-xl transition-colors duration-300"
           id="about-me"
         >
           <div className="flex flex-col lg:flex-row gap-6">

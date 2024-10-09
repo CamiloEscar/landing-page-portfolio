@@ -10,10 +10,7 @@ import {
   Coffee,
   ChevronDown,
   ChevronRight,
-  Code,
-  Layers,
 } from 'lucide-react';
-// import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Tooltip,
@@ -28,6 +25,7 @@ import type { ExperienceGroup, ExperienceCategory } from '@/data';
 import { iconMap, IconMapKey } from './iconMap';
 import GradientName from './GradientName';
 import { ScrollArea, ScrollBar } from './ui/scroll-area';
+import { Separator } from './ui/separator';
 
 const getIcon = (tech: string): React.ReactElement => {
   const key = tech.toLowerCase() as IconMapKey;
@@ -171,9 +169,9 @@ export default function ServicesAndExperience() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <motion.div
-          className="text-center mb-8 sm:mb-12 md:mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16 "
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -181,25 +179,16 @@ export default function ServicesAndExperience() {
           <div className="inline-block p-2 sm:p-3 rounded-full bg-primary/10 mb-3 sm:mb-4">
             <Briefcase className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary" />
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 ">
             <GradientName>Servicios y Experiencia</GradientName>
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-black-foreground">
             Descubre mi trayectoria profesional y habilidades
           </p>
-          <div className="flex justify-center items-center gap-2 sm:gap-4 mt-4 sm:mt-6">
-            <div className="flex items-center gap-1 sm:gap-2">
-              <Code className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-              <span className="text-xs sm:text-sm font-medium">Desarrollo</span>
-            </div>
-            <div className="flex items-center gap-1 sm:gap-2">
-              <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-              <span className="text-xs sm:text-sm font-medium">Diseño</span>
-            </div>
-          </div>
         </motion.div>
+        <Separator />
 
-        <Tabs defaultValue="services" className="w-full">
+        <Tabs defaultValue="services" className="w-full gap-8 mt-12">
           <div className="relative">
             <ScrollArea className="w-full whitespace-nowrap rounded-md border">
               <TabsList className="h-12 inline-flex min-w-full justify-start gap-1 p-1 bg-muted/50 dark:bg-gray-800/50">

@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { itemsNavbar } from '@/data';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import {
   Github,
@@ -13,6 +13,7 @@ import {
   Sun,
   Moon,
   Download,
+  ArrowUp,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import {
@@ -27,15 +28,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import ScrollIndicator from '@/components/ui/ScrollIndicator';
+
 
 const Navbar = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const { setTheme, theme } = useTheme();
   const [showToolTip, setShowToolTip] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollPosition(window.scrollY);
+      const currentPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      setScrollPosition(currentPosition);
+      setShowBackToTop(currentPosition > 300);
+      setShowScrollIndicator(currentPosition < documentHeight - windowHeight - 100);
     };
 
     setShowToolTip(true);
@@ -54,6 +65,13 @@ const Navbar = () => {
     ) : (
       <Moon className="h-5 w-5" />
     );
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -250,6 +268,56 @@ const Navbar = () => {
           </div>
         </div>
       </motion.nav>
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.div
+            className="fixed z-50 bottom-4 right-4"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="bg-background/20 hover:bg-background/40"
+                    onClick={scrollToTop}
+                  >
+                    <ArrowUp className="h-5 w-5" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Back to top</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showScrollIndicator && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="fixed bottom-20 right-16 mb-1 text-center z-50 sm:hidden"
+          >
+            <motion.div
+              className="flex flex-col items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <ScrollIndicator />
+              
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

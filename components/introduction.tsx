@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, FC } from 'react';
+import React, { useState, useEffect, useCallback, useRef, FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -32,11 +32,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import GradientName from './GradientName';
 import TechStack from './TechStack';
 
-const greetings = [
-  'Hola 👋, soy',
-  'Hello 👋, I am',
-  'Olá 👋, eu sou',
-];
+
+
+const greetings = ['Hola 👋, soy', 'Hello 👋, I am', 'Olá 👋, eu sou'];
 
 interface ActionButtonProps {
   text: string;
@@ -52,9 +50,13 @@ const ActionButton: FC<ActionButtonProps> = ({
   href,
 }) => (
   <motion.div
-    whileHover={{ scale: 1.05 }}
+    whileHover={{
+      scale: 1.05,
+      z: 20,
+      transition: { duration: 0.2 },
+    }}
     whileTap={{ scale: 0.95 }}
-    className="w-full sm:w-auto"
+    className="w-full sm:w-auto relative"
   >
     <Button
       size="lg"
@@ -77,7 +79,7 @@ const ActionButton: FC<ActionButtonProps> = ({
           color === 'purple' &&
           'bg-purple-500 hover:bg-purple-600 text-white shadow-purple-200/50 dark:shadow-purple-900/50'
         }
-        shadow-lg hover:shadow-xl
+        shadow-lg hover:shadow-xl transform transition-transform
       `}
     >
       <Link href={href} className="flex items-center justify-center w-full">
@@ -126,11 +128,70 @@ const SocialLink: FC<SocialLinkProps> = ({
   </motion.div>
 );
 
+const ScrollIndicator = () => (
+  <div className="relative w-6 h-10 rounded-full border-2 border-gray-400 dark:border-gray-600 p-1">
+    <motion.div
+      animate={{
+        y: [0, 12, 0],
+      }}
+      transition={{
+        duration: 1.5,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      className="w-2 h-2 bg-gray-400 dark:bg-gray-600 rounded-full mx-auto"
+    />
+  </div>
+);
+
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [cvLanguage, setCvLanguage] = useState('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+
+      const { clientX, clientY } = e;
+      const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+      
+      // Invertimos la dirección del movimiento
+      const moveX = (centerX - clientX) / 50;
+      const moveY = (centerY - clientY) / 50;
+
+      if (cardRef.current) {
+        cardRef.current.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
+      }
+      if (imageRef.current) {
+        imageRef.current.style.transform = `translate(${moveX * 0.9}px, ${moveY * 0.9}px)`;
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowScrollIndicator(false);
+      } else {
+        setShowScrollIndicator(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const cycleGreeting = useCallback(() => {
     setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
@@ -139,10 +200,8 @@ export default function Introduction() {
   useEffect(() => {
     const greetingInterval = setInterval(cycleGreeting, 3000);
 
-
     return () => {
       clearInterval(greetingInterval);
-
     };
   }, [cycleGreeting]);
 
@@ -152,14 +211,16 @@ export default function Introduction() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center">
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 relative">
           <motion.div
-            className="w-full lg:w-3/5"
+            ref={cardRef}
+            className="w-full lg:w-3/5 z-10"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            style={{ transition: 'transform 0.3s ease-out' }}
           >
             <Card className="backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-white/20 dark:border-gray-700/20 shadow-xl">
               <CardContent className="p-8 sm:p-10">
@@ -195,8 +256,8 @@ export default function Introduction() {
                 </div>
 
                 <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                  Más de 2 años de experiencia en desarrollo web, me he
-                  enfocado en tecnologías como
+                  Más de 2 años de experiencia en desarrollo web, me he enfocado
+                  en tecnologías como
                   <GradientName
                     size="small"
                     className="mx-1 font-bold font-mono"
@@ -283,15 +344,17 @@ export default function Introduction() {
           </motion.div>
 
           <motion.div
-            className="w-full lg:w-2/5"
+            ref={imageRef}
+            className="w-full lg:w-2/5 lg:absolute lg:right-20 lg:-mr-0 z-20"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: isImageLoaded ? 1 : 0,
               scale: isImageLoaded ? 1 : 0.8,
             }}
             transition={{ duration: 0.8 }}
+            style={{ transition: 'transform 0.3s ease-out' }}
           >
-            <div className="relative aspect-square max-w-[280px] sm:max-w-[320px] lg:max-w-[400px] mx-auto">
+            <div className="relative aspect-square max-w-[280px] sm:max-w-[320px] lg:max-w-[400px] mx-auto lg:ml-auto">
               <div className="absolute inset-0 rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 backdrop-blur-3xl" />
                 <div className="absolute inset-0 border-[16px] border-white/10 dark:border-gray-800/10 rounded-2xl z-10" />
@@ -309,6 +372,33 @@ export default function Introduction() {
           </motion.div>
         </div>
       </div>
+      <AnimatePresence>
+        {showScrollIndicator && (
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            className="fixed bottom-8 right-8 text-center z-50"
+          >
+            <motion.div
+              className="flex flex-col items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <ScrollIndicator />
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.5 }}
+                className="mt-4 text-sm font-bold text-gray-600 dark:text-gray-400 backdrop-blur-sm  px-4 py-2 rounded-full"
+              >
+                Scroll
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Dialog open={isCVOpen} onOpenChange={setIsCVOpen}>
         <DialogContent className="sm:max-w-[800px] h-[90vh] p-0">

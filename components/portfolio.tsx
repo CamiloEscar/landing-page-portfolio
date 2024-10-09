@@ -17,12 +17,19 @@ import {
   Code,
   ChevronDown,
   ChevronUp,
-  Database,
-  Monitor,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { iconMap, IconMapKey } from './iconMap'; // Import the iconMap and IconMapKey type
+import { iconMap, IconMapKey } from './iconMap';
 import GradientName from './GradientName';
+import { Separator } from '@/components/ui/separator';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -57,7 +64,6 @@ const techColors: Record<string, string> = {
   bun: '#FBF0DF',
   astro: '#000000',
   sheets: '#47A248'
-  
 };
 
 const getTechIcon = (tech: string) => {
@@ -65,12 +71,13 @@ const getTechIcon = (tech: string) => {
   const IconComponent = iconMap[key];
   
   if (IconComponent) {
-    const color = techColors[key] || '#718096'; // Color por defecto si no se especifica
+    const color = techColors[key] || '#718096';
     return React.cloneElement(IconComponent, { style: { color } });
   }
   
   return <Code size={12} />;
 };
+
 const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
@@ -138,6 +145,54 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   </motion.div>
 );
 
+const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
+  <Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Project</TableHead>
+        <TableHead>Technologies</TableHead>
+        <TableHead>Links</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      {projects.map((project) => (
+        <TableRow key={project.id}>
+          <TableCell>
+            <div className="font-medium">{project.title}</div>
+            <div className="text-sm text-muted-foreground">{project.description}</div>
+          </TableCell>
+          <TableCell>
+            <div className="flex flex-wrap gap-1">
+              {project.technologies.map((tech, index) => (
+                <span key={index} className="text-xs bg-muted px-1 py-0.5 rounded">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </TableCell>
+          <TableCell>
+            <div className="flex space-x-2">
+              {project.urlGithub && (
+                <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="sm">
+                    <Github className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+              {project.urlDemo && (
+                <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
+                  <Button size="sm">
+                    <ExternalLink className="h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </TableCell>
+        </TableRow>
+      ))}
+    </TableBody>
+  </Table>
+);
 
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);
@@ -176,14 +231,14 @@ const Portfolio: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <motion.div
           className="text-center mb-12 md:mb-16"
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="inline-block p-3 rounded-full bg-primary/10 mb-4">
+          <div className="inline-block p-3 rounded-full bg-primary/10 mb-4 mt-2">
             <Code className="w-10 h-10 md:w-12 md:h-12 text-primary" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
@@ -192,52 +247,43 @@ const Portfolio: React.FC = () => {
           <p className="text-lg md:text-xl text-muted-foreground">
             Chequea mis proyectos
           </p>
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <div className="flex items-center gap-2">
-              <Monitor className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">Web</span>
-            </div>
-            {/* <div className="flex items-center gap-2">
-          <Smartphone className="w-5 h-5 text-primary" />
-          <span className="text-sm font-medium">Móvil</span>
-        </div> */}
-            <div className="flex items-center gap-2">
-              <Database className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">Back-end</span>
-            </div>
-            {/* <div className="flex items-center gap-2">
-          <Zap className="w-5 h-5 text-primary" />
-          <span className="text-sm font-medium"></span>
-        </div> */}
-          </div>
         </motion.div>
+        <Separator />
 
         <AnimatePresence>
           <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12"
+            className="mt-12"
             initial="hidden"
             animate="visible"
             variants={{
               visible: { transition: { staggerChildren: 0.1 } },
             }}
           >
-            {filteredProjects
-              .slice(0, visibleProjects)
-              .map((project: PortfolioItem) => (
-                <motion.div
-                  key={project.id}
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: { duration: 0.5 },
-                    },
-                  }}
-                >
-                  <ProjectCard project={project} />
-                </motion.div>
-              ))}
+            {/* Grid view for larger screens */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
+              {filteredProjects
+                .slice(0, visibleProjects)
+                .map((project: PortfolioItem) => (
+                  <motion.div
+                    key={project.id}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.5 },
+                      },
+                    }}
+                  >
+                    <ProjectCard project={project} />
+                  </motion.div>
+                ))}
+            </div>
+
+            {/* Table view for mobile screens */}
+            <div className="md:hidden overflow-x-auto">
+              <ProjectTable projects={filteredProjects.slice(0, visibleProjects)} />
+            </div>
           </motion.div>
         </AnimatePresence>
 
