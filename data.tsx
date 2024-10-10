@@ -10,7 +10,6 @@ import {
   PanelsTopLeft,
   // Phone,
   UserRound,
-  UsersRound,
   Wrench,
   GraduationCap,
   BarChart,
@@ -18,6 +17,7 @@ import {
   Cpu,
   Database,
   Pen,
+  Globe,
 } from 'lucide-react';
 import {
   // FaFacebookF,
@@ -36,15 +36,15 @@ export const dataAboutMe = [
   },
   {
     id: 2,
-    name: 'Clientes',
-    icon: <UsersRound />,
-    description: 'Múltiples clientes satisfechos',
+    name: 'Dev Web',
+    icon: <Globe />,
+    description: '20+ Tecnologías',
   },
   {
     id: 3,
     name: 'Proyectos',
     icon: <Wrench />,
-    description: '+10 completados',
+    description: '+10 Proyectos Completados',
   },
   {
     id: 4,
@@ -90,7 +90,7 @@ export const educationTimeline = [
     id: 4,
     title: 'Técnico Electricista con Orientación a Electrónica Industrial',
     institution: 'EET N°2 "Francisco Ramírez"',
-    period: 'Graduado en 2013',
+    period: '2013',
     description: 'Educación secundaria técnica.',
   },
 ];
@@ -102,9 +102,9 @@ export const workExperience = [
     position: 'Técnico Instalador de Fibra Óptica',
     company: 'Video Digital SRL',
     period: '2018 - Actualidad',
-    description: `Encargado de instalaciones y mantenimiento de redes de fibra óptica, asegurando una conectividad rápida y confiable para nuestros clientes.
-      Implementé un sistema de gestión de reclamos que redujo los tiempos de respuesta en un 50%, elevando la satisfacción del cliente.
-      Enfoque en la atención al cliente y manejo de software de gestión, contribuyendo a fortalecer las relaciones con los usuarios y garantizar un servicio excepcional.`,
+    description: `Encargado del mantenimiento de redes de fibra óptica y soporte tecnico.
+      Implementé un sistema de gestión de reclamos que redujo los tiempos de respuesta en un 50%.
+      Enfoque en la atención al cliente y manejo de software de gestión.`,
   },
   {
     id: 2,
@@ -189,7 +189,7 @@ export const aboutMe = {
   age: 29,
   location: 'Concepción del Uruguay, Entre Ríos, Argentina',
   description:
-    'Soy técnico electricista con una sólida experiencia en instalación y mantenimiento de fibra óptica. Actualmente, estoy cursando mis estudios en Sistemas de Información, lo que me permite combinar mis conocimientos técnicos con una visión más amplia del mundo digital. Mis habilidades interpersonales me permiten colaborar de manera efectiva en equipos, fomentando un ambiente de trabajo positivo y productivo. Busco una oportunidad en un entorno amigable y desafiante donde pueda seguir aprendiendo y aplicar mis habilidades para contribuir al crecimiento del equipo y la empresa.',
+    'Actualmente, estoy cursando la carrera de Sistemas de Información y tengo experiencia en la creación de proyectos de forma independiente, abarcando desde el diseño inicial hasta la implementación final. Me capacito constantemente en nuevas tecnologías y metodologías que me permiten escribir código más limpio y escalable. Mis habilidades interpersonales me facilitan la colaboración efectiva en equipos, promoviendo un ambiente de trabajo positivo y productivo. Busco una oportunidad en un entorno amigable y desafiante donde pueda seguir aprendiendo y aplicar mis habilidades para contribuir al crecimiento del equipo y de la empresa.',
 };
 
 export interface PortfolioItem {
@@ -494,10 +494,10 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
       //     "Desarrollo de aplicaciones empresariales y microservicios con Spring Boot y JPA.",
       //   technologies: [
       //     "socket",
-      //     // "spring",
-      //     // "hibernate",
-      //     // "maven",
-      //     // "junit",
+          // "spring",
+          // "hibernate",
+          // "maven",
+          // "junit",
       //   ],
       // },
       // {

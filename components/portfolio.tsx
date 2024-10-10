@@ -146,52 +146,56 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
 );
 
 const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
-  <Table>
-    <TableHeader>
-      <TableRow>
-        <TableHead>Project</TableHead>
-        <TableHead>Technologies</TableHead>
-        <TableHead>Links</TableHead>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      {projects.map((project) => (
-        <TableRow key={project.id}>
-          <TableCell>
-            <div className="font-medium">{project.title}</div>
-            <div className="text-sm text-muted-foreground">{project.description}</div>
-          </TableCell>
-          <TableCell>
-            <div className="flex flex-wrap gap-1">
-              {project.technologies.map((tech, index) => (
-                <span key={index} className="text-xs bg-muted px-1 py-0.5 rounded">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </TableCell>
-          <TableCell>
-            <div className="flex space-x-2">
-              {project.urlGithub && (
-                <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="sm">
-                    <Github className="h-4 w-4" />
-                  </Button>
-                </Link>
-              )}
-              {project.urlDemo && (
-                <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
-                  <Button size="sm">
-                    <ExternalLink className="h-4 w-4" />
-                  </Button>
-                </Link>
-              )}
-            </div>
-          </TableCell>
+  <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 shadow-lg backdrop-blur-sm">
+    <Table>
+      <TableHeader>
+        <TableRow className="bg-gray-50 dark:bg-gray-700/50">
+          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Project</TableHead>
+          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Technologies</TableHead>
+          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Links</TableHead>
         </TableRow>
-      ))}
-    </TableBody>
-  </Table>
+      </TableHeader>
+      <TableBody>
+        {projects.map((project) => (
+          <TableRow key={project.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+            <TableCell>
+              <div className="font-medium text-gray-900 dark:text-gray-100">{project.title}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{project.description}</div>
+            </TableCell>
+            <TableCell>
+              <div className="flex flex-wrap gap-1">
+                {project.technologies.map((tech, index) => (
+                  <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex space-x-2">
+                {project.urlGithub && (
+                  <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm" className="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <Github className="h-4 w-4 mr-2" />
+                      GitHub
+                    </Button>
+                  </Link>
+                )}
+                {project.urlDemo && (
+                  <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
+                    <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Demo
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  </div>
 );
 
 const Portfolio: React.FC = () => {
@@ -245,7 +249,7 @@ const Portfolio: React.FC = () => {
             <GradientName>Portfolio</GradientName>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Chequea mis proyectos
+          Algunos de mis Proyectos desarrollados de manera freelance.
           </p>
         </motion.div>
         <Separator />

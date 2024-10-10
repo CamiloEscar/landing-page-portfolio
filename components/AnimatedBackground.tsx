@@ -29,6 +29,9 @@ const Star = dynamic(() => import('lucide-react').then((mod) => mod.Star), {
 const Rocket = dynamic(() => import('lucide-react').then((mod) => mod.Rocket), {
   ssr: false,
 });
+const TreePalm = dynamic(() => import('lucide-react').then((mod) => mod.TreePalm), {
+  ssr: false,
+});
 
 interface AnimatedElement {
   id: number;
@@ -137,7 +140,6 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   }, [generateElements]);
 
   useEffect(() => {
-    // Regenerate elements when theme changes
     generateElements();
   }, [isDark, generateElements]);
 
@@ -260,13 +262,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         </motion.div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-green-600 to-transparent dark:from-green-900 transition-colors duration-500 pointer-events-none"
+          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-yellow-200 to-transparent dark:from-green-900 transition-colors duration-500 pointer-events-none"
           style={{ opacity: grassOpacity }}
         >
           {elements.trees.map((tree) => (
             <motion.div
               key={tree.id}
-              className="absolute bottom-0 text-green-700 dark:text-green-800"
+              className={`absolute bottom-0 ${isDark ? 'text-green-800' : 'text-yellow-600'}`}
               style={{
                 left: `${tree.x}%`,
                 fontSize: `${tree.size}px`,
@@ -280,7 +282,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                 repeatType: 'reverse',
               }}
             >
-              <Trees />
+              {isDark ? <Trees /> : <TreePalm />}
             </motion.div>
           ))}
         </motion.div>

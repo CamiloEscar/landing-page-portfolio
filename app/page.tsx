@@ -7,6 +7,7 @@ import Introduction from '@/components/introduction';
 import Loading from '@/components/loading'; // Necesitarás crear este componente
 import RecentPosts from '@/components/RecentPost';
 import { dataBlog } from '@/app/blog/data'; // Importa la data de los posts
+import AboutMe2 from '@/components/sobreMi';
 
 // Lazy load components
 const AboutMe = lazy(() => import('@/components/about-me'));
@@ -21,6 +22,7 @@ export default function Home() {
       <main className="relative z-10">
         <Navbar />
         <Introduction />
+        <AboutMe2 />
         <Suspense fallback={<Loading />}>
           <Portfolio />
         </Suspense>

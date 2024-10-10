@@ -10,14 +10,12 @@ interface GradientNameProps {
 const COLOR_PALETTES = {
   light: [
     ['#0366D6', '#2EA043', '#2188FF'], // GitHub azul, verde, azul claro
-    ['#5B4638', '#E36209', '#044289'], // Brown, naranja, azul oscuro
     ['#4969E1', '#2EA043', '#6F42C1'], // Azul royal, verde, púrpura
     ['#1A73E8', '#188038', '#A142F4'], // Google blue, green, purple
     ['#0060B9', '#2EA043', '#5E17EB'], // Azure blue, verde, violeta
   ],
   dark: [
     ['#58A6FF', '#3FB950', '#79C0FF'], // GitHub azul claro, verde claro, celeste
-    ['#FFA657', '#F778BA', '#79C0FF'], // Naranja suave, rosa, celeste
     ['#79C0FF', '#56D364', '#D2A8FF'], // Celeste, verde claro, lavanda
     ['#39D353', '#388BFD', '#8957E5'], // Verde neón, azul brillante, púrpura
     ['#388BFD', '#EC775C', '#8957E5'], // Azul brillante, coral, púrpura

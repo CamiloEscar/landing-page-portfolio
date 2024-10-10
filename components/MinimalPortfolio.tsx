@@ -39,6 +39,7 @@ import {
   dataLanguage,
 } from '../data';
 import Image from 'next/image';
+import { QRCodeCanvas } from 'qrcode.react';
 
 const ProfessionalMinimalPortfolio = () => {
   const handlePrint = () => {
@@ -196,7 +197,6 @@ const ProfessionalMinimalPortfolio = () => {
           </div>
         </div>
       </section>
-
       <div className="grid grid-cols-4 gap-4">
         <div className="col-span-3">
           <section id="projects" className="mb-4">
@@ -364,6 +364,27 @@ const ProfessionalMinimalPortfolio = () => {
               </div>
             ))}
           </section>
+            {/* Sección para el código QR */}
+            <section id="qr-code" className="mb-4 grid justify-center">
+              
+                <h2 className="text-xl font-semibold mb-2 border-b pb-1">
+              Codigo QR
+            </h2>
+              
+              <div className="flex justify-between items-start mb-1">
+                <h3 className="font-medium text-blue-600 dark:text-blue-400">
+                  <QRCodeCanvas
+                    value={
+                      typeof window !== 'undefined' ? window.location.href : ''
+                    }
+                    size={128}
+                    bgColor={'#ffffff'}
+                    fgColor={'#000000'}
+                    level={'L'}
+                  />
+                </h3>
+              </div>
+            </section>
         </div>
       </div>
     </div>
