@@ -306,7 +306,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 1,
     title: 'Pizzeria Web',
     image: '/pizzeriadonatello.webp',
-    gifImage: '/pizzeriadonatello.gif',
+    gifImage: '/pizzeriadonatelloG.webp',
     urlGithub: 'https://github.com/CamiloEscar/pizzeria-landing.git',
     urlDemo: 'https://pizzeria-donatello.vercel.app/',
     description:
@@ -317,7 +317,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 2,
     title: 'Reclamos App',
     image: '/VDappsheets.webp',
-    gifImage: '/VDappsheets.gif',
+    gifImage: '/VDappsheetsG.webp',
     urlGithub: '',
     urlDemo:
       'https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481',
@@ -339,7 +339,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 8,
     title: 'Arquitecto Page',
     image: '/arquitectolanding.webp',
-    gifImage: '/arquitectolanding.gif',
+    gifImage: '/arquitectolandingG.webp',
     urlGithub: 'https://github.com/CamiloEscar/Landing-page-arquitecto.git',
     urlDemo: 'https://landing-page-arquitecto.vercel.app/',
     description:

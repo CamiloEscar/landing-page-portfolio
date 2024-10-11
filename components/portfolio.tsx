@@ -36,6 +36,7 @@ import {
 interface ExtendedPortfolioItem extends PortfolioItem {
   mediaType?: 'image' | 'gif';
   staticImage?: string;
+  image: string;
   gifImage?: string;
 }
 
@@ -93,6 +94,7 @@ const MediaDisplay: React.FC<{
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [loadGif, setLoadGif] = useState(false);
 
   const handleLoad = () => setIsLoading(false);
   const handleError = () => {
@@ -100,7 +102,13 @@ const MediaDisplay: React.FC<{
     setIsLoading(false);
   };
 
-  const currentImage = isHovered && project.gifImage ? project.gifImage : project.image;
+  useEffect(() => {
+    if (isHovered && project.gifImage) {
+      setLoadGif(true);
+    }
+  }, [isHovered, project.gifImage]);
+
+  const currentImage = loadGif && isHovered && project.gifImage ? project.gifImage : project.image;
 
   if (error) {
     return (
@@ -109,6 +117,7 @@ const MediaDisplay: React.FC<{
       </div>
     );
   }
+
   return (
     <div 
       className="relative w-full h-48"
@@ -123,14 +132,14 @@ const MediaDisplay: React.FC<{
       <Image
         src={currentImage}
         alt={alt}
-        width={400}
-        height={300}
-        className={`rounded-t-xl object-cover w-full h-48 transition-all duration-300 ${
+        fill
+        className={`rounded-t-xl object-cover transition-opacity duration-300 ${
           isLoading ? 'opacity-0' : 'opacity-100'
         }`}
         onLoad={handleLoad}
         onError={handleError}
-        unoptimized={project.mediaType === 'gif' && isHovered}
+        unoptimized={loadGif && isHovered && project.gifImage !== undefined}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>
   );
