@@ -18,8 +18,6 @@ import {
     Globe,
   } from 'lucide-react';
   import {
-    // FaFacebookF,
-    //  FaInstagram,
     // FaLinkedinIn,
     FaWhatsapp,
   } from 'react-icons/fa';
@@ -1073,18 +1071,4 @@ export const dataAboutMe = [
     //   link: 'https://www.linkedin.com/in/camiloescar',
     //   icon: <FaLinkedinIn />,
     // },
-    // {
-    //   id: 6,
-    //   title: 'Instagram',
-    //   subtitle: 'instagram.com/camiloescar',
-    //   link: 'https://www.instagram.com/camiloescar',
-    //   icon: <FaInstagram />,
-    // },
-    // {
-    //   id: 7,
-    //   title: 'Facebook',
-    //   subtitle: 'facebook.com/camiloescar',
-    //   link: 'https://www.facebook.com/Camilinnnn/',
-    //   icon: <FaFacebookF />,
-    // }
   ];  

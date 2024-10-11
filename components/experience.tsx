@@ -111,9 +111,9 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ item }) => (
       </TooltipTrigger>
       <TooltipContent side="bottom" className="max-w-[200px] sm:max-w-xs p-2 sm:p-4">
         <p className="text-xs sm:text-sm">{item.experience || `Experiencia en ${item.name}`}</p>
-        <Badge variant="outline" className="mt-2 text-[10px] sm:text-xs">
+        {/* <Badge variant="outline" className="mt-2 text-[10px] sm:text-xs">
           Ver más <ExternalLink className="ml-1 w-2 h-2 sm:w-3 sm:h-3" />
-        </Badge>
+        </Badge> */}
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

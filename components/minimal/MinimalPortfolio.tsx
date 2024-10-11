@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Printer,
@@ -106,6 +106,45 @@ const ProfessionalMinimalPortfolio = () => {
           />
         ))}
       </div>
+    );
+  };
+
+  const QRSection = () => {
+    const [qrSize, setQrSize] = useState(128);
+  
+    useEffect(() => {
+      const updateQRSize = () => {
+        // Get the parent column width
+        const columnWidth = document.querySelector('.col-span-1')?.clientWidth || 128;
+        // Set QR size to be 80% of column width, but not larger than 128px
+        setQrSize(Math.min(Math.floor(columnWidth * 0.8), 128));
+      };
+  
+      // Initial size
+      updateQRSize();
+  
+      // Update on window resize
+      window.addEventListener('resize', updateQRSize);
+      return () => window.removeEventListener('resize', updateQRSize);
+    }, []);
+    return (
+      <section id="qr-code" className="mb-4">
+        <h2 className="text-xl font-semibold mb-2 border-b pb-1">
+          Código QR
+        </h2>
+        <div className="flex justify-center">
+          <div className="bg-white p-2 rounded-lg">
+            <QRCodeCanvas
+              value={typeof window !== 'undefined' ? window.location.href : ''}
+              size={qrSize}
+              bgColor={'#ffffff'}
+              fgColor={'#000000'}
+              level={'L'}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
     );
   };
 
@@ -364,27 +403,7 @@ const ProfessionalMinimalPortfolio = () => {
               </div>
             ))}
           </section>
-            {/* Sección para el código QR */}
-            <section id="qr-code" className="mb-4 grid justify-center">
-              
-                <h2 className="text-xl font-semibold mb-2 border-b pb-1">
-              Codigo QR
-            </h2>
-              
-              <div className="flex justify-between items-start mb-1">
-                <h3 className="font-medium text-blue-600 dark:text-blue-400">
-                  <QRCodeCanvas
-                    value={
-                      typeof window !== 'undefined' ? window.location.href : ''
-                    }
-                    size={128}
-                    bgColor={'#ffffff'}
-                    fgColor={'#000000'}
-                    level={'L'}
-                  />
-                </h3>
-              </div>
-            </section>
+          <QRSection />
         </div>
       </div>
     </div>

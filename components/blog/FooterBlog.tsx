@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Facebook, Twitter, Instagram, Linkedin, Github, ArrowUp } from 'lucide-react';
+import { Linkedin, Github, ArrowUp } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { dataContact } from '../../data';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const socialLinks = [
-  { icon: Facebook, href: 'https://www.facebook.com/Camilinnnn/', label: 'Facebook', color: 'hover:text-[#1877f2]' },
-  { icon: Twitter, href: 'https://x.com/CamiloEscar', label: 'Twitter', color: 'hover:text-[#1da1f2]' },
-  { icon: Instagram, href: 'https://www.instagram.com/camilo.escar/', label: 'Instagram', color: 'hover:text-[#e4405f]' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/camiloescar/', label: 'LinkedIn', color: 'hover:text-[#0a66c2]' },
   { icon: Github, href: 'https://github.com/CamiloEscar', label: 'GitHub', color: 'hover:text-gray-900 dark:hover:text-white' },
 ];

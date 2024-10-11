@@ -77,11 +77,12 @@ export interface ExperienceItem {
 export interface PortfolioItem {
   id: number;
   title: string;
-  image: string;
-  urlGithub: string;
-  urlDemo: string;
   description: string;
+  image: string;
+  gifImage?: string;
   technologies: string[];
+  urlGithub?: string;
+  urlDemo?: string;
 }
 
 export interface ExperienceItemMinimal {
@@ -305,6 +306,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 1,
     title: 'Pizzeria Web',
     image: '/pizzeriadonatello.webp',
+    gifImage: '/pizzeriadonatello.gif',
     urlGithub: 'https://github.com/CamiloEscar/pizzeria-landing.git',
     urlDemo: 'https://pizzeria-donatello.vercel.app/',
     description:
@@ -315,6 +317,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 2,
     title: 'Reclamos App',
     image: '/VDappsheets.webp',
+    gifImage: '/VDappsheets.gif',
     urlGithub: '',
     urlDemo:
       'https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481',
@@ -331,6 +334,17 @@ export const dataPortfolio: PortfolioItem[] = [
     description:
       'Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.',
     technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
+  },
+  {
+    id: 8,
+    title: 'Arquitecto Page',
+    image: '/arquitectolanding.webp',
+    gifImage: '/arquitectolanding.gif',
+    urlGithub: 'https://github.com/CamiloEscar/Landing-page-arquitecto.git',
+    urlDemo: 'https://landing-page-arquitecto.vercel.app/',
+    description:
+      'Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.',
+    technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
   },
   {
     id: 4,
@@ -372,20 +386,12 @@ export const dataPortfolio: PortfolioItem[] = [
       'Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.',
     technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
   },
-  {
-    id: 8,
-    title: 'Arquitecto Page',
-    image: '/arquitectolanding.webp',
-    urlGithub: 'https://github.com/CamiloEscar/Landing-page-arquitecto.git',
-    urlDemo: 'https://landing-page-arquitecto.vercel.app/',
-    description:
-      'Una elegante landing page para un estudio de arquitectura, mostrando proyectos destacados, servicios ofrecidos y la filosofía del estudio, con un diseño moderno y responsive que refleja la estética del arquitecto.',
-    technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
-  },
+  
   {
     id: 9,
     title: 'FlyBondi',
     image: '/flybondi.webp',
+    gifImage: '/flybondi.gif',
     urlGithub: 'https://github.com/CamiloEscar/FlyBondi-PA23.git',
     urlDemo: 'https://flybondi-challenge.netlify.app/',
     description:
@@ -396,6 +402,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 10,
     title: 'Listado de CryptoCoin',
     image: '/spavanillacoin.webp',
+    gifImage: '/spavanillacoin.gif',
     urlGithub: 'https://github.com/CamiloEscar/SPA-VanillaCoin.git',
     urlDemo: 'https://spavanillacoin.netlify.app/',
     description:
@@ -426,6 +433,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 13,
     title: 'Fulbito-F5',
     image: '/fulbitof5.webp',
+    gifImage: '/fulbitof5.gif',
     urlGithub: '',
     urlDemo: 'https://fulbito-f5.vercel.app/',
     description:
@@ -446,6 +454,7 @@ export const dataPortfolio: PortfolioItem[] = [
     id: 15,
     title: 'Clima Json',
     image: '/clima.webp',
+    gifImage: '/clima.gif',
     urlGithub: '',
     urlDemo: 'https://pruebaclima-api.netlify.app/',
     description:
@@ -502,13 +511,13 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
           // "gatsby"
         ],
       },
-      {
-        name: 'Svelte',
-        subtitle: 'Basico',
-        value: 20,
-        experience: 'Diseño de web simulando a Google Translate.',
-        technologies: ['svelte', 'Astro'],
-      },
+      // {
+      //   name: 'Svelte',
+      //   subtitle: 'Basico',
+      //   value: 20,
+      //   experience: 'Diseño de web simulando a Google Translate.',
+      //   technologies: ['svelte', 'Astro'],
+      // },
       // {
       //   name: "Vue.js",
       //   subtitle: "Basico",
@@ -671,28 +680,28 @@ export const dataExperience: ExperienceCategory[] = [
         category: 'Lenguajes',
         items: [
           {
-            name: 'HTML',
+            name: 'HTML & CSS',
             subtitle: 'Intermedio',
             value: 60,
             experience:
               'Más de 2 años de experiencia creando estructuras web semánticas y accesibles.',
-            technologies: ['html5'],
+            technologies: ['html5', 'css3'],
           },
-          {
-            name: 'CSS',
-            subtitle: 'Intermedio',
-            value: 60,
-            experience:
-              'Amplio conocimiento en diseño responsivo y animaciones CSS.',
-            technologies: ['css3'],
-          },
+          // {
+          //   name: 'CSS',
+          //   subtitle: 'Intermedio',
+          //   value: 60,
+          //   experience:
+          //     'Amplio conocimiento en diseño responsivo y animaciones CSS.',
+          //   technologies: ['css3'],
+          // },
           {
             name: 'JavaScript',
             subtitle: 'Intermedio',
             value: 60,
             experience:
               'Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.',
-            technologies: ['javascript', 'typescript'],
+            technologies: ['javascript'],
           },
           {
             name: 'TypeScript',
@@ -700,7 +709,7 @@ export const dataExperience: ExperienceCategory[] = [
             value: 40,
             experience:
               'Conocimiento básico de TypeScript y experiencia en desarrollo de aplicaciones.',
-            technologies: ['javascript', 'typescript'],
+            technologies: ['typescript'],
           },
         ],
       },
@@ -803,21 +812,21 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Básico',
             technologies: ['django'],
           },
-          {
-            name: 'Flask',
-            subtitle: 'Básico',
-            technologies: ['flask'],
-          },
+          // {
+          //   name: 'Flask',
+          //   subtitle: 'Básico',
+          //   technologies: ['flask'],
+          // },
         ],
       },
       {
         category: 'Tecnologías',
         items: [
-          {
-            name: 'Socket.io',
-            subtitle: 'Básico',
-            technologies: ['socket-io'],
-          },
+          // {
+          //   name: 'Socket.io',
+          //   subtitle: 'Básico',
+          //   technologies: ['socket-io'],
+          // },
           {
             name: 'GraphQL',
             subtitle: 'Básico',
@@ -828,11 +837,11 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Basico',
             technologies: ['axios'],
           },
-          // {
-          //   name: 'Docker',
-          //   subtitle: 'Básico',
-          //   technologies: ['docker'],
-          // },
+          {
+            name: 'Docker',
+            subtitle: 'Básico',
+            technologies: ['docker'],
+          },
           // {
           //   name: "OAuth",
           //   subtitle: "Básico",
@@ -1074,20 +1083,6 @@ export const dataContact = [
   //   link: 'https://www.linkedin.com/in/camiloescar',
   //   icon: <FaLinkedinIn />,
   // },
-  // {
-  //   id: 6,
-  //   title: 'Instagram',
-  //   subtitle: 'instagram.com/camiloescar',
-  //   link: 'https://www.instagram.com/camiloescar',
-  //   icon: <FaInstagram />,
-  // },
-  // {
-  //   id: 7,
-  //   title: 'Facebook',
-  //   subtitle: 'facebook.com/camiloescar',
-  //   link: 'https://www.facebook.com/Camilinnnn/',
-  //   icon: <FaFacebookF />,
-  // }
 ];
 
 // export const dataTestimonials = [

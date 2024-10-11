@@ -17,6 +17,7 @@ import {
   Code,
   ChevronDown,
   ChevronUp,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { iconMap, IconMapKey } from './shared/iconMap';
@@ -30,6 +31,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+
+// Extended interface for portfolio items
+interface ExtendedPortfolioItem extends PortfolioItem {
+  mediaType?: 'image' | 'gif';
+  staticImage?: string;
+  gifImage?: string;
+}
 
 const ITEMS_PER_PAGE = 6;
 
@@ -78,7 +86,58 @@ const getTechIcon = (tech: string) => {
   return <Code size={12} />;
 };
 
-const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
+const MediaDisplay: React.FC<{ 
+  project: ExtendedPortfolioItem,
+  alt: string,
+}> = ({ project, alt }) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleLoad = () => setIsLoading(false);
+  const handleError = () => {
+    setError(true);
+    setIsLoading(false);
+  };
+
+  const currentImage = isHovered && project.gifImage ? project.gifImage : project.image;
+
+  if (error) {
+    return (
+      <div className="w-full h-48 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-t-xl">
+        <ImageIcon className="w-12 h-12 text-gray-400" />
+      </div>
+    );
+  }
+  return (
+    <div 
+      className="relative w-full h-48"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {isLoading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        </div>
+      )}
+      <Image
+        src={currentImage}
+        alt={alt}
+        width={400}
+        height={300}
+        className={`rounded-t-xl object-cover w-full h-48 transition-all duration-300 ${
+          isLoading ? 'opacity-0' : 'opacity-100'
+        }`}
+        onLoad={handleLoad}
+        onError={handleError}
+        unoptimized={project.mediaType === 'gif' && isHovered}
+      />
+    </div>
+  );
+};
+
+// Project Card Component
+const ProjectCard: React.FC<{ project: ExtendedPortfolioItem }> = ({ project }) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
     whileTap={{ scale: 0.98 }}
@@ -86,12 +145,9 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   >
     <Card className="h-full flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
       <CardHeader className="p-0">
-        <Image
-          src={project.image}
+        <MediaDisplay
+          project={project}
           alt={project.title}
-          width={400}
-          height={300}
-          className="rounded-t-xl object-cover w-full h-48"
         />
       </CardHeader>
       <CardContent className="p-4 flex-grow">
@@ -147,7 +203,8 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   </motion.div>
 );
 
-const ProjectTable: React.FC<{ projects: PortfolioItem[] }> = ({ projects }) => (
+// Project Table Component
+const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({ projects }) => (
   <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 shadow-lg backdrop-blur-sm">
     <Table>
       <TableHeader>
@@ -216,7 +273,7 @@ const ProjectTable: React.FC<{ projects: PortfolioItem[] }> = ({ projects }) => 
   </div>
 );
 
-
+// Main Portfolio Component
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);
   const [searchTerm] = useState('');
@@ -228,7 +285,10 @@ const Portfolio: React.FC = () => {
   }, []);
 
   const filteredProjects = useMemo(() => {
-    return dataPortfolio.filter(
+    return dataPortfolio.map(project => ({
+      ...project,
+      mediaType: project.image.toLowerCase().endsWith('.gif') ? 'gif' as const : 'image' as const
+    })).filter(
       (project) =>
         project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -268,7 +328,7 @@ const Portfolio: React.FC = () => {
             <GradientName>Portfolio</GradientName>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground">
-          Algunos de mis Proyectos desarrollados de manera freelance.
+            Algunos de mis Proyectos desarrollados de manera freelance.
           </p>
         </motion.div>
         <Separator />
@@ -282,11 +342,11 @@ const Portfolio: React.FC = () => {
               visible: { transition: { staggerChildren: 0.1 } },
             }}
           >
-            {/* Grid view for larger screens */}
-            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
+             {/* Grid view for larger screens */}
+             <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
               {filteredProjects
                 .slice(0, visibleProjects)
-                .map((project: PortfolioItem) => (
+                .map((project) => (
                   <motion.div
                     key={project.id}
                     variants={{
@@ -325,7 +385,7 @@ const Portfolio: React.FC = () => {
             >
               {visibleProjects === ITEMS_PER_PAGE ? (
                 <>
-                  Ver mas
+                  Ver más
                   <ChevronDown className="ml-2 h-4 w-4" />
                 </>
               ) : (

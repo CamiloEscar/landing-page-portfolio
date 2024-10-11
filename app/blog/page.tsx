@@ -116,7 +116,7 @@ export default function BlogIndex() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4"
           >
-            <Title title="Blog" subtitle="Explora Artículos" />
+            <Title title="Blog Personal" subtitle="Explora Artículos subidos por mi, que utilizo para repasar" />
             <div className="flex gap-4">
               <Button variant="outline" size="sm" asChild>
                 <Link href="/">

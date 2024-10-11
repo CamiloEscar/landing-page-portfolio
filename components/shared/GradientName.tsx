@@ -18,7 +18,6 @@ const COLOR_PALETTES = {
     ['#58A6FF', '#3FB950', '#79C0FF'], // GitHub azul claro, verde claro, celeste
     ['#79C0FF', '#56D364', '#D2A8FF'], // Celeste, verde claro, lavanda
     ['#39D353', '#388BFD', '#8957E5'], // Verde neón, azul brillante, púrpura
-    ['#388BFD', '#EC775C', '#8957E5'], // Azul brillante, coral, púrpura
   ]
 };
 
