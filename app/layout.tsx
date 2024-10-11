@@ -7,8 +7,31 @@ import React from 'react';
 const urbanist = Urbanist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Portfolio - Camilo Escar',
-  description: 'Landing page by me',
+  title: 'Portfolio de Camilo Escar | Desarrollador Web',
+  description: 'Explora el portfolio de Camilo Escar, desarrollador web especializado en Next.js y React. Proyectos, habilidades y experiencia.',
+  keywords: ['desarrollo web', 'Next.js', 'React', 'portfolio', 'Camilo Escar'],
+  authors: [{ name: 'Camilo Escar', url: 'https://camiloescar.vercel.app/' }],
+  creator: 'Camilo Escar',
+  metadataBase: new URL('https://camiloescar.vercel.app/'),
+  openGraph: {
+    title: 'Portfolio de Camilo Escar | Desarrollador Web',
+    description: 'Explora el portfolio de Camilo Escar, desarrollador web especializado en Next.js y React.',
+    type: 'website',
+    url: '/',
+    siteName: 'Portfolio de Camilo Escar',
+    locale: 'es_ES',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -18,6 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={urbanist.className}>
         <ThemeProvider
           attribute="class"
