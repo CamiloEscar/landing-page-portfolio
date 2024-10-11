@@ -1,10 +1,10 @@
 'use client';
 
 import React, { Suspense, lazy } from 'react';
-import Loading from '@/components/loading';
+import Loading from '@/components/shared/loading';
 
-const MinimalPortfolio = lazy(() => import('@/components/MinimalPortfolio'));
-const MinimalNavbar = lazy(() => import('@/components/MinimalNavbar'));
+const MinimalPortfolio = lazy(() => import('@/components/minimal/MinimalPortfolio'));
+const MinimalNavbar = lazy(() => import('@/components/minimal/MinimalNavbar'));
 
 export default function MinimalPage() {
   return (

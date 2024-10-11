@@ -19,7 +19,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Check } from 'lucide-react';
-import GradientName from './GradientName';
+import GradientName from './shared/GradientName';
 
 const formSchema = z.object({
   username: z

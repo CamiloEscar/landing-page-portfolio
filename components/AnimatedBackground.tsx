@@ -74,7 +74,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   );
 
   const generateElements = useCallback(() => {
-    const newStars = Array.from({ length: 5 }, (_, i) => ({
+    const newStars = Array.from({ length: 2 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 60,

@@ -24,8 +24,8 @@ import {
 } from '@/components/ui/select';
 import Title from '@/components/shared/title';
 import { dataBlog, BlogPost } from './data';
-import Navbar from '@/components/shared/navbar';
-import FooterBlog from '@/components/FooterBlog';
+import Navbar from '@/components/shared/navbarBlog';
+import FooterBlog from '@/components/blog/FooterBlog';
 
 const ITEMS_PER_PAGE = 6;
 

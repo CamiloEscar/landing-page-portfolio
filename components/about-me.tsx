@@ -2,7 +2,7 @@ import React from 'react';
 import { Building, Calendar } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { educationTimeline, workExperience } from '@/data';
-import GradientName from './GradientName';
+import GradientName from './shared/GradientName';
 
 interface TimelineEvent {
   id: number;
@@ -69,7 +69,7 @@ export default function CenteredTimeline() {
   ].sort((a, b) => b.period.localeCompare(a.period));
 
   return (
-    <section className="py-6">
+    <section className="py-6" id='timeline'>
       <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <div className="grid grid-cols-2 gap-4 mb-4 pt-4">
           <div className="text-right">

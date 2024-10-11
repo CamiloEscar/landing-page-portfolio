@@ -37,7 +37,7 @@ import {
   workExperience,
   aboutMe,
   dataLanguage,
-} from '../data';
+} from '../../data';
 import Image from 'next/image';
 import { QRCodeCanvas } from 'qrcode.react';
 

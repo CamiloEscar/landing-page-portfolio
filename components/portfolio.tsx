@@ -19,8 +19,8 @@ import {
   ChevronUp,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
-import { iconMap, IconMapKey } from './iconMap';
-import GradientName from './GradientName';
+import { iconMap, IconMapKey } from './shared/iconMap';
+import GradientName from './shared/GradientName';
 import { Separator } from '@/components/ui/separator';
 import {
   Table,
@@ -84,7 +84,7 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
     whileTap={{ scale: 0.98 }}
     transition={{ type: 'spring', stiffness: 300, damping: 10 }}
   >
-    <Card className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
+    <Card className="h-full flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
       <CardHeader className="p-0">
         <Image
           src={project.image}
@@ -94,13 +94,15 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
           className="rounded-t-xl object-cover w-full h-48"
         />
       </CardHeader>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-grow">
         <CardTitle className="text-xl mb-2 text-gray-800 dark:text-white">
           {project.title}
         </CardTitle>
-        <p className="text-black dark:text-gray-400 text-sm mb-4">
-          {project.description}
-        </p>
+        <div className="relative">
+          <p className="text-black dark:text-gray-400 text-sm mb-4 line-clamp-3 hover:line-clamp-none transition-all duration-300">
+            {project.description}
+          </p>
+        </div>
         <div className="flex flex-wrap gap-2 mb-4">
           {project.technologies.map((tech: string, techIndex: number) => (
             <motion.span
@@ -145,13 +147,13 @@ const ProjectCard: React.FC<{ project: PortfolioItem }> = ({ project }) => (
   </motion.div>
 );
 
-const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
+const ProjectTable: React.FC<{ projects: PortfolioItem[] }> = ({ projects }) => (
   <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 shadow-lg backdrop-blur-sm">
     <Table>
       <TableHeader>
         <TableRow className="bg-gray-50 dark:bg-gray-700/50">
           <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Project</TableHead>
-          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Technologies</TableHead>
+          <TableHead className="hidden sm:table-cell font-semibold text-gray-700 dark:text-gray-200">Technologies</TableHead>
           <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Links</TableHead>
         </TableRow>
       </TableHeader>
@@ -160,9 +162,25 @@ const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
           <TableRow key={project.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
             <TableCell>
               <div className="font-medium text-gray-900 dark:text-gray-100">{project.title}</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{project.description}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2 sm:line-clamp-none">
+                {project.description}
+              </div>
+              <div className="sm:hidden mt-2">
+                <div className="flex flex-wrap gap-1">
+                  {project.technologies.slice(0, 3).map((tech, index) => (
+                    <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.technologies.length > 3 && (
+                    <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                      +{project.technologies.length - 3}
+                    </span>
+                  )}
+                </div>
+              </div>
             </TableCell>
-            <TableCell>
+            <TableCell className="hidden sm:table-cell">
               <div className="flex flex-wrap gap-1">
                 {project.technologies.map((tech, index) => (
                   <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
@@ -172,10 +190,10 @@ const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
               </div>
             </TableCell>
             <TableCell>
-              <div className="flex space-x-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 {project.urlGithub && (
                   <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="sm" className="bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <Button variant="outline" size="sm" className="w-full sm:w-auto bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <Github className="h-4 w-4 mr-2" />
                       GitHub
                     </Button>
@@ -183,7 +201,7 @@ const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
                 )}
                 {project.urlDemo && (
                   <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
-                    <Button size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                    <Button size="sm" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Demo
                     </Button>
@@ -197,6 +215,7 @@ const ProjectTable = ({ projects }: { projects: PortfolioItem[] }) => (
     </Table>
   </div>
 );
+
 
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);

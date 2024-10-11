@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { dataExperience } from '../data';
+import { dataExperience } from '../../data';
 import { iconMap, IconMapKey } from './iconMap';
 
 type TechInfo = {

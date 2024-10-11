@@ -33,9 +33,9 @@ import {
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Title from '@/components/shared/title';
-import Navbar from '@/components/shared/navbar';
+import Navbar from '@/components/shared/navbarBlog';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Footer from '@/components/FooterBlog';
+import Footer from '@/components/blog/FooterBlog';
 
 interface Item {
   name: string

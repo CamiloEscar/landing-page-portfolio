@@ -13,7 +13,7 @@ import {
   workExperience,
   aboutMe,
 } from '@/data';
-import GradientName from './GradientName';
+import GradientName from './shared/GradientName';
 
 type Skill = {
   id: string | number;

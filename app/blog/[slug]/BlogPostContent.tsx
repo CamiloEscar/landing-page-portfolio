@@ -18,11 +18,11 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Navbar from '@/components/shared/navbar';
+import Navbar from '@/components/shared/navbarBlog';
 import { BlogPost, dataBlog } from '../data';
 import TableOfContents from './TableOfContents';
 import RelatedArticles from './RelatedArticles';
-import FooterBlog from '@/components/FooterBlog';
+import FooterBlog from '@/components/blog/FooterBlog';
 
 interface TocItem {
   id: string;

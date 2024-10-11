@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useCallback, useRef, FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,12 +31,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Card, CardContent } from '@/components/ui/card';
-import GradientName from './GradientName';
-import TechStack from './TechStack';
-
-
-
-const greetings = ['Hola 👋, soy', 'Hello 👋, I am', 'Olá 👋, eu sou'];
+import GradientName from './shared/GradientName';
+import TechStack from './shared/TechStack';
+import { dataIntroduction } from '@/data';
 
 interface ActionButtonProps {
   text: string;
@@ -155,6 +154,8 @@ export default function Introduction() {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
+  const { greetings, roles, description, buttons, socialLinks, cv, scroll } = dataIntroduction[0];
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
@@ -164,15 +165,14 @@ export default function Introduction() {
       const centerX = left + width / 2;
       const centerY = top + height / 2;
       
-      // Invertimos la dirección del movimiento
       const moveX = (centerX - clientX) / 50;
       const moveY = (centerY - clientY) / 50;
 
       if (cardRef.current) {
-        cardRef.current.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
+        cardRef.current.style.transform = `translate(${moveX * 0.2}px, ${moveY * 0.2}px)`;
       }
       if (imageRef.current) {
-        imageRef.current.style.transform = `translate(${moveX * 0.9}px, ${moveY * 0.9}px)`;
+        imageRef.current.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
       }
     };
 
@@ -195,7 +195,7 @@ export default function Introduction() {
 
   const cycleGreeting = useCallback(() => {
     setCurrentGreetingIndex((prevIndex) => (prevIndex + 1) % greetings.length);
-  }, []);
+  }, [greetings.length]);
 
   useEffect(() => {
     const greetingInterval = setInterval(cycleGreeting, 3000);
@@ -244,7 +244,7 @@ export default function Introduction() {
                 <div className="h-[40px] mb-6">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200">
                     <Typewriter
-                      words={['Developer Web 💻', 'Estudiante de Sistemas 📚']}
+                      words={roles}
                       loop={true}
                       cursor
                       cursorStyle="|"
@@ -256,41 +256,38 @@ export default function Introduction() {
                 </div>
 
                 <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                  Más de 2 años de experiencia en desarrollo web, me he enfocado
-                  en tecnologías como
+                  {description.before}
                   <GradientName
                     size="small"
                     className="mx-1 font-bold font-mono"
                   >
-                    React
+                    {description.reactText}
                   </GradientName>
-                  y
+                  {description.middle}
                   <GradientName
                     size="small"
                     className="mx-1 font-bold font-mono"
                   >
-                    Node.js
+                    {description.nodeText}
                   </GradientName>
-                  . Mi objetivo es crear experiencias web de calidad,
-                  manteniendo un aprendizaje continuo para innovar y mejorar
-                  cada día.
+                  {description.after}
                 </p>
 
                 <div className="flex flex-wrap gap-4 mb-8">
                   <ActionButton
-                    text="Contacto"
+                    text={buttons.contact}
                     icon={Mail}
                     color="green"
                     href="#contact"
                   />
                   <ActionButton
-                    text="Portfolio"
+                    text={buttons.portfolio}
                     icon={Layers}
                     color="blue"
                     href="/minimal"
                   />
                   <ActionButton
-                    text="Blog"
+                    text={buttons.blog}
                     icon={Pen}
                     color="purple"
                     href="/blog"
@@ -301,13 +298,13 @@ export default function Introduction() {
                   <SocialLink
                     href="https://github.com/CamiloEscar"
                     icon={Github}
-                    label="GitHub"
+                    label={socialLinks.github}
                     color="gray"
                   />
                   <SocialLink
                     href="https://www.linkedin.com/in/camiloescar/"
                     icon={Linkedin}
-                    label="LinkedIn"
+                    label={socialLinks.linkedin}
                     color="blue"
                   />
                   <DropdownMenu>
@@ -321,7 +318,7 @@ export default function Introduction() {
                           className="bg-green-500/10 border-green-500/50 text-green-600 dark:text-green-400 hover:bg-green-500 hover:text-white transition-all duration-300 font-medium"
                         >
                           <Download className="mr-2 w-5 h-5" />
-                          Curriculum
+                          {cv.button}
                         </Button>
                       </motion.div>
                     </DropdownMenuTrigger>
@@ -375,7 +372,7 @@ export default function Introduction() {
       <AnimatePresence>
         {showScrollIndicator && (
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 20  }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             className="fixed bottom-8 right-8 text-center z-50"
@@ -393,7 +390,7 @@ export default function Introduction() {
                 transition={{ delay: 1.5 }}
                 className="mt-4 text-sm font-bold text-gray-600 dark:text-gray-400 backdrop-blur-sm  px-4 py-2 rounded-full"
               >
-                Scroll
+                {scroll}
               </motion.div>
             </motion.div>
           </motion.div>
@@ -404,12 +401,10 @@ export default function Introduction() {
         <DialogContent className="sm:max-w-[800px] h-[90vh] p-0">
           <DialogHeader className="p-6 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
             <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
-              Curriculum Vitae
+              {cv.dialog.title}
             </DialogTitle>
             <DialogDescription className="text-gray-600 dark:text-gray-400">
-              {cvLanguage === 'en'
-                ? 'You\'re viewing the English version. Switch language or download using the buttons below.'
-                : 'Estás viendo la versión en Español. Cambia el idioma o descarga usando los botones debajo.'}
+              {cv.dialog.description}
             </DialogDescription>
           </DialogHeader>
           <div className="flex-1 bg-gray-100 dark:bg-gray-800">
@@ -425,7 +420,7 @@ export default function Introduction() {
               onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
               className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              {cvLanguage === 'en' ? 'Cambiar a Español' : 'Switch to English'}
+              {cv.dialog.switchLanguage}
             </Button>
             <div className="flex items-center gap-4">
               <Button
@@ -434,7 +429,7 @@ export default function Introduction() {
                 className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
               >
                 <X className="mr-2 h-4 w-4" />
-                {cvLanguage === 'en' ? 'Close' : 'Cerrar'}
+                {cv.dialog.close}
               </Button>
               <Button
                 onClick={() =>
@@ -443,7 +438,7 @@ export default function Introduction() {
                 className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white hover:opacity-90 transition-opacity"
               >
                 <Download className="mr-2 h-4 w-4" />
-                {cvLanguage === 'en' ? 'Download CV' : 'Descargar CV'}
+                {cv.dialog.download}
               </Button>
             </div>
           </div>

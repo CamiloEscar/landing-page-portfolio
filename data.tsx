@@ -2,13 +2,11 @@ import {
   BookText,
   Briefcase,
   Brush,
-  // Code2,
   CodeSquare,
   Home,
   Inbox,
   Mail,
   PanelsTopLeft,
-  // Phone,
   UserRound,
   Wrench,
   GraduationCap,
@@ -18,14 +16,119 @@ import {
   Database,
   Pen,
   Globe,
+  Calendar,
 } from 'lucide-react';
 import {
-  // FaFacebookF,
-  //  FaInstagram,
-  // FaLinkedinIn,
   FaWhatsapp,
 } from 'react-icons/fa';
 import { Github } from 'lucide-react';
+
+interface Introduccion {
+  greetings: string[];
+  roles: string[];
+  description: {
+    before: string;
+    reactText: string;
+    middle: string;
+    nodeText: string;
+    after: string;
+  };
+  buttons: {
+    contact: string;
+    portfolio: string;
+    blog: string;
+  };
+  socialLinks: {
+    github: string;
+    linkedin: string;
+  };
+  cv: {
+    button: string;
+    dialog: {
+      title: string;
+      description: string;
+      switchLanguage: string;
+      close: string;
+      download: string;
+    };
+  };
+  scroll: string;
+}
+
+export interface ExperienceCategory {
+  id: number;
+  title: string;
+  experience: ExperienceGroup[];
+}
+
+export interface ExperienceGroup {
+  category: string;
+  items: ExperienceItem[];
+}
+
+export interface ExperienceItem {
+  name: string;
+  subtitle: string;
+  value?: number;
+  experience?: string;
+  technologies: string[];
+}
+
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  image: string;
+  urlGithub: string;
+  urlDemo: string;
+  description: string;
+  technologies: string[];
+}
+
+export interface ExperienceItemMinimal {
+  name: string;
+  subtitle: string;
+  value: number;
+  experience: string;
+  technologies: string[];
+}
+
+export interface ExperienceCategoryMinimal {
+  id: number;
+  title: string;
+  experience: ExperienceItemMinimal[];
+}
+
+export const dataIntroduction: Introduccion [] = [
+  {greetings: ['Hola 👋, soy', 'Hi 👋, soy', 'Olá 👋, soy'],
+  roles: ['Desarrollador Web', 'Estudiante de Sistemas'],
+  description: {
+    before: 'Más de 2 años de experiencia en desarrollo web, me he enfocado en tecnologías como',
+    reactText: 'React',
+    middle: 'y',
+    nodeText: 'Node.js',
+    after: '. Mi objetivo es crear experiencias web de calidad, manteniendo un aprendizaje continuo para innovar y mejorar cada día.',
+  },
+  buttons: {
+    contact: 'Contacto',
+    portfolio: 'Mini Portfolio',
+    blog: 'Blog Personal',
+  },
+  socialLinks: {
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
+  },
+  cv: {
+    button: 'Curriculum',
+    dialog: {
+      title: 'Curriculum Vitae',
+      description: 'Estás viendo la versión en Español. Cambia el idioma o descarga usando los botones debajo.',
+      switchLanguage: 'Switch to English',
+      close: 'Cerrar',
+      download: 'Descargar CV',
+    },
+  },
+  scroll: 'Desplazar',}
+];
 
 export const dataAboutMe = [
   {
@@ -64,6 +167,7 @@ export const dataLanguage = [
     level: 'Lecto compresion',
   },
 ];
+
 export const educationTimeline = [
   {
     id: 1,
@@ -95,7 +199,6 @@ export const educationTimeline = [
   },
 ];
 
-
 export const workExperience = [
   {
     id: 1,
@@ -126,7 +229,6 @@ export const workExperience = [
   },
 ];
 
-
 export const itemsNavbar = [
   {
     id: 1,
@@ -136,30 +238,36 @@ export const itemsNavbar = [
   },
   {
     id: 2,
-    title: 'Proyectos',
-    icon: <CodeSquare size={20} />,
-    link: '#portfolio',
-  },
-  {
-    id: 3,
-    title: 'Servicio',
-    icon: <BookText size={20} />,
-    link: '#services',
-  },
-  {
-    id: 4,
     title: 'Sobre Mi',
     icon: <UserRound size={20} />,
     link: '#about-me',
   },
   {
+    id: 3,
+    title: 'Proyectos',
+    icon: <CodeSquare size={20} />,
+    link: '#portfolio',
+  },
+  {
+    id: 4,
+    title: 'Servicio',
+    icon: <BookText size={20} />,
+    link: '#experience-services',
+  },
+  {
     id: 5,
+    title: 'TimeLine',
+    icon: <Calendar size={20} />,
+    link: '#timeline',
+  },
+  {
+    id: 6,
     title: 'Blog',
     icon: <Pen size={20} />,
     link: '#blog',
   },
   {
-    id: 6,
+    id: 7,
     title: 'Contacto',
     icon: <Mail size={20} />,
     link: '#contact',
@@ -191,16 +299,6 @@ export const aboutMe = {
   description:
     'Actualmente, estoy cursando la carrera de Sistemas de Información y tengo experiencia en la creación de proyectos de forma independiente, abarcando desde el diseño inicial hasta la implementación final. Me capacito constantemente en nuevas tecnologías y metodologías que me permiten escribir código más limpio y escalable. Mis habilidades interpersonales me facilitan la colaboración efectiva en equipos, promoviendo un ambiente de trabajo positivo y productivo. Busco una oportunidad en un entorno amigable y desafiante donde pueda seguir aprendiendo y aplicar mis habilidades para contribuir al crecimiento del equipo y de la empresa.',
 };
-
-export interface PortfolioItem {
-  id: number;
-  title: string;
-  image: string;
-  urlGithub: string;
-  urlDemo: string;
-  description: string;
-  technologies: string[];
-}
 
 export const dataPortfolio: PortfolioItem[] = [
   {
@@ -355,20 +453,6 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
 ];
-
-export interface ExperienceItemMinimal {
-  name: string;
-  subtitle: string;
-  value: number;
-  experience: string;
-  technologies: string[];
-}
-
-export interface ExperienceCategoryMinimal {
-  id: number;
-  title: string;
-  experience: ExperienceItemMinimal[];
-}
 
 export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
   {
@@ -577,24 +661,6 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
     ],
   },
 ];
-export interface ExperienceCategory {
-  id: number;
-  title: string;
-  experience: ExperienceGroup[];
-}
-
-export interface ExperienceGroup {
-  category: string;
-  items: ExperienceItem[];
-}
-
-export interface ExperienceItem {
-  name: string;
-  subtitle: string;
-  value?: number;
-  experience?: string;
-  technologies: string[];
-}
 
 export const dataExperience: ExperienceCategory[] = [
   {
@@ -1027,44 +1093,10 @@ export const dataContact = [
 // export const dataTestimonials = [
 //   {
 //     id: 1,
-//     name: "George Snow",
+//     name: "",
 //     description:
-//       "¡Increíble plataforma! Los testimonios aquí son genuinos y me han ayudado a tomar decisiones informadas. ¡Altamente recomendado!",
+//       "¡!",
 //     imageUrl: "/profile-1.jpeg",
 //   },
-//   {
-//     id: 2,
-//     name: "Juan Pérez",
-//     description:
-//       "Me encanta la variedad de testimonios disponibles en esta página. Es inspirador ver cómo otras personas han superado desafíos similares a los míos. ¡Gracias por esta invaluable fuente de motivación!",
-//     imageUrl: "/profile-2.jpeg",
-//   },
-//   {
-//     id: 3,
-//     name: "María García",
-//     description:
-//       "Excelente recurso para obtener opiniones auténticas sobre diferentes productos y servicios. Me ha ayudado mucho en mis compras en línea. ¡Bravo por este sitio!",
-//     imageUrl: "/profile-3.jpeg",
-//   },
-//   {
-//     id: 4,
-//     name: "Laura Snow",
-//     description:
-//       "¡Qué descubrimiento tan fantástico! Los testimonios aquí son honestos y detallados. Me siento más seguro al tomar decisiones después de leer las experiencias compartidas por otros usuarios.",
-//     imageUrl: "/profile-3.jpeg",
-//   },
-//   {
-//     id: 5,
-//     name: "Carlos Sánchez",
-//     description:
-//       "Una joya en la web. Los testimonios son fáciles de encontrar y están bien organizados. ¡Definitivamente mi destino número uno cuando necesito referencias confiables!",
-//     imageUrl: "/profile-2.jpeg",
-//   },
-//   {
-//     id: 6,
-//     name: "Antonio Martínez",
-//     description:
-//       "¡Fantástico recurso para aquellos que buscan validación antes de tomar decisiones importantes! Los testimonios aquí son veraces y realmente útiles. ¡Gracias por simplificar mi proceso de toma de decisiones!",
-//     imageUrl: "/profile-3.jpeg",
-//   },
 // ];
+

@@ -4,7 +4,7 @@ import { BlogPost } from '@/app/blog/data';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Book } from 'lucide-react';
-import GradientName from './GradientName';
+import GradientName from './shared/GradientName';
 
 interface RecentPostsProps {
   posts: BlogPost[];

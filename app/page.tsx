@@ -2,9 +2,9 @@
 
 import React, { Suspense, lazy } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
-import Navbar from '@/components/navbar';
+import Navbar from '@/components/shared/navbar';
 import Introduction from '@/components/introduction';
-import Loading from '@/components/loading'; // Necesitarás crear este componente
+import Loading from '@/components/shared/loading'; // Necesitarás crear este componente
 import RecentPosts from '@/components/RecentPost';
 import { dataBlog } from '@/app/blog/data'; // Importa la data de los posts
 import AboutMe2 from '@/components/sobreMi';

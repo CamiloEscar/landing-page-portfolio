@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Linkedin, Github, ArrowUp } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { dataContact } from '../data';
+import { dataContact } from '../../data';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const socialLinks = [
