@@ -265,7 +265,6 @@ export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [cvLanguage, setCvLanguage] = useState('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
-  const [isImageLoaded] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -340,7 +339,7 @@ export default function Introduction() {
             transition={{ duration: 0.8 }}
             style={{ transition: 'transform 0.3s ease-out' }}
           >
-            <Card className="backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-white/20 dark:border-gray-700/20 shadow-xl">
+            <Card className="w-full backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-white/20 dark:border-gray-700/20 shadow-xl">
               <CardContent className="p-8 sm:p-10">
                 <AnimatePresence mode="wait">
                   <motion.h3
@@ -361,6 +360,7 @@ export default function Introduction() {
 
                 <div className="h-[40px] mb-6">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200">
+                    
                     <Typewriter
                       words={roles}
                       loop={true}
@@ -460,12 +460,9 @@ export default function Introduction() {
 
           <motion.div
             ref={imageRef}
-            className="w-full lg:w-2/5 lg:absolute lg:right-20 lg:-mr-0 z-20"
+            className="w-full lg:w-2/5 lg:absolute lg:right-20 lg:-mr-0 z-30"
             initial={{ opacity: 0, scale: 0.8 }}
-            animate={{
-              opacity: isImageLoaded ? 1 : 0,
-              scale: isImageLoaded ? 1 : 0.8,
-            }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             style={{ transition: 'transform 0.3s ease-out' }}
           >
