@@ -34,6 +34,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import GradientName from './shared/GradientName';
 import TechStack from './shared/TechStack';
 import { dataIntroduction } from '@/data';
+import { QRCodeCanvas } from 'qrcode.react';
 
 interface ActionButtonProps {
   text: string;
@@ -127,6 +128,123 @@ const SocialLink: FC<SocialLinkProps> = ({
   </motion.div>
 );
 
+const FlipCard = () => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [startPosition, setStartPosition] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [qrSize, setQrSize] = useState(280);
+
+  useEffect(() => {
+    const updateQRSize = () => {
+      if (cardRef.current) {
+        const { width } = cardRef.current.getBoundingClientRect();
+        setQrSize(width - 32); // Subtract padding
+      }
+    };
+
+    updateQRSize();
+    window.addEventListener('resize', updateQRSize);
+    return () => window.removeEventListener('resize', updateQRSize);
+  }, []);
+
+  const handleClick = () => {
+    if (!isDragging) {
+      setIsFlipped(!isFlipped);
+      setRotation({ x: 0, y: 0 });
+    }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartPosition({ x: e.clientX, y: e.clientY });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && cardRef.current) {
+      const { width, height } = cardRef.current.getBoundingClientRect();
+      const deltaX = e.clientX - startPosition.x;
+      const deltaY = e.clientY - startPosition.y;
+      const newRotationY = (deltaX / width) * 180;
+      const newRotationX = -(deltaY / height) * 180;
+      setRotation({ x: newRotationX, y: newRotationY });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    if (Math.abs(rotation.y) > 90) {
+      setIsFlipped(!isFlipped);
+    }
+    setRotation({ x: 0, y: 0 });
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      if (Math.abs(rotation.y) > 90) {
+        setIsFlipped(!isFlipped);
+      }
+      setRotation({ x: 0, y: 0 });
+    }
+  };
+
+  return (
+    <div 
+      ref={cardRef}
+      className="flip-card w-full h-full cursor-pointer"
+      onClick={handleClick}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div 
+        className={`flip-card-inner w-full h-full transition-transform duration-300 ${isFlipped ? 'rotate-y-180' : ''}`}
+        style={{
+          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) ${isFlipped ? 'rotateY(180deg)' : ''}`,
+        }}
+      >
+        <div className="flip-card-front w-full h-full">
+          <div className="absolute inset-0 rounded-2xl overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 backdrop-blur-3xl" />
+            <div className="absolute inset-0 border-[16px] border-white/10 dark:border-gray-800/10 rounded-2xl z-10" />
+            <Image
+              src="/profile.webp"
+              alt="Profile"
+              fill
+              style={{ objectFit: 'cover' }}
+              className="rounded-xl z-0"
+              priority
+            />
+          </div>
+        </div>
+        <div className="flip-card-back w-full h-full rotate-y-180 rounded-2xl overflow-hidden">
+          <div className="w-full h-full flex flex-col items-center justify-center bg-white dark:bg-gray-800 p-4">
+            <QRCodeCanvas
+              value={typeof window !== 'undefined' ? window.location.href : ''}
+              size={qrSize}
+              bgColor={'#ffffff'}
+              fgColor={'#000000'}
+              level={'H'}
+              imageSettings={{
+                src: '/logo.png',
+                x: undefined,
+                y: undefined,
+                height: qrSize * 0.2,
+                width: qrSize * 0.2,
+                excavate: true,
+              }}
+              className="w-full h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ScrollIndicator = () => (
   <div className="relative w-6 h-10 rounded-full border-2 border-gray-400 dark:border-gray-600 p-1">
     <motion.div
@@ -147,7 +265,7 @@ export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
   const [cvLanguage, setCvLanguage] = useState('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isImageLoaded] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -352,19 +470,7 @@ export default function Introduction() {
             style={{ transition: 'transform 0.3s ease-out' }}
           >
             <div className="relative aspect-square max-w-[280px] sm:max-w-[320px] lg:max-w-[400px] mx-auto lg:ml-auto">
-              <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 backdrop-blur-3xl" />
-                <div className="absolute inset-0 border-[16px] border-white/10 dark:border-gray-800/10 rounded-2xl z-10" />
-                <Image
-                  src="/profile.webp"
-                  alt="Profile"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  className="rounded-xl z-0"
-                  priority
-                  onLoadingComplete={() => setIsImageLoaded(true)}
-                />
-              </div>
+              <FlipCard />
             </div>
           </motion.div>
         </div>
