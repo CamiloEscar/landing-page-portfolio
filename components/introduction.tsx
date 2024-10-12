@@ -13,6 +13,7 @@ import {
   X,
   ChevronRight,
   ExternalLink,
+  QrCode,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -191,7 +192,7 @@ const FlipCard = () => {
   };
 
   return (
-    <div 
+    <div
       ref={cardRef}
       className="flip-card w-full h-full cursor-pointer"
       onClick={handleClick}
@@ -200,10 +201,14 @@ const FlipCard = () => {
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
     >
-      <div 
-        className={`flip-card-inner w-full h-full transition-transform duration-300 ${isFlipped ? 'rotate-y-180' : ''}`}
+      <div
+        className={`flip-card-inner w-full h-full transition-transform duration-300 ${
+          isFlipped ? 'rotate-y-180' : ''
+        }`}
         style={{
-          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) ${isFlipped ? 'rotateY(180deg)' : ''}`,
+          transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) ${
+            isFlipped ? 'rotateY(180deg)' : ''
+          }`,
         }}
       >
         <div className="flip-card-front w-full h-full">
@@ -218,6 +223,10 @@ const FlipCard = () => {
               className="rounded-xl z-0"
               priority
             />
+            <Button className="absolute bottom-4 right-4 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 text-gray-800 dark:text-white">
+              <QrCode className="w-4 h-4" />
+              
+            </Button>
           </div>
         </div>
         <div className="flip-card-back w-full h-full rotate-y-180 rounded-2xl overflow-hidden">
@@ -271,25 +280,31 @@ export default function Introduction() {
   const cardRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  const { greetings, roles, description, buttons, socialLinks, cv, scroll } = dataIntroduction[0];
+  const { greetings, roles, description, buttons, socialLinks, cv, scroll } =
+    dataIntroduction[0];
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
 
       const { clientX, clientY } = e;
-      const { left, top, width, height } = containerRef.current.getBoundingClientRect();
+      const { left, top, width, height } =
+        containerRef.current.getBoundingClientRect();
       const centerX = left + width / 2;
       const centerY = top + height / 2;
-      
+
       const moveX = (centerX - clientX) / 50;
       const moveY = (centerY - clientY) / 50;
 
       if (cardRef.current) {
-        cardRef.current.style.transform = `translate(${moveX * 0.2}px, ${moveY * 0.2}px)`;
+        cardRef.current.style.transform = `translate(${moveX * 0.2}px, ${
+          moveY * 0.2
+        }px)`;
       }
       if (imageRef.current) {
-        imageRef.current.style.transform = `translate(${moveX * 0.4}px, ${moveY * 0.4}px)`;
+        imageRef.current.style.transform = `translate(${moveX * 0.4}px, ${
+          moveY * 0.4
+        }px)`;
       }
     };
 
@@ -328,7 +343,10 @@ export default function Introduction() {
   };
 
   return (
-    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden" ref={containerRef}>
+    <section
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
+      ref={containerRef}
+    >
       <div className="container mx-auto px-4 py-12 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 relative">
           <motion.div
@@ -360,7 +378,6 @@ export default function Introduction() {
 
                 <div className="h-[40px] mb-6">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200">
-                    
                     <Typewriter
                       words={roles}
                       loop={true}
@@ -475,7 +492,7 @@ export default function Introduction() {
       <AnimatePresence>
         {showScrollIndicator && (
           <motion.div
-            initial={{ opacity: 0, x: 20  }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             className="fixed bottom-8 right-8 text-center z-50"
