@@ -33,7 +33,17 @@ interface Introduccion {
     nodeText: string;
     after: string;
   };
+  link: {
+    github: string;
+    linkedin: string;
+    whatsapp: string;
+    blog: string,
+    Miniportfolio: string,
+    home: string,
+    contacto:string
+  }
   buttons: {
+    home: string,
     contact: string;
     portfolio: string;
     blog: string;
@@ -100,7 +110,11 @@ export interface ExperienceCategoryMinimal {
 }
 
 export const dataIntroduction: Introduccion [] = [
-  {greetings: ['Hola 👋, soy', 'Hi 👋, soy', 'Olá 👋, soy'],
+  {greetings: ['Hola 👋, soy',
+    'Hi 👋, I am',
+     'Bonjour 👋, je suis',
+     'Ciao 👋, sono',
+    ],
   roles: ['Desarrollador Web', 'Estudiante de Sistemas'],
   description: {
     before: 'Más de 2 años de experiencia en desarrollo web, me he enfocado en tecnologías como',
@@ -109,7 +123,17 @@ export const dataIntroduction: Introduccion [] = [
     nodeText: 'Node.js',
     after: '. Mi objetivo es crear experiencias web de calidad, manteniendo un aprendizaje continuo para innovar y mejorar cada día.',
   },
+  link: {
+    linkedin: 'in/camiloescar/',
+    github: 'CamiloEscar',
+    whatsapp: '3442-475466',
+    blog: 'Blog',
+    Miniportfolio: 'Portfolio Impreso',
+    home: 'Portfolio',
+    contacto:'camiloescar1995@gmail.com'
+  },
   buttons: {
+    home: 'Portfolio',
     contact: 'Contacto',
     portfolio: 'Mini Portfolio',
     blog: 'Blog Personal',

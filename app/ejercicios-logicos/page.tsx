@@ -1,20 +1,17 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
   Folder,
   FileCode,
-  ChevronRight,
   Loader2,
   Play,
   BookOpen,
-  List,
-  ChevronDown,
-  Menu,
+  Terminal,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css';
 import 'prismjs/components/prism-javascript';
@@ -34,66 +31,67 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Title from '@/components/shared/title';
 import Navbar from '@/components/shared/navbarBlog';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Footer from '@/components/blog/FooterBlog';
 
 interface Item {
-  name: string
-  path: string
-  type: 'file' | 'dir'
-  content?: string
-  items?: Item[]
-  url: string
-  isOpen?: boolean
+  name: string;
+  path: string;
+  type: 'file' | 'dir';
+  content?: string;
+  items?: Item[];
+  url: string;
 }
 
 const REPO_URL =
   'https://api.github.com/repos/CamiloEscar/EjerciciosLogicos/contents';
 
 export default function EjerciciosLogicos() {
-  const [categories, setCategories] = useState<Item[]>([]);
+  const [rootItems, setRootItems] = useState<Item[]>([]);
+  const [currentItems, setCurrentItems] = useState<Item[]>([]);
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [currentPath, setCurrentPath] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [consoleOutput, setConsoleOutput] = useState<string>('');
   const [htmlContent, setHtmlContent] = useState<string>('');
-  const [showPreview, setShowPreview] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const fetchItems = useCallback(async (url: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('No se pudo cargar el contenido del repositorio');
+      }
+      const data = await response.json();
+
+      const items = data.map((item: any) => ({
+        name: item.name,
+        path: item.path,
+        type: item.type,
+        url: item.url,
+      }));
+
+      return items;
+    } catch (error) {
+      console.error('Error fetching items:', error);
+      setError(
+        'No se pudo cargar el contenido. Por favor, intenta de nuevo más tarde.'
+      );
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(REPO_URL);
-        if (!response.ok) {
-          throw new Error('No se pudo cargar el contenido del repositorio');
-        }
-        const data = await response.json();
-
-        const categoriesData = data
-          .filter((item: any) => item.type === 'dir')
-          .map((item: any) => ({
-            name: item.name,
-            path: item.path,
-            type: item.type,
-            url: item.url,
-            isOpen: false,
-          }));
-
-        setCategories(categoriesData);
-      } catch (error) {
-        console.error('Error fetching categories:', error);
-        setError(
-          'No se pudo cargar las categorías. Por favor, intenta de nuevo más tarde.'
-        );
-      } finally {
-        setIsLoading(false);
-      }
+    const loadRootItems = async () => {
+      const items = await fetchItems(REPO_URL);
+      setRootItems(items);
+      setCurrentItems(items);
     };
-
-    fetchCategories();
-  }, []);
+    loadRootItems();
+  }, [fetchItems]);
 
   useEffect(() => {
     if (selectedItem && selectedItem.type === 'file' && selectedItem.content) {
@@ -101,7 +99,7 @@ export default function EjerciciosLogicos() {
     }
   }, [selectedItem]);
 
-  const loadItemContent = async (item: Item) => {
+  const loadItemContent = useCallback(async (item: Item) => {
     setIsLoading(true);
     setError(null);
     try {
@@ -113,18 +111,7 @@ export default function EjerciciosLogicos() {
         const data = await response.json();
         item.content = atob(data.content);
       } else if (item.type === 'dir' && !item.items) {
-        const response = await fetch(item.url);
-        if (!response.ok) {
-          throw new Error('No se pudo cargar el contenido del directorio');
-        }
-        const data = await response.json();
-        item.items = data.map((subItem: any) => ({
-          name: subItem.name,
-          path: subItem.path,
-          type: subItem.type,
-          url: subItem.url,
-          isOpen: false,
-        }));
+        item.items = await fetchItems(item.url);
       }
       return item;
     } catch (error) {
@@ -136,79 +123,112 @@ export default function EjerciciosLogicos() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [fetchItems]);
 
-  const toggleFolder = async (item: Item) => {
-    let updatedItem = item;
-    if (!item.items) {
-      updatedItem = (await loadItemContent(item)) || item;
+  const loadRelatedFiles = useCallback(async (htmlItem: Item) => {
+    const folder = currentItems;
+    const baseName = htmlItem.name.replace('.html', '');
+    const cssItem = folder.find(item => item.name === `${baseName}.css`);
+    const jsItem = folder.find(item => item.name === `${baseName}.js`);
+
+    let htmlContent = htmlItem.content || '';
+    let cssContent = '';
+    let jsContent = '';
+
+    if (cssItem) {
+      const loadedCssItem = await loadItemContent(cssItem);
+      if (loadedCssItem) {
+        cssContent = loadedCssItem.content || '';
+      }
     }
-    updatedItem.isOpen = !updatedItem.isOpen;
 
-    const updateCategories = (categories: Item[]): Item[] => {
-      return categories.map((category) => {
-        if (category.path === updatedItem.path) {
-          return updatedItem;
-        }
-        if (category.items) {
-          return { ...category, items: updateCategories(category.items) };
-        }
-        return category;
-      });
-    };
+    if (jsItem) {
+      const loadedJsItem = await loadItemContent(jsItem);
+      if (loadedJsItem) {
+        jsContent = loadedJsItem.content || '';
+      }
+    }
 
-    setCategories(updateCategories(categories));
-  };
+    const fullContent = `
+      <html>
+        <head>
+          <style>${cssContent}</style>
+        </head>
+        <body>
+          ${htmlContent}
+          <script>${jsContent}</script>
+        </body>
+      </html>
+    `;
 
-  const selectItem = async (item: Item) => {
+    setHtmlContent(fullContent);
+  }, [currentItems, loadItemContent]);
+
+  const selectItem = useCallback(async (item: Item) => {
     if (item.type === 'dir') {
-      await toggleFolder(item);
+      const loadedItem = await loadItemContent(item);
+      if (loadedItem && loadedItem.items) {
+        setCurrentItems(loadedItem.items);
+        setCurrentPath([...currentPath, item.name]);
+      }
     } else {
       const loadedItem = await loadItemContent(item);
       if (loadedItem) {
         setSelectedItem(loadedItem);
-        setCurrentPath(loadedItem.path.split('/'));
+        if (loadedItem.name.endsWith('.html')) {
+          await loadRelatedFiles(loadedItem);
+        }
       }
     }
-    setIsSidebarOpen(false);
-  };
+  }, [loadItemContent, currentPath, loadRelatedFiles]);
 
-  const renderDirectoryContent = (items: Item[], depth = 0) => (
-    <ul
-      className={`space-y-1 ${
-        depth > 0 ? 'border-l border-gray-200 dark:border-gray-700' : ''
-      }`}
-    >
-      {items.map((item) => (
-        <li key={item.path} className={`${depth > 0 ? 'ml-4' : ''}`}>
-          <Button
-            variant="ghost"
-            className="w-full text-left hover:bg-accent hover:text-accent-foreground transition-colors"
-            onClick={() => selectItem(item)}
+
+
+  const renderFileExplorer = useCallback((items: Item[]) => (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="space-y-2"
+      >
+        {items.map((item) => (
+          <motion.div
+            key={item.path}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
           >
-            {item.type === 'dir' &&
-              (item.isOpen ? (
-                <ChevronDown className="mr-2 h-4 w-4" />
-              ) : (
-                <ChevronRight className="mr-2 h-4 w-4" />
-              ))}
-            {item.type === 'file' ? (
-              <FileCode className="mr-2 h-4 w-4" />
+            {item.type === 'dir' ? (
+              <Button
+                variant="ghost"
+                className="w-full text-left hover:bg-accent hover:text-accent-foreground transition-colors"
+                onClick={() => selectItem(item)}
+              >
+                <Folder className="mr-2 h-4 w-4" />
+                {item.name}
+              </Button>
             ) : (
-              <Folder className="mr-2 h-4 w-4" />
+              <Card
+                className="cursor-pointer hover:shadow-md transition-shadow"
+                onClick={() => selectItem(item)}
+              >
+                <CardHeader className="p-4">
+                  <CardTitle className="text-sm font-medium flex items-center">
+                    <FileCode className="mr-2 h-4 w-4" />
+                    {item.name}
+                  </CardTitle>
+                </CardHeader>
+              </Card>
             )}
-            {item.name}
-          </Button>
-          {item.type === 'dir' &&
-            item.isOpen &&
-            item.items &&
-            renderDirectoryContent(item.items, depth + 1)}
-        </li>
-      ))}
-    </ul>
-  );
+          </motion.div>
+        ))}
+      </motion.div>
+    </AnimatePresence>
+  ), [selectItem]);
 
-  const getLanguage = (fileName: string) => {
+  const getLanguage = useCallback((fileName: string) => {
     const extension = fileName.split('.').pop()?.toLowerCase();
     switch (extension) {
       case 'js':
@@ -224,49 +244,88 @@ export default function EjerciciosLogicos() {
       default:
         return 'markup';
     }
-  };
+  }, []);
 
-  const renderHTML = () => {
+  const runCode = useCallback(() => {
     if (selectedItem && selectedItem.content) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(selectedItem.content, 'text/html');
+      const language = getLanguage(selectedItem.name);
+      let output = '';
 
-      // Extract CSS
-      const styles = doc.getElementsByTagName('style');
-      let cssContent = '';
-      for (let i = 0; i < styles.length; i++) {
-        cssContent += styles[i].textContent;
-        styles[i].remove();
+      if (language === 'javascript') {
+        try {
+          const runInSandbox = new Function('console', selectedItem.content);
+          const mockConsole = {
+            log: (...args: any[]) => {
+              output += args.join(' ') + '\n';
+            },
+            error: (...args: any[]) => {
+              output += 'Error: ' + args.join(' ') + '\n';
+            },
+            warn: (...args: any[]) => {
+              output += 'Warning: ' + args.join(' ') + '\n';
+            }
+          };
+          runInSandbox(mockConsole);
+        } catch (error) {
+          output = 'Error';
+        }
+      } else if (language === 'python') {
+        // Simulación básica de ejecución de Python
+        // const lines = selectedItem.content.split('\n');
+        const scope: { [key: string]: any } = {};
+
+        const simulatePythonExecution = (code: string) => {
+          const functionPattern = /def\s+(\w+)\s*$$(.*?)$$:/;
+          const functionCalls = /(\w+)$$(.*?)$$/g;
+
+          // Define functions
+          code.split('\n').forEach(line => {
+            const match = line.match(functionPattern);
+            if (match) {
+              const [, name, params] = match;
+              scope[name] = new Function(...params.split(','), 'return ' + line.replace(functionPattern, ''));
+            }
+          });
+
+          // Execute function calls
+          code.split('\n').forEach(line => {
+            const calls = line.match(functionCalls);
+            if (calls) {
+              calls.forEach(call => {
+                const [, name, args] = call.match(/(\w+)$$(.*?)$$/) || [];
+                if (scope[name]) {
+                  const result = scope[name](...eval(`[${args}]`));
+                  if (line.trim().startsWith('print(')) {
+                    output += result + '\n';
+                  }
+                }
+              });
+            }
+          });
+        };
+
+        simulatePythonExecution(selectedItem.content);
       }
 
-      // Extract JavaScript
-      const scripts = doc.getElementsByTagName('script');
-      let jsContent = '';
-      for (let i = 0; i < scripts.length; i++) {
-        jsContent += scripts[i].textContent;
-        scripts[i].remove();
-      }
-
-      // Remaining HTML
-      const htmlContent = doc.documentElement.outerHTML;
-
-      // Combine everything
-      const fullContent = `
-        <html>
-          <head>
-            <style>${cssContent}</style>
-          </head>
-          <body>
-            ${htmlContent}
-            <script>${jsContent}</script>
-          </body>
-        </html>
-      `;
-
-      setHtmlContent(fullContent);
-      setShowPreview(true);
+      setConsoleOutput(output);
     }
-  };
+  }, [selectedItem, getLanguage]);
+
+  const goBack = useCallback(() => {
+    if (currentPath.length > 0) {
+      const newPath = currentPath.slice(0, -1);
+      setCurrentPath(newPath);
+      if (newPath.length === 0) {
+        setCurrentItems(rootItems);
+      } else {
+        const parentItem = rootItems.find(item => item.name === newPath[0]);
+        if (parentItem && parentItem.items) {
+          setCurrentItems(parentItem.items);
+        }
+      }
+      setSelectedItem(null);
+    }
+  }, [currentPath, rootItems]);
 
   return (
     <>
@@ -300,50 +359,26 @@ export default function EjerciciosLogicos() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="w-full lg:w-1/3"
             >
-              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 lg:hidden mb-4">
+              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300">
                 <CardHeader className="bg-primary/10 text-primary">
-                  <CardTitle className="text-xl font-semibold flex items-center">
-                    <List className="mr-2 h-5 w-5" />
-                    Categorías
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-2">
-                  <Sheet open={isSidebarOpen} onOpenChange={setIsSidebarOpen}>
-                    <SheetTrigger asChild>
-                      <Button variant="outline" className="w-full">
-                        <Menu className="mr-2 h-4 w-4" />
-                        Abrir Categorías
+                  <CardTitle className="text-xl font-semibold flex items-center justify-between">
+                    <span>Explorador de Archivos</span>
+                    {currentPath.length > 0 && (
+                      <Button variant="outline" size="sm" onClick={goBack}>
+                        <ArrowLeft className="mr-2 h-4 w-4" />
+                        Volver
                       </Button>
-                    </SheetTrigger>
-                    <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-                      <ScrollArea className="h-[calc(100vh-100px)]">
-                        {isLoading && categories.length === 0 ? (
-                          <div className="flex justify-center items-center h-full">
-                            <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                          </div>
-                        ) : (
-                          renderDirectoryContent(categories)
-                        )}
-                      </ScrollArea>
-                    </SheetContent>
-                  </Sheet>
-                </CardContent>
-              </Card>
-              <Card className="shadow-md hover:shadow-lg transition-shadow duration-300 hidden lg:block">
-                <CardHeader className="bg-primary/10 text-primary">
-                  <CardTitle className="text-xl font-semibold flex items-center">
-                    <List className="mr-2 h-5 w-5" />
-                    Categorías
+                    )}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="p-2">
                   <ScrollArea className="h-[calc(100vh-200px)]">
-                    {isLoading && categories.length === 0 ? (
+                    {isLoading ? (
                       <div className="flex justify-center items-center h-full">
                         <Loader2 className="h-8 w-8 animate-spin text-primary" />
                       </div>
                     ) : (
-                      renderDirectoryContent(categories)
+                      renderFileExplorer(currentItems)
                     )}
                   </ScrollArea>
                 </CardContent>
@@ -362,7 +397,7 @@ export default function EjerciciosLogicos() {
                     <BookOpen className="mr-2 h-5 w-5" />
                     {selectedItem
                       ? selectedItem.name
-                      : 'Selecciona una categoría'}
+                      : 'Selecciona un archivo'}
                   </CardTitle>
                   {currentPath.length > 0 && (
                     <Breadcrumb>
@@ -371,10 +406,17 @@ export default function EjerciciosLogicos() {
                           <BreadcrumbLink
                             href="#"
                             onClick={() => {
-                              const item =
-                                categories.find((c) => c.name === path) ||
-                                selectedItem;
-                              if (item) selectItem(item);
+                              const newPath = currentPath.slice(0, index + 1);
+                              setCurrentPath(newPath);
+                              let items = rootItems;
+                              for (let i = 0; i < newPath.length; i++) {
+                                const folder = items.find(item => item.name === 
+                                newPath[i]);
+                                if (folder && folder.items) {
+                                  items = folder.items;
+                                }
+                              }
+                              setCurrentItems(items);
                             }}
                             className="text-primary hover:text-accent transition-colors"
                           >
@@ -400,6 +442,9 @@ export default function EjerciciosLogicos() {
                       <Tabs defaultValue="code" className="w-full">
                         <TabsList>
                           <TabsTrigger value="code">Código</TabsTrigger>
+                          {(selectedItem.name.endsWith('.js') || selectedItem.name.endsWith('.py')) && (
+                            <TabsTrigger value="console">Consola</TabsTrigger>
+                          )}
                           {selectedItem.name.endsWith('.html') && (
                             <TabsTrigger value="preview">
                               Vista previa
@@ -407,7 +452,7 @@ export default function EjerciciosLogicos() {
                           )}
                         </TabsList>
                         <TabsContent value="code">
-                          <ScrollArea className="h-[calc(100vh-300px)]">
+                          <ScrollArea className="h-[calc(100vh-400px)]">
                             <pre className="p-4 rounded-md overflow-x-auto bg-[#2d2d2d] text-[#ccc]">
                               <code
                                 className={`language-${getLanguage(
@@ -418,44 +463,81 @@ export default function EjerciciosLogicos() {
                               </code>
                             </pre>
                           </ScrollArea>
+                          {(selectedItem.name.endsWith('.js') || selectedItem.name.endsWith('.py')) && (
+                            <Button onClick={runCode} className="mt-4">
+                              <Play className="mr-2 h-4 w-4" />
+                              Ejecutar código
+                            </Button>
+                          )}
+                          {(selectedItem.name.endsWith('.js') || selectedItem.name.endsWith('.py')) && (
+                            <Card className="mt-4">
+                              <CardHeader>
+                                <CardTitle className="text-lg font-semibold flex items-center">
+                                  <Terminal className="mr-2 h-5 w-5" />
+                                  Consola
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <pre className="p-4 rounded-md bg-[#2d2d2d] text-[#ccc] overflow-x-auto">
+                                  {consoleOutput || 'La salida de la consola aparecerá aquí después de ejecutar el código.'}
+                                </pre>
+                              </CardContent>
+                            </Card>
+                          )}
                         </TabsContent>
+                        {(selectedItem.name.endsWith('.js') || selectedItem.name.endsWith('.py')) && (
+                          <TabsContent value="console">
+                            <Card>
+                              <CardHeader>
+                                <CardTitle className="text-lg font-semibold flex items-center">
+                                  <Terminal className="mr-2 h-5 w-5" />
+                                  Consola
+                                </CardTitle>
+                              </CardHeader>
+                              <CardContent>
+                                <pre className="p-4 rounded-md bg-[#2d2d2d] text-[#ccc] overflow-x-auto">
+                                  {consoleOutput || 'La salida de la consola aparecerá aquí después de ejecutar el código.'}
+                                </pre>
+                              </CardContent>
+                            </Card>
+                          </TabsContent>
+                        )}
                         {selectedItem.name.endsWith('.html') && (
                           <TabsContent value="preview">
-                            <div className="space-y-4">
-                              <Button onClick={renderHTML}>
-                                <Play className="mr-2 h-4 w-4" />
-                                Renderizar HTML
-                              </Button>
-                              {showPreview && (
-                                <div className="w-full h-[calc(100vh-400px)] border rounded">
-                                  <iframe
-                                    srcDoc={htmlContent}
-                                    title="HTML Preview"
-                                    className="w-full h-full"
-                                    sandbox="allow-scripts"
-                                  />
-                                </div>
-                              )}
+                            <div className="w-full h-[calc(100vh-400px)] border rounded">
+                              <iframe
+                                srcDoc={htmlContent}
+                                title="HTML Preview"
+                                className="w-full h-full"
+                                sandbox="allow-scripts"
+                              />
                             </div>
                           </TabsContent>
                         )}
                       </Tabs>
                     ) : (
-                      <ScrollArea className="h-[calc(100vh-300px)]">
-                        {renderDirectoryContent(selectedItem.items || [])}
-                      </ScrollArea>
+                      <div className="text-center text-muted-foreground">
+                        <p>Selecciona un archivo para ver su contenido.</p>
+                      </div>
                     )
                   ) : (
-                    <p className="text-center text-muted-foreground">
-                      Selecciona una categoría de la lista para ver su
-                      contenido.
-                    </p>
+                    <div className="text-center text-muted-foreground space-y-4">
+                      <p>
+                        Selecciona un archivo de la lista para comenzar.
+                      </p>
+                      <p>
+                        Cada ejercicio te ayudará a mejorar tus habilidades de programación y lógica.
+                      </p>
+                      <p>
+                        ¡Buena suerte en tu viaje de aprendizaje!
+                      </p>
+                    </div>
                   )}
                 </CardContent>
               </Card>
             </motion.div>
           </div>
-            <Footer />
+          <Footer />
         </div>
       </motion.section>
     </>

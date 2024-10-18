@@ -238,7 +238,7 @@ const FlipCard = () => {
               fgColor={'#000000'}
               level={'H'}
               imageSettings={{
-                src: '/logo.png',
+                src: '/',
                 x: undefined,
                 y: undefined,
                 height: qrSize * 0.2,

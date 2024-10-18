@@ -15,6 +15,148 @@ export interface BlogPost {
 }
 
 export const dataBlog: BlogPost[] = [
+  // dockerizando-proyectos-backend-frontend
+  {
+    slug: 'dockerizando-proyectos-backend-frontend',
+    title:
+      'Cómo Dockerizar un Proyecto Backend y Frontend: Una Guía Paso a Paso',
+    image: '/blog/docker_category.png',
+    date: '2024-10-17',
+    tags: ['Docker', 'Backend', 'Frontend', 'DevOps', 'Contenedores'],
+    type: 'Tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/camilo-avatar.webp',
+    },
+    readingTime: '6 min',
+    excerpt:
+      'En este blog, aprenderás cómo dockerizar un proyecto backend y frontend, para que puedas ejecutarlo en cualquier entorno sin preocuparte por las diferencias en configuraciones.',
+    content: `
+    <h2>Cómo Dockerizar un Proyecto Backend y Frontend: Una Guía Paso a Paso</h2>
+    <p>En el mundo del desarrollo moderno, la capacidad de crear aplicaciones portables es esencial para trabajar de manera eficiente y escalar sin problemas. Docker es una de las herramientas más poderosas para lograr esto, permitiéndonos empacar nuestras aplicaciones, junto con sus dependencias, en contenedores que pueden ejecutarse en cualquier entorno. En este artículo, te mostraré cómo dockerizar un proyecto tanto de backend como de frontend, para que puedas usarlo donde quieras.</p>
+
+    <h3>¿Qué es Docker?</h3>
+    <p>Docker es una plataforma que permite desarrollar, enviar y ejecutar aplicaciones dentro de contenedores. Un contenedor incluye todo lo necesario para que una aplicación funcione: código, dependencias, librerías y configuraciones, lo que garantiza que se ejecute de la misma manera en cualquier entorno.</p>
+
+    <h3>¿Por qué Dockerizar tu Proyecto?</h3>
+    <p>Al dockerizar tu aplicación, te aseguras de que:</p>
+    <ul>
+      <li><strong>Portabilidad:</strong> Puedes ejecutar la misma imagen en cualquier lugar, desde tu máquina local hasta un servidor en la nube.</li>
+      <li><strong>Reproducibilidad:</strong> Todos los entornos son consistentes, evitando el clásico "funciona en mi máquina".</li>
+      <li><strong>Escalabilidad:</strong> Facilita la integración con orquestadores como Kubernetes, permitiendo escalar tu aplicación fácilmente.</li>
+    </ul>
+
+    <h3>Dockerizando un Proyecto Backend</h3>
+    <p>Vamos a empezar dockerizando un backend sencillo en Node.js con Express.</p>
+
+    <h4>1. Estructura del Proyecto</h4>
+    <p>La estructura básica de tu proyecto Node.js debería lucir así:</p>
+    <pre><code>mi-backend/
+    ├── Dockerfile
+    ├── .dockerignore
+    ├── package.json
+    ├── server.js
+    └── node_modules/
+    </code></pre>
+
+    <h4>2. Crear el Dockerfile</h4>
+    <p>El Dockerfile define cómo se debe construir la imagen de Docker para tu aplicación:</p>
+    <pre><code>FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+EXPOSE 3000
+CMD ["npm", "start"]
+    </code></pre>
+
+    <h4>3. Crear el .dockerignore</h4>
+    <p>Excluye archivos innecesarios del contenedor:</p>
+    <pre><code>node_modules
+npm-debug.log
+    </code></pre>
+
+    <h4>4. Construir la Imagen</h4>
+    <p>Navega a la carpeta del proyecto y ejecuta el comando:</p>
+    <pre><code>docker build -t mi-backend .</code></pre>
+
+    <h4>5. Ejecutar el Contenedor</h4>
+    <p>Ejecuta el contenedor en el puerto 3000:</p>
+    <pre><code>docker run -p 3000:3000 mi-backend</code></pre>
+
+    <h3>Dockerizando un Proyecto Frontend</h3>
+    <p>Ahora vamos a dockerizar un frontend sencillo creado con React.</p>
+
+    <h4>1. Estructura del Proyecto</h4>
+    <p>Un proyecto típico de React tendrá esta estructura:</p>
+    <pre><code>mi-frontend/
+    ├── Dockerfile
+    ├── .dockerignore
+    ├── package.json
+    ├── public/
+    ├── src/
+    └── node_modules/
+    </code></pre>
+
+    <h4>2. Crear el Dockerfile</h4>
+    <p>Este Dockerfile servirá la aplicación con Nginx:</p>
+    <pre><code>FROM node:18 AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+    </code></pre>
+
+    <h4>3. Crear el .dockerignore</h4>
+    <p>Excluye archivos innecesarios:</p>
+    <pre><code>node_modules
+build
+npm-debug.log
+    </code></pre>
+
+    <h4>4. Construir la Imagen</h4>
+    <p>Ejecuta el siguiente comando para crear la imagen del frontend:</p>
+    <pre><code>docker build -t mi-frontend .</code></pre>
+
+    <h4>5. Ejecutar el Contenedor</h4>
+    <p>Sirve la aplicación en el puerto 3000:</p>
+    <pre><code>docker run -p 3000:80 mi-frontend</code></pre>
+
+    <h3>Orquestando con Docker Compose</h3>
+    <p>Si trabajas con un backend y frontend, puedes usar Docker Compose:</p>
+
+    <pre><code>version: '3'
+services:
+  frontend:
+    build: ./mi-frontend
+    ports:
+      - "3000:80"
+  backend:
+    build: ./mi-backend
+    ports:
+      - "3001:3000"
+    </code></pre>
+
+    <p>Ejecuta ambos servicios con:</p>
+    <pre><code>docker-compose up</code></pre>
+
+    <h3>Subiendo las Imágenes a Docker Hub</h3>
+    <p>Sube tus imágenes a Docker Hub para ejecutarlas en cualquier servidor:</p>
+    <ul>
+      <li><strong>Login en Docker Hub:</strong> <code>docker login</code></li>
+      <li><strong>Etiquetar la Imagen:</strong> <code>docker tag mi-backend tu-usuario/mi-backend</code></li>
+      <li><strong>Subir la Imagen:</strong> <code>docker push tu-usuario/mi-backend</code></li>
+    </ul>
+
+    <h3>Fin</h3>
+    <p>Dockerizar tus proyectos backend y frontend te permitirá ejecutar tu código de manera eficiente en cualquier entorno. Si sigues los pasos descritos, estarás listo para crear aplicaciones portables y escalables. ¡Dockerizar es un gran primer paso hacia un flujo de trabajo más ágil y robusto!</p>
+  `,
+  },
   //trabajo-integrador-desarrollo-app
   {
     slug: 'trabajo-integrador-desarrollo-app',
