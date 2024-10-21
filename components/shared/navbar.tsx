@@ -24,6 +24,8 @@ import {
   Move,
   RotateCcw,
   Shuffle,
+  Sunrise,
+  Sunset,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -112,9 +114,53 @@ export default function EnhancedNavBar() {
   }, [lastScrollY, navConfig.hideOnScroll]);
 
   const cycleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    const themes = ['light', 'dark', 'sunrise', 'sunset'];
+    const currentIndex = themes.indexOf(theme || 'light');
+    const nextIndex = (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
   };
 
+  const getThemeIcon = () => {
+    switch (theme) {
+      case 'dark':
+        return <Moon className="h-5 w-5" />;
+      case 'sunrise':
+        return <Sunrise className="h-5 w-5" />;
+      case 'sunset':
+        return <Sunset className="h-5 w-5" />;
+      default:
+        return <Sun className="h-5 w-5" />;
+    }
+  };
+
+  // Add theme selection radio group in the sheet content
+  const ThemeSelector = () => (
+    <div className="space-y-2">
+      <Label className="text-sm font-medium">Tema</Label>
+      <RadioGroup
+        value={theme}
+        onValueChange={setTheme}
+        className="grid grid-cols-2 gap-2"
+      >
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="light" id="light" />
+          <Label htmlFor="light">Claro</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="dark" id="dark" />
+          <Label htmlFor="dark">Oscuro</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="sunrise" id="sunrise" />
+          <Label htmlFor="sunrise">Amanecer</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="sunset" id="sunset" />
+          <Label htmlFor="sunset">Atardecer</Label>
+        </div>
+      </RadioGroup>
+    </div>
+  );
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -591,22 +637,21 @@ export default function EnhancedNavBar() {
                             </Button>
                           </div>
 
-                          <Separator />
+                          <div className="flex flex-col space-y-4">
+    <Separator />
+    <ThemeSelector />
+  </div>
 
                           <div className="flex justify-between items-center">
                             <span className="text-sm font-medium">Tema</span>
                             <Button
-                              variant="outline"
-                              size="icon"
-                              className="bg-background/50"
-                              onClick={cycleTheme}
-                            >
-                              {theme === 'dark' ? (
-                                <Sun className="h-5 w-5" />
-                              ) : (
-                                <Moon className="h-5 w-5" />
-                              )}
-                            </Button>
+    variant="ghost"
+    size="icon"
+    className="bg-background/10 hover:bg-background/20"
+    onClick={cycleTheme}
+  >
+    {getThemeIcon()}
+  </Button>
                           </div>
                         </div>
                       </div>

@@ -1,37 +1,17 @@
 'use client';
 
 import React, { useEffect, useState, useCallback, ReactNode } from 'react';
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useSpring,
-  AnimatePresence,
-} from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 
-const Cloud = dynamic(() => import('lucide-react').then((mod) => mod.Cloud), {
-  ssr: false,
-});
-const Sun = dynamic(() => import('lucide-react').then((mod) => mod.Sun), {
-  ssr: false,
-});
-const Moon = dynamic(() => import('lucide-react').then((mod) => mod.Moon), {
-  ssr: false,
-});
-const Trees = dynamic(() => import('lucide-react').then((mod) => mod.Trees), {
-  ssr: false,
-});
-const Star = dynamic(() => import('lucide-react').then((mod) => mod.Star), {
-  ssr: false,
-});
-const Rocket = dynamic(() => import('lucide-react').then((mod) => mod.Rocket), {
-  ssr: false,
-});
-const TreePalm = dynamic(() => import('lucide-react').then((mod) => mod.TreePalm), {
-  ssr: false,
-});
+const Cloud = dynamic(() => import('lucide-react').then((mod) => mod.Cloud), { ssr: false });
+const Sun = dynamic(() => import('lucide-react').then((mod) => mod.Sun), { ssr: false });
+const Moon = dynamic(() => import('lucide-react').then((mod) => mod.Moon), { ssr: false });
+const Trees = dynamic(() => import('lucide-react').then((mod) => mod.Trees), { ssr: false });
+const Star = dynamic(() => import('lucide-react').then((mod) => mod.Star), { ssr: false });
+const Rocket = dynamic(() => import('lucide-react').then((mod) => mod.Rocket), { ssr: false });
+const TreePalm = dynamic(() => import('lucide-react').then((mod) => mod.TreePalm), { ssr: false });
 
 interface AnimatedElement {
   id: number;
@@ -42,11 +22,10 @@ interface AnimatedElement {
 
 interface AnimatedBackgroundProps {
   children: ReactNode;
+  forcedTheme?: 'light' | 'dark' | 'sunrise' | 'sunset';
 }
 
-const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
-  children,
-}) => {
+const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, forcedTheme }) => {
   const [mounted, setMounted] = useState(false);
   const [elements, setElements] = useState<{
     stars: AnimatedElement[];
@@ -57,20 +36,15 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   }>({ stars: [], starDots: [], clouds: [], trees: [], rockets: [] });
 
   const { scrollYProgress } = useScroll();
-  const { theme, systemTheme } = useTheme();
+  const { theme } = useTheme();
 
-  const currentTheme = theme === 'system' ? systemTheme : theme;
-  const isDark = currentTheme === 'dark';
+  const currentTheme = forcedTheme || theme || 'light';
 
   const skyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const grassOpacity = useTransform(scrollYProgress, [0.6, 1], [0, 1]);
   const sunMoonY = useSpring(
     useTransform(scrollYProgress, [0, 1], ['20%', '80%']),
-    {
-      stiffness: 100,
-      damping: 30,
-      mass: 1,
-    }
+    { stiffness: 100, damping: 30, mass: 1 }
   );
 
   const generateElements = useCallback(() => {
@@ -141,21 +115,37 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
 
   useEffect(() => {
     generateElements();
-  }, [isDark, generateElements]);
+  }, [currentTheme, generateElements]);
 
   if (!mounted) return null;
+
+  const getBackgroundGradient = () => {
+    switch (currentTheme) {
+      case 'light':
+        return 'bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400';
+      case 'dark':
+        return 'bg-gradient-to-b from-blue-950 via-indigo-950 to-purple-950';
+      case 'sunrise':
+        return 'bg-gradient-to-b from-rose-300 via-amber-200 to-blue-200';
+      case 'sunset':
+        return 'bg-gradient-to-b from-rose-400 via-amber-300 to-indigo-800';
+      default:
+        return 'bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400';
+    }
+  };
+
+  const isDarkMode = currentTheme === 'dark' || currentTheme === 'sunset';
+  const isSunrise = currentTheme === 'sunrise';
+  const isSunset = currentTheme === 'sunset';
+  const showClouds = !isDarkMode || isSunset;
 
   return (
     <div className="relative min-h-screen">
       <div className="fixed inset-0 w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
-            key={isDark ? 'dark' : 'light'}
-            className={`absolute inset-0 w-full h-full transition-colors duration-500 ${
-              isDark
-                ? 'bg-gradient-to-b from-blue-950 via-indigo-950 to-purple-950'
-                : 'bg-gradient-to-b from-blue-200 via-blue-300 to-blue-400'
-            }`}
+            key={currentTheme}
+            className={`absolute inset-0 w-full h-full transition-colors duration-500 ${getBackgroundGradient()}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -167,7 +157,7 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none"
           style={{ opacity: skyOpacity }}
         >
-          {isDark ? (
+          {isDarkMode && (
             <>
               {elements.starDots.map((starDot) => (
                 <motion.div
@@ -235,11 +225,16 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                 </motion.div>
               ))}
             </>
-          ) : (
+          )}
+          {showClouds && (
             elements.clouds.map((cloud) => (
               <motion.div
                 key={cloud.id}
-                className="fixed text-white"
+                className={`fixed ${
+                  isSunset ? 'text-orange-200' :
+                  isSunrise ? 'text-yellow-100' :
+                  'text-white'
+                }`}
                 style={{
                   left: `${cloud.x}%`,
                   top: `${cloud.y}%`,
@@ -262,13 +257,27 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         </motion.div>
 
         <motion.div
-          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-yellow-200 to-transparent dark:from-green-900 transition-colors duration-500 pointer-events-none"
-          style={{ opacity: grassOpacity }}
-        >
+  className={`absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t ${
+    currentTheme === 'dark'
+      ? 'from-green-900 to-transparent'
+      : currentTheme === 'sunset'
+      ? 'from-purple-900 to-transparent'
+      : currentTheme === 'sunrise'
+      ? 'from-emerald-300 to-transparent'
+      : 'from-green-400 to-transparent'
+  } transition-colors duration-500 pointer-events-none`}
+  style={{ opacity: grassOpacity }}
+>
           {elements.trees.map((tree) => (
             <motion.div
               key={tree.id}
-              className={`absolute bottom-0 ${isDark ? 'text-green-800' : 'text-yellow-600'}`}
+              className={`absolute bottom-0 ${
+                isDarkMode
+                  ? 'text-gray-700'
+                  : isSunrise
+                  ? 'text-green-600'
+                  : 'text-yellow-600'
+              }`}
               style={{
                 left: `${tree.x}%`,
                 fontSize: `${tree.size}px`,
@@ -282,20 +291,26 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                 repeatType: 'reverse',
               }}
             >
-              {isDark ? <Trees /> : <TreePalm />}
+              {isDarkMode ? <Trees /> : <TreePalm />}
             </motion.div>
           ))}
         </motion.div>
 
         <motion.div
-          className="absolute text-yellow-400 dark:text-yellow-200 transition-colors duration-500 pointer-events-none"
+          className={`absolute transition-colors duration-500 pointer-events-none ${
+            isDarkMode
+              ? 'text-gray-200'
+              : isSunrise
+              ? 'text-yellow-400'
+              : 'text-orange-400'
+          }`}
           style={{
             right: '10%',
             top: sunMoonY,
             fontSize: '4rem',
           }}
         >
-          {isDark ? <Moon /> : <Sun />}
+          {isDarkMode ? <Moon /> : <Sun />}
         </motion.div>
       </div>
 

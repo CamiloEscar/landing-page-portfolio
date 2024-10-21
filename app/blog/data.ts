@@ -15,6 +15,286 @@ export interface BlogPost {
 }
 
 export const dataBlog: BlogPost[] = [
+  
+  // entender-init-package-json-tsconfig
+  {
+    slug: 'entender-init-package-json-tsconfig',
+    title: 'Entendiendo el Init: Detalles de package.json y tsconfig.json',
+    image: '/blog/init_category.png',
+    date: '2024-10-21',
+    tags: [
+      'Node.js',
+      'TypeScript',
+      'package.json',
+      'tsconfig.json',
+      'Desarrollo',
+    ],
+    type: 'Tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/tu-avatar.webp',
+    },
+    readingTime: '6 min',
+    excerpt:
+      'Descubre qué hace el comando init en un proyecto de Node.js y cómo los archivos package.json y tsconfig.json influyen en tu desarrollo.',
+    content: `
+  <h2>🚀 ¿Qué Significa 'Init' en un Proyecto Node.js?</h2>
+  <p>El comando <code>npm init</code> inicializa un nuevo proyecto de Node.js y crea un archivo <code>package.json</code> que contiene la configuración básica de tu proyecto.</p>
+  
+  <h2>📦 Explorando package.json</h2>
+  <p>El <code>package.json</code> es el corazón de cualquier proyecto Node.js. Aquí te mostramos sus secciones más importantes:</p>
+  
+  <h3>1. Información del Proyecto</h3>
+  <pre><code>{
+  "name": "mi-proyecto",
+  "version": "1.0.0",
+  "description": "Descripción de mi proyecto",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js"
+  },
+  ...
+}</code></pre>
+  <p>Esta sección incluye el nombre, la versión y una breve descripción de tu proyecto. También especifica el archivo principal y los scripts que puedes ejecutar.</p>
+  
+  <h3>2. Dependencias</h3>
+  <pre><code>{
+  ...
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.3.2"
+  }
+}</code></pre>
+  <p>Aquí se enumeran las bibliotecas que tu proyecto necesita para funcionar, así como las dependencias de desarrollo, como TypeScript.</p>
+  
+  <h3>3. Scripts Personalizados</h3>
+  <pre><code> "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc"
+  }</code></pre>
+  <p>Puedes definir comandos personalizados que faciliten tareas comunes, como iniciar el servidor o compilar tu código TypeScript.</p>
+  
+  <h2>⚙️ Comprendiendo tsconfig.json</h2>
+  <p>El archivo <code>tsconfig.json</code> es esencial para proyectos TypeScript. Aquí configuras cómo TypeScript debe compilar tu código.</p>
+  
+  <h3>1. Opciones del Compilador</h3>
+  <pre><code>{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true
+  }
+}</code></pre>
+  <p>En esta sección, defines la versión de ECMAScript a la que quieres compilar, el sistema de módulos y las rutas de entrada y salida.</p>
+  
+  <h3>2. Inclusiones y Exclusiones</h3>
+  <pre><code>{
+  ...
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}</code></pre>
+  <p>Esto especifica qué archivos incluir o excluir durante la compilación. Normalmente, incluyes el código fuente y excluyes las carpetas de dependencias.</p>
+  
+  <h2>📁 La Raíz del Proyecto</h2>
+  <p>La raíz del proyecto es el directorio donde se encuentran los archivos <code>package.json</code> y <code>tsconfig.json</code>. Aquí es donde iniciarás tus comandos de npm y TypeScript. Mantener una estructura de carpetas organizada es clave para el éxito del proyecto.</p>
+  
+  <h2>🔄 ¿Cómo Avanzar Desde Aquí?</h2>
+  <p>Una vez que tengas tus archivos inicializados, puedes:</p>
+  <ul>
+    <li>Instalar más dependencias según necesites.</li>
+    <li>Crear y organizar tus archivos en la carpeta <code>src</code>.</li>
+    <li>Definir más scripts en <code>package.json</code> para automatizar tareas.</li>
+  </ul>
+  
+  <h2>🎉 Conclusión</h2>
+  <p>Entender el init y los archivos que genera es crucial para cualquier desarrollador que trabaje con Node.js y TypeScript. Ahora que conoces la estructura básica, ¡estás listo para empezar a desarrollar aplicaciones increíbles!</p>
+  `,
+  },
+  // entender-ejercicio-logica-javascript
+  {
+    slug: 'entender-ejercicio-logica-javascript',
+    title: 'Cómo Entender y Resolver Ejercicios de Lógica en JavaScript',
+    image: '/blog/javascript_logic_exercises.png',
+    date: '2024-10-20',
+    tags: ['JavaScript', 'Lógica', 'Tutorial', 'Desarrollo', 'Programación'],
+    type: 'Tutorial',
+    author: {
+      name: 'Tu Nombre',
+      avatar: '/tu-avatar.webp',
+    },
+    readingTime: '6 min',
+    excerpt:
+      'Aprende a abordar ejercicios de lógica en JavaScript con un enfoque paso a paso. Mejora tus habilidades de programación y resolución de problemas.',
+    content: `
+  <article>
+    <header>
+      <h1>Cómo Entender y Resolver Ejercicios de Lógica en JavaScript</h1>
+      <p>Los ejercicios de lógica son esenciales para desarrollar habilidades de programación. Aquí te mostramos un enfoque paso a paso para resolverlos en JavaScript.</p>
+    </header>
+
+    <section>
+      <h2>1. Lee el Problema con Atención</h2>
+      <p>Antes de codificar, asegúrate de comprender bien el enunciado. Pregúntate:</p>
+      <ul>
+        <li>¿Qué se solicita?</li>
+        <li>¿Cuáles son los datos de entrada y los resultados esperados?</li>
+      </ul>
+      
+      <h3>Ejemplo</h3>
+      <p>"Escribe una función que reciba un array de números y devuelva un nuevo array que contenga solo los números pares."</p>
+    </section>
+
+    <section>
+      <h2>2. Identifica las Reglas y Condiciones</h2>
+      <p>Anota las reglas clave, como:</p>
+      <ul>
+        <li>Un número es par si se puede dividir entre 2 sin residuo.</li>
+        <li>Considera casos especiales (array vacío, todos los números impares).</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Esquema Tu Solución</h2>
+      <p>Antes de codificar, piensa en la lógica. Usa pseudocódigo para organizar tus ideas.</p>
+
+      <h3>Pseudocódigo</h3>
+      <pre>
+        1. Crear una función que acepte un array.
+        2. Inicializar un array vacío para pares.
+        3. Iterar sobre cada número en el array:
+          - Si es par, añadirlo al array de pares.
+        4. Devolver el array de pares.
+      </pre>
+    </section>
+
+    <section>
+      <h2>4. Escribe el Código</h2>
+      <p>Con el plan claro, codifica tu solución en JavaScript.</p>
+
+      <h3>Código</h3>
+      <pre><code>
+  function obtenerPares(arr) {
+      const pares = [];
+      for (let num of arr) {
+          if (num % 2 === 0) {
+              pares.push(num);
+          }
+      }
+      return pares;
+  }
+
+  // Ejemplo de uso
+  const numeros = [1, 2, 3, 4, 5, 6];
+  console.log(obtenerPares(numeros)); // Output: [2, 4, 6]
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>5. Prueba tu Solución</h2>
+      <p>Verifica tu función con diferentes casos de prueba:</p>
+      <pre><code>
+  console.log(obtenerPares([])); // Output: []
+  console.log(obtenerPares([1, 3, 5])); // Output: []
+  console.log(obtenerPares([2, 4, 6])); // Output: [2, 4, 6]
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>6. Revisa y Optimiza</h2>
+      <p>Revisa tu solución. Pregúntate si es legible y si puede optimizarse. Podrías usar <code>filter</code> para un enfoque más elegante.</p>
+
+      <h3>Versión Optimizada</h3>
+      <pre><code>
+  const obtenerPares = (arr) => arr.filter(num => num % 2 === 0);
+
+  // Ejemplo de uso
+  console.log(obtenerPares([1, 2, 3, 4, 5, 6])); // Output: [2, 4, 6]
+      </code></pre>
+    </section>
+
+    <section>
+      <h2>7. Reflexiona sobre el Proceso</h2>
+      <p>Cada ejercicio es una oportunidad de aprendizaje. Reflexiona sobre lo que hiciste bien y lo que podrías mejorar. ¡Cada práctica cuenta!</p>
+    </section>
+
+    <footer>
+      <h2>Conclusión</h2>
+      <p>Los ejercicios de lógica en JavaScript pueden ser desafiantes, pero con un enfoque estructurado y práctica, puedes dominarlos. Recuerda seguir los pasos y, sobre todo, ¡disfrutar del proceso de aprendizaje!</p>
+    </footer>
+  </article>
+  `
+  },
+  // iniciar-proyecto-node-typescript
+  {
+    slug: 'iniciar-proyecto-node-typescript',
+    title: 'Cómo Iniciar un Proyecto con Node.js y TypeScript: ¡Guía Completa!',
+    image: '/blog/node_typescript_category.png',
+    date: '2024-10-20',
+    tags: ['Node.js', 'TypeScript', 'Desarrollo', 'Tutorial', 'JavaScript'],
+    type: 'Tutorial',
+    author: {
+      name: 'Tu Nombre',
+      avatar: '/tu-avatar.webp',
+    },
+    readingTime: '5 min',
+    excerpt:
+      'Descubre cómo iniciar tu proyecto en Node.js con TypeScript desde cero o utilizando plantillas. ¡Empieza a codificar hoy mismo!',
+    content: `
+  <h2>🚀 ¿Por Qué Node.js y TypeScript?</h2>
+  <p>Node.js permite construir aplicaciones rápidas y escalables, mientras que TypeScript añade tipado estático y características avanzadas para mejorar la mantenibilidad.</p>
+  
+  <h2>🛠️ Opción 1: Iniciar Desde Cero</h2>
+  
+  <h3>Paso 1: Crear la Carpeta del Proyecto</h3>
+  <pre><code>mkdir mi-proyecto-ts
+cd mi-proyecto-ts</code></pre>
+  
+  <h3>Paso 2: Inicializar npm</h3>
+  <pre><code>npm init -y</code></pre>
+  
+  <h3>Paso 3: Instalar TypeScript</h3>
+  <pre><code>npm install typescript --save-dev</code></pre>
+  
+  <h3>Paso 4: Configurar TypeScript</h3>
+  <pre><code>npx tsc --init</code></pre>
+  <p>Configura tu <code>tsconfig.json</code> como prefieras.</p>
+  
+  <h3>Paso 5: Crear la Estructura de Carpetas</h3>
+  <pre><code>mkdir src
+touch src/index.ts</code></pre>
+  <p>Agrega un código simple en <code>index.ts</code>:</p>
+  <pre><code>const greeting: string = '¡Hola, mundo!';
+console.log(greeting);</code></pre>
+  
+  <h3>Paso 6: Compilar y Ejecutar</h3>
+  <pre><code>npx tsc
+node dist/index.js</code></pre>
+  
+  <h2>🌟 Opción 2: Usar Plantillas de Proyecto</h2>
+  <p>Para comenzar rápidamente, considera usar plantillas o generadores:</p>
+  
+  <h3>1. NestJS</h3>
+  <pre><code>npm i -g @nestjs/cli
+nest new mi-proyecto-nest</code></pre>
+  
+  <h3>2. Express con TypeScript</h3>
+  <pre><code>npx express-generator-typescript mi-proyecto-express
+cd mi-proyecto-express
+npm install</code></pre>
+  
+  <h3>3. Vite</h3>
+  <pre><code>npm create vite@latest mi-proyecto-vite --template vanilla-ts
+cd mi-proyecto-vite
+npm install</code></pre>
+  
+  <h2>🎉 Conclusión</h2>
+  <p>Ya sea que elijas iniciar desde cero o usar plantillas, ahora tienes varias maneras de comenzar tu proyecto en Node.js y TypeScript. ¡Elige la que más te guste y comienza a codificar!</p>
+  `,
+  },
   // dockerizando-proyectos-backend-frontend
   {
     slug: 'dockerizando-proyectos-backend-frontend',
