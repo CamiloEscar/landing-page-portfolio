@@ -544,7 +544,7 @@
 //           experience:
 //             'Development of RESTful APIs, GraphQL, and real-time applications with Node.js, Express, and Socket.io.',
 //           technologies: [
-//             'nodejs',
+//             'NodeJs',
 //             'express',
 //             'socket-io',
 //             'npm',
@@ -775,7 +775,7 @@
 //               value: 30,
 //               experience:
 //                 'Development of RESTful APIs, GraphQL, and real-time applications with Node.js, Express, and Socket.io.',
-//               technologies: ['nodejs'],
+//               technologies: ['NodeJs'],
 //             },
 //             {
 //               name: 'Python',

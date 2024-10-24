@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback, useRef, FC } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  Mail,
   Github,
   Linkedin,
   Layers,
@@ -14,6 +13,7 @@ import {
   ChevronRight,
   ExternalLink,
   QrCode,
+  Briefcase,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -223,9 +223,10 @@ const FlipCard = () => {
               className="rounded-xl z-0"
               priority
             />
+            {/* Degradado sobre la imagen */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 rounded-xl" />
             <Button className="absolute bottom-4 right-4 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 text-gray-800 dark:text-white">
               <QrCode className="w-4 h-4" />
-              
             </Button>
           </div>
         </div>
@@ -410,10 +411,10 @@ export default function Introduction() {
 
                 <div className="flex flex-wrap gap-4 mb-8">
                   <ActionButton
-                    text={buttons.contact}
-                    icon={Mail}
+                    text={buttons.portfolioPage}
+                    icon={Briefcase}
                     color="green"
-                    href="#contact"
+                    href="/portfolio"
                   />
                   <ActionButton
                     text={buttons.portfolio}

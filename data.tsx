@@ -38,6 +38,7 @@ interface Introduccion {
     linkedin: string;
     whatsapp: string;
     blog: string,
+    Portfolio: string;
     Miniportfolio: string,
     home: string,
     contacto:string
@@ -45,6 +46,7 @@ interface Introduccion {
   buttons: {
     home: string,
     contact: string;
+    portfolioPage: string;
     portfolio: string;
     blog: string;
   };
@@ -128,6 +130,7 @@ export const dataIntroduction: Introduccion [] = [
     github: 'CamiloEscar',
     whatsapp: '3442-475466',
     blog: 'Blog',
+    Portfolio: 'Portfolio',
     Miniportfolio: 'Portfolio Impreso',
     home: 'Portfolio',
     contacto:'camiloescar1995@gmail.com'
@@ -135,6 +138,7 @@ export const dataIntroduction: Introduccion [] = [
   buttons: {
     home: 'Portfolio',
     contact: 'Contacto',
+    portfolioPage: 'Proyectos',
     portfolio: 'Mini Portfolio',
     blog: 'Blog Personal',
   },
@@ -351,16 +355,6 @@ export const dataPortfolio: PortfolioItem[] = [
   },
   {
     id: 3,
-    title: 'Sala de chat',
-    image: '/chattiemporealnode.webp',
-    urlGithub: 'https://github.com/CamiloEscar/chat-tiempo-real-Node.git',
-    urlDemo: '',
-    description:
-      'Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.',
-    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
-  },
-  {
-    id: 8,
     title: 'Arquitecto Page',
     image: '/arquitectolanding.webp',
     gifImage: '/arquitectolandingG.webp',
@@ -372,16 +366,26 @@ export const dataPortfolio: PortfolioItem[] = [
   },
   {
     id: 4,
+    title: 'Sala de chat',
+    image: '/chattiemporealnode.webp',
+    urlGithub: 'https://github.com/CamiloEscar/chat-tiempo-real-Node.git',
+    urlDemo: '',
+    description:
+      'Una plataforma de chat en tiempo real que permite a los usuarios comunicarse instantáneamente, compartir archivos y crear salas temáticas, ideal para equipos de trabajo o comunidades en línea.',
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
+  },
+  {
+    id: 5,
     title: 'MERN CRUD',
     image: '/MERNCRUDAUTH.webp',
     urlGithub: 'https://github.com/CamiloEscar/MERN-CRUD-AUTH.git',
     urlDemo: '',
     description:
       'Una aplicación web completa que demuestra operaciones CRUD (Crear, Leer, Actualizar, Eliminar) con autenticación de usuarios, utilizando el stack MERN para una experiencia de desarrollo y usuario fluida.',
-    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
   {
-    id: 5,
+    id: 6,
     title: 'CHAT PDF',
     image: '/chatpdf.webp',
     urlGithub: 'https://github.com/CamiloEscar/chat-con-pdf.git',
@@ -391,7 +395,7 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['Svelte', 'Astro', 'TypeScript', 'JavaScript'],
   },
   {
-    id: 6,
+    id: 7,
     title: 'Google Traductor Clon',
     image: '/googletraductor.webp',
     urlGithub: 'https://github.com/CamiloEscar/google-translate-clone.git',
@@ -401,14 +405,14 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['Vite', 'OpenAI', 'TypeScript'],
   },
   {
-    id: 7,
+    id: 8,
     title: 'Reserva Futbol 5',
     image: '/bookingappf5.webp',
     urlGithub: 'https://github.com/CamiloEscar/bookingapp-f5.git',
     urlDemo: '',
     description:
       'Sistema de reservas para canchas de fútbol 5, permitiendo a los usuarios ver disponibilidad en tiempo real, realizar reservas y gestionar sus partidos, optimizando el uso de las instalaciones deportivas.',
-    technologies: ['React', 'Nodejs', 'Express', 'MongoDB'],
+    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
   },
   
   {
@@ -443,16 +447,16 @@ export const dataPortfolio: PortfolioItem[] = [
       'Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.',
     technologies: ['JavaScript', 'CSS3', 'HTML5'],
   },
-  {
-    id: 12,
-    title: 'Trello Clone',
-    image: '/trelloClon.webp',
-    urlGithub: '',
-    urlDemo: 'https://prueba-trello.vercel.app/',
-    description:
-      'Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.',
-    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
-  },
+  // {
+  //   id: 12,
+  //   title: 'Trello Clone',
+  //   image: '/trelloClon.webp',
+  //   urlGithub: '',
+  //   urlDemo: 'https://prueba-trello.vercel.app/',
+  //   description:
+  //     'Réplica funcional de Trello, ofreciendo gestión de proyectos y tareas con tableros personalizables, listas y tarjetas, permitiendo a los equipos organizar y colaborar en sus proyectos de manera visual y efectiva.',
+  //   technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
+  // },
   {
     id: 13,
     title: 'Fulbito-F5',
@@ -474,17 +478,17 @@ export const dataPortfolio: PortfolioItem[] = [
   //     "Tienda en línea especializada en ambos y ropa médica, ofreciendo una experiencia de compra personalizada con opciones de tallas, colores y estilos, además de un sistema de recomendaciones basado en preferencias del usuario.",
   //   technologies: ["React", "next-js", "Tailwind CSS", "Vercel"],
   // },
-  {
-    id: 15,
-    title: 'Clima Json',
-    image: '/clima.webp',
-    gifImage: '/clima.gif',
-    urlGithub: '',
-    urlDemo: 'https://pruebaclima-api.netlify.app/',
-    description:
-      'Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.',
-    technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
-  },
+  // {
+  //   id: 15,
+  //   title: 'Clima Json',
+  //   image: '/clima.webp',
+  //   gifImage: '/clima.gif',
+  //   urlGithub: '',
+  //   urlDemo: 'https://pruebaclima-api.netlify.app/',
+  //   description:
+  //     'Aplicación meteorológica que proporciona pronósticos precisos y actualizados, utilizando APIs de clima para mostrar condiciones actuales, previsiones a corto plazo y alertas meteorológicas en una interfaz clara y fácil de usar.',
+  //   technologies: ['React', 'NodeJs', 'Express', 'MongoDB'],
+  // },
 ];
 
 export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
@@ -579,7 +583,7 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         experience:
           'Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.',
         technologies: [
-          'nodejs',
+          'NodeJs',
           'express',
           'socket-io',
           'npm',
@@ -811,7 +815,7 @@ export const dataExperience: ExperienceCategory[] = [
             value: 30,
             experience:
               'Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.',
-            technologies: ['nodejs'],
+            technologies: ['NodeJs'],
           },
           {
             name: 'Python',

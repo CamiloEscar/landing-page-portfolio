@@ -8,6 +8,7 @@ import Loading from '@/components/shared/loading'; // Necesitarás crear este co
 import RecentPosts from '@/components/RecentPost';
 import { dataBlog } from '@/app/blog/data'; // Importa la data de los posts
 import AboutMe2 from '@/components/sobreMi';
+import ChatBot from '@/components/Chatbot';
 
 // Lazy load components
 const AboutMe = lazy(() => import('@/components/about-me'));
@@ -41,6 +42,8 @@ export default function Home() {
         <Suspense fallback={<Loading />}>
           <Footer />
         </Suspense>
+
+        <ChatBot />
       </main>
     </AnimatedBackground>
   );

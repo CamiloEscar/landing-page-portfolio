@@ -1,0 +1,650 @@
+{
+  "conversation": [
+    {
+      "id": "greeting",
+      "question": "¡Hola! Soy Botito, el asistente virtual de Camilo. ¿En qué puedo ayudarte hoy?",
+      "answers": {
+        "about": "Cuéntame más sobre Camilo",
+        "portfolio": "Me gustaría ver su portafolio",
+        "skills": "¿Cuáles son sus habilidades?",
+        "experience": "Háblame de su experiencia laboral",
+        "contact": "¿Cómo puedo contactar a Camilo?",
+        "availability": "¿Está disponible para nuevos proyectos?"
+      },
+      "keywords": {
+        "greeting": ["greeting","hola", "como estas", "que tal"],
+        "about": ["camilo", "sobre", "información", "quién", "es", "perfil"],
+        "portfolio": ["portafolio", "proyectos", "trabajos", "ver", "mostrar", "ejemplos"],
+        "skills": ["habilidades", "tecnologías", "lenguajes", "herramientas", "sabe", "conocimientos"],
+        "experience": ["experiencia", "trabajo", "laboral", "empresas", "historial", "trayectoria"],
+        "contact": ["contacto", "email", "teléfono", "redes", "comunicar", "contactar"],
+        "availability": ["disponible", "proyectos", "contratar", "freelance", "tiempo", "horarios"]
+      },
+      "next": {
+        "about": "about_camilo",
+        "portfolio": "portfolio_overview",
+        "skills": "skills_overview",
+        "experience": "experience_overview",
+        "contact": "contact_details",
+        "availability": "work_availability"
+      }
+    },
+    {
+      "id": "about_camilo",
+      "question": "¡Encantado de conocerte! Camilo es un desarrollador Full Stack con más de 3 años de experiencia en crear experiencias web modernas y eficientes.",
+      "profile_image": "/profile.webp",
+      "social_links": {
+        "linkedin": {
+          "url": "https://linkedin.com/in/camiloescar",
+          "description": "Perfil profesional de Camilo"
+        },
+        "github": {
+          "url": "https://github.com/CamiloEscar",
+          "description": "Proyectos y contribuciones de Camilo"
+        }
+      },
+      "answers": {
+        "background": "¿Cuál es su formación?",
+        "hobbies": "¿Qué hace en su tiempo libre?",
+        "location": "¿Dónde está ubicado?",
+        "portfolio": "Me gustaría ver su portafolio",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "background": ["formación", "estudios", "educación", "títulos", "certificaciones"],
+        "hobbies": ["tiempo libre", "pasatiempos", "intereses", "actividades", "fuera del trabajo"],
+        "location": ["ubicación", "ciudad", "país", "donde vive", "residencia"],
+        "portfolio": ["portafolio", "proyectos", "trabajos", "ver", "mostrar", "ejemplos"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "background": "education_background",
+        "hobbies": "personal_interests",
+        "location": "current_location",
+        "portfolio": "portfolio_overview",
+        "back": "greeting"
+      }
+    },
+    {
+      "id": "education_background",
+      "question": "Camilo tiene una sólida formación en desarrollo web y tecnologías modernas:",
+      "content": [
+        "Ingeniero en Sistemas, Universidad Nacional de Córdoba (2018-2022)",
+        "Bootcamp Full Stack JavaScript, Plataforma 5 (2021)",
+        "Certificación en React y Next.js, Vercel (2023)"
+      ],
+      "answers": {
+        "skills": "¿Qué habilidades ha adquirido?",
+        "experience": "¿Cuál es su experiencia laboral?",
+        "back": "Volver a información personal"
+      },
+      "keywords": {
+        "skills": ["habilidades", "tecnologías", "lenguajes", "herramientas", "conocimientos"],
+        "experience": ["experiencia", "trabajo", "laboral", "empresas", "historial", "trayectoria"],
+        "back": ["volver", "regresar", "información", "personal", "sobre camilo"]
+      },
+      "next": {
+        "skills": "skills_overview",
+        "experience": "experience_overview",
+        "back": "about_camilo"
+      }
+    },
+    {
+      "id": "personal_interests",
+      "question": "En su tiempo libre, Camilo disfruta de varias actividades:",
+      "content": [
+        "Contribuir a proyectos open source",
+        "Leer sobre nuevas tecnologías y tendencias en desarrollo web",
+        "Practicar deportes como fútbol y ciclismo",
+        "Viajar y conocer nuevas culturas"
+      ],
+      "answers": {
+        "skills": "¿Cómo aplica estos intereses en su trabajo?",
+        "portfolio": "Me gustaría ver proyectos relacionados",
+        "back": "Volver a información personal"
+      },
+      "keywords": {
+        "skills": ["aplicar", "intereses", "trabajo", "relación", "habilidades"],
+        "portfolio": ["proyectos", "relacionados", "ver", "ejemplos", "portafolio"],
+        "back": ["volver", "regresar", "información", "personal", "sobre camilo"]
+      },
+      "next": {
+        "skills": "skills_overview",
+        "portfolio": "portfolio_overview",
+        "back": "about_camilo"
+      }
+    },
+    {
+      "id": "current_location",
+      "question": "Actualmente, Camilo está ubicado en:",
+      "content": "Córdoba, Argentina",
+      "additional_info": "Está abierto a oportunidades de trabajo remoto y reubicación.",
+      "answers": {
+        "availability": "¿Está disponible para proyectos remotos?",
+        "contact": "¿Cómo puedo contactarlo?",
+        "back": "Volver a información personal"
+      },
+      "keywords": {
+        "availability": ["disponible", "proyectos", "remotos", "trabajo", "horarios"],
+        "contact": ["contacto", "email", "teléfono", "redes", "comunicar"],
+        "back": ["volver", "regresar", "información", "personal", "sobre camilo"]
+      },
+      "next": {
+        "availability": "work_availability",
+        "contact": "contact_details",
+        "back": "about_camilo"
+      }
+    },
+    {
+      "id": "portfolio_overview",
+      "question": "El portafolio de Camilo incluye varios proyectos destacados. ¿Qué tipo de proyecto te interesa ver?",
+      "categories": {
+        "web_apps": "Aplicaciones Web",
+        "websites": "Sitios Web",
+        "mobile": "Apps Móviles"
+      },
+      "answers": {
+        "web_apps": "Ver Aplicaciones Web",
+        "websites": "Ver Sitios Web",
+        "mobile": "Ver Apps Móviles",
+        "all": "Ver todos los proyectos",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "web_apps": ["aplicaciones", "web", "webapp", "app"],
+        "websites": ["sitios", "web", "páginas", "landing"],
+        "mobile": ["apps", "móviles", "android", "ios", "celular"],
+        "all": ["todos", "proyectos", "completo", "portafolio"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "web_apps": "webapp_portfolio",
+        "websites": "website_portfolio",
+        "mobile": "mobile_portfolio",
+        "all": "all_projects",
+        "back": "greeting"
+      }
+    },
+    {
+      "id": "webapp_portfolio",
+      "question": "Aquí tienes algunos de los proyectos web más destacados de Camilo:",
+      "projects": [
+        {
+          "name": "Pizzeria Web",
+          "description": "Aplicación web moderna para explorar el menú, personalizar pedidos y realizar compras en línea.",
+          "tech_stack": ["React", "Next.js", "TailwindCSS", "Vercel", "Sheets"],
+          "features": [
+            "Catálogo de productos dinámico",
+            "Carrito de compras en tiempo real",
+            "Integración con pasarela de pagos",
+            "Panel de administración para gestión de pedidos"
+          ],
+          "image": "/pizzeriadonatello.webp",
+          "links": {
+            "demo": "https://pizzeria-donatello.vercel.app/",
+            "code": "https://github.com/CamiloEscar/pizzeria-landing.git"
+          }
+        },
+        {
+          "name": "Reclamos App",
+          "description": "Sistema de gestión de reclamos de clientes, optimizando el seguimiento y resolución de problemas.",
+          "tech_stack": ["AppSheets", "Google Cloud Platform"],
+          "features": [
+            "Registro y seguimiento de reclamos en tiempo real",
+            "Asignación automática de tickets",
+            "Generación de informes y estadísticas",
+            "Notificaciones por correo electrónico"
+          ],
+          "image": "/VDappsheets.webp",
+          "links": {
+            "demo": "https://www.appsheet.com/start/0ad56ea3-db22-4a5f-8a3a-5ceecf293481"
+          }
+        }
+      ],
+      "answers": {
+        "more": "Ver más proyectos",
+        "skills": "¿Qué habilidades se utilizaron?",
+        "contact": "Me interesa, ¿cómo puedo contactar a Camilo?",
+        "back": "Volver al portafolio"
+      },
+      "keywords": {
+        "more": ["más", "proyectos", "otros", "adicionales"],
+        "skills": ["habilidades", "tecnologías", "utilizadas", "stack"],
+        "contact": ["contactar", "camilo", "interesado", "comunicar"],
+        "back": ["volver", "regresar", "portafolio", "proyectos"]
+      },
+      "next": {
+        "more": "all_projects",
+        "skills": "skills_overview",
+        "contact": "contact_details",
+        "back": "portfolio_overview"
+      }
+    },
+    {
+      "id": "website_portfolio",
+      "question": "Estos son algunos de los sitios web desarrollados por Camilo:",
+      "projects": [
+        {
+          "name": "Arquitecto Page",
+          "description": "Landing page para un estudio de arquitectura, mostrando proyectos y servicios.",
+          "tech_stack": ["Astro", "TailwindCSS", "Vercel", "Vite"],
+          "features": [
+            "Diseño responsivo y moderno",
+            "Galería de proyectos interactiva",
+            "Formulario de contacto integrado",
+            "Optimización SEO"
+          ],
+          "image": "/arquitectolanding.webp",
+          "links": {
+            "demo": "https://landing-page-arquitecto.vercel.app/",
+            "code": "https://github.com/CamiloEscar/Landing-page-arquitecto.git"
+          }
+        },
+        {
+          "name": "FlyBondi",
+          "description": "Plataforma de reserva de vuelos con interfaz intuitiva y responsive.",
+          "tech_stack": ["React", "Vite", "CSS3", "JavaScript"],
+          "features": [
+            "Búsqueda y filtrado de vuelos en tiempo real",
+            "Proceso de reserva simplificado",
+            "Integración con API de aerolíneas",
+            "Diseño adaptable a dispositivos móviles"
+          ],
+          "image": "/flybondi.webp",
+          "links": {
+            "demo": "https://flybondi-challenge.netlify.app/",
+            "code": "https://github.com/CamiloEscar/FlyBondi-PA23.git"
+          }
+        }
+      ],
+      "answers": {
+        "more": "Ver más proyectos",
+        "skills": "¿Qué habilidades se utilizaron?",
+        "contact": "Me interesa, ¿cómo puedo contactar a Camilo?",
+        "back": "Volver al portafolio"
+      },
+      "keywords": {
+        "more": ["más", "proyectos", "otros", "adicionales"],
+        "skills": ["habilidades", "tecnologías", "utilizadas", "stack"],
+        "contact": ["contactar", "camilo", "interesado", "comunicar"],
+        "back": ["volver", "regresar", "portafolio", "proyectos"]
+      },
+      "next": {
+        "more": "all_projects",
+        "skills": "skills_overview",
+        "contact": "contact_details",
+        "back": "portfolio_overview"
+      }
+    },
+    {
+      "id": "mobile_portfolio",
+      "question": "Aquí tienes un ejemplo de aplicación móvil desarrollada por Camilo:",
+      "projects": [
+        {
+          "name": "Google Traductor Clon",
+          "description": "Réplica funcional del servicio Google Traductor con soporte para múltiples idiomas.",
+          "tech_stack": ["React Native", "Expo", "OpenAI API", "TypeScript"],
+          "features": [
+            "Traducción en tiempo real",
+            "Soporte para más de 50 idiomas",
+            "Reconocimiento de voz",
+            "Historial de traducciones"
+          ],
+          "image": "/googletraductor.webp",
+          "links": {
+            "code": "https://github.com/CamiloEscar/google-translate-clone.git"
+          }
+        }
+      ],
+      "answers": {
+        "more": "Ver más proyectos",
+        "skills": "¿Qué habilidades se utilizaron en desarrollo móvil?",
+        "contact": "Me interesa, ¿cómo puedo contactar a Camilo?",
+        "back": "Volver al portafolio"
+      },
+      "keywords": {
+        "more": ["más", "proyectos", "otros", "adicionales"],
+        "skills": ["habilidades", "tecnologías", "utilizadas", "stack", "móvil"],
+        "contact": ["contactar", "camilo", "interesado", "comunicar"],
+        "back":   ["volver", "regresar", "portafolio", "proyectos"]
+      },
+      "next": {
+        "more": "all_projects",
+        "skills": "skills_overview",
+        "contact": "contact_details",
+        "back": "portfolio_overview"
+      }
+    },
+    {
+      "id": "skills_overview",
+      "question": "Camilo ha desarrollado un conjunto diverso de habilidades técnicas. ¿Sobre qué área te gustaría saber más?",
+      "skills_categories": {
+        "frontend": "Desarrollo Frontend",
+        "backend": "Desarrollo Backend",
+        "devops": "DevOps y Cloud",
+        "mobile": "Desarrollo Móvil",
+        "tools": "Herramientas y Metodologías"
+      },
+      "answers": {
+        "frontend": "Habilidades Frontend",
+        "backend": "Habilidades Backend",
+        "devops": "Habilidades DevOps",
+        "mobile": "Desarrollo Móvil",
+        "tools": "Herramientas y Metodologías",
+        "all": "Ver todas las habilidades",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "frontend": ["frontend", "cliente", "interfaz", "ui", "ux"],
+        "backend": ["backend", "servidor", "api", "base de datos"],
+        "devops": ["devops", "cloud", "ci/cd", "infraestructura"],
+        "mobile": ["móvil", "android", "ios", "apps"],
+        "tools": ["herramientas", "metodologías", "procesos", "gestión"],
+        "all": ["todas", "habilidades", "completo", "resumen"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "frontend": "frontend_skills",
+        "backend": "backend_skills",
+        "devops": "devops_skills",
+        "mobile": "mobile_skills",
+        "tools": "tools_skills",
+        "all": "all_skills",
+        "back": "greeting"
+      }
+    },
+    {
+      "id": "frontend_skills",
+      "question": "Habilidades de Desarrollo Frontend de Camilo:",
+      "skills": [
+        {
+          "name": "Lenguajes y Frameworks",
+          "technologies": ["HTML5", "CSS3", "JavaScript (ES6+)", "TypeScript", "React", "Next.js", "Vue.js"]
+        },
+        {
+          "name": "Estilizado y Diseño Responsivo",
+          "technologies": ["Sass/SCSS", "TailwindCSS", "Styled Components", "CSS Modules", "Bootstrap"]
+        },
+        {
+          "name": "Estado y Gestión de Datos",
+          "technologies": ["Redux", "Context API", "Apollo Client", "React Query"]
+        },
+        {
+          "name": "Optimización y Rendimiento",
+          "technologies": ["Webpack", "Babel", "Lazy Loading", "Code Splitting"]
+        }
+      ],
+      "answers": {
+        "backend": "Ver habilidades Backend",
+        "projects": "Ver proyectos relacionados",
+        "more": "Más habilidades",
+        "back": "Volver a categorías de habilidades"
+      },
+      "keywords": {
+        "backend": ["backend", "servidor", "api", "base de datos"],
+        "projects": ["proyectos", "relacionados", "ejemplos", "portafolio"],
+        "more": ["más", "habilidades", "otras", "adicionales"],
+        "back": ["volver", "regresar", "categorías", "habilidades"]
+      },
+      "next": {
+        "backend": "backend_skills",
+        "projects": "webapp_portfolio",
+        "more": "all_skills",
+        "back": "skills_overview"
+      }
+    },
+    {
+      "id": "backend_skills",
+      "question": "Habilidades de Desarrollo Backend de Camilo:",
+      "skills": [
+        {
+          "name": "Lenguajes y Frameworks",
+          "technologies": ["Node.js", "Express.js", "NestJS", "Python", "Django", "FastAPI"]
+        },
+        {
+          "name": "Bases de Datos",
+          "technologies": ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Prisma ORM"]
+        },
+        {
+          "name": "APIs y Protocolos",
+          "technologies": ["RESTful APIs", "GraphQL", "WebSockets", "OAuth 2.0"]
+        },
+        {
+          "name": "Seguridad y Autenticación",
+          "technologies": ["JWT", "bcrypt", "HTTPS/SSL", "CORS"]
+        }
+      ],
+      "answers": {
+        "frontend": "Ver habilidades Frontend",
+        "projects": "Ver proyectos relacionados",
+        "more": "Más habilidades",
+        "back": "Volver a categorías de habilidades"
+      },
+      "keywords": {
+        "frontend": ["frontend", "cliente", "interfaz", "ui", "ux"],
+        "projects": ["proyectos", "relacionados", "ejemplos", "portafolio"],
+        "more": ["más", "habilidades", "otras", "adicionales"],
+        "back": ["volver", "regresar", "categorías", "habilidades"]
+      },
+      "next": {
+        "frontend": "frontend_skills",
+        "projects": "webapp_portfolio",
+        "more": "all_skills",
+        "back": "skills_overview"
+      }
+    },
+    {
+      "id": "devops_skills",
+      "question": "Habilidades de DevOps y Cloud de Camilo:",
+      "skills": [
+        {
+          "name": "Control de Versiones",
+          "technologies": ["Git", "GitHub", "GitLab", "Bitbucket"]
+        },
+        {
+          "name": "CI/CD",
+          "technologies": ["GitHub Actions", "GitLab CI", "Jenkins", "CircleCI"]
+        },
+        {
+          "name": "Contenedores y Orquestación",
+          "technologies": ["Docker", "Kubernetes", "Docker Compose"]
+        },
+        {
+          "name": "Cloud Platforms",
+          "technologies": ["AWS", "Google Cloud Platform", "Vercel", "Netlify", "Heroku"]
+        }
+      ],
+      "answers": {
+        "frontend": "Ver habilidades Frontend",
+        "backend": "Ver habilidades Backend",
+        "more": "Más habilidades",
+        "back": "Volver a categorías de habilidades"
+      },
+      "keywords": {
+        "frontend": ["frontend", "cliente", "interfaz", "ui", "ux"],
+        "backend": ["backend", "servidor", "api", "base de datos"],
+        "more": ["más", "habilidades", "otras", "adicionales"],
+        "back": ["volver", "regresar", "categorías", "habilidades"]
+      },
+      "next": {
+        "frontend": "frontend_skills",
+        "backend": "backend_skills",
+        "more": "all_skills",
+        "back": "skills_overview"
+      }
+    },
+    {
+      "id": "experience_overview",
+      "question": "Camilo tiene una sólida experiencia laboral en desarrollo web. ¿Sobre qué aspecto te gustaría saber más?",
+      "answers": {
+        "current": "Trabajo actual",
+        "previous": "Experiencias previas",
+        "projects": "Proyectos destacados",
+        "skills": "Habilidades adquiridas",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "current": ["actual", "trabajo", "empleo", "puesto"],
+        "previous": ["previas", "anteriores", "pasadas", "experiencias"],
+        "projects": ["proyectos", "destacados", "importantes", "relevantes"],
+        "skills": ["habilidades", "adquiridas", "aprendidas", "desarrolladas"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "current": "current_job",
+        "previous": "previous_jobs",
+        "projects": "portfolio_overview",
+        "skills": "skills_overview",
+        "back": "greeting"
+      }
+    },
+    {
+      "id": "current_job",
+      "question": "Actualmente, Camilo trabaja como:",
+      "content": {
+        "position": "Desarrollador Full Stack Senior",
+        "company": "TechInnovate Solutions",
+        "duration": "Desde Enero 2022 - Presente",
+        "responsibilities": [
+          "Desarrollo de aplicaciones web escalables utilizando React y Node.js",
+          "Implementación de arquitecturas serverless en AWS",
+          "Liderazgo técnico en proyectos de e-commerce",
+          "Mentoría a desarrolladores junior y mid-level"
+        ]
+      },
+      "answers": {
+        "previous": "Ver trabajos anteriores",
+        "skills": "¿Qué habilidades utiliza en este trabajo?",
+        "projects": "Ver proyectos relacionados",
+        "back": "Volver a resumen de experiencia"
+      },
+      "keywords": {
+        "previous": ["anteriores", "previos", "pasados", "trabajos"],
+        "skills": ["habilidades", "utilizadas", "requeridas", "aplicadas"],
+        "projects": ["proyectos", "relacionados", "actuales", "empresa"],
+        "back": ["volver", "regresar", "resumen", "experiencia"]
+      },
+      "next": {
+        "previous": "previous_jobs",
+        "skills": "skills_overview",
+        "projects": "portfolio_overview",
+        "back": "experience_overview"
+      }
+    },
+    {
+      "id": "contact_details",
+      "question": "Excelente elección. Camilo está siempre abierto a nuevas oportunidades y colaboraciones. ¿Cómo prefieres contactarlo?",
+      "contact_methods": {
+        "email": {
+          "value": "camiloescar1995@gmail.com",
+          "description": "Correo electrónico profesional",
+          "action": "mailto:camiloescar1995@gmail.com"
+        },
+        "linkedin": {
+          "url": "https://linkedin.com/in/camiloescar",
+          "description": "Perfil de LinkedIn",
+          "action": "https://linkedin.com/in/camiloescar"
+        },
+        "github": {
+          "url": "https://github.com/CamiloEscar",
+          "description": "Perfil de GitHub",
+          "action": "https://github.com/CamiloEscar"
+        },
+        "website": {
+          "url": "https://camiloescar.vercel.app/links",
+          "description": "Sitio web personal",
+          "action": "https://camiloescar.vercel.app/links"
+        }
+      },
+      "answers": {
+        "availability": "¿Está disponible para nuevos proyectos?",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "email": ["correo", "email", "e-mail", "electrónico", "mail"],
+        "linkedin": ["linkedin", "red", "profesional", "perfil"],
+        "github": ["github", "repositorio", "código", "proyectos"],
+        "website": ["sitio", "web", "personal", "portafolio"],
+        "availability": ["disponibilidad", "proyectos", "nuevos", "trabajos"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "email": "send_email",
+        "linkedin": "view_linkedin",
+        "github": "view_github",
+        "website": "view_website",
+        "availability": "work_availability",
+        "back": "greeting"
+      },
+      "action_handlers": {
+        "send_email": {
+          "type": "email",
+          "address": "camiloescar1995@gmail.com",
+          "subject": "Contacto desde el portafolio",
+          "body": "Hola Camilo, me gustaría discutir una oportunidad de colaboración..."
+        },
+        "view_linkedin": {
+          "type": "external_link",
+          "url": "https://linkedin.com/in/camiloescar"
+        },
+        "view_github": {
+          "type": "external_link",
+          "url": "https://github.com/CamiloEscar"
+        },
+        "view_website": {
+          "type": "external_link",
+          "url": "https://camiloescar.vercel.app/links"
+        }
+      }
+    },
+    {
+      "id": "work_availability",
+      "question": "Camilo está actualmente disponible para nuevos proyectos y oportunidades laborales.",
+      "content": [
+        "Abierto a proyectos freelance y contratos a tiempo completo",
+        "Disponible para trabajo remoto o híbrido",
+        "Interesado en proyectos desafiantes que involucren tecnologías modernas",
+        "Dispuesto a considerar reubicación para las oportunidades adecuadas"
+      ],
+      "availability_details": {
+        "preferred_work_type": ["Tiempo completo", "Freelance", "Contratos"],
+        "work_modality": ["Remoto", "Híbrido", "Presencial (con flexibilidad)"],
+        "hours_per_week": "40 horas (negociable para proyectos interesantes)",
+        "time_zone": "GMT-3 (Argentina), flexible para trabajar en otros horarios",
+        "start_date": "Disponible para comenzar en 2 semanas",
+        "relocation": "Abierto a reubicación para las oportunidades adecuadas",
+        "travel": "Disponible para viajes ocasionales"
+      },
+      "preferred_projects": [
+        "Desarrollo de aplicaciones web escalables",
+        "Proyectos que involucren tecnologías emergentes",
+        "Soluciones de e-commerce innovadoras",
+        "Aplicaciones móviles multiplataforma"
+      ],
+      "additional_info": [
+        "Comprometido con el aprendizaje continuo y la mejora de habilidades",
+        "Experiencia en trabajo remoto y colaboración en equipos distribuidos",
+        "Fuerte ética de trabajo y habilidades de gestión del tiempo",
+        "Apasionado por crear soluciones tecnológicas que impacten positivamente"
+      ],
+      "answers": {
+        "contact": "Me gustaría contactarlo",
+        "skills": "¿Qué habilidades ofrece?",
+        "portfolio": "Ver su portafolio",
+        "back": "Volver al menú principal"
+      },
+      "keywords": {
+        "contact": ["contactar", "comunicar", "hablar", "mensaje"],
+        "skills": ["habilidades", "conocimientos", "experiencia", "tecnologías"],
+        "portfolio": ["portafolio", "proyectos", "trabajos", "ejemplos"],
+        "back": ["volver", "regresar", "inicio", "menú", "principal"]
+      },
+      "next": {
+        "contact": "contact_details",
+        "skills": "skills_overview",
+        "portfolio": "portfolio_overview",
+        "back": "greeting"
+      }
+    }
+  ]
+}

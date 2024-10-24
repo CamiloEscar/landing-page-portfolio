@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useMemo } from 'react';
 import { dataPortfolio, PortfolioItem } from '@/data';
 import Image from 'next/image';
@@ -10,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Github,
@@ -18,7 +20,24 @@ import {
   ChevronDown,
   ChevronUp,
   Image as ImageIcon,
+  Search,
+  X,
+  SlidersHorizontal,
 } from 'lucide-react';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+import { Badge } from '@/components/ui/badge';
 import { useTheme } from 'next-themes';
 import { iconMap, IconMapKey } from './shared/iconMap';
 import GradientName from './shared/GradientName';
@@ -72,24 +91,24 @@ const techColors: Record<string, string> = {
   svelte: '#FF3E00',
   bun: '#FBF0DF',
   astro: '#000000',
-  sheets: '#47A248'
+  sheets: '#47A248',
 };
 
 const getTechIcon = (tech: string) => {
   const key = tech.toLowerCase().replace(/\s+/g, '-') as IconMapKey;
   const IconComponent = iconMap[key];
-  
+
   if (IconComponent) {
     const color = techColors[key] || '#718096';
     return React.cloneElement(IconComponent, { style: { color } });
   }
-  
+
   return <Code size={12} />;
 };
 
-const MediaDisplay: React.FC<{ 
-  project: ExtendedPortfolioItem,
-  alt: string,
+const MediaDisplay: React.FC<{
+  project: ExtendedPortfolioItem;
+  alt: string;
 }> = ({ project, alt }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -108,7 +127,8 @@ const MediaDisplay: React.FC<{
     }
   }, [isHovered, project.gifImage]);
 
-  const currentImage = loadGif && isHovered && project.gifImage ? project.gifImage : project.image;
+  const currentImage =
+    loadGif && isHovered && project.gifImage ? project.gifImage : project.image;
 
   if (error) {
     return (
@@ -119,7 +139,7 @@ const MediaDisplay: React.FC<{
   }
 
   return (
-    <div 
+    <div
       className="relative w-full h-48"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -145,8 +165,153 @@ const MediaDisplay: React.FC<{
   );
 };
 
+const SearchAndFilter: React.FC<{
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  selectedTech: string[];
+  toggleTech: (tech: string) => void;
+  allTechnologies: string[];
+  clearFilters: () => void;
+  filteredCount: number;
+}> = ({
+  searchTerm,
+  setSearchTerm,
+  selectedTech,
+  toggleTech,
+  allTechnologies,
+  clearFilters,
+  filteredCount,
+}) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* Search Bar with Enhanced Design */}
+        <div className="relative flex-grow">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <Input
+              type="text"
+              placeholder="Buscar proyectos por nombre o tecnología..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 pr-4 h-11 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 rounded-lg shadow-sm focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+            />
+            {searchTerm && (
+              <button
+                onClick={() => setSearchTerm('')}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Tech Filter Popover */}
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded={open}
+              className="h-11 min-w-[200px] justify-between bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700/50"
+            >
+              <SlidersHorizontal className="mr-2 h-4 w-4" />
+              Filtrar por tecnología
+              <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[300px] p-0" align="start">
+            <Command>
+              <CommandInput placeholder="Buscar tecnología..." />
+              <CommandList>
+                <CommandEmpty>No se encontraron tecnologías.</CommandEmpty>
+                <CommandGroup>
+                  {allTechnologies.map((tech) => (
+                    <CommandItem
+                      key={tech}
+                      onSelect={() => toggleTech(tech)}
+                      className="flex items-center gap-2 cursor-pointer"
+                    >
+                      {getTechIcon(tech)}
+                      <span>{tech}</span>
+                      <span className="ml-auto">
+                        {selectedTech.includes(tech) && (
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            exit={{ scale: 0 }}
+                          >
+                            <Badge variant="secondary" className="ml-auto">
+                              Seleccionado
+                            </Badge>
+                          </motion.div>
+                        )}
+                      </span>
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </div>
+
+      {/* Selected Filters Display */}
+      {(selectedTech.length > 0 || searchTerm) && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="flex flex-wrap items-center gap-2"
+        >
+          <div className="flex-1 flex flex-wrap gap-2">
+            {selectedTech.map((tech) => (
+              <motion.div
+                key={tech}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+              >
+                <Badge
+                  variant="secondary"
+                  className="px-3 py-1 flex items-center gap-1 bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
+                  onClick={() => toggleTech(tech)}
+                >
+                  {getTechIcon(tech)}
+                  {tech}
+                  <X className="h-3 w-3 ml-1" />
+                </Badge>
+              </motion.div>
+            ))}
+          </div>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-muted-foreground">
+              {filteredCount} proyecto{filteredCount !== 1 ? 's' : ''}{' '}
+              encontrado{filteredCount !== 1 ? 's' : ''}
+            </span>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={clearFilters}
+              className="h-8 px-2 hover:bg-primary/10"
+            >
+              <X className="h-4 w-4 mr-1" />
+              Limpiar filtros
+            </Button>
+          </div>
+        </motion.div>
+      )}
+    </div>
+  );
+};
+
 // Project Card Component
-const ProjectCard: React.FC<{ project: ExtendedPortfolioItem }> = ({ project }) => (
+const ProjectCard: React.FC<{ project: ExtendedPortfolioItem }> = ({
+  project,
+}) => (
   <motion.div
     whileHover={{ scale: 1.03 }}
     whileTap={{ scale: 0.98 }}
@@ -154,10 +319,7 @@ const ProjectCard: React.FC<{ project: ExtendedPortfolioItem }> = ({ project }) 
   >
     <Card className="h-full flex flex-col bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
       <CardHeader className="p-0">
-        <MediaDisplay
-          project={project}
-          alt={project.title}
-        />
+        <MediaDisplay project={project} alt={project.title} />
       </CardHeader>
       <CardContent className="p-4 flex-grow">
         <CardTitle className="text-xl mb-2 text-gray-800 dark:text-white">
@@ -213,28 +375,44 @@ const ProjectCard: React.FC<{ project: ExtendedPortfolioItem }> = ({ project }) 
 );
 
 // Project Table Component
-const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({ projects }) => (
+const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({
+  projects,
+}) => (
   <div className="rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-800/90 shadow-lg backdrop-blur-sm">
     <Table>
       <TableHeader>
         <TableRow className="bg-gray-50 dark:bg-gray-700/50">
-          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Project</TableHead>
-          <TableHead className="hidden sm:table-cell font-semibold text-gray-700 dark:text-gray-200">Technologies</TableHead>
-          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">Links</TableHead>
+          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">
+            Project
+          </TableHead>
+          <TableHead className="hidden sm:table-cell font-semibold text-gray-700 dark:text-gray-200">
+            Technologies
+          </TableHead>
+          <TableHead className="font-semibold text-gray-700 dark:text-gray-200">
+            Links
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {projects.map((project) => (
-          <TableRow key={project.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+          <TableRow
+            key={project.id}
+            className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors"
+          >
             <TableCell>
-              <div className="font-medium text-gray-900 dark:text-gray-100">{project.title}</div>
+              <div className="font-medium text-gray-900 dark:text-gray-100">
+                {project.title}
+              </div>
               <div className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2 sm:line-clamp-none">
                 {project.description}
               </div>
               <div className="sm:hidden mt-2">
                 <div className="flex flex-wrap gap-1">
                   {project.technologies.slice(0, 3).map((tech, index) => (
-                    <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                    <span
+                      key={index}
+                      className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -249,7 +427,10 @@ const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({ project
             <TableCell className="hidden sm:table-cell">
               <div className="flex flex-wrap gap-1">
                 {project.technologies.map((tech, index) => (
-                  <span key={index} className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full">
+                  <span
+                    key={index}
+                    className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full"
+                  >
                     {tech}
                   </span>
                 ))}
@@ -258,16 +439,31 @@ const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({ project
             <TableCell>
               <div className="flex flex-col sm:flex-row gap-2">
                 {project.urlGithub && (
-                  <Link href={project.urlGithub} target="_blank" rel="noopener noreferrer">
-                    <Button variant="outline" size="sm" className="w-full sm:w-auto bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <Link
+                    href={project.urlGithub}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full sm:w-auto bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    >
                       <Github className="h-4 w-4 mr-2" />
                       GitHub
                     </Button>
                   </Link>
                 )}
                 {project.urlDemo && (
-                  <Link href={project.urlDemo} target="_blank" rel="noopener noreferrer">
-                    <Button size="sm" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground">
+                  <Link
+                    href={project.urlDemo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button
+                      size="sm"
+                      className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground"
+                    >
                       <ExternalLink className="h-4 w-4 mr-2" />
                       Demo
                     </Button>
@@ -285,27 +481,60 @@ const ProjectTable: React.FC<{ projects: ExtendedPortfolioItem[] }> = ({ project
 // Main Portfolio Component
 const Portfolio: React.FC = () => {
   const [visibleProjects, setVisibleProjects] = useState(ITEMS_PER_PAGE);
-  const [searchTerm] = useState('');
-  useTheme();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTech, setSelectedTech] = useState<string[]>([]);
+  const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  // Get unique technologies from all projects
+  const allTechnologies = useMemo(() => {
+    const techSet = new Set<string>();
+    dataPortfolio.forEach((project) => {
+      project.technologies.forEach((tech) => techSet.add(tech));
+    });
+    return Array.from(techSet).sort();
+  }, []);
+
   const filteredProjects = useMemo(() => {
-    return dataPortfolio.map(project => ({
-      ...project,
-      mediaType: project.image.toLowerCase().endsWith('.gif') ? 'gif' as const : 'image' as const
-    })).filter(
-      (project) =>
-        project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.technologies.some((tech) =>
-          tech.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+    return dataPortfolio
+      .map((project) => ({
+        ...project,
+        mediaType: project.image.toLowerCase().endsWith('.gif')
+          ? ('gif' as const)
+          : ('image' as const),
+      }))
+      .filter((project) => {
+        const matchesSearch =
+          project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          project.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          project.technologies.some((tech) =>
+            tech.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+
+        const matchesTech =
+          selectedTech.length === 0 ||
+          selectedTech.every((tech) => project.technologies.includes(tech));
+
+        return matchesSearch && matchesTech;
+      });
+  }, [searchTerm, selectedTech]);
+
+  const toggleTech = (tech: string) => {
+    setSelectedTech((prev) =>
+      prev.includes(tech) ? prev.filter((t) => t !== tech) : [...prev, tech]
     );
-  }, [searchTerm]);
+  };
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedTech([]);
+  };
 
   const toggleProjects = () => {
     setVisibleProjects((prev) =>
@@ -324,6 +553,7 @@ const Portfolio: React.FC = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
+        {/* Header section remains the same */}
         <motion.div
           className="text-center mb-12 md:mb-16"
           initial={{ y: -50, opacity: 0 }}
@@ -340,6 +570,24 @@ const Portfolio: React.FC = () => {
             Algunos de mis Proyectos desarrollados de manera freelance.
           </p>
         </motion.div>
+
+        {/* Enhanced Search and Filter Section */}
+        <motion.div
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <SearchAndFilter
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedTech={selectedTech}
+            toggleTech={toggleTech}
+            allTechnologies={allTechnologies}
+            clearFilters={clearFilters}
+            filteredCount={filteredProjects.length}
+          />
+        </motion.div>
         <Separator />
 
         <AnimatePresence>
@@ -351,30 +599,30 @@ const Portfolio: React.FC = () => {
               visible: { transition: { staggerChildren: 0.1 } },
             }}
           >
-             {/* Grid view for larger screens */}
-             <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
-              {filteredProjects
-                .slice(0, visibleProjects)
-                .map((project) => (
-                  <motion.div
-                    key={project.id}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: {
-                        opacity: 1,
-                        y: 0,
-                        transition: { duration: 0.5 },
-                      },
-                    }}
-                  >
-                    <ProjectCard project={project} />
-                  </motion.div>
-                ))}
+            {/* Grid view for larger screens */}
+            <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 lg:gap-8">
+              {filteredProjects.slice(0, visibleProjects).map((project) => (
+                <motion.div
+                  key={project.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { duration: 0.5 },
+                    },
+                  }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))}
             </div>
 
             {/* Table view for mobile screens */}
             <div className="md:hidden overflow-x-auto">
-              <ProjectTable projects={filteredProjects.slice(0, visibleProjects)} />
+              <ProjectTable
+                projects={filteredProjects.slice(0, visibleProjects)}
+              />
             </div>
           </motion.div>
         </AnimatePresence>
