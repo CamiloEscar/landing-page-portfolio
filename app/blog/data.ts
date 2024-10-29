@@ -15,7 +15,232 @@ export interface BlogPost {
 }
 
 export const dataBlog: BlogPost[] = [
+  //extensiones-vs-code
+  {
+    slug: 'extensiones-vscode',
+    title: 'Guía Completa sobre Extensiones de Visual Studio Code',
+    image: '/blog/vscode_extensions.png',
+    date: '2024-10-21',
+    tags: [
+      'VSCode',
+      'Extensiones',
+      'Desarrollo',
+      'Productividad',
+      'Herramientas',
+    ],
+    type: 'Tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/tu-avatar.webp',
+    },
+    readingTime: '10 min',
+    excerpt:
+      'Descubre cómo las extensiones de Visual Studio Code pueden mejorar tu flujo de trabajo y aumentar tu productividad como desarrollador.',
+    content: `
+  <h2>🚀 ¿Qué es Visual Studio Code?</h2>
+  <p>Visual Studio Code (VSCode) es un editor de código fuente desarrollado por Microsoft. Es popular entre los desarrolladores debido a su interfaz ligera, versatilidad y un ecosistema rico en extensiones que mejoran la experiencia de codificación.</p>
+
+  <h2>🌟 ¿Por qué Usar Extensiones?</h2>
+  <p>Las extensiones permiten personalizar y ampliar las funcionalidades de VSCode. Pueden ayudar a mejorar la productividad, agregar soporte para nuevos lenguajes, integrar herramientas y mejorar el flujo de trabajo general. Aquí hay algunas razones para usar extensiones:</p>
+  <ul>
+    <li><strong>Aumentar la Productividad:</strong> Las extensiones pueden automatizar tareas repetitivas y proporcionar atajos de teclado útiles.</li>
+    <li><strong>Soporte para Múltiples Lenguajes:</strong> Puedes agregar soporte para nuevos lenguajes de programación y sus características específicas.</li>
+    <li><strong>Integración de Herramientas:</strong> Algunas extensiones permiten integrar herramientas de desarrollo y servicios externos directamente en el editor.</li>
+  </ul>
+
+  <h2>🛠 Mejores Extensiones para VSCode</h2>
+  <p>A continuación, se presentan algunas de las extensiones más populares y útiles que puedes instalar en VSCode:</p>
+
+  <h3>1. Prettier - Code Formatter</h3>
+  <p>Prettier es una herramienta de formateo de código que garantiza que tu código sea consistente y fácil de leer. Funciona con varios lenguajes y formatos de archivo.</p>
+  <pre><code>Instalación: 
+  1. Abre el panel de extensiones (Ctrl+Shift+X).
+  2. Busca "Prettier" y selecciona "Instalar".
+  </code></pre>
+
+  <h3>2. ESLint</h3>
+  <p>ESLint es una herramienta para identificar y reportar patrones problemáticos en el código JavaScript. Ayuda a mantener un código limpio y libre de errores.</p>
+  <pre><code>Instalación: 
+  1. Abre el panel de extensiones.
+  2. Busca "ESLint" y selecciona "Instalar".
+  </code></pre>
+
+  <h3>3. GitLens</h3>
+  <p>GitLens mejora la integración de Git en VSCode, proporcionando información sobre las líneas de código, historia de cambios y autoría, lo que facilita el seguimiento del desarrollo del proyecto.</p>
+  <pre><code>Instalación: 
+  1. Abre el panel de extensiones.
+  2. Busca "GitLens" y selecciona "Instalar".
+  </code></pre>
+
+  <h3>4. Live Server</h3>
+  <p>Live Server permite lanzar un servidor local con recarga automática para aplicaciones web. Es especialmente útil para el desarrollo de aplicaciones front-end.</p>
+  <pre><code>Instalación: 
+  1. Abre el panel de extensiones.
+  2. Busca "Live Server" y selecciona "Instalar".
+  </code></pre>
+
+  <h3>5. Python</h3>
+  <p>La extensión oficial de Python proporciona soporte completo para desarrollo en Python, incluyendo depuración, IntelliSense y gestión de entornos virtuales.</p>
+  <pre><code>Instalación: 
+  1. Abre el panel de extensiones.
+  2. Busca "Python" y selecciona "Instalar".
+  </code></pre>
+
+  <h2>💡 Cómo Instalar Extensiones</h2>
+  <p>Instalar extensiones en VSCode es un proceso sencillo:</p>
+  <ol>
+    <li>Abre VSCode.</li>
+    <li>Ve al panel de extensiones (Ctrl+Shift+X).</li>
+    <li>Busca la extensión que deseas instalar.</li>
+    <li>Haz clic en "Instalar".</li>
+  </ol>
+
+  <h2>🔧 Gestionando Extensiones</h2>
+  <p>Para gestionar tus extensiones instaladas, puedes desactivarlas, desinstalarlas o actualizar su configuración:</p>
+  <ol>
+    <li>Abre el panel de extensiones.</li>
+    <li>Ve a la sección "Instaladas".</li>
+    <li>Selecciona la extensión y usa las opciones disponibles para desactivar o desinstalar.</li>
+  </ol>
+
+  <h2>🛡 Consejos para Elegir Extensiones</h2>
+  <ul>
+    <li><strong>Revisar Calificaciones y Reseñas:</strong> Antes de instalar, verifica la calificación y las reseñas de otros usuarios.</li>
+    <li><strong>Verificar Actualizaciones:</strong> Asegúrate de que la extensión esté activa y reciba actualizaciones periódicas.</li>
+    <li><strong>Compatibilidad:</strong> Confirma que la extensión sea compatible con tu versión de VSCode y con tus lenguajes de programación.</li>
+  </ul>
+
+  <h2>🔚 Conclusión</h2>
+  <p>Las extensiones de Visual Studio Code son una herramienta poderosa para mejorar tu flujo de trabajo y aumentar tu productividad. Desde formateadores de código hasta herramientas de integración de Git, hay una amplia variedad de opciones disponibles para adaptarse a tus necesidades. ¡Explora el mercado de extensiones y personaliza tu experiencia de codificación hoy mismo!</p>
+`,
+  },
+  //guia-para-entender-el-proceso-TDD
+  {
+    slug: 'tdd-guia-completa',
+    title: 'Guía Completa para Implementar TDD en tus Proyectos',
+    image: '/blog/tdd_guide.png',
+    date: '2024-10-21',
+    tags: [
+      'TDD',
+      'Desarrollo',
+      'Pruebas',
+      'Calidad de Código',
+      'Metodologías Ágiles',
+    ],
+    type: 'Tutorial',
+    author: {
+      name: 'Camilo Escar',
+      avatar: '/tu-avatar.webp',
+    },
+    readingTime: '10 min',
+    excerpt:
+      'Descubre cómo implementar el Desarrollo Guiado por Pruebas (TDD) en tus proyectos y mejora la calidad y mantenibilidad del código con un ejemplo práctico.',
+    content: `
+  <h2>🚀 ¿Qué es TDD?</h2>
+  <p>El Desarrollo Guiado por Pruebas (TDD) es una metodología que prioriza la creación de pruebas antes de escribir el código funcional. Este enfoque ayuda a garantizar que el software cumpla con los requisitos desde el inicio, mejorando la calidad y la mantenibilidad del código.</p>
+
+  <h2>🌟 Beneficios de TDD</h2>
+  <ul>
+    <li><strong>Calidad del Código:</strong> Asegura que el código se adhiera a los requisitos desde el principio.</li>
+    <li><strong>Menos Errores:</strong> Detecta problemas temprano, lo que reduce costos y esfuerzos de corrección.</li>
+    <li><strong>Diseño Mejorado:</strong> Promueve un diseño más modular y desacoplado.</li>
+    <li><strong>Documentación Viviente:</strong> Las pruebas actúan como documentación que explica el comportamiento esperado del sistema.</li>
+  </ul>
+
+  <h2>🛠 Pasos para Implementar TDD</h2>
+  <h3>1. Entender los Requisitos</h3>
+  <p>Asegúrate de tener claros los requisitos de la funcionalidad a implementar. Por ejemplo, supongamos que deseas implementar una calculadora simple que sume, reste, multiplique y divida.</p>
+
+  <h3>2. Escribir la Prueba Inicial</h3>
+  <p>Comienza escribiendo una prueba para la función de suma. Esta prueba debería fallar inicialmente.</p>
+  <pre><code>def test_suma():
+    assert suma(2, 3) == 5
+  </code></pre>
+
+  <h3>3. Ejecutar la Prueba</h3>
+  <p>Ejecuta la prueba y asegúrate de que falle, confirmando que la funcionalidad aún no está implementada.</p>
+
+  <h3>4. Escribir el Código Necesario</h3>
+  <p>Ahora, implementa la función de suma con el código mínimo necesario para que la prueba pase.</p>
+  <pre><code>def suma(a, b):
+    return a + b
+  </code></pre>
+
+  <h3>5. Ejecutar las Pruebas Nuevamente</h3>
+  <p>Ejecuta las pruebas nuevamente. Deberías ver que la prueba pasa.</p>
+
+  <h3>6. Refactorizar el Código</h3>
+  <p>Una vez que la prueba pasa, puedes refactorizar el código para mejorar su claridad o eficiencia, asegurándote de que todas las pruebas sigan pasando.</p>
+
+  <h3>7. Repetir el Proceso</h3>
+  <p>Repite el ciclo para cada nueva funcionalidad. Por ejemplo, escribe pruebas para la resta, multiplicación y división de la calculadora.</p>
+  <pre><code>def test_resta():
+    assert resta(5, 3) == 2
+
+def test_multiplicacion():
+    assert multiplicacion(2, 3) == 6
+
+def test_division():
+    assert division(6, 3) == 2
+  </code></pre>
+
+  <h2>📚 Ejemplo Completo de TDD</h2>
+  <p>Imaginemos que estás creando una calculadora simple con las operaciones básicas. Aquí te muestro cómo implementar TDD paso a paso.</p>
   
+  <h3>1. Prueba de Suma</h3>
+  <pre><code>def test_suma():
+    assert suma(2, 3) == 5
+  </code></pre>
+
+  <h3>2. Implementación de Suma</h3>
+  <pre><code>def suma(a, b):
+    return a + b
+  </code></pre>
+
+  <h3>3. Prueba de Resta</h3>
+  <pre><code>def test_resta():
+    assert resta(5, 3) == 2
+  </code></pre>
+
+  <h3>4. Implementación de Resta</h3>
+  <pre><code>def resta(a, b):
+    return a - b
+  </code></pre>
+
+  <h3>5. Prueba de Multiplicación</h3>
+  <pre><code>def test_multiplicacion():
+    assert multiplicacion(2, 3) == 6
+  </code></pre>
+
+  <h3>6. Implementación de Multiplicación</h3>
+  <pre><code>def multiplicacion(a, b):
+    return a * b
+  </code></pre>
+
+  <h3>7. Prueba de División</h3>
+  <pre><code>def test_division():
+    assert division(6, 3) == 2
+  </code></pre>
+
+  <h3>8. Implementación de División</h3>
+  <pre><code>def division(a, b):
+    if b == 0:
+        raise ValueError("No se puede dividir por cero")
+    return a / b
+  </code></pre>
+
+  <h2>💡 Consejos Adicionales para TDD Efectivo</h2>
+  <ul>
+    <li><strong>Utiliza Frameworks de Pruebas:</strong> Herramientas como <code>pytest</code> o <code>unittest</code> en Python facilitan la creación y ejecución de pruebas.</li>
+    <li><strong>Cubre Diferentes Casos de Prueba:</strong> Asegúrate de incluir tanto casos positivos como negativos.</li>
+    <li><strong>Mantén la Prueba Simple:</strong> Escribe pruebas que sean fáciles de entender.</li>
+    <li><strong>Automatiza la Ejecución de Pruebas:</strong> Configura tu entorno para ejecutar pruebas automáticamente al realizar cambios.</li>
+  </ul>
+
+  <h2>🔚 Conclusión</h2>
+  <p>Implementar TDD puede ser un desafío al principio, pero se convertirá en una parte natural de tu flujo de trabajo. Este enfoque no solo mejora la calidad del código, sino que también aumenta tu confianza al realizar cambios. ¡Empieza hoy mismo y transforma tu proceso de desarrollo!</p>
+`,
+  },
   // entender-init-package-json-tsconfig
   {
     slug: 'entender-init-package-json-tsconfig',
@@ -226,7 +451,7 @@ export const dataBlog: BlogPost[] = [
       <p>Los ejercicios de lógica en JavaScript pueden ser desafiantes, pero con un enfoque estructurado y práctica, puedes dominarlos. Recuerda seguir los pasos y, sobre todo, ¡disfrutar del proceso de aprendizaje!</p>
     </footer>
   </article>
-  `
+  `,
   },
   // iniciar-proyecto-node-typescript
   {

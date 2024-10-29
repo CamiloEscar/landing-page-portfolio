@@ -535,7 +535,13 @@ export default function ImprovedChatBot() {
               size="icon"
               className="rounded-full h-14 w-14 shadow-lg"
             >
-              <MessageCircle className="h-6 w-6" />
+              <Image
+                src="/robotitoicon.png" // Replace with your 3D robot image path
+                alt="3D Robot Chat Icon"
+                width={112}
+                height={112}
+                className="object-cover"
+              />
               {unreadCount > 0 && (
                 <Badge 
                   variant="destructive" 

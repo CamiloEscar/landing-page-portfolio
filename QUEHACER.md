@@ -3,7 +3,7 @@
 [] COMPONETIZAR
 
 * LinkPage
-[] Poner logo no imagen
+[✅] Poner logo no imagen
   
 * Introduction
 [] Ver si cambiar introducción por algo parecido a linktree <https://linktr.ee/>
@@ -16,9 +16,10 @@
 * Blog
 [] Agregar paso a paso en el código para explicar
 [] Agregar post de extensiones, crear diferentes ramas de posts
-
-* Landing
-[] Achicar portafolio en landing
+[] Agregar sockets hecho en SO
+[] Agregar singleton, patronces, hecho en ing2
+[] Agregar metodologias de ing1
+[] Agregar otros ides
 
 * Proyectos
 [] Ejercicio php
@@ -30,3 +31,10 @@
 
 * Navbar
 [] Arreglar personalizacion, arrastrable
+
+* Portfolio
+[✅] Sacar proyectos y dejar aprox 4 buenos
+[] Modificar UI ya que no esta del todo hecho
+
+* Fondo
+[✅] Cambiar fondo, sacar playa y bosque

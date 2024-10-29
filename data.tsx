@@ -365,6 +365,16 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
   },
   {
+    id: 11,
+    title: 'Imagen Compresor',
+    image: '/imagencompressor.webp',
+    urlGithub: 'https://github.com/CamiloEscar/imagen-compresor.git',
+    urlDemo: 'https://imagencompressor.netlify.app/',
+    description:
+      'Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.',
+    technologies: ['JavaScript', 'CSS3', 'HTML5'],
+  },
+  {
     id: 4,
     title: 'Sala de chat',
     image: '/chattiemporealnode.webp',
@@ -435,16 +445,6 @@ export const dataPortfolio: PortfolioItem[] = [
     urlDemo: 'https://spavanillacoin.netlify.app/',
     description:
       'Aplicación de página única (SPA) que muestra un listado actualizado de criptomonedas, sus precios y tendencias, implementada con JavaScript puro para demostrar habilidades de desarrollo frontend sin frameworks.',
-    technologies: ['JavaScript', 'CSS3', 'HTML5'],
-  },
-  {
-    id: 11,
-    title: 'Imagen Compresor',
-    image: '/imagencompressor.webp',
-    urlGithub: 'https://github.com/CamiloEscar/imagen-compresor.git',
-    urlDemo: 'https://imagencompressor.netlify.app/',
-    description:
-      'Herramienta web eficiente para comprimir imágenes, reduciendo el tamaño de archivo sin comprometer significativamente la calidad visual, ideal para optimizar imágenes para sitios web y aplicaciones.',
     technologies: ['JavaScript', 'CSS3', 'HTML5'],
   },
   // {

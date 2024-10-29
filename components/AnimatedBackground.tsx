@@ -8,10 +8,8 @@ import dynamic from 'next/dynamic';
 const Cloud = dynamic(() => import('lucide-react').then((mod) => mod.Cloud), { ssr: false });
 const Sun = dynamic(() => import('lucide-react').then((mod) => mod.Sun), { ssr: false });
 const Moon = dynamic(() => import('lucide-react').then((mod) => mod.Moon), { ssr: false });
-const Trees = dynamic(() => import('lucide-react').then((mod) => mod.Trees), { ssr: false });
 const Star = dynamic(() => import('lucide-react').then((mod) => mod.Star), { ssr: false });
 const Rocket = dynamic(() => import('lucide-react').then((mod) => mod.Rocket), { ssr: false });
-const TreePalm = dynamic(() => import('lucide-react').then((mod) => mod.TreePalm), { ssr: false });
 
 interface AnimatedElement {
   id: number;
@@ -31,9 +29,9 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
     stars: AnimatedElement[];
     starDots: AnimatedElement[];
     clouds: AnimatedElement[];
-    trees: AnimatedElement[];
     rockets: AnimatedElement[];
-  }>({ stars: [], starDots: [], clouds: [], trees: [], rockets: [] });
+    shootingStar: AnimatedElement | null;
+  }>({ stars: [], starDots: [], clouds: [], rockets: [], shootingStar: null });
 
   const { scrollYProgress } = useScroll();
   const { theme } = useTheme();
@@ -41,7 +39,6 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
   const currentTheme = forcedTheme || theme || 'light';
 
   const skyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const grassOpacity = useTransform(scrollYProgress, [0.6, 1], [0, 1]);
   const sunMoonY = useSpring(
     useTransform(scrollYProgress, [0, 1], ['20%', '80%']),
     { stiffness: 100, damping: 30, mass: 1 }
@@ -69,13 +66,6 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
       size: Math.random() * 20 + 30,
     }));
 
-    const newTrees = Array.from({ length: 5 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 20 + 20,
-      size: Math.random() * 20 + 30,
-    }));
-
     const newRockets = Array.from({ length: 1 }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
@@ -83,12 +73,19 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
       size: Math.random() * 15 + 15,
     }));
 
+    const newShootingStar = {
+      id: 0,
+      x: Math.random() * 100,
+      y: Math.random() * 30,
+      size: Math.random() * 2 + 2,
+    };
+
     setElements({
       stars: newStars,
       starDots: newStarDots,
       clouds: newClouds,
-      trees: newTrees,
       rockets: newRockets,
+      shootingStar: newShootingStar,
     });
   }, []);
 
@@ -102,7 +99,6 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
           stars: prev.stars.slice(0, 3),
           starDots: prev.starDots.slice(0, 25),
           clouds: prev.clouds.slice(0, 2),
-          trees: prev.trees.slice(0, 3),
         }));
       } else {
         generateElements();
@@ -224,6 +220,28 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
                   <Rocket />
                 </motion.div>
               ))}
+              {elements.shootingStar && (
+                <motion.div
+                  className="absolute bg-white rounded-full"
+                  style={{
+                    left: `${elements.shootingStar.x}%`,
+                    top: `${elements.shootingStar.y}%`,
+                    width: `${elements.shootingStar.size}px`,
+                    height: `${elements.shootingStar.size}px`,
+                  }}
+                  animate={{
+                    x: [`${elements.shootingStar.x}%`, `${(elements.shootingStar.x + 30) % 100}%`],
+                    y: [`${elements.shootingStar.y}%`, `${(elements.shootingStar.y + 20) % 100}%`],
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 5,
+                    ease: 'easeInOut',
+                  }}
+                />
+              )}
             </>
           )}
           {showClouds && (
@@ -254,46 +272,6 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({ children, force
               </motion.div>
             ))
           )}
-        </motion.div>
-
-        <motion.div
-  className={`absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t ${
-    currentTheme === 'dark'
-      ? 'from-green-900 to-transparent'
-      : currentTheme === 'sunset'
-      ? 'from-purple-900 to-transparent'
-      : currentTheme === 'sunrise'
-      ? 'from-emerald-300 to-transparent'
-      : 'from-green-400 to-transparent'
-  } transition-colors duration-500 pointer-events-none`}
-  style={{ opacity: grassOpacity }}
->
-          {elements.trees.map((tree) => (
-            <motion.div
-              key={tree.id}
-              className={`absolute bottom-0 ${
-                isDarkMode
-                  ? 'text-gray-700'
-                  : isSunrise
-                  ? 'text-green-600'
-                  : 'text-yellow-600'
-              }`}
-              style={{
-                left: `${tree.x}%`,
-                fontSize: `${tree.size}px`,
-              }}
-              animate={{
-                y: [0, -5, 0],
-              }}
-              transition={{
-                duration: 2 + Math.random() * 2,
-                repeat: Infinity,
-                repeatType: 'reverse',
-              }}
-            >
-              {isDarkMode ? <Trees /> : <TreePalm />}
-            </motion.div>
-          ))}
         </motion.div>
 
         <motion.div
