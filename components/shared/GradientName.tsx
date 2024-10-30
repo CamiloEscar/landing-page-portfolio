@@ -4,7 +4,17 @@ interface GradientNameProps {
   children: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   className?: string;
+  technology?: string;
 }
+
+type TechnologyColorScheme = {
+  light: string[];
+  dark: string[];
+};
+
+type TechnologyColors = {
+  [key: string]: TechnologyColorScheme;
+};
 
 // Paletas de colores optimizadas para modo claro y oscuro
 const COLOR_PALETTES = {
@@ -21,10 +31,62 @@ const COLOR_PALETTES = {
   ]
 };
 
+const TECHNOLOGY_COLORS: TechnologyColors = {
+  React: {
+    light: ['#61DAFB', '#00B7FF', '#0088FF'],
+    dark: ['#61DAFB', '#00D8FF', '#0088FF']
+  },
+  JavaScript: {
+    light: ['#F7DF1E', '#E8D44D', '#C8B900'], // Brighter yellow to darker gold
+    dark: ['#F7DF1E', '#FFD700', '#FFA500']
+  },
+  Angular: {
+    light: ['#DD0031', '#C3002F', '#A6002A'],
+    dark: ['#FF1744', '#FF4081', '#FF80AB']
+  },
+  'Node.js': {
+    light: ['#339933', '#2E8B57', '#228B22'],
+    dark: ['#66CC33', '#32CD32', '#00FF00']
+  },
+  TypeScript: {
+    light: ['#007ACC', '#0288D1', '#039BE5'],
+    dark: ['#007ACC', '#00B0FF', '#40C4FF']
+  },
+  Python: {
+    light: ['#3776AB', '#4B8BBE', '#646464'],
+    dark: ['#FFD43B', '#FFE873', '#FFF8DC']
+  },
+  Java: {
+    light: ['#007396', '#5382A1', '#F8981D'],
+    dark: ['#5382A1', '#1565C0', '#F8981D']
+  },
+  'C#': {
+    light: ['#239120', '#37A93C', '#4CAF50'],
+    dark: ['#67CF76', '#9CCC65', '#C5E1A5']
+  },
+  PHP: {
+    light: ['#777BB4', '#8892BF', '#4F5B93'],
+    dark: ['#8892BF', '#B0BEC5', '#CFD8DC']
+  },
+  Ruby: {
+    light: ['#CC342D', '#E0115F', '#FF0000'],
+    dark: ['#FF6347', '#FF4500', '#FF0000']
+  },
+  NextJs: {
+    light: ['#000000', '#333333', '#666666'],
+    dark: ['#FFFFFF', '#AAAAAA', '#CCCCCC']
+  }
+};
+
+// Colores específicos para tecnologías
+
+
+
 export default function GradientName({
   children,
   size = 'medium',
   className = '',
+  technology,
 }: GradientNameProps) {
   const sizeClasses = {
     small: 'text-lg sm:text-xl lg:text-2xl',
@@ -36,12 +98,12 @@ export default function GradientName({
     <span className={`relative inline-block ${sizeClasses[size]} ${className}`}>
       {/* Versión modo claro */}
       <span className="dark:hidden">
-        <LightDarkGradient mode="light">{children}</LightDarkGradient>
+        <LightDarkGradient mode="light" technology={technology}>{children}</LightDarkGradient>
       </span>
       
       {/* Versión modo oscuro */}
       <span className="hidden dark:inline">
-        <LightDarkGradient mode="dark">{children}</LightDarkGradient>
+        <LightDarkGradient mode="dark" technology={technology}>{children}</LightDarkGradient>
       </span>
     </span>
   );
@@ -50,14 +112,23 @@ export default function GradientName({
 interface LightDarkGradientProps {
   children: React.ReactNode;
   mode: 'light' | 'dark';
+  technology?: string;
 }
 
-function LightDarkGradient({ children, mode }: LightDarkGradientProps) {
+function LightDarkGradient({ children, mode, technology }: LightDarkGradientProps) {
   const selectedPalette = useMemo(() => {
+    if (technology) {
+      const techKey = Object.keys(TECHNOLOGY_COLORS).find(
+        key => key.toLowerCase() === technology.toLowerCase()
+      );
+      if (techKey && TECHNOLOGY_COLORS[techKey]) {
+        return TECHNOLOGY_COLORS[techKey][mode];
+      }
+    }
     const palettes = COLOR_PALETTES[mode];
     const randomIndex = Math.floor(Math.random() * palettes.length);
     return palettes[randomIndex];
-  }, [mode]);
+  }, [mode, technology]);
 
   const [fromColor, viaColor, toColor] = selectedPalette;
 

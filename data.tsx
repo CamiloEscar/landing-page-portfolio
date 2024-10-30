@@ -31,6 +31,8 @@ interface Introduccion {
     reactText: string;
     middle: string;
     nodeText: string;
+    y: string;
+    nextText: string;
     after: string;
   };
   link: {
@@ -119,10 +121,12 @@ export const dataIntroduction: Introduccion [] = [
     ],
   roles: ['Desarrollador Web', 'Estudiante de Sistemas'],
   description: {
-    before: 'Más de 2 años de experiencia en desarrollo web, me he enfocado en tecnologías como',
+    before: 'Más de 2 años de experiencia en desarrollo web, me he enfocado en lenguajes como',
+    nodeText: 'JavaScript',
+    middle: 'y tecnologias como',
     reactText: 'React',
-    middle: 'y',
-    nodeText: 'Node.js',
+    y: 'y ',
+    nextText: 'NextJs',
     after: '. Mi objetivo es crear experiencias web de calidad, manteniendo un aprendizaje continuo para innovar y mejorar cada día.',
   },
   link: {

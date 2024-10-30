@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageCircle, Send, X, ArrowLeft, ArrowUpCircle, Loader2, RefreshCcw, Mail, Linkedin, Github, Globe } from 'lucide-react';
+import { Send, X, ArrowLeft, ArrowUpCircle, Loader2, RefreshCcw, Mail, Linkedin, Github, Globe } from 'lucide-react';
 import chatResponses from '../app/api/chatbot/chat_responses.json';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

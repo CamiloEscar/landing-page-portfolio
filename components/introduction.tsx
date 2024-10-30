@@ -396,15 +396,25 @@ export default function Introduction() {
                   <GradientName
                     size="small"
                     className="mx-1 font-bold font-mono"
+                    technology={description.nodeText}
                   >
-                    {description.reactText}
+                    {description.nodeText}
                   </GradientName>
                   {description.middle}
                   <GradientName
                     size="small"
                     className="mx-1 font-bold font-mono"
+                    technology={description.reactText}
                   >
-                    {description.nodeText}
+                    {description.reactText}
+                  </GradientName>
+                  {description.y}
+                  <GradientName
+                    size="small"
+                    className="mx-1 font-bold font-mono"
+                    technology={description.nextText}
+                  >
+                    {description.nextText}
                   </GradientName>
                   {description.after}
                 </p>
