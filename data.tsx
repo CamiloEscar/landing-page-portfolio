@@ -369,6 +369,26 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
   },
   {
+    'id': 4,
+    'title': 'Colección de Juegos',
+    'image': '/juegos.png',
+    'gifImage': '/juegosG.webp',
+    'urlGithub': 'https://github.com/CamiloEscar/juegos-app',
+    'urlDemo': 'https://gameshub-eta.vercel.app/',
+    'description': 'Explora mi colección de juegos construidos con herramientas web modernas. El propósito de esta web es tener una biblioteca de juegos creados con HTML, CSS, y JavaScript.',
+    'technologies': ['Vite', 'React', 'TypeScript', 'CSS']
+  },
+  {
+    'id': 5,
+    'title': 'Divipagos',
+    'image': '/divipagos.png',
+    'gifImage': '/divipagosG.png',
+    'urlGithub': 'https://github.com/CamiloEscar/gastos-tracker-app',
+    'urlDemo': 'https://divi-pagos.vercel.app/',
+    'description': 'Divipagos te ayuda a organizar y repartir los gastos de tus salidas, viajes y juntadas con amigos. Simplifica la gestión de gastos y evita confusiones con nuestra plataforma fácil de usar.',
+    'technologies': ['Vite', 'React', 'TypeScript', 'CSS']
+  },
+  {
     id: 11,
     title: 'Imagen Compresor',
     image: '/imagencompressor.webp',

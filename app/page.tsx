@@ -4,9 +4,9 @@ import React, { Suspense, lazy } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import Navbar from '@/components/shared/navbar';
 import Introduction from '@/components/introduction';
-import Loading from '@/components/shared/loading'; // Necesitarás crear este componente
+import Loading from '@/components/shared/loading';
 import RecentPosts from '@/components/RecentPost';
-import { dataBlog } from '@/app/blog/data'; // Importa la data de los posts
+import { dataBlog } from '@/app/blog/data';
 import AboutMe2 from '@/components/sobreMi';
 import ChatBot from '@/components/Chatbot';
 
@@ -23,22 +23,16 @@ export default function Home() {
       <main className="relative z-10">
         <Navbar />
         <Introduction />
-        <AboutMe2 />
+        
         <Suspense fallback={<Loading />}>
+          <AboutMe2 />
           <Portfolio />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
           <Experience />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
           <AboutMe />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
           <RecentPosts posts={dataBlog} />
-        </Suspense>
-        <Suspense fallback={<Loading />}>
           <Contact />
         </Suspense>
+
         <Suspense fallback={<Loading />}>
           <Footer />
         </Suspense>
