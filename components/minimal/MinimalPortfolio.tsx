@@ -1,6 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { 
+  // useEffect, 
+  // useState 
+} from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Printer,
@@ -39,7 +42,7 @@ import {
   dataLanguage,
 } from '../../data';
 import Image from 'next/image';
-import { QRCodeCanvas } from 'qrcode.react';
+// import { QRCodeCanvas } from 'qrcode.react';
 
 const ProfessionalMinimalPortfolio = () => {
   const handlePrint = () => {
@@ -109,48 +112,48 @@ const ProfessionalMinimalPortfolio = () => {
     );
   };
 
-  const QRSection = () => {
-    const [qrSize, setQrSize] = useState(128);
+  // const QRSection = () => {
+  //   const [qrSize, setQrSize] = useState(128);
   
-    useEffect(() => {
-      const updateQRSize = () => {
-        // Get the parent column width
-        const columnWidth = document.querySelector('.col-span-1')?.clientWidth || 128;
-        // Set QR size to be 80% of column width, but not larger than 128px
-        setQrSize(Math.min(Math.floor(columnWidth * 0.8), 128));
-      };
+  //   useEffect(() => {
+  //     const updateQRSize = () => {
+  //       // Get the parent column width
+  //       const columnWidth = document.querySelector('.col-span-1')?.clientWidth || 128;
+  //       // Set QR size to be 80% of column width, but not larger than 128px
+  //       setQrSize(Math.min(Math.floor(columnWidth * 0.8), 128));
+  //     };
   
-      // Initial size
-      updateQRSize();
+  //     // Initial size
+  //     updateQRSize();
   
-      // Update on window resize
-      window.addEventListener('resize', updateQRSize);
-      return () => window.removeEventListener('resize', updateQRSize);
-    }, []);
-    return (
-      <section id="qr-code" className="mb-4">
-        <h2 className="text-xl font-semibold mb-2 border-b pb-1">
-          Código QR
-        </h2>
-        <div className="flex justify-center">
-          <div className="bg-white p-2 rounded-lg">
-            <QRCodeCanvas
-              value={typeof window !== 'undefined' ? window.location.href : ''}
-              size={qrSize}
-              bgColor={'#ffffff'}
-              fgColor={'#000000'}
-              level={'L'}
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
-      </section>
-    );
-  };
+  //     // Update on window resize
+  //     window.addEventListener('resize', updateQRSize);
+  //     return () => window.removeEventListener('resize', updateQRSize);
+  //   }, []);
+  //   return (
+  //     <section id="qr-code" className="mb-4">
+  //       <h2 className="text-xl font-semibold mb-2 border-b pb-1">
+  //         Código QR
+  //       </h2>
+  //       <div className="flex justify-center">
+  //         <div className="bg-white p-2 rounded-lg">
+  //           <QRCodeCanvas
+  //             value={typeof window !== 'undefined' ? window.location.href : ''}
+  //             size={qrSize}
+  //             bgColor={'#ffffff'}
+  //             fgColor={'#000000'}
+  //             level={'L'}
+  //             className="w-full h-auto"
+  //           />
+  //         </div>
+  //       </div>
+  //     </section>
+  //   );
+  // };
 
   return (
     <div className="container mx-auto px-2 py-4 max-w-[21cm] min-h-[29.7cm] bg-white dark:bg-gray-900 text-black dark:text-white print:text-black print:bg-white">
-      <section id="header" className="flex items-start mb-4 border-b pb-3">
+      <section id="header" className="flex flex-col sm:flex-row items-start mb-4 border-b pb-3">
         <div className="relative w-24 h-24 mr-4 rounded-md overflow-hidden shadow-lg">
           <Image
             src="/profile.webp"
@@ -162,81 +165,86 @@ const ProfessionalMinimalPortfolio = () => {
           />
         </div>
         <div className="flex-grow">
-          <div className="flex justify-between items-start mb-2">
-            <div>
-              <a
-                href="https://www.instagram.com/camilo.escar/"
-                className="flex items-center hover:text-pink-600 transition-colors group"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <h1 className="text-2xl font-bold mb-0.5">Camilo Escar</h1>
-              </a>
-              <h2 className="text-lg text-gray-600 dark:text-gray-400 print:text-gray-600">
-                Estudiante de Sistemas de Información / Desarrollador Web
-              </h2>
-            </div>
-            <button
-              onClick={handlePrint}
-              className="print:hidden bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-1.5 rounded-lg transition-colors"
-              aria-label="Imprimir CV"
-            >
-              <Printer className="h-6 w-6 text-gray-600 dark:text-gray-400" />
-            </button>
-          </div>
-          <div className="grid grid-cols-2 gap-y-1.5 gap-x-2 text-sm">
-            <div className="flex items-center">
-              <a
-                href="https://www.google.com/maps/place/Concepci%C3%B3n+del+Uruguay,+Entre+R%C3%ADos,+Argentina/data=!4m2!3m1!1s0x95afdb005dbc939d:0x3c8a23c6cb1334b2?sa=X&ved=1t:155783&ictx=111"
-                className="flex items-center hover:text-green-600 transition-colors group"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MapPin className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-green-600 flex-shrink-0" />
-                <span className="text-gray-600 dark:text-gray-400 hover:text-green-600 truncate">
-                  {aboutMe.location}
-                </span>
-              </a>
-            </div>
-            <div className="flex items-center">
-              <a
-                href="mailto:camiloescar1995@gmail.com"
-                className="flex items-center hover:text-red-600 transition-colors group"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Mail className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-red-600 flex-shrink-0" />
-                <span className="text-gray-600 dark:text-gray-400 group-hover:text-red-600 truncate">
-                  camiloescar1995@gmail.com
-                </span>
-              </a>
-            </div>
-            <a
-              href="https://linkedin.com/in/camiloescar"
-              className="flex items-center hover:text-blue-600 transition-colors group"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Linkedin className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-blue-600 flex-shrink-0" />
-              <span className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 truncate">
-                /in/camiloescar
-              </span>
-            </a>
-            <a
-              href="https://github.com/CamiloEscar"
-              className="flex items-center hover:text-blue-600 transition-colors group"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GithubIcon className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-gray-900 flex-shrink-0" />
-              <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-900 truncate">
-                /CamiloEscar
-              </span>
-            </a>
-          </div>
-        </div>
+  <div className="flex flex-col sm:flex-row justify-between items-start mb-2 gap-2 sm:gap-0">
+    <div>
+      <a
+        href="https://www.instagram.com/camilo.escar/"
+        className="flex items-center hover:text-pink-600 transition-colors group"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <h1 className="text-xl sm:text-2xl font-bold mb-0.5">Camilo Escar</h1>
+      </a>
+      <h2 className="text-sm sm:text-lg text-gray-600 dark:text-gray-400 print:text-gray-600">
+        Estudiante de Sistemas de Información / Desarrollador Web
+      </h2>
+    </div>
+    <button
+      onClick={handlePrint}
+      className="print:hidden bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 p-1.5 rounded-lg transition-colors"
+      aria-label="Imprimir CV"
+    >
+      <Printer className="h-6 w-6 text-gray-600 dark:text-gray-400" />
+    </button>
+  </div>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1.5 gap-x-2 text-sm">
+    <div className="flex items-center">
+      <a
+        href="https://www.google.com/maps/place/Concepci%C3%B3n+del+Uruguay,+Entre+R%C3%ADos,+Argentina/data=!4m2!3m1!1s0x95afdb005dbc939d:0x3c8a23c6cb1334b2?sa=X&ved=1t:155783&ictx=111"
+        className="flex items-center hover:text-green-600 transition-colors group w-full"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <MapPin className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-green-600 flex-shrink-0" />
+        <span className="text-gray-600 dark:text-gray-400 hover:text-green-600 truncate max-w-full">
+          {aboutMe.location}
+        </span>
+      </a>
+    </div>
+
+    <div className="flex items-center">
+      <a
+        href="mailto:camiloescar1995@gmail.com"
+        className="flex items-center hover:text-red-600 transition-colors group w-full"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Mail className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-red-600 flex-shrink-0" />
+        <span className="text-gray-600 dark:text-gray-400 group-hover:text-red-600 truncate max-w-full">
+          camiloescar1995@gmail.com
+        </span>
+      </a>
+    </div>
+
+    <a
+      href="https://linkedin.com/in/camiloescar"
+      className="flex items-center hover:text-blue-600 transition-colors group w-full"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Linkedin className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-blue-600 flex-shrink-0" />
+      <span className="text-gray-600 dark:text-gray-400 group-hover:text-blue-600 truncate max-w-full">
+        /in/camiloescar
+      </span>
+    </a>
+
+    <a
+      href="https://github.com/CamiloEscar"
+      className="flex items-center hover:text-blue-600 transition-colors group w-full"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <GithubIcon className="h-4 w-4 mr-1.5 text-gray-500 group-hover:text-gray-900 flex-shrink-0" />
+      <span className="text-gray-600 dark:text-gray-400 group-hover:text-gray-900 truncate max-w-full">
+        /CamiloEscar
+      </span>
+    </a>
+  </div>
+</div>
+
       </section>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 print:grid-cols-2 print:gap-2">
         <div className="col-span-3">
           <section id="projects" className="mb-4">
             <h2 className="text-2xl font-semibold mb-2 border-b pb-1">
@@ -247,11 +255,18 @@ const ProfessionalMinimalPortfolio = () => {
                 <Card
                   key={project.id}
                   className="border border-gray-200 dark:border-gray-700 print:border-gray-200 hover:shadow-sm transition-shadow"
-                >
-                  <CardHeader className="py-2 px-3 bg-gray-50 rounded-t-md dark:bg-gray-800">
+                  >
+                  <CardHeader className="py-2 px-3 bg-gray-50 rounded-t-md dark:bg-gray-800"
+                  
+                  >
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-base font-semibold text-blue-600 dark:text-blue-400">
-                        {project.title}
+                        <a 
+                        //quiero que al hacer click se abra en /portfolio/{id}
+                        href='/portfolio'
+                        >
+                          {project.title}
+                        </a>
                       </CardTitle>
                       <div className="flex gap-2 ml-2 print:hidden">
                         {project.urlGithub && (
@@ -345,12 +360,12 @@ const ProfessionalMinimalPortfolio = () => {
           </section>
         </div>
 
-        <div className="col-span-1">
+        <div className="col-span-2">
           <section id="skills" className="mb-4">
             <h2 className="text-2xl font-semibold mb-2 border-b pb-1">
               Tecnologias
             </h2>
-            <div className="grid grid-cols-1 gap-1.5">
+            <div className="grid grid-cols-2 gap-1.5">
               {dataExperienceMinimal.flatMap((category) =>
                 category.experience.map((skill) => (
                   <div
@@ -403,7 +418,7 @@ const ProfessionalMinimalPortfolio = () => {
               </div>
             ))}
           </section>
-          <QRSection />
+          {/* <QRSection /> */}
         </div>
       </div>
     </div>

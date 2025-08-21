@@ -13,7 +13,7 @@ export default function PortofolioPage() {
         <Suspense fallback={<Loading />}>
           <MinimalNavbar />
         </Suspense>
-        <main className="pt-12">
+        <main>
           <Suspense fallback={<Loading />}>
             <PortfolioPage />
           </Suspense>

@@ -13,7 +13,7 @@ export default function MinimalPage() {
         <Suspense fallback={<Loading />}>
           <MinimalNavbar />
         </Suspense>
-        <main className="pt-12">
+        <main>
           <Suspense fallback={<Loading />}>
             <MinimalPortfolio />
           </Suspense>

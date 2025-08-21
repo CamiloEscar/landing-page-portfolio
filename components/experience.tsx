@@ -4,10 +4,10 @@ import {
   Briefcase,
   BadgeCheck,
   Coffee,
-  ExternalLink,
+  // ExternalLink,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
@@ -222,14 +222,14 @@ const ServicesAndExperience: React.FC = () => {
           </TabsContent>
         </Tabs>
 
-        <div className="mt-8 sm:mt-12 text-center">
+        {/* <div className="mt-8 sm:mt-12 text-center">
           <a href="#contact">
             <Button variant="default" size="sm" className="group sm:text-base sm:px-6 sm:py-3">
               Contáctame
               <ExternalLink className="ml-2 w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </a>
-        </div>
+        </div> */}
       </div>
     </motion.section>
   );

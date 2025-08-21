@@ -116,18 +116,17 @@ export interface ExperienceCategoryMinimal {
 export const dataIntroduction: Introduccion [] = [
   {greetings: ['Hola 👋, soy',
     'Hi 👋, I am',
-     'Bonjour 👋, je suis',
      'Ciao 👋, sono',
     ],
   roles: ['Desarrollador Web', 'Estudiante de Sistemas'],
   description: {
-    before: 'Más de 2 años de experiencia en desarrollo web, me he enfocado en lenguajes como',
+    before: 'Me dedico en crear sitios web rápidos, amigables y bien diseñados utilizando tecnologías modernas como',
     nodeText: 'JavaScript',
-    middle: 'y tecnologias como',
+    middle: ',',
     reactText: 'React',
     y: 'y ',
     nextText: 'NextJs',
-    after: '. Mi objetivo es crear experiencias web de calidad, manteniendo un aprendizaje continuo para innovar y mejorar cada día.',
+    after: '.\n Mi enfoque está en además de la parte técnica, es que cada sitio mantenga el espíritu de cada empresa o proyecto que mis clientes llevan a cabo, ya que en la actualidad no sólo alcanza con estar en Internet, sinó de la manera en la que se lo representa.',
   },
   link: {
     linkedin: 'in/camiloescar/',
@@ -168,7 +167,7 @@ export const dataAboutMe = [
     id: 1,
     name: 'Experiencia',
     icon: <Briefcase />,
-    description: '+2 años de experiencia',
+    description: '+3 años de experiencia',
   },
   {
     id: 2,
@@ -327,13 +326,26 @@ export const dataSlider = [
 ];
 
 export const aboutMe = {
-  age: 29,
+  age: 30,
   location: 'Concepción del Uruguay, Entre Ríos, Argentina',
+  // description:
+  //   'Soy estudiante de Licenciatura en Sistemas de Información y cuento con experiencia en el desarrollo de proyectos de forma independiente. Desde el diseño inicial hasta la implementación final. Estoy en constante aprendizaje de nuevas tecnologías y metodologías para escribir código más limpio y escalable. En cuanto al trabajo en equipo, mis habilidades y experiencia me permiten colaborar de manera efectiva y contribuir a un ambiente de trabajo positivo. Busco una oportunidad en un entorno que sea a la vez desafiante y colaborativo, donde pueda seguir creciendo profesionalmente. Me gustaría aplicar mis conocimientos para ayudar a mi equipo y a la empresa a alcanzar sus metas.',
   description:
-    'Actualmente, estoy cursando la carrera de Sistemas de Información y tengo experiencia en la creación de proyectos de forma independiente, abarcando desde el diseño inicial hasta la implementación final. Me capacito constantemente en nuevas tecnologías y metodologías que me permiten escribir código más limpio y escalable. Mis habilidades interpersonales me facilitan la colaboración efectiva en equipos, promoviendo un ambiente de trabajo positivo y productivo. Busco una oportunidad en un entorno amigable y desafiante donde pueda seguir aprendiendo y aplicar mis habilidades para contribuir al crecimiento del equipo y de la empresa.',
+    'Soy estudiante de la Licenciatura en Sistemas de Información y cuento con experiencia en el desarrollo de proyectos de forma independiente, participando en todas las etapas: desde el diseño inicial hasta la implementación final. Estoy en constante aprendizaje de nuevas tecnologías y metodologías que me permiten escribir código más limpio, escalable y eficiente. Mi enfoque está en crear soluciones web rápidas, intuitivas y estéticamente atractivas, adaptadas a un entorno donde los usuarios esperan acceder a la información de manera inmediata. Además de desarrollar sitios web desde cero, también me especializo en potenciar proyectos ya iniciados e implementar soluciones de e-commerce, ayudando a empresas a mejorar su presencia y ventas online.',
 };
 
 export const dataPortfolio: PortfolioItem[] = [
+  {
+  id: 14,
+  title: 'Ecommerce Fullstack',
+  image: '/ecommerce.webp',
+  gifImage: '/ecommerce.gif',
+  urlGithub: 'https://github.com/CamiloEscar/ecommerce',
+  urlDemo: '',
+  description:
+    'Actualmente me encuentro enfocado en el desarrollo de un ecommerce fullstack. El sistema permite gestionar productos, usuarios, pedidos y pagos, con un panel administrativo completo y diseño responsive.',
+  technologies: ['Laravel', 'Angular', 'MySQL', 'Bootstrap', 'PHP'],
+  },
   {
     id: 1,
     title: 'Pizzeria Web',
@@ -369,24 +381,24 @@ export const dataPortfolio: PortfolioItem[] = [
     technologies: ['Vercel', 'TailwindCSS', 'Astro', 'Vite', 'bun', 'Sheets'],
   },
   {
-    'id': 4,
-    'title': 'Colección de Juegos',
-    'image': '/juegos.png',
-    'gifImage': '/juegosG.webp',
-    'urlGithub': 'https://github.com/CamiloEscar/juegos-app',
-    'urlDemo': 'https://gameshub-eta.vercel.app/',
-    'description': 'Explora mi colección de juegos construidos con herramientas web modernas. El propósito de esta web es tener una biblioteca de juegos creados con HTML, CSS, y JavaScript.',
-    'technologies': ['Vite', 'React', 'TypeScript', 'CSS']
+    id: 4,
+    title: 'Divipagos',
+    image: '/divipagos.png',
+    gifImage: '/divipagosG.png',
+    urlGithub: 'https://github.com/CamiloEscar/gastos-tracker-app',
+    urlDemo: 'https://divi-pagos.vercel.app/',
+    description: 'Divipagos te ayuda a organizar y repartir los gastos de tus salidas, viajes y juntadas con amigos. Simplifica la gestión de gastos y evita confusiones con nuestra plataforma fácil de usar.',
+    technologies: ['Vite', 'React', 'TypeScript', 'CSS']
   },
   {
-    'id': 5,
-    'title': 'Divipagos',
-    'image': '/divipagos.png',
-    'gifImage': '/divipagosG.png',
-    'urlGithub': 'https://github.com/CamiloEscar/gastos-tracker-app',
-    'urlDemo': 'https://divi-pagos.vercel.app/',
-    'description': 'Divipagos te ayuda a organizar y repartir los gastos de tus salidas, viajes y juntadas con amigos. Simplifica la gestión de gastos y evita confusiones con nuestra plataforma fácil de usar.',
-    'technologies': ['Vite', 'React', 'TypeScript', 'CSS']
+    id: 5,
+    title: 'Colección de Juegos',
+    image: '/juegos.png',
+    gifImage: '/juegosG.webp',
+    urlGithub: 'https://github.com/CamiloEscar/juegos-app',
+    urlDemo: 'https://gameshub-eta.vercel.app/',
+    description: 'Explora mi colección de juegos construidos con herramientas web modernas. El propósito de esta web es tener una biblioteca de juegos creados con HTML, CSS, y JavaScript.',
+    technologies: ['Vite', 'React', 'TypeScript', 'CSS']
   },
   {
     id: 11,
@@ -526,7 +538,7 @@ export const dataExperienceMinimal: ExperienceCategoryMinimal[] = [
         value: 60,
         experience:
           'Más de 2 años de experiencia creando estructuras web semánticas y accesibles.',
-        technologies: ['html5', 'semantic-ui', 'accessibility'],
+        technologies: ['html5'],
       },
       {
         name: 'CSS',
@@ -736,17 +748,9 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Intermedio',
             value: 60,
             experience:
-              'Más de 2 años de experiencia creando estructuras web semánticas y accesibles.',
+              'Más de 3 años de experiencia creando estructuras web semánticas y accesibles.',
             technologies: ['html5', 'css3'],
           },
-          // {
-          //   name: 'CSS',
-          //   subtitle: 'Intermedio',
-          //   value: 60,
-          //   experience:
-          //     'Amplio conocimiento en diseño responsivo y animaciones CSS.',
-          //   technologies: ['css3'],
-          // },
           {
             name: 'JavaScript',
             subtitle: 'Intermedio',
@@ -776,27 +780,36 @@ export const dataExperience: ExperienceCategory[] = [
               'Desarrollo de aplicaciones complejas utilizando React y su ecosistema.',
             technologies: [
               'react',
-              // "redux",
               'next-js',
             ],
           },
           {
-            name: 'Svelte',
-            subtitle: 'Basico',
-            value: 20,
-            experience: 'Diseño de web simulando a Google Translate.',
-            technologies: ['svelte', 'Astro'],
+            name: 'Angular',
+            subtitle: 'Intermedio',
+            value: 60,
+            experience:
+              'Desarrollo de aplicaciones complejas utilizando React y su ecosistema.',
+            technologies: [
+              'angular',
+            ],
           },
+          // {
+          //   name: 'Svelte',
+          //   subtitle: 'Basico',
+          //   value: 20,
+          //   experience: 'Diseño de web simulando a Google Translate.',
+          //   technologies: ['svelte', 'Astro'],
+          // },
         ],
       },
       {
         category: 'Tecnologías',
         items: [
-          // {
-          //   name: 'Semantic UI',
-          //   subtitle: 'Intermedio',
-          //   technologies: ['semantic-ui'],
-          // },
+          {
+            name: 'Vite',
+            subtitle: 'Intermedio',
+            technologies: ['vite'],
+          },
           // {
           //   name: 'Accessibility',
           //   subtitle: 'Intermedio',
@@ -849,6 +862,14 @@ export const dataExperience: ExperienceCategory[] = [
               'Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.',
             technologies: ['python'],
           },
+          {
+            name: 'PHP',
+            subtitle: 'Intermedio',
+            value: 60,
+            experience:
+              'Desarrollo de backend con PHP y Laravel, incluyendo APIs RESTful y aplicaciones web dinámicas.',
+            technologies: ['php'],
+          },
         ],
       },
       {
@@ -864,21 +885,21 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Básico',
             technologies: ['django'],
           },
-          // {
-          //   name: 'Flask',
-          //   subtitle: 'Básico',
-          //   technologies: ['flask'],
-          // },
+          {
+            name: 'Laravel',
+            subtitle: 'Básico',
+            technologies: ['laravel'],
+          },
         ],
       },
       {
         category: 'Tecnologías',
         items: [
-          // {
-          //   name: 'Socket.io',
-          //   subtitle: 'Básico',
-          //   technologies: ['socket-io'],
-          // },
+          {
+            name: 'Socket.io',
+            subtitle: 'Básico',
+            technologies: ['socket-io'],
+          },
           {
             name: 'GraphQL',
             subtitle: 'Básico',
@@ -894,11 +915,11 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Básico',
             technologies: ['docker'],
           },
-          // {
-          //   name: "OAuth",
-          //   subtitle: "Básico",
-          //   technologies: ["oauth"],
-          // },
+          {
+            name: 'OAuth',
+            subtitle: 'Básico',
+            technologies: ['oauth'],
+          },
           {
             name: 'JWT',
             subtitle: 'Básico',
@@ -957,6 +978,14 @@ export const dataExperience: ExperienceCategory[] = [
             experience:
               'Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.',
             technologies: ['mongodb'],
+          },
+          {
+            name: 'MySQL',
+            subtitle: 'Básico',
+            value: 20,
+            experience:
+              'Diseño y modelado de datos en bases de datos SQL.',
+            technologies: ['mysql'],
           },
         ],
       },

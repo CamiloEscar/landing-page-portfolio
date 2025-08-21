@@ -83,7 +83,7 @@ const ProjectRow: React.FC<{ project: PortfolioItem; priority?: boolean }> = ({ 
         />
       </div>
       <div className="flex-1 flex flex-col justify-between">
-        <div>
+        <a href='/portfolio/'>
           <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
           <p className="text-muted-foreground mb-4 line-clamp-2">{project.description}</p>
           <div className="flex flex-wrap gap-2 mb-4">
@@ -94,7 +94,7 @@ const ProjectRow: React.FC<{ project: PortfolioItem; priority?: boolean }> = ({ 
               </Badge>
             ))}
           </div>
-        </div>
+        </a>
         <div className="flex gap-4">
           {project.urlGithub && (
             <Button variant="outline" size="sm" asChild>

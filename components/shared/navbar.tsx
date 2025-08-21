@@ -410,7 +410,6 @@ export default function EnhancedNavBar() {
                                 </SelectTrigger>
                                 <SelectContent>
                                   <SelectItem value="bottom">Abajo</SelectItem>
-                                  <SelectItem value="top">Arriba</SelectItem>
                                   <SelectItem value="left">
                                     Izquierda
                                   </SelectItem>
@@ -524,23 +523,6 @@ export default function EnhancedNavBar() {
                               />
                             </div>
 
-                            {/* Rotation Angle */}
-                            <div className="space-y-2">
-                              <Label className="text-sm font-medium flex items-center gap-2">
-                                <RotateCcw className="h-4 w-4" /> Ángulo de
-                                Rotación
-                              </Label>
-                              <Slider
-                                value={[navConfig.rotationAngle]}
-                                min={0}
-                                max={360}
-                                step={1}
-                                onValueChange={([value]) =>
-                                  updateConfig('rotationAngle', value)
-                                }
-                              />
-                            </div>
-
                             {/* Icon Style */}
                             <div className="space-y-2">
                               <Label className="text-sm font-medium flex items-center gap-2">
@@ -638,20 +620,20 @@ export default function EnhancedNavBar() {
                           </div>
 
                           <div className="flex flex-col space-y-4">
-    <Separator />
-    <ThemeSelector />
-  </div>
+                            <Separator />
+                            <ThemeSelector />
+                          </div>
 
                           <div className="flex justify-between items-center">
                             <span className="text-sm font-medium">Tema</span>
                             <Button
-    variant="ghost"
-    size="icon"
-    className="bg-background/10 hover:bg-background/20"
-    onClick={cycleTheme}
-  >
-    {getThemeIcon()}
-  </Button>
+                            variant="ghost"
+                            size="icon"
+                            className="bg-background/10 hover:bg-background/20"
+                            onClick={cycleTheme}
+                          >
+                            {getThemeIcon()}
+                          </Button>
                           </div>
                         </div>
                       </div>
@@ -665,115 +647,108 @@ export default function EnhancedNavBar() {
       </AnimatePresence>
 
       {/* Enhanced navigation */}
-      <motion.nav
-        ref={navRef}
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          rotate: navConfig.rotationAngle,
-          ...getNavbarPosition(),
-        }}
-        transition={getAnimationProps()}
-        className={`fixed z-40 ${
-          navConfig.position === 'left' || navConfig.position === 'right'
-            ? 'w-auto h-auto'
-            : 'w-full'
-        }`}
-        drag={navConfig.draggable}
-        dragControls={dragControls}
-        dragMomentum={false}
-        dragElastic={0.1}
-        dragConstraints={{
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-        }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-center">
-            <motion.div
-              className={`${getContainerClasses()}`}
-              style={{
-                backgroundColor:
-                  navConfig.navbarStyle === 'glass'
-                    ? `rgba(${parseInt(
-                        navConfig.color.slice(1, 3),
-                        16
-                      )}, ${parseInt(
-                        navConfig.color.slice(3, 5),
-                        16
-                      )}, ${parseInt(navConfig.color.slice(5, 7), 16)}, ${
-                        navConfig.opacity
-                      })`
-                    : navConfig.navbarStyle === 'solid'
-                    ? navConfig.color
-                    : navConfig.navbarStyle === 'gradient'
-                    ? `linear-gradient(45deg, ${navConfig.color}, ${navConfig.textColor})`
-                    : `${navConfig.color}${Math.floor(navConfig.opacity * 255)
-                        .toString(16)
-                        .padStart(2, '0')}`,
-                backdropFilter:
-                  navConfig.navbarStyle === 'glass' ? 'blur(10px)' : 'none',
-                color: navConfig.textColor,
-              }}
-              whileHover={{ scale: 1.02 }}
-              transition={getAnimationProps()}
-            >
-              {navItems.map((item) => (
-                <TooltipProvider key={item.id}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`flex ${
-                          navConfig.labelPosition === 'right'
-                            ? 'flex-row'
-                            : 'flex-col'
-                        } items-center`}
-                      >
-                        <Link href={item.link}>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="bg-transparent"
-                            style={{ color: navConfig.textColor }}
-                          >
-                            {React.cloneElement(item.icon, {
-                              size: navConfig.iconSize,
-                              strokeWidth:
-                                navConfig.iconStyle === 'thin' ? 1 : 2,
-                              fill:
-                                navConfig.iconStyle === 'filled'
-                                  ? 'currentColor'
-                                  : 'none',
-                            })}
-                          </Button>
-                        </Link>
-                        {navConfig.showLabels && (
-                          <span
-                            className={`text-xs ${
+      {showTopNav && (
+          <motion.nav
+            ref={navRef}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: 1,
+              ...getNavbarPosition(),
+            }}
+            transition={getAnimationProps()}
+            className={`fixed z-40 ${
+              navConfig.position === 'left' || navConfig.position === 'right'
+                ? 'w-auto h-auto'
+                : 'w-full'
+            }`}
+            drag={navConfig.draggable}
+            dragMomentum={false}
+            dragElastic={0.1}
+            dragConstraints={false} // permite arrastrar libremente
+          >
+            <div className="container mx-auto px-4">
+              <div className="flex items-center justify-center">
+                <motion.div
+                  className={`${getContainerClasses()}`}
+                  style={{
+                    backgroundColor:
+                      navConfig.navbarStyle === 'glass'
+                        ? `rgba(${parseInt(navConfig.color.slice(1, 3), 16)}, ${parseInt(
+                            navConfig.color.slice(3, 5),
+                            16
+                          )}, ${parseInt(navConfig.color.slice(5, 7), 16)}, ${
+                            navConfig.opacity
+                          })`
+                        : navConfig.navbarStyle === 'solid'
+                        ? navConfig.color
+                        : navConfig.navbarStyle === 'gradient'
+                        ? `linear-gradient(45deg, ${navConfig.color}, ${navConfig.textColor})`
+                        : `${navConfig.color}${Math.floor(navConfig.opacity * 255)
+                            .toString(16)
+                            .padStart(2, '0')}`,
+                    backdropFilter:
+                      navConfig.navbarStyle === 'glass' ? 'blur(10px)' : 'none',
+                    color: navConfig.textColor,
+                  }}
+                  whileHover={{ scale: 1.02 }}
+                  transition={getAnimationProps()}
+                >
+                  {navItems.map((item) => (
+                    <TooltipProvider key={item.id}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <motion.div
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            className={`flex ${
                               navConfig.labelPosition === 'right'
-                                ? 'ml-2'
-                                : 'mt-1'
-                            }`}
+                                ? 'flex-row'
+                                : 'flex-col'
+                            } items-center`}
                           >
-                            {item.title}
-                          </span>
-                        )}
-                      </motion.div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{item.title}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </motion.nav>
+                            <Link href={item.link}>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                className="bg-transparent"
+                                style={{ color: navConfig.textColor }}
+                              >
+                                {React.cloneElement(item.icon, {
+                                  size: navConfig.iconSize,
+                                  strokeWidth:
+                                    navConfig.iconStyle === 'thin' ? 1 : 2,
+                                  fill:
+                                    navConfig.iconStyle === 'filled'
+                                      ? 'currentColor'
+                                      : 'none',
+                                })}
+                              </Button>
+                            </Link>
+                            {navConfig.showLabels && (
+                              <span
+                                className={`text-xs ${
+                                  navConfig.labelPosition === 'right'
+                                    ? 'ml-2'
+                                    : 'mt-1'
+                                }`}
+                              >
+                                {item.title}
+                              </span>
+                            )}
+                          </motion.div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{item.title}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+
 
       {/* Back to Top Button */}
       <AnimatePresence>
