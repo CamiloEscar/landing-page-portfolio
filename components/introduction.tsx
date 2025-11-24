@@ -543,76 +543,94 @@ export default function Introduction() {
         )}
       </AnimatePresence>
 
-      <Dialog open={isCVOpen} onOpenChange={setIsCVOpen}>
-  <DialogContent className="sm:max-w-[800px] h-[90vh] p-0">
-    <DialogHeader className="p-6 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
-      <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
-        {cv.dialog.title}
-      </DialogTitle>
-      <DialogDescription className="text-gray-600 dark:text-gray-400">
-        {cv.dialog.description}
-      </DialogDescription>
-    </DialogHeader>
+      <Dialog open={isCVOpen} onOpenChange={setIsCVOpen} >
+<DialogContent
+  className="p-0 flex flex-col h-[90vh] sm:max-w-[900px]"
+>
+  {/* Header */}
+  <DialogHeader className="p-6 border-b bg-white/40 dark:bg-gray-900/40">
+    <div className="flex items-center justify-between w-full">
+      <div>
+        <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
+          {cv.dialog.title}
+        </DialogTitle>
+        <DialogDescription className="text-gray-600 dark:text-gray-400">
+          {cv.dialog.description}
+        </DialogDescription>
+      </div>
 
-    {/* Selector PDF / Docs */}
-    <div className="flex gap-2 p-4 justify-center bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
-      <Button
-        variant={viewType === 'pdf' ? 'default' : 'outline'}
-        onClick={() => setViewType('pdf')}
-      >
-        PDF
-      </Button>
-      <Button
-        variant={viewType === 'docs' ? 'default' : 'outline'}
-        onClick={() => setViewType('docs')}
-      >
-        Google Docs
-      </Button>
-    </div>
-
-    {/* Contenido dinámico */}
-    <div className="flex-1 bg-gray-100 dark:bg-gray-800">
-      <iframe
-        src={
-          viewType === 'pdf'
-            ? `/CV${cvLanguage}-CamiloEscar.pdf`
-            : docsLinks[cvLanguage]
-        }
-        className="w-full h-[calc(90vh-240px)]"
-        title="CV"
-      />
-    </div>
-
-    {/* Footer */}
-    <div className="flex justify-between items-center gap-4 p-4 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-t border-gray-200/20 dark:border-gray-700/20">
-      <Button
-        variant="outline"
-        onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
-      >
-        {getSwitchLanguageText()}
-      </Button>
-
-      <div className="flex items-center gap-4">
-        <Button variant="outline" onClick={() => setIsCVOpen(false)}>
-          <X className="mr-2 h-4 w-4" />
-          {cv.dialog.close}
+      {/* Selector PDF / Docs integrado al título */}
+      <div className="flex gap-2">
+        <Button
+          size="sm"
+          variant={viewType === 'pdf' ? 'default' : 'outline'}
+          onClick={() => setViewType('pdf')}
+        >
+          PDF
         </Button>
 
-        {/* Descargar solo si es PDF */}
-        {viewType === 'pdf' && (
-          <Button
-            onClick={() =>
-              window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, '_blank')
-            }
-            className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white hover:opacity-90 transition-opacity"
+        <Button
+          size="sm"
+          variant={viewType === 'docs' ? 'default' : 'outline'}
+          onClick={() => setViewType('docs')}
+        >
+          Docs
+        </Button>
+
+        {viewType === 'docs' && (
+          <a
+            href={docsLinks[cvLanguage]}
+            target="_blank"
+            className="text-sm underline text-blue-500"
           >
-            <Download className="mr-2 h-4 w-4" />
-            {cv.dialog.download}
-          </Button>
+            Abrir en Google Docs
+          </a>
         )}
       </div>
     </div>
-  </DialogContent>
+  </DialogHeader>
+
+  {/* Contenido */}
+  <div className="flex-1">
+    <iframe
+      src={
+        viewType === 'pdf'
+          ? `/CV${cvLanguage}-CamiloEscar.pdf`
+          : docsLinks[cvLanguage]
+      }
+      className="w-full h-full"
+    />
+  </div>
+
+  {/* Footer */}
+  <div className="flex justify-between items-center p-4 border-t bg-white/40 dark:bg-gray-900/40">
+    <Button
+      variant="outline"
+      onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
+    >
+      {getSwitchLanguageText()}
+    </Button>
+
+    <div className="flex items-center gap-4">
+      <Button variant="outline" onClick={() => setIsCVOpen(false)}>
+        <X className="mr-2 h-4 w-4" />
+        {cv.dialog.close}
+      </Button>
+
+      {viewType === 'pdf' && (
+        <Button
+          onClick={() =>
+            window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, '_blank')
+          }
+          className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white"
+        >
+          <Download className="mr-2 h-4 w-4" />
+          {cv.dialog.download}
+        </Button>
+      )}
+    </div>
+  </div>
+</DialogContent>
 </Dialog>
     </section>
   );
