@@ -14,7 +14,7 @@ const ProfessionalNavbar = () => {
   };
 
   return (
-    <nav className="print:hidden flex justify-between items-center py-4 px-6 bg-white dark:bg-gray-900">
+    <nav className="print:hidden flex justify-between items-center py-4 px-6 bg-white dark:bg-[#0c0a09]">
       <div className="flex items-center space-x-4">
         <Link href="/">
           <span className="text-gray-600 font-bold dark:text-gray-300 hover:text-black dark:hover:text-white">

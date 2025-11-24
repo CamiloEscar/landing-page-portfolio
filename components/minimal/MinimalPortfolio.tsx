@@ -251,7 +251,7 @@ const ProfessionalMinimalPortfolio = () => {
               Proyectos Destacados
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 print:grid-cols-2 print:gap-2">
-              {dataPortfolio.slice(0, 10).map((project) => (
+              {dataPortfolio.slice(0, 4).map((project) => (
                 <Card
                   key={project.id}
                   className="border border-gray-200 dark:border-gray-700 print:border-gray-200 hover:shadow-sm transition-shadow"
@@ -365,7 +365,7 @@ const ProfessionalMinimalPortfolio = () => {
             <h2 className="text-2xl font-semibold mb-2 border-b pb-1">
               Tecnologias
             </h2>
-            <div className="grid grid-cols-2 gap-1.5">
+            <div className="grid grid-cols-5 gap-1.5">
               {dataExperienceMinimal.flatMap((category) =>
                 category.experience.map((skill) => (
                   <div

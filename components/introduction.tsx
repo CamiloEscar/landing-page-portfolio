@@ -129,6 +129,8 @@ const SocialLink: FC<SocialLinkProps> = ({
   </motion.div>
 );
 
+type CvLanguage = 'es' | 'en';
+
 const FlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -273,9 +275,10 @@ const ScrollIndicator = () => (
 
 export default function Introduction() {
   const [isCVOpen, setIsCVOpen] = useState(false);
-  const [cvLanguage, setCvLanguage] = useState('es');
+  const [cvLanguage, setCvLanguage] = useState<CvLanguage>('es');
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+  const [viewType, setViewType] = useState('pdf'); // 'pdf' | 'docs'
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -338,9 +341,21 @@ export default function Introduction() {
     };
   }, [cycleGreeting]);
 
-  const handleCVOpen = (language: string) => {
+  const handleCVOpen = (language: CvLanguage) => {
     setCvLanguage(language);
     setIsCVOpen(true);
+  };
+
+
+  const docsLinks: Record<CvLanguage, string> = {
+  es: 'https://docs.google.com/document/d/1CvRZx0hI_KiiFPk9ok56dn2o5snL49w4cCidnHRFnXs/preview',
+  en: 'https://docs.google.com/document/d/1b4_exJllgBVQ6j0ISaJPk_F2Y4pphwzQinM4XDUknFY/preview'
+  };
+
+    const getSwitchLanguageText = () => {
+    return cvLanguage === 'en' 
+      ? 'Ver CV en Español' 
+      : 'View CV in English';
   };
 
   return (
@@ -529,52 +544,76 @@ export default function Introduction() {
       </AnimatePresence>
 
       <Dialog open={isCVOpen} onOpenChange={setIsCVOpen}>
-        <DialogContent className="sm:max-w-[800px] h-[90vh] p-0">
-          <DialogHeader className="p-6 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
-            <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
-              {cv.dialog.title}
-            </DialogTitle>
-            <DialogDescription className="text-gray-600 dark:text-gray-400">
-              {cv.dialog.description}
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex-1 bg-gray-100 dark:bg-gray-800">
-            <iframe
-              src={`/CV${cvLanguage}-CamiloEscar.pdf`}
-              className="w-full h-[calc(90vh-180px)]"
-              title="CV"
-            />
-          </div>
-          <div className="flex justify-between items-center gap-4 p-4 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-t border-gray-200/20 dark:border-gray-700/20">
-            <Button
-              variant="outline"
-              onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
-              className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-            >
-              {cv.dialog.switchLanguage}
-            </Button>
-            <div className="flex items-center gap-4">
-              <Button
-                variant="outline"
-                onClick={() => setIsCVOpen(false)}
-                className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              >
-                <X className="mr-2 h-4 w-4" />
-                {cv.dialog.close}
-              </Button>
-              <Button
-                onClick={() =>
-                  window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, '_blank')
-                }
-                className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white hover:opacity-90 transition-opacity"
-              >
-                <Download className="mr-2 h-4 w-4" />
-                {cv.dialog.download}
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+  <DialogContent className="sm:max-w-[800px] h-[90vh] p-0">
+    <DialogHeader className="p-6 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
+      <DialogTitle className="text-2xl font-bold bg-gradient-to-r from-emerald-500 to-sky-500 bg-clip-text text-transparent">
+        {cv.dialog.title}
+      </DialogTitle>
+      <DialogDescription className="text-gray-600 dark:text-gray-400">
+        {cv.dialog.description}
+      </DialogDescription>
+    </DialogHeader>
+
+    {/* Selector PDF / Docs */}
+    <div className="flex gap-2 p-4 justify-center bg-white/40 dark:bg-gray-900/40 border-b border-gray-200/20 dark:border-gray-700/20">
+      <Button
+        variant={viewType === 'pdf' ? 'default' : 'outline'}
+        onClick={() => setViewType('pdf')}
+      >
+        PDF
+      </Button>
+      <Button
+        variant={viewType === 'docs' ? 'default' : 'outline'}
+        onClick={() => setViewType('docs')}
+      >
+        Google Docs
+      </Button>
+    </div>
+
+    {/* Contenido dinámico */}
+    <div className="flex-1 bg-gray-100 dark:bg-gray-800">
+      <iframe
+        src={
+          viewType === 'pdf'
+            ? `/CV${cvLanguage}-CamiloEscar.pdf`
+            : docsLinks[cvLanguage]
+        }
+        className="w-full h-[calc(90vh-240px)]"
+        title="CV"
+      />
+    </div>
+
+    {/* Footer */}
+    <div className="flex justify-between items-center gap-4 p-4 backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-t border-gray-200/20 dark:border-gray-700/20">
+      <Button
+        variant="outline"
+        onClick={() => setCvLanguage(cvLanguage === 'en' ? 'es' : 'en')}
+      >
+        {getSwitchLanguageText()}
+      </Button>
+
+      <div className="flex items-center gap-4">
+        <Button variant="outline" onClick={() => setIsCVOpen(false)}>
+          <X className="mr-2 h-4 w-4" />
+          {cv.dialog.close}
+        </Button>
+
+        {/* Descargar solo si es PDF */}
+        {viewType === 'pdf' && (
+          <Button
+            onClick={() =>
+              window.open(`/CV${cvLanguage}-CamiloEscar.pdf`, '_blank')
+            }
+            className="bg-gradient-to-r from-emerald-500 to-sky-500 text-white hover:opacity-90 transition-opacity"
+          >
+            <Download className="mr-2 h-4 w-4" />
+            {cv.dialog.download}
+          </Button>
+        )}
+      </div>
+    </div>
+  </DialogContent>
+</Dialog>
     </section>
   );
 }

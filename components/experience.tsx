@@ -152,7 +152,7 @@ const ServicesAndExperience: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-2 sm:px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
+      <div className="container mx-auto px-2 py-4 sm:px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <motion.div
           className="text-center mb-8 sm:mb-12"
           initial={{ y: -50, opacity: 0 }}

@@ -64,6 +64,16 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta property="og:title" content="Camilo Escar | Desarrollador Web" />
+        <meta property="og:description" content="Portfolio de Camilo Escar. React, Next.js, Node.js." />
+        <meta property="og:url" content="https://camiloescar.github.io/" />
+        <meta property="og:site_name" content="Portfolio de Camilo Escar" />
+        <meta property="og:locale" content="es_ES" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://raw.githubusercontent.com/CamiloEscar/CamiloEscar/main/assets/profile.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Camilo Escar — Portfolio" />
       </head>
       <body className={urbanist.className}>
         <ThemeProvider

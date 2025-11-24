@@ -71,7 +71,7 @@ const RecentPosts: React.FC<RecentPostsProps> = ({ posts }) => {
               </li>
             ))}
           </ul>
-          <div className="mt-4 sm:mt-6 flex justify-center">
+          <div className="mt-4 py-4 sm:mt-6 flex justify-center">
             <Link href="/blog" className="w-full sm:w-auto">
               <button className="w-full bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700 transition-colors text-sm sm:text-base">
                 Ver todos los posts
