@@ -15,12 +15,514 @@ export interface BlogPost {
 }
 
 export const dataBlog: BlogPost[] = [
-  //extensiones-vs-code
+  //herramientas esenciales para node
+  {
+  slug: 'herramientas-esenciales-nodejs',
+  title: 'Herramientas Esenciales para Desarrollar con Node.js',
+  image: '/blog/node_tools.png',
+  date: '2025-06-12',
+  tags: [
+    'Node.js',
+    'Backend',
+    'Herramientas',
+    'Testing',
+    'JavaScript',
+  ],
+  type: 'Artículo Técnico',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '12 min',
+  excerpt:
+    'Un repaso práctico por las herramientas más utilizadas en proyectos Node.js modernos: testing, logging, automatización y manejo de dependencias.',
+  content: `
+<h2>Introducción</h2>
+<p>
+Node.js no es solo el runtime que ejecuta JavaScript en el backend.
+Gran parte de su potencia viene del ecosistema de herramientas que lo rodean.
+Elegir bien estas herramientas puede marcar la diferencia entre un proyecto difícil de mantener
+y uno limpio, testeable y profesional.
+</p>
+
+<p>
+En este artículo voy a recorrer algunas de las <strong>herramientas más usadas en proyectos Node.js</strong>,
+explicando para qué sirven y cuándo conviene utilizarlas.
+</p>
+
+<hr/>
+
+<h2>Jest: testing sin complicaciones</h2>
+<p>
+Jest es uno de los frameworks de testing más populares del ecosistema JavaScript.
+Se destaca por ser simple de configurar y por incluir todo lo necesario para comenzar a escribir pruebas
+sin agregar demasiadas dependencias.
+</p>
+
+<p>
+Con Jest podemos escribir <strong>tests unitarios</strong>, mocks y pruebas asincrónicas de forma clara,
+lo que lo vuelve ideal para APIs y servicios backend.
+</p>
+
+<pre><code>
+test('suma correcta', () => {
+  expect(2 + 3).toBe(5);
+});
+</code></pre>
+
+<hr/>
+
+<h2>Nodemon: desarrollo sin reinicios manuales</h2>
+<p>
+Nodemon es una herramienta pensada exclusivamente para el entorno de desarrollo.
+Su función es observar los archivos del proyecto y reiniciar automáticamente la aplicación
+cuando detecta cambios.
+</p>
+
+<p>
+Esto ahorra tiempo y mejora el flujo de trabajo,
+especialmente cuando estamos desarrollando APIs con Express o Fastify.
+</p>
+
+<pre><code>
+nodemon index.js
+</code></pre>
+
+<hr/>
+
+<h2>Yargs: crear CLIs fácilmente</h2>
+<p>
+Yargs permite construir aplicaciones de línea de comandos en Node.js
+de manera ordenada y legible.
+Es muy útil cuando necesitamos scripts internos, herramientas de automatización
+o pequeños programas ejecutables.
+</p>
+
+<p>
+Facilita la definición de comandos, argumentos y flags,
+haciendo que nuestras CLIs sean más amigables.
+</p>
+
+<pre><code>
+const yargs = require('yargs');
+
+const argv = yargs
+  .option('name', {
+    alias: 'n',
+    type: 'string',
+    description: 'Nombre del usuario'
+  })
+  .argv;
+
+console.log('Hola', argv.name);
+</code></pre>
+
+<hr/>
+
+<h2>Winston: logging profesional</h2>
+<p>
+El logging es clave en cualquier aplicación backend.
+Winston es una librería que permite manejar logs de forma estructurada,
+con distintos niveles y múltiples destinos.
+</p>
+
+<p>
+Podemos registrar logs en consola, archivos o servicios externos,
+y diferenciar claramente entre información, advertencias y errores.
+</p>
+
+<pre><code>
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  level: 'info',
+  transports: [
+    new winston.transports.Console(),
+    new winston.transports.File({ filename: 'app.log' })
+  ],
+});
+
+logger.info('Aplicación iniciada');
+</code></pre>
+
+<hr/>
+
+<h2>Axios: consumir APIs externas</h2>
+<p>
+Axios es una de las librerías más utilizadas para realizar solicitudes HTTP.
+Funciona tanto en Node.js como en el navegador
+y ofrece una API simple basada en promesas.
+</p>
+
+<p>
+Es ideal para consumir servicios externos,
+integrarse con APIs de terceros o comunicar microservicios.
+</p>
+
+<pre><code>
+const axios = require('axios');
+
+axios.get('https://api.example.com/data')
+  .then(response => {
+    console.log(response.data);
+  })
+  .catch(error => {
+    console.error(error.message);
+  });
+</code></pre>
+
+<hr/>
+
+<h2>Rimraf: limpiar sin preocuparse por el sistema operativo</h2>
+<p>
+Rimraf es una utilidad que permite eliminar carpetas y archivos
+de forma recursiva, incluso en sistemas donde
+<code>rm -rf</code> no está disponible.
+</p>
+
+<p>
+Se usa mucho en scripts de build, limpieza de carpetas temporales
+o reinicio de entornos.
+</p>
+
+<pre><code>
+const rimraf = require('rimraf');
+
+rimraf('dist', () => {
+  console.log('Carpeta eliminada');
+});
+</code></pre>
+
+<hr/>
+
+<h2>Cómo encajan todas estas herramientas</h2>
+<p>
+En un proyecto real, estas herramientas suelen trabajar juntas:
+</p>
+
+<ul>
+  <li>Jest para garantizar la calidad del código</li>
+  <li>Nodemon para agilizar el desarrollo</li>
+  <li>Yargs para scripts y herramientas internas</li>
+  <li>Winston para observabilidad y debugging</li>
+  <li>Axios para integraciones externas</li>
+  <li>Rimraf para automatizar tareas de mantenimiento</li>
+</ul>
+
+<hr/>
+
+
+<p>
+Dominar Node.js no implica solo conocer JavaScript o Express,
+sino también saber elegir y utilizar correctamente las herramientas
+que acompañan el desarrollo.
+</p>
+
+<p>
+Invertir tiempo en aprender estas librerías se traduce en
+proyectos más profesionales, mantenibles y escalables.
+</p>
+`,
+},
+  //patrones de diseño node
+  {
+  slug: 'nodejs-design-patterns',
+  title: 'Patrones de Diseño en Node.js: Guía Práctica con Ejemplos Reales',
+  image: '/blog/api_architecture.png',
+  date: '2025-04-21',
+  tags: [
+    'Node.js',
+    'Design Patterns',
+    'Backend',
+    'Arquitectura',
+    'JavaScript',
+  ],
+  type: 'Artículo Técnico',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '15 min',
+  excerpt:
+    'Un recorrido práctico por los patrones de diseño más utilizados en Node.js, con ejemplos adaptados a ES6 y explicaciones claras para aplicar en proyectos reales.',
+  content: `
+<h2>Introducción</h2>
+<p>
+Cuando trabajamos con Node.js, especialmente en proyectos backend que crecen con el tiempo,
+la forma en la que organizamos el código se vuelve tan importante como la lógica de negocio.
+Los patrones de diseño nos ayudan a resolver problemas comunes de una manera probada y mantenible.
+</p>
+
+<p>
+En este artículo voy a repasar distintos <strong>patrones de diseño aplicados a Node.js</strong>,
+tomando como base el libro <em>Node.js Design Patterns</em>, pero adaptando los ejemplos
+al estilo moderno de JavaScript (ES6).
+</p>
+
+<h2>Un enfoque distinto a Java y C#</h2>
+<p>
+Si venís de lenguajes como Java o C#, vas a notar que los patrones no se implementan exactamente igual.
+En JavaScript no todo gira en torno a clases e herencia; aquí pesan mucho más conceptos como
+funciones, composición y módulos.
+</p>
+
+<p>
+Aun así, la <strong>idea central de cada patrón se mantiene intacta</strong>.
+El objetivo sigue siendo el mismo: desacoplar, reutilizar y hacer el código más fácil de mantener.
+</p>
+
+<h2>Patrones que vamos a ver</h2>
+<ul>
+  <li>Factory</li>
+  <li>Proxy</li>
+  <li>Decorator</li>
+  <li>Adapter</li>
+  <li>Strategy</li>
+  <li>State</li>
+  <li>Template</li>
+  <li>Middleware</li>
+  <li>Command</li>
+  <li>Singleton</li>
+  <li>Universal Module Definition (UMD)</li>
+</ul>
+
+<hr/>
+
+<h2>Factory: controlar la creación de objetos</h2>
+<p>
+El patrón Factory se utiliza cuando no queremos que el código que consume un objeto
+sea responsable de crearlo directamente.
+En lugar de instanciar con <code>new</code> en todos lados,
+delegamos esa responsabilidad a una fábrica.
+</p>
+
+<p>
+Esto nos permite validar datos, cambiar la forma de construir el objeto
+o incluso devolver distintas implementaciones sin afectar al resto del sistema.
+</p>
+
+<pre><code>
+class Person {
+  constructor(name, surname, age, sex) {
+    this.name = name;
+    this.surname = surname;
+    this.age = age;
+    this.sex = sex;
+  }
+}
+
+class PersonFactory {
+  constructor() {
+    this.data = {};
+  }
+
+  set(key, value) {
+    this.data[key] = value;
+  }
+
+  build() {
+    return new Person(
+      this.data.name,
+      this.data.surname,
+      this.data.age,
+      this.data.sex
+    );
+  }
+}
+
+const factory = new PersonFactory();
+factory.set('name', 'Damián');
+factory.set('surname', 'Cipolat');
+factory.set('age', 30);
+factory.set('sex', 'M');
+
+const person = factory.build();
+console.log(person);
+</code></pre>
+
+<hr/>
+
+<h2>Proxy: controlar el acceso a un objeto</h2>
+<p>
+El patrón Proxy actúa como un intermediario.
+En lugar de acceder directamente a un objeto,
+lo hacemos a través de otro que decide qué hacer con cada llamada.
+</p>
+
+<p>
+Es muy común usar proxies para agregar validaciones,
+logs, control de permisos o incluso cachear resultados.
+</p>
+
+<pre><code>
+class Service {
+  getMessage() {
+    return 'Hola';
+  }
+}
+
+class ServiceProxy {
+  constructor(service) {
+    this.service = service;
+  }
+
+  getMessage() {
+    const result = this.service.getMessage();
+    return result + ' mundo';
+  }
+}
+
+const service = new Service();
+const proxy = new ServiceProxy(service);
+
+console.log(proxy.getMessage());
+</code></pre>
+
+<hr/>
+
+<h2>Decorator: extender comportamiento sin herencia</h2>
+<p>
+Decorator es ideal cuando queremos agregar nuevas funcionalidades
+a un objeto sin modificar su clase original.
+A diferencia de la herencia, el cambio se aplica solo al objeto decorado.
+</p>
+
+<pre><code>
+class User {
+  greet() {
+    return 'Hola';
+  }
+}
+
+class UserDecorator {
+  constructor(user) {
+    this.user = user;
+  }
+
+  greet() {
+    return this.user.greet() + ', bienvenido!';
+  }
+}
+
+const user = new User();
+const decoratedUser = new UserDecorator(user);
+
+console.log(decoratedUser.greet());
+</code></pre>
+
+<hr/>
+
+<h2>Adapter: hacer compatibles interfaces distintas</h2>
+<p>
+El Adapter entra en juego cuando tenemos dos componentes
+que hacen cosas similares pero con interfaces diferentes.
+En lugar de modificar uno de ellos, creamos un adaptador.
+</p>
+
+<pre><code>
+class OldShipping {
+  calculate() {
+    return '$50';
+  }
+}
+
+class ShippingAdapter {
+  constructor(service) {
+    this.service = service;
+  }
+
+  getCost() {
+    return this.service.calculate();
+  }
+}
+
+const adapter = new ShippingAdapter(new OldShipping());
+console.log(adapter.getCost());
+</code></pre>
+
+<hr/>
+
+<h2>Strategy y State: comportamiento intercambiable</h2>
+<p>
+Strategy nos permite cambiar un algoritmo en tiempo de ejecución
+sin modificar el código que lo utiliza.
+State es una variación donde el comportamiento depende del estado interno.
+</p>
+
+<p>
+Ambos patrones son muy útiles cuando tenemos múltiples reglas
+que cambian según el contexto.
+</p>
+
+<hr/>
+
+<h2>Middleware: encadenar responsabilidades</h2>
+<p>
+En Node.js este patrón es muy común, especialmente en frameworks como Express.
+La idea es simple: una función procesa datos y pasa el resultado a la siguiente.
+</p>
+
+<p>
+Esto permite crear flujos claros y reutilizables para validaciones,
+transformaciones o cálculos.
+</p>
+
+<hr/>
+
+<h2>Command: acciones como objetos</h2>
+<p>
+Command encapsula una acción completa en un objeto.
+Esto hace posible ejecutar, deshacer o registrar operaciones
+sin acoplarlas al código que las dispara.
+</p>
+
+<p>
+Es especialmente útil en sistemas que requieren historial de acciones.
+</p>
+
+<hr/>
+
+<h2>Singleton: una sola instancia</h2>
+<p>
+El patrón Singleton asegura que exista una única instancia de un objeto.
+En Node.js, los módulos ya funcionan naturalmente de esta forma,
+lo que lo vuelve muy práctico para configuraciones o servicios compartidos.
+</p>
+
+<hr/>
+
+<h2>Universal Module Definition</h2>
+<p>
+UMD busca que un mismo módulo funcione tanto en Node.js
+como en el navegador, sin importar el sistema de módulos utilizado.
+</p>
+
+<p>
+Es una solución pensada para librerías que deben ejecutarse
+en distintos entornos.
+</p>
+
+<hr/>
+
+
+<p>
+Los patrones de diseño no son recetas mágicas,
+pero aplicados correctamente pueden marcar una gran diferencia
+en la calidad de un proyecto Node.js.
+</p>
+
+<p>
+Entender cuándo usarlos y adaptarlos al estilo de JavaScript moderno
+es una habilidad clave para cualquier desarrollador backend.
+</p>
+`,
+}
+,  //extensiones-vs-code
   {
     slug: 'extensiones-vscode',
     title: 'Guía Completa sobre Extensiones de Visual Studio Code',
     image: '/blog/vscode_extensions.png',
-    date: '2024-10-21',
+    date: '2025-02-21',
     tags: [
       'VSCode',
       'Extensiones',
@@ -31,16 +533,16 @@ export const dataBlog: BlogPost[] = [
     type: 'Tutorial',
     author: {
       name: 'Camilo Escar',
-      avatar: '/tu-avatar.webp',
+      avatar: '/profile.webp',
     },
     readingTime: '10 min',
     excerpt:
       'Descubre cómo las extensiones de Visual Studio Code pueden mejorar tu flujo de trabajo y aumentar tu productividad como desarrollador.',
     content: `
-  <h2>🚀 ¿Qué es Visual Studio Code?</h2>
+  <h2>¿Qué es Visual Studio Code?</h2>
   <p>Visual Studio Code (VSCode) es un editor de código fuente desarrollado por Microsoft. Es popular entre los desarrolladores debido a su interfaz ligera, versatilidad y un ecosistema rico en extensiones que mejoran la experiencia de codificación.</p>
 
-  <h2>🌟 ¿Por qué Usar Extensiones?</h2>
+  <h2> ¿Por qué Usar Extensiones?</h2>
   <p>Las extensiones permiten personalizar y ampliar las funcionalidades de VSCode. Pueden ayudar a mejorar la productividad, agregar soporte para nuevos lenguajes, integrar herramientas y mejorar el flujo de trabajo general. Aquí hay algunas razones para usar extensiones:</p>
   <ul>
     <li><strong>Aumentar la Productividad:</strong> Las extensiones pueden automatizar tareas repetitivas y proporcionar atajos de teclado útiles.</li>
@@ -86,7 +588,7 @@ export const dataBlog: BlogPost[] = [
   2. Busca "Python" y selecciona "Instalar".
   </code></pre>
 
-  <h2>💡 Cómo Instalar Extensiones</h2>
+  <h2> Cómo Instalar Extensiones</h2>
   <p>Instalar extensiones en VSCode es un proceso sencillo:</p>
   <ol>
     <li>Abre VSCode.</li>
@@ -95,7 +597,7 @@ export const dataBlog: BlogPost[] = [
     <li>Haz clic en "Instalar".</li>
   </ol>
 
-  <h2>🔧 Gestionando Extensiones</h2>
+  <h2>Gestionando Extensiones</h2>
   <p>Para gestionar tus extensiones instaladas, puedes desactivarlas, desinstalarlas o actualizar su configuración:</p>
   <ol>
     <li>Abre el panel de extensiones.</li>
@@ -110,10 +612,241 @@ export const dataBlog: BlogPost[] = [
     <li><strong>Compatibilidad:</strong> Confirma que la extensión sea compatible con tu versión de VSCode y con tus lenguajes de programación.</li>
   </ul>
 
-  <h2>🔚 Conclusión</h2>
+  
   <p>Las extensiones de Visual Studio Code son una herramienta poderosa para mejorar tu flujo de trabajo y aumentar tu productividad. Desde formateadores de código hasta herramientas de integración de Git, hay una amplia variedad de opciones disponibles para adaptarse a tus necesidades. ¡Explora el mercado de extensiones y personaliza tu experiencia de codificación hoy mismo!</p>
 `,
   },
+  //arquitectura llamado de multiples apis
+  {
+  slug: 'arquitectura-llamado-multiples-apis-nodejs',
+  title: 'Arquitectura para el Llamado de Múltiples APIs en Node.js',
+  image: '/blog/nodejs_design_patterns.webp',
+  date: '2025-01-23',
+  tags: [
+    'Node.js',
+    'Arquitectura de Software',
+    'APIs',
+    'Backend',
+    'Clean Architecture',
+  ],
+  type: 'Arquitectura',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '14 min',
+  excerpt:
+    'Cómo diseñar una arquitectura limpia y escalable para consumir múltiples APIs externas en Node.js, aplicando buenas prácticas y patrones de diseño.',
+  content: `
+<h2>Introducción</h2>
+<p>
+En muchos proyectos backend, especialmente en fintech, seguros o ecommerce,
+el servidor no solo expone endpoints propios,
+sino que actúa como un <strong>orquestador de múltiples APIs externas</strong>.
+</p>
+
+<p>
+Cuando este tipo de integración crece sin una arquitectura clara,
+el código se vuelve difícil de mantener, probar y escalar.
+En este artículo vamos a ver <strong>arquitecturas recomendadas</strong>
+para manejar múltiples llamados a APIs de forma ordenada y profesional.
+</p>
+
+<hr/>
+
+<h2>El problema de una mala arquitectura</h2>
+<p>
+Un error común es llamar a las APIs externas directamente desde los controladores.
+Esto genera:
+</p>
+
+<ul>
+  <li>Controladores demasiado grandes</li>
+  <li>Lógica de negocio mezclada con HTTP</li>
+  <li>Dificultad para testear</li>
+  <li>Código fuertemente acoplado a proveedores externos</li>
+</ul>
+
+<p>
+El objetivo de una buena arquitectura es <strong>aislar el impacto del cambio</strong>.
+Si mañana cambia una API, el sistema no debería romperse.
+</p>
+
+<hr/>
+
+<h2>Arquitectura recomendada: capas bien definidas</h2>
+<p>
+Una arquitectura clara para este escenario suele dividirse en capas:
+</p>
+
+<ul>
+  <li><strong>Controllers</strong>: reciben la request y devuelven la response</li>
+  <li><strong>Services / Use Cases</strong>: orquestan la lógica de negocio</li>
+  <li><strong>Clients (API Adapters)</strong>: encapsulan cada API externa</li>
+  <li><strong>Domain</strong>: reglas del negocio y modelos</li>
+</ul>
+
+<p>
+Esta separación permite que cada parte tenga una responsabilidad única.
+</p>
+
+<hr/>
+
+<h2>Capa de Clients: una API, un adaptador</h2>
+<p>
+Cada API externa debería tener su propio cliente.
+Nunca conviene llamar a Axios directamente desde un servicio de negocio.
+</p>
+
+<p>
+Este enfoque sigue el patrón <strong>Adapter</strong>.
+</p>
+
+<pre><code>
+class InsuranceApiClient {
+  constructor(http) {
+    this.http = http;
+  }
+
+  async getQuote(data) {
+    const response = await this.http.post('/quote', data);
+    return response.data;
+  }
+}
+</code></pre>
+
+<p>
+Si mañana cambia el proveedor,
+solo se modifica este archivo.
+</p>
+
+<hr/>
+
+<h2>Services: orquestar múltiples APIs</h2>
+<p>
+La capa de servicios es la encargada de coordinar
+los llamados a distintas APIs y aplicar reglas de negocio.
+</p>
+
+<pre><code>
+class QuoteService {
+  constructor(apiA, apiB) {
+    this.apiA = apiA;
+    this.apiB = apiB;
+  }
+
+  async calculateQuote(input) {
+    const resultA = await this.apiA.getQuote(input);
+    const resultB = await this.apiB.getQuote(input);
+
+    return {
+      providerA: resultA.price,
+      providerB: resultB.price,
+    };
+  }
+}
+</code></pre>
+
+<p>
+Aquí no importa cómo funcionan las APIs,
+solo qué información devuelven.
+</p>
+
+<hr/>
+
+<h2>Patrón Strategy: proveedores intercambiables</h2>
+<p>
+Cuando varias APIs cumplen el mismo objetivo,
+el patrón <strong>Strategy</strong> permite intercambiarlas fácilmente.
+</p>
+
+<pre><code>
+class ProviderStrategy {
+  async quote(data) {
+    throw new Error('Not implemented');
+  }
+}
+</code></pre>
+
+<p>
+Cada proveedor implementa su propia estrategia,
+pero el sistema los trata de forma uniforme.
+</p>
+
+<hr/>
+
+<h2>Manejo de fallos y tolerancia</h2>
+<p>
+Cuando dependemos de APIs externas,
+los errores no son una excepción, sino una certeza.
+</p>
+
+<p>
+Buenas prácticas:
+</p>
+
+<ul>
+  <li>Timeouts bien definidos</li>
+  <li>Retries controlados</li>
+  <li>Fallbacks si un proveedor no responde</li>
+  <li>Logs claros por proveedor</li>
+</ul>
+
+<p>
+Esto convierte a la aplicación en un sistema más resiliente.
+</p>
+
+<hr/>
+
+<h2>Arquitectura orientada a casos de uso</h2>
+<p>
+Una evolución natural es aplicar <strong>Clean Architecture</strong>
+o <strong>Hexagonal Architecture</strong>.
+</p>
+
+<p>
+En este enfoque:
+</p>
+
+<ul>
+  <li>El dominio no conoce a Axios ni HTTP</li>
+  <li>Las APIs externas son detalles reemplazables</li>
+  <li>Los casos de uso definen el flujo principal</li>
+</ul>
+
+<p>
+Esto hace que el sistema sea más fácil de testear
+y más preparado para el crecimiento.
+</p>
+
+<hr/>
+
+<h2>Escalabilidad y mantenibilidad</h2>
+<p>
+Una arquitectura bien pensada permite:
+</p>
+
+<ul>
+  <li>Agregar nuevos proveedores sin reescribir lógica</li>
+  <li>Testear servicios sin depender de APIs reales</li>
+  <li>Reducir bugs al aislar responsabilidades</li>
+  <li>Escalar el equipo sin generar caos</li>
+</ul>
+
+<hr/>
+
+
+<p>
+Cuando una aplicación backend consume múltiples APIs,
+la arquitectura deja de ser un detalle y pasa a ser una necesidad.
+</p>
+
+<p>
+Separar responsabilidades, aplicar patrones de diseño
+y tratar a las APIs externas como dependencias reemplazables
+es clave para construir sistemas robustos y profesionales.
+</p>
+`},  
   //guia-para-entender-el-proceso-TDD
   {
     slug: 'tdd-guia-completa',
@@ -130,16 +863,16 @@ export const dataBlog: BlogPost[] = [
     type: 'Tutorial',
     author: {
       name: 'Camilo Escar',
-      avatar: '/tu-avatar.webp',
+      avatar: '/profile.webp',
     },
     readingTime: '10 min',
     excerpt:
       'Descubre cómo implementar el Desarrollo Guiado por Pruebas (TDD) en tus proyectos y mejora la calidad y mantenibilidad del código con un ejemplo práctico.',
     content: `
-  <h2>🚀 ¿Qué es TDD?</h2>
+  <h2>¿Qué es TDD?</h2>
   <p>El Desarrollo Guiado por Pruebas (TDD) es una metodología que prioriza la creación de pruebas antes de escribir el código funcional. Este enfoque ayuda a garantizar que el software cumpla con los requisitos desde el inicio, mejorando la calidad y la mantenibilidad del código.</p>
 
-  <h2>🌟 Beneficios de TDD</h2>
+  <h2>Beneficios de TDD</h2>
   <ul>
     <li><strong>Calidad del Código:</strong> Asegura que el código se adhiera a los requisitos desde el principio.</li>
     <li><strong>Menos Errores:</strong> Detecta problemas temprano, lo que reduce costos y esfuerzos de corrección.</li>
@@ -184,7 +917,7 @@ def test_division():
     assert division(6, 3) == 2
   </code></pre>
 
-  <h2>📚 Ejemplo Completo de TDD</h2>
+  <h2>Ejemplo Completo de TDD</h2>
   <p>Imaginemos que estás creando una calculadora simple con las operaciones básicas. Aquí te muestro cómo implementar TDD paso a paso.</p>
   
   <h3>1. Prueba de Suma</h3>
@@ -229,7 +962,7 @@ def test_division():
     return a / b
   </code></pre>
 
-  <h2>💡 Consejos Adicionales para TDD Efectivo</h2>
+  <h2>Consejos Adicionales para TDD Efectivo</h2>
   <ul>
     <li><strong>Utiliza Frameworks de Pruebas:</strong> Herramientas como <code>pytest</code> o <code>unittest</code> en Python facilitan la creación y ejecución de pruebas.</li>
     <li><strong>Cubre Diferentes Casos de Prueba:</strong> Asegúrate de incluir tanto casos positivos como negativos.</li>
@@ -237,7 +970,7 @@ def test_division():
     <li><strong>Automatiza la Ejecución de Pruebas:</strong> Configura tu entorno para ejecutar pruebas automáticamente al realizar cambios.</li>
   </ul>
 
-  <h2>🔚 Conclusión</h2>
+  
   <p>Implementar TDD puede ser un desafío al principio, pero se convertirá en una parte natural de tu flujo de trabajo. Este enfoque no solo mejora la calidad del código, sino que también aumenta tu confianza al realizar cambios. ¡Empieza hoy mismo y transforma tu proceso de desarrollo!</p>
 `,
   },
@@ -257,16 +990,16 @@ def test_division():
     type: 'Tutorial',
     author: {
       name: 'Camilo Escar',
-      avatar: '/tu-avatar.webp',
+      avatar: '/profile.webp',
     },
     readingTime: '6 min',
     excerpt:
       'Descubre qué hace el comando init en un proyecto de Node.js y cómo los archivos package.json y tsconfig.json influyen en tu desarrollo.',
     content: `
-  <h2>🚀 ¿Qué Significa 'Init' en un Proyecto Node.js?</h2>
+  <h2>¿Qué Significa 'Init' en un Proyecto Node.js?</h2>
   <p>El comando <code>npm init</code> inicializa un nuevo proyecto de Node.js y crea un archivo <code>package.json</code> que contiene la configuración básica de tu proyecto.</p>
   
-  <h2>📦 Explorando package.json</h2>
+  <h2>Explorando package.json</h2>
   <p>El <code>package.json</code> es el corazón de cualquier proyecto Node.js. Aquí te mostramos sus secciones más importantes:</p>
   
   <h3>1. Información del Proyecto</h3>
@@ -301,7 +1034,7 @@ def test_division():
   }</code></pre>
   <p>Puedes definir comandos personalizados que faciliten tareas comunes, como iniciar el servidor o compilar tu código TypeScript.</p>
   
-  <h2>⚙️ Comprendiendo tsconfig.json</h2>
+  <h2>Comprendiendo tsconfig.json</h2>
   <p>El archivo <code>tsconfig.json</code> es esencial para proyectos TypeScript. Aquí configuras cómo TypeScript debe compilar tu código.</p>
   
   <h3>1. Opciones del Compilador</h3>
@@ -324,10 +1057,10 @@ def test_division():
 }</code></pre>
   <p>Esto especifica qué archivos incluir o excluir durante la compilación. Normalmente, incluyes el código fuente y excluyes las carpetas de dependencias.</p>
   
-  <h2>📁 La Raíz del Proyecto</h2>
+  <h2>La Raíz del Proyecto</h2>
   <p>La raíz del proyecto es el directorio donde se encuentran los archivos <code>package.json</code> y <code>tsconfig.json</code>. Aquí es donde iniciarás tus comandos de npm y TypeScript. Mantener una estructura de carpetas organizada es clave para el éxito del proyecto.</p>
   
-  <h2>🔄 ¿Cómo Avanzar Desde Aquí?</h2>
+  <h2>¿Cómo Avanzar Desde Aquí?</h2>
   <p>Una vez que tengas tus archivos inicializados, puedes:</p>
   <ul>
     <li>Instalar más dependencias según necesites.</li>
@@ -335,7 +1068,7 @@ def test_division():
     <li>Definir más scripts en <code>package.json</code> para automatizar tareas.</li>
   </ul>
   
-  <h2>🎉 Conclusión</h2>
+  
   <p>Entender el init y los archivos que genera es crucial para cualquier desarrollador que trabaje con Node.js y TypeScript. Ahora que conoces la estructura básica, ¡estás listo para empezar a desarrollar aplicaciones increíbles!</p>
   `,
   },
@@ -349,7 +1082,7 @@ def test_division():
     type: 'Tutorial',
     author: {
       name: 'Tu Nombre',
-      avatar: '/tu-avatar.webp',
+      avatar: '/profile.webp',
     },
     readingTime: '6 min',
     excerpt:
@@ -447,7 +1180,7 @@ def test_division():
     </section>
 
     <footer>
-      <h2>Conclusión</h2>
+      
       <p>Los ejercicios de lógica en JavaScript pueden ser desafiantes, pero con un enfoque estructurado y práctica, puedes dominarlos. Recuerda seguir los pasos y, sobre todo, ¡disfrutar del proceso de aprendizaje!</p>
     </footer>
   </article>
@@ -463,13 +1196,13 @@ def test_division():
     type: 'Tutorial',
     author: {
       name: 'Tu Nombre',
-      avatar: '/tu-avatar.webp',
+      avatar: '/profile.webp',
     },
     readingTime: '5 min',
     excerpt:
       'Descubre cómo iniciar tu proyecto en Node.js con TypeScript desde cero o utilizando plantillas. ¡Empieza a codificar hoy mismo!',
     content: `
-  <h2>🚀 ¿Por Qué Node.js y TypeScript?</h2>
+  <h2>¿Por Qué Node.js y TypeScript?</h2>
   <p>Node.js permite construir aplicaciones rápidas y escalables, mientras que TypeScript añade tipado estático y características avanzadas para mejorar la mantenibilidad.</p>
   
   <h2>🛠️ Opción 1: Iniciar Desde Cero</h2>
@@ -499,7 +1232,7 @@ console.log(greeting);</code></pre>
   <pre><code>npx tsc
 node dist/index.js</code></pre>
   
-  <h2>🌟 Opción 2: Usar Plantillas de Proyecto</h2>
+  <h2>Opción 2: Usar Plantillas de Proyecto</h2>
   <p>Para comenzar rápidamente, considera usar plantillas o generadores:</p>
   
   <h3>1. NestJS</h3>
@@ -516,7 +1249,7 @@ npm install</code></pre>
 cd mi-proyecto-vite
 npm install</code></pre>
   
-  <h2>🎉 Conclusión</h2>
+  
   <p>Ya sea que elijas iniciar desde cero o usar plantillas, ahora tienes varias maneras de comenzar tu proyecto en Node.js y TypeScript. ¡Elige la que más te guste y comienza a codificar!</p>
   `,
   },
@@ -833,7 +1566,7 @@ node index.mjs
 <h3>6. Cuidado con los términos de uso</h3>
 <p>Es importante tener en cuenta que algunas páginas web prohíben el scraping en sus términos de uso. Asegúrate de revisar las políticas de cada sitio web antes de realizar scraping masivo.</p>
 
-<h3>Conclusión</h3>
+<h3></h3>
 <p>Con este tutorial, has aprendido cómo hacer scraping de cualquier página web utilizando <strong>Node.js</strong> y <strong>Playwright</strong>, y cómo guardar los datos en un archivo JSON. Esto te permitirá obtener y analizar información de manera automatizada, abriendo las puertas a una gran cantidad de aplicaciones.</p>
 `,
   },
@@ -968,7 +1701,7 @@ node index.mjs
   <li><strong>Jira</strong>: Software de gestión ágil.</li>
 </ul>
 
-<h3>Conclusión</h3>
+<h3></h3>
 <p>El ecosistema del desarrollo web es amplio y diverso, y hay muchas herramientas y tecnologías disponibles para ayudar a los desarrolladores a crear aplicaciones efectivas. Esta guía es solo un punto de partida; te animamos a explorar cada una de estas tecnologías para encontrar las que mejor se adapten a tus proyectos y estilo de trabajo.</p>
 `,
   },
@@ -1048,7 +1781,7 @@ node index.mjs
       </ul>
       <p><strong>Cuándo usarlo:</strong> Para proyectos que buscan las ventajas del SSR y la simplicidad de Vue.</p>
   
-      <h2>Conclusión</h2>
+      
       <p>La elección de la tecnología adecuada depende de diversos factores como la complejidad del proyecto, la experiencia del equipo y las necesidades específicas del cliente. React y Angular son excelentes para proyectos grandes, mientras que Vue y Svelte pueden ser ideales para desarrollos más rápidos y simples. Next.js y Nuxt.js son opciones sobresalientes cuando se necesita optimizar el rendimiento y el SEO. Considera estos aspectos al tomar tu decisión para asegurar el éxito de tu proyecto.</p>
     `,
   },
