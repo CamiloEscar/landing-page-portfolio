@@ -14,8 +14,8 @@ const socialLinks = [
 const quickLinks = [
   { href: '/', label: 'Home' },
   { href: '/blog', label: 'Blog' },
-  { href: '/#about-me', label: 'About' },
-  { href: '/#contact', label: 'Contact' },
+  { href: 'https://docs.google.com/document/d/1CvRZx0hI_KiiFPk9ok56dn2o5snL49w4cCidnHRFnXs/edit?tab=t.0', label: 'CV' },
+  { href: '/links', label: 'Contact' },
 ];
 
 export default function FooterBlog() {
@@ -72,6 +72,7 @@ export default function FooterBlog() {
                 <li key={label}>
                   <Link
                     href={href}
+                    target='_blank'
                     className="text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center space-x-2"
                   >
                     <span className="h-1 w-1 rounded-full bg-primary"></span>

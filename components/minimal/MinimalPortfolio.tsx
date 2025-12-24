@@ -152,7 +152,7 @@ const ProfessionalMinimalPortfolio = () => {
   // };
 
   return (
-    <div className="container mx-auto px-2 py-4 max-w-[21cm] min-h-[29.7cm] bg-white dark:bg-gray-900 text-black dark:text-white print:text-black print:bg-white">
+    <div className="container mx-auto px-2 py-4 max-w-[21cm] min-h-[29.7cm] bg-amber-50 dark:bg-gray-900 text-black dark:text-white print:text-black print:bg-white">
       <section id="header" className="flex flex-col sm:flex-row items-start mb-4 border-b pb-3">
         <div className="relative w-24 h-24 mr-4 rounded-md overflow-hidden shadow-lg">
           <Image

@@ -15,7 +15,9 @@ const Footer = () => {
             </div>
             <nav className="flex flex-wrap justify-center md:justify-end gap-6 md:gap-8">
               <Link
-                href="#about-me"
+                href="https://docs.google.com/document/d/1CvRZx0hI_KiiFPk9ok56dn2o5snL49w4cCidnHRFnXs/edit?tab=t.0"
+                target='_blank'
+                rel="noopener noreferrer"
                 className="text-gray-600 hover:text-primary dark:text-gray-300 dark:hover:text-primary transition-colors duration-300"
               >
                 Sobre Mi

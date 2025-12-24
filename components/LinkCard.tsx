@@ -145,31 +145,36 @@ export default function Component() {
       >
         <Card className="overflow-hidden shadow-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg">
           <CardContent className="p-6">
-            <motion.div 
+            <motion.div
               className="relative w-full mb-6 overflow-hidden rounded-xl"
-              style={{ paddingTop: '75%' }}
+              style={{ aspectRatio: '4 / 5' }} // proporción vertical
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
               <Image
-                src="/logo.png"
-                alt="Profile"
-                width={400}
-                height={200}
-                layout="full"
-                objectFit="cover"
-                className="rounded-xl border-2 border-white dark:border-gray-700 shadow-md"
-              />
+  src="/profile.png"
+  alt="Profile"
+  fill
+  className="
+    rounded-xl
+    border-2 border-white dark:border-gray-700
+    shadow-md
+    object-cover object-top
+    scale-115
+    transition-transform duration-300
+  "
+/>
             </motion.div>
-            
+
             <GradientName size="small" className="text-center font-bold mb-2 text-2xl">
               Camilo Escar
             </GradientName>
-            
+
             <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-6 font-medium">
               {roles.join(' | ')}
             </p>
           </CardContent>
+
         </Card>
       </motion.div>
 

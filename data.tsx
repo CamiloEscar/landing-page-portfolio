@@ -125,7 +125,7 @@ export const dataIntroduction: Introduccion [] = [
     middle: ',',
     reactText: 'React',
     y: 'y ',
-    nextText: 'NextJs',
+    nextText: 'NodeJs',
     after: '.\n Mi enfoque está en además de la parte técnica, es que cada sitio mantenga el espíritu de cada empresa o proyecto que mis clientes llevan a cabo, ya que en la actualidad no sólo alcanza con estar en Internet, sinó de la manera en la que se lo representa.',
   },
   link: {
@@ -272,7 +272,7 @@ export const itemsNavbar = [
     id: 2,
     title: 'Sobre Mi',
     icon: <UserRound size={20} />,
-    link: '#about-me',
+    link: 'https://docs.google.com/document/d/1CvRZx0hI_KiiFPk9ok56dn2o5snL49w4cCidnHRFnXs/edit?tab=t.0',
   },
   {
     id: 3,

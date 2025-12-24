@@ -15,6 +15,2599 @@ export interface BlogPost {
 }
 
 export const dataBlog: BlogPost[] = [
+  //tpfinal-integrador
+{
+  slug: 'ecommerce-funko-pops-proyecto-final',
+  title: 'E-commerce de Funko Pops con Angular y Laravel: de la Entrevista al Deploy',
+  image: '/blog/ecommerce_funko.webp',
+  date: '2025-12-15',
+  tags: [
+    'Laravel',
+    'Angular',
+    'E-commerce',
+    'Full Stack',
+    'Proyecto Final',
+    'Arquitectura'
+  ],
+  type: 'Desarrollo de Software',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp'
+  },
+  readingTime: '12 min',
+  excerpt: 'Cómo diseñé y desarrollé un e-commerce real de Funko Pops con Angular y Laravel: entrevistas, arquitectura, base de datos, pagos, deploy y lecciones clave de ingeniería.',
+  content: `<h2>El inicio: "Solo es un carrito de compras, ¿no?"</h2>
+<p>
+Cuando me asignaron el proyecto final para obtener mi título de Analista de Sistemas, pensé que sería relativamente simple. Después de algunas entrevistas sobre mi experiencia, me propusieron desarrollar un e-commerce completo para venta de Funko Pops.
+</p>
+
+<p>
+"Seguro es un CRUD con carrito", pensé. Estaba equivocado.
+</p>
+
+<p>
+Este proyecto me enseñó que un e-commerce real no es solo "mostrar productos y cobrar". Implica gestión compleja de inventario, múltiples variaciones de productos, sistemas de descuentos, integración de pagos, manejo de sesiones, reportes y mucho más.
+</p>
+
+<p>
+En este artículo comparto todo el proceso: desde las entrevistas iniciales hasta el deploy, los desafíos que enfrenté y lo que aprendí en el camino.
+</p>
+
+<hr/>
+
+<h2>Fase 1: Las entrevistas que cambiaron todo</h2>
+<p>
+El proyecto comenzó con algo que me sorprendió: entrevistas simuladas con los "propietarios" del negocio. Aunque eran ficticias, debíamos tratarlas como reales para aprender a levantar requisitos correctamente.
+</p>
+
+<h3>Lo que descubrí en las entrevistas:</h3>
+<ul>
+  <li>No era "solo vender muñecos" - Necesitaban productos con múltiples variaciones (colores, tamaños, ediciones especiales) cada una con su propio precio y stock</li>
+  <li>Querían dos sistemas de descuentos diferentes: automáticos por fecha (como Black Friday) y cupones manuales que los clientes ingresan</li>
+  <li>Precios en dos monedas: ARS y USD, con el tipo de cambio guardado en cada venta</li>
+  <li>Categorías jerárquicas: 3 niveles de profundidad (Ej: Películas > Marvel > Avengers)</li>
+  <li>Sistema de reseñas: Pero solo podían opinar quienes compraron el producto</li>
+  <li>Panel administrativo robusto: Con reportes, filtros y exportación de datos</li>
+</ul>
+
+<p>
+Después de 3 sesiones de entrevistas, documenté 25 requisitos funcionales</strong> que organicé usando el método MoSCoW</strong> (Must Have, Should Have, Could Have, Won't Have).
+</p>
+
+<blockquote>
+<strong>Primera gran lección:</strong> Nunca subestimes la fase de requisitos. Los 3 días que invertí aquí me ahorraron semanas de retrabajos después. Es más fácil cambiar un documento que reescribir código.
+</blockquote>
+
+<hr/>
+
+<h2>Fase 2: Decisiones de arquitectura</h2>
+<p>
+Con los requisitos claros, tuve que decidir cómo construir el sistema.
+</p>
+
+<h3>Stack tecnológico elegido:</h3>
+<ul>
+  <li>Backend: Laravel (PHP) - Para crear la API REST</li>
+  <li>Frontend: Angular - Para la interfaz de usuario</li>
+  <li>Base de datos: MySQL</li>
+  <li>Pagos: Mercado Pago</li>
+  <li>Envíos: Correo Argentino</li>
+  <li>Autenticación: JWT (tokens de sesión)</li>
+</ul>
+
+<h3>¿Por qué estas tecnologías?</h3>
+<p>
+<strong>Laravel</strong> porque:
+</p>
+<ul>
+  <li>Tiene herramientas excelentes para manejar relaciones complejas entre datos (productos, categorías, variaciones)</li>
+  <li>Sistema de migraciones que facilita versionar la base de datos</li>
+  <li>Manejo sencillo de archivos para las imágenes de productos</li>
+  <li>Soporte nativo para "eliminación lógica" (marcar como eliminado sin borrar realmente)</li>
+</ul>
+<br/>
+<p>
+<strong>Angular</strong> porque:
+</p>
+<ul>
+  <li>Necesitaba una aplicación de página única (SPA) para mejor experiencia de usuario</li>
+  <li>TypeScript hace el código más predecible y mantenible</li>
+  <li>Sistema de rutas con protección (usuarios normales vs administradores)</li>
+  <li>Componentes reutilizables</li>
+</ul>
+
+<p>
+Separé frontend y backend completamente, esto me permitió desarrollar ambos en paralelo y, en el futuro, poder escalarlos de forma independiente.
+</p>
+
+<blockquote>
+<strong>Segunda lección:</strong> Elegir bien las tecnologías al inicio es crucial. Cambiarlas a mitad de proyecto es casi como empezar de cero.
+</blockquote>
+
+<hr/>
+
+<h2>Fase 3: El corazón del sistema - La base de datos</h2>
+<p>
+Aquí es donde las cosas se pusieron serias. Diseñé una base de datos con más de 25 tablas interrelacionadas.
+</p>
+
+<h3>Las tablas principales:</h3>
+<ul>
+  <li>Usuarios: Clientes y administradores con sus datos personales</li>
+  <li>Productos: Información base (nombre, descripción, precio, imágenes)</li>
+  <li>Variaciones de productos: Cada combinación (Ej: "Rojo-Grande") con su propio stock y precio</li>
+  <li>Categorías: Organizadas en árbol de 3 niveles</li>
+  <li>Marcas: Fabricantes de los productos</li>
+  <li>Descuentos: Campañas automáticas por fecha</li>
+  <li>Cupones: Códigos que los usuarios ingresan manualmente</li>
+  <li>Carrito: Persiste entre sesiones (no se pierde al cerrar el navegador)</li>
+  <li>Ventas: Registro histórico de todas las compras</li>
+  <li>Reseñas: Comentarios y calificaciones vinculadas a compras reales</li>
+</ul>
+
+<h3>Decisiones clave del diseño:</h3>
+<p>
+1. Eliminación lógica en todas las tablas - Nunca borrar datos físicamente, solo marcar como eliminados. Esto permite recuperar información y mantener historial completo.
+</p>
+
+<p>
+2. Variaciones anidadas - Un producto puede tener variaciones padre-hijo. Por ejemplo: Color Rojo (padre) → Tamaño pequeño, mediano, grande (hijos).
+</p>
+
+<p>
+3. Sistema flexible de descuentos - Un descuento puede aplicarse a productos específicos, marcas completas o categorías enteras. La prioridad es: Producto > Marca > Categoría.
+</p>
+
+<p>
+4. Doble moneda desde el inicio - Cada producto tiene precio en ARS y USD. Cada venta guarda el tipo de cambio del día para referencias futuras.
+</p>
+
+<blockquote>
+<strong>Tercera lección:</strong> Invertí 2 semanas solo diseñando la base de datos en papel antes de escribir una línea de código. Esto evitó tener que hacer migraciones complejas después. <strong>Un buen modelo de datos es el 60% del éxito del proyecto</strong>.
+</blockquote>
+
+<hr/>
+
+<h2>Fase 4: Desarrollo del Backend</h2>
+<p>
+Con la base de datos lista, empecé a construir la API que conectaría todo.
+</p>
+
+<h3>Los desafíos más interesantes:</h3>
+
+<p>
+<strong>1. Sistema de descuentos multicapa</strong>
+</p>
+<p>
+Este fue probablemente el aspecto más complejo. Tenía que:
+</p>
+<ul>
+  <li>Aplicar descuentos automáticos si había campañas activas en ese momento</li>
+  <li>Permitir que los usuarios ingresen cupones manualmente</li>
+  <li>Respetar una jerarquía clara (producto específico > marca > categoría)</li>
+  <li>Calcular correctamente tanto porcentajes como montos fijos</li>
+  <li>Permitir aplicar descuento automático Y cupón al mismo tiempo</li>
+</ul>
+<p>
+La lógica busca en orden: primero si hay descuento para ese producto específico, si no, busca para su marca, y si no, para su categoría. Se aplica el primero que encuentre válido.
+</p>
+
+<p>
+<strong>2. Carrito persistente</strong>
+</p>
+<p>
+El carrito se guarda en la base de datos, no en cookies o almacenamiento local. Esto significa que:
+</p>
+<ul>
+  <li>No se pierde si el usuario cierra el navegador</li>
+  <li>Funciona en cualquier dispositivo donde inicie sesión</li>
+  <li>Permite al administrador ver carritos abandonados para análisis</li>
+</ul>
+<br/>
+<p>
+<strong>3. Integración con Mercado Pago</strong>
+</p>
+<p>
+Esta fue una de las partes más complejas. El flujo funciona así:
+</p>
+<ul>
+  <li>Usuario confirma la compra</li>
+  <li>Se crea una "venta temporal" en mi sistema</li>
+  <li>Se redirige al usuario a Mercado Pago</li>
+  <li>Usuario paga (o no)</li>
+  <li>Mercado Pago me notifica el resultado mediante un "webhook"</li>
+  <li>Si el pago fue exitoso: creo la venta definitiva, actualizo el stock, vacío el carrito y envío email de confirmación</li>
+  <li>Si falló: elimino la venta temporal y el usuario puede intentar de nuevo</li>
+</ul>
+<br/>
+<p>
+<strong>4. Actualización automática de stock</strong>
+</p>
+<p>
+Cada vez que se confirma una venta, el sistema:
+</p>
+<ul>
+  <li>Reduce el stock de cada producto o variación vendida</li>
+  <li>Si algún producto se queda sin stock, automáticamente se oculta del catálogo</li>
+  <li>Los administradores reciben alertas de productos con stock bajo</li>
+</ul>
+
+<blockquote>
+<strong>Cuarta lección:</strong> Las integraciones con sistemas externos (pagos, envíos) siempre son más complejas de lo esperado. Siempre hay casos extremos: ¿qué pasa si el usuario cierra la ventana durante el pago? ¿Y si la conexión falla? Hay que contemplar todo.
+</blockquote>
+
+<hr/>
+
+<h2>Fase 5: Frontend y experiencia de usuario</h2>
+<p>
+Con el backend funcionando, me enfoqué en crear una interfaz intuitiva y atractiva.
+</p>
+
+<h3>Estructura del frontend:</h3>
+<p>
+Organicé la aplicación en 3 áreas principales:
+</p>
+<ul>
+  <li>Zona pública: Catálogo, detalle de productos, búsqueda (accesible para todos)</li>
+  <li>Zona de usuario: Login, carrito, checkout, historial de compras</li>
+  <li>Panel admin: Dashboard, gestión de productos, ventas, descuentos, reportes</li>
+</ul>
+
+<h3>Funcionalidades destacadas:</h3>
+
+<p>
+<strong>Sistema de búsqueda y filtros combinables:</strong>
+</p>
+<ul>
+  <li>Por texto (busca en título y descripción)</li>
+  <li>Por categorías (los 3 niveles)</li>
+  <li>Por marca</li>
+  <li>Por rango de precios</li>
+  <li>Por colores disponibles</li>
+  <li>Solo productos con reseñas</li>
+</ul>
+<p>
+Todos los filtros se pueden combinar libremente y funcionan en tiempo real.
+</p>
+
+<p>
+<strong>Carrito inteligente:</strong>
+</p>
+<ul>
+  <li>Muestra el precio unitario, subtotal por producto y total general</li>
+  <li>Calcula descuentos automáticos en tiempo real</li>
+  <li>Permite aplicar cupones con validación inmediata</li>
+  <li>Muestra el ahorro total logrado</li>
+  <li>Si no hay stock suficiente, avisa al momento</li>
+</ul>
+<br/>
+<p>
+<strong>Protección de rutas:</strong>
+</p>
+<ul>
+  <li>Las rutas de usuario requieren estar logueado</li>
+  <li>Las rutas de admin verifican que el usuario sea administrador (type_user = 2)</li>
+  <li>Si intentas acceder sin permisos, te redirige al login o al home</li>
+</ul>
+
+<blockquote>
+<strong>Quinta lección:</strong> La experiencia de usuario es tan importante como la funcionalidad. Un sistema robusto con una interfaz confusa fracasará igual.
+</blockquote>
+
+<hr/>
+
+<h2>Fase 6: Panel administrativo</h2>
+<p>
+El panel admin fue crucial para que los "dueños del negocio" pudieran gestionar todo sin ayuda técnica.
+</p>
+
+<h3>Lo que pueden hacer los administradores:</h3>
+<ul>
+  <li>Dashboard con métricas en tiempo real: Ventas del mes, productos más vendidos, stock bajo, gráficos de tendencias</li>
+  <li>Gestión completa de productos: Crear, editar, eliminar, subir múltiples imágenes, definir variaciones</li>
+  <li>Sistema de categorías visual: Árbol interactivo de 3 niveles</li>
+  <li>Creación de campañas de descuentos: Con fechas de inicio/fin, aplicación selectiva</li>
+  <li>Generación de cupones: Con límites de uso y códigos personalizables</li>
+  <li>Historial de ventas con filtros avanzados: Por fecha, cliente, marca, categoría, método de pago</li>
+  <li>Reportes exportables: Excel y PDF con toda la información de ventas</li>
+</ul>
+
+<p>
+Los reportes incluyen: datos del cliente, productos comprados, cantidades, precios, descuentos aplicados y dirección de envío completa.
+</p>
+
+<hr/>
+
+<h2>Fase 7: Testing y ajustes finales</h2>
+<p>
+Antes del deploy, dediqué tiempo a probar todo exhaustivamente.
+</p>
+
+<h3>Lo que probé:</h3>
+<ul>
+  <li>Flujo completo de compra: Desde agregar al carrito hasta recibir el email de confirmación</li>
+  <li>Casos extremos de stock: ¿Qué pasa si dos personas intentan comprar el último producto al mismo tiempo?</li>
+  <li>Descuentos combinados: Verificar que se calculen correctamente en todas las combinaciones posibles</li>
+  <li>Formularios con datos inválidos: Mails mal formados, contraseñas débiles, campos vacíos</li>
+  <li>Pagos fallidos: Que el sistema maneje correctamente cuando alguien cancela el pago</li>
+  <li>Responsividad: Que funcione bien en móviles, tablets y desktop</li>
+</ul>
+
+<p>
+Encontré y corregí varios bugs que no había anticipado, especialmente en la lógica de descuentos con productos que tenían variaciones.
+</p>
+
+<hr/>
+
+<h2>Fase 8: Deploy y producción</h2>
+<p>
+Finalmente llegó el momento de poner todo en producción.
+</p>
+
+<h3>Configuraciones importantes:</h3>
+<ul>
+  <li>Variables de entorno separadas para desarrollo y producción</li>
+  <li>Certificado SSL para conexiones seguras (HTTPS)</li>
+  <li>Configuración de CORS para que el frontend pudiera comunicarse con el backend</li>
+  <li>Optimización de imágenes automática</li>
+  <li>Caché de consultas frecuentes</li>
+  <li>Logs de errores para debugging</li>
+</ul>
+
+
+<h2>Resultados y lecciones finales</h2>
+
+<ul>
+  <li>Arquitectura escalable - Separar frontend y backend fue la mejor decisión</li>
+  <li>Base de datos bien diseñada - No tuve que hacer migraciones complejas después</li>
+  <li>Sistema de descuentos flexible - Puede adaptarse a cualquier estrategia de ventas</li>
+  <li>Panel admin intuitivo - Los "clientes" pudieron usarlo sin capacitación</li>
+  <li>Integración de pagos robusta - Maneja correctamente casos extremos</li>
+</ul>
+
+<h3>Lo que mejoraría:</h3>
+<ul>
+  <li>Testing automatizado desde el inicio - Hice todo manualmente y llevó mucho tiempo</li>
+  <li>Documentación más detallada - A mitad de proyecto olvidaba por qué tomé ciertas decisiones</li>
+  <li>Implementar caché antes - Algunas consultas eran lentas hasta que agregué caché</li>
+  <li>Sistema de notificaciones - Quedó fuera del alcance pero hubiera sido útil</li>
+</ul>
+
+<h3>Las grandes lecciones:</h3>
+
+<p>
+<strong>1. La planificación vale oro</strong><br>
+Los 3 días de entrevistas y 2 semanas de diseño de BD me ahorraron meses de retrabajos.
+</p>
+
+<p>
+<strong>2. Los requisitos cambiarán (y está bien)</strong><br>
+Aprendí a ser flexible y a priorizar. No todo tiene que estar en la primera versión.
+</p>
+
+<p>
+<strong>3. Las integraciones son complejas</strong><br>
+Mercado Pago, Correo Argentino, emails... cada integración tiene sus particularidades y casos extremos.
+</p>
+
+<p>
+<strong>4. La experiencia de usuario importa tanto como la funcionalidad</strong><br>
+Un sistema técnicamente perfecto pero difícil de usar es un fracaso.
+</p>
+
+<p>
+<strong>5. Documentar las decisiones es crucial</strong><br>
+A los 2 meses no recordaba por qué había elegido ciertas soluciones. Documentar me salvó varias veces.
+</p>
+
+<hr/>
+<br/>
+<p>
+Este proyecto me enseñó más que todos los cursos que tomé. Enfrentarme a problemas reales, tomar decisiones de arquitectura y ver cómo todas las piezas se conectan fue invaluable.
+</p>
+
+<p>
+Si tuviera que dar un consejo a alguien que está por empezar un proyecto similar:
+</p>
+
+<p>
+<strong>Invierte tiempo en planificar y diseñar antes de escribir código</strong>. Es tentador empezar a programar de inmediato, pero cada hora invertida en planificación te ahorra días de retrabajos.
+</p>
+
+<p>
+El e-commerce funciona, es escalable y está listo para crecer. Pero más importante que eso: aprendí a pensar como un ingeniero de software, no solo como un programador.
+</p>
+
+<p>
+Y eso, para mí, fue el verdadero logro de este proyecto final.
+</p>`
+},
+  //crossfading
+{
+  slug: 'aprendiendo-programacion-paralela-cross-fading',
+  title: 'Mi Experiencia Aprendiendo Programación Paralela',
+  image: '/blog/parallel_computing.jpg',
+  date: '2025-11-27',
+  tags: [
+    'C++',
+    'Programación Paralela',
+    'MPI',
+    'OpenMP',
+    'High Performance Computing',
+    'Aprendizaje',
+  ],
+  type: 'Experiencia',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '12 min',
+  excerpt:
+    'Cómo aprendí programación paralela implementando un algoritmo de cross-fading de imágenes. Desde compilar MPI en Windows hasta entender por qué los speedups no siempre son lo que esperamos.',
+  content: `
+<h2>El desafío: procesar imágenes más rápido</h2>
+<p>
+Todo empezó con un trabajo práctico de Computación Avanzada en la UADER:
+crear un video de cross-fading (transición suave entre una imagen a color y su versión en blanco y negro).
+</p>
+
+<p>
+Sonaba simple hasta que vi los números:
+</p>
+
+<ul>
+  <li>96 frames a generar (4 segundos de video @ 24 fps)</li>
+  <li>Imagen de 5000×5000 píxeles (25 millones de píxeles)</li>
+  <li>Tiempo de procesamiento: ¡más de 10 minutos!</li>
+</ul>
+
+<p>
+La consigna era clara: implementar tres versiones (secuencial, MPI y OpenMP)
+y comparar sus desempeños. Pero nadie me había advertido sobre
+lo complicado que sería configurar todo en Windows.
+</p>
+
+<hr/>
+
+<h2>Primer obstáculo: compilar en Windows</h2>
+<p>
+La mayoría de tutoriales de MPI y OpenMP asumen que estás en Linux.
+Yo estaba en Windows 11 con Visual Studio 2022.
+</p>
+
+<h3>El calvario de MPI en Windows</h3>
+<p>
+Primero intenté con MinGW, después con Cygwin, finalmente con MS-MPI.
+Cada uno tenía sus problemas:
+</p>
+
+<ul>
+  <li>MinGW: No encontraba las librerías de MPI</li>
+  <li>Cygwin: Problemas con las rutas de Windows</li>
+  <li>MS-MPI: Finalmente funcionó, pero necesité configurar paths manualmente</li>
+</ul>
+
+<pre><code>
+// Compilar MPI en Windows (después de muchos intentos)
+cl /O2 /EHsc /I"C:\\Program Files (x86)\\Microsoft SDKs\\MPI\\Include" ^
+   crossfading_mpi.cpp /link msmpi.lib
+
+// Ejecutar (y aprender que NO se usa mpiexec con el benchmark)
+mpiexec -n 4 crossfading_mpi.exe imagen.png
+</code></pre>
+
+<p>
+<strong>Lección 1:</strong> En Windows, usa MS-MPI. Te ahorrarás días de frustración.
+</p>
+
+<hr/>
+
+<h2>Implementando la versión secuencial</h2>
+<p>
+Antes de paralelizar, necesitaba una versión que funcionara.
+El algoritmo era conceptualmente simple:
+</p>
+
+<h3>Paso 1: Convertir a escala de grises</h3>
+<pre><code>
+void convertToGrayscale() {
+    for (int i = 0; i < totalPixels; i++) {
+        int idx = i * 3;
+        unsigned char gray = (unsigned char)(
+            0.299 * colorImage[idx] +      // Rojo
+            0.587 * colorImage[idx + 1] +  // Verde
+            0.114 * colorImage[idx + 2]    // Azul
+        );
+        grayImage[idx] = grayImage[idx + 1] = grayImage[idx + 2] = gray;
+    }
+}
+</code></pre>
+
+<h3>Paso 2: Aplicar cross-fading</h3>
+<pre><code>
+void generateFrame(float P, int frameNum) {
+    for (int i = 0; i < totalPixels; i++) {
+        int idx = i * 3;
+        result[idx] = colorImage[idx] * P + grayImage[idx] * (1.0f - P);
+        result[idx+1] = colorImage[idx+1] * P + grayImage[idx+1] * (1.0f - P);
+        result[idx+2] = colorImage[idx+2] * P + grayImage[idx+2] * (1.0f - P);
+    }
+    
+    char filename[50];
+    sprintf(filename, "frame_%04d.png", frameNum);
+    stbi_write_png(filename, width, height, 3, result.data(), width * 3);
+}
+</code></pre>
+
+<p>
+Simple, ¿verdad? Lo ejecuté con una imagen de 800×800 y tardó <strong>15.8 segundos</strong>.
+Con 5000×5000 tardó <strong>10.5 minutos</strong>. Era hora de paralelizar.
+</p>
+
+<hr/>
+
+<h2>Primera experiencia con MPI</h2>
+<p>
+MPI fue mi primer contacto con programación paralela "de verdad".
+El concepto de <strong>memoria distribuida</strong> me costó entender al principio.
+</p>
+
+<h3>La estrategia: divide y venceras</h3>
+<pre><code>
+// Cada proceso calcula qué píxeles le tocan
+int pixelsPerProc = totalPixels / size;
+int startIdx = rank * pixelsPerProc;
+int endIdx = (rank == size - 1) ? totalPixels : startIdx + pixelsPerProc;
+
+// Cada proceso trabaja en su porción
+for (int i = startIdx; i < endIdx; i++) {
+    localResult[i] = /* cálculo de cross-fading */;
+}
+
+// Reunir todos los resultados
+MPI_Allgatherv(localData, localSize, MPI_UNSIGNED_CHAR,
+               globalData, recvCounts, displs, 
+               MPI_UNSIGNED_CHAR, MPI_COMM_WORLD);
+</code></pre>
+
+<h3>El error que me costó horas</h3>
+<p>
+Mi primer intento fue así:
+</p>
+
+<pre><code>
+// ❌ ERROR: Intenté ejecutar el benchmark con mpiexec
+C:\\proyecto> mpiexec -n 4 benchmark.exe test.png
+
+// Resultado: 4 benchmarks corriendo simultáneamente, cada uno
+// intentando ejecutar sus propias pruebas de MPI. Caos 
+</code></pre>
+
+<p>
+<strong>La solución:</strong> El benchmark llama a mpiexec internamente.
+Ejecutarlo directamente:
+</p>
+
+<pre><code>
+// ✅ CORRECTO
+C:\\proyecto> benchmark.exe test.png 3
+</code></pre>
+
+<hr/>
+
+<h2>OpenMP: más simple pero sorprendente</h2>
+<p>
+Después de sufrir con MPI, OpenMP parecía trivial:
+</p>
+
+<pre><code>
+#pragma omp parallel for schedule(static)
+for (int i = 0; i < totalPixels; i++) {
+    result[i] = colorImage[i] * P + grayImage[i] * (1.0f - P);
+}
+</code></pre>
+
+<p>
+Dos líneas y ya está paralelizado. Compilé, ejecuté y...
+¡los resultados fueron peores que MPI!
+</p>
+
+<h3>¿Por qué OpenMP no ganó?</h3>
+<p>
+Esperaba que OpenMP fuera más rápido (memoria compartida = menos overhead).
+Pero los números decían otra cosa:
+</p>
+
+<table>
+  <tr>
+    <th>Versión</th>
+    <th>Tiempo</th>
+    <th>Speedup</th>
+  </tr>
+  <tr>
+    <td>Secuencial</td>
+    <td>627.7 s</td>
+    <td>1.0x</td>
+  </tr>
+  <tr>
+    <td>MPI (8 proc)</td>
+    <td>474.1 s</td>
+    <td>1.32x</td>
+  </tr>
+  <tr>
+    <td>OpenMP (16 threads)</td>
+    <td>486.7 s</td>
+    <td>1.29x</td>
+  </tr>
+</table>
+
+<p>
+Después de investigar, encontré las posibles causas:
+</p>
+
+<ul>
+  <li>OpenMP crea/destruye threads en cada frame (96 veces)</li>
+  <li>Posible "false sharing" (threads compitiendo por caché)</li>
+  <li>Contención en la escritura de archivos</li>
+  <li>Tal vez compilé OpenMP en Debug y MPI en Release (nunca lo confirmé)</li>
+</ul>
+
+<hr/>
+
+<h2>El benchmark: automatizando las pruebas</h2>
+<p>
+No quería ejecutar manualmente 36 configuraciones (3 tamaños × 12 configs).
+Así que hice un benchmark automático:
+</p>
+
+<pre><code>
+class Benchmark {
+    void runSequential(string imageFile);
+    void runMPI(string imageFile, vector<int> configs);
+    void runOpenMP(string imageFile, vector<int> configs);
+    
+    void printResults();
+    void saveToCSV(string filename);
+    void generateReport(string filename);
+};
+
+// Uso
+Benchmark bench("5000x5000", 3); // 3 corridas por config
+bench.runSequential("test.png");
+bench.runMPI("test.png", {2, 4, 8});
+bench.runOpenMP("test.png", {2, 4, 8, 16});
+bench.generateReport("report_5000x5000.txt");
+</code></pre>
+
+<p>
+El benchmark generaba CSV y reportes de texto automáticamente.
+<strong>Me ahorró horas de trabajo manual</strong>.
+</p>
+
+<hr/>
+
+<h2>La revelación: el I/O es el cuello de botella</h2>
+<p>
+Los speedups me decepcionaron al principio. Solo 1.32x con 8 procesos.
+¿Por qué tan bajo?
+</p>
+
+<p>
+Entonces hice las cuentas:
+</p>
+
+<pre><code>
+Tiempo total (5000×5000): 627 segundos
+
+Desglose estimado:
+- Convertir a gris:    10 s  (2%)
+- Calcular frames:     50 s  (8%)
+- **Guardar 96 PNG:   350 s  (56%)** ← ¡Aquí está el problema!
+- Comunicación MPI:    30 s  (5%)
+- Overhead:           187 s  (29%)
+</code></pre>
+
+<p>
+El 56% del tiempo es I/O secuencial que no se puede paralelizar.
+</p>
+
+<p>
+Apliqué la Ley de Amdahl:
+</p>
+
+<pre><code>
+Speedup máximo = 1 / (s + (1-s)/p)
+                = 1 / (0.56 + 0.44/8)
+                = 1.63x
+
+Speedup real: 1.32x
+Eficiencia: 1.32/1.63 = 81% del máximo teórico
+</code></pre>
+
+<p>
+Conclusión: Los resultados no eran malos,
+¡estaba alcanzando el 81% del límite teórico posible!
+</p>
+
+<hr/>
+
+<h2>Resultados finales y lecciones</h2>
+
+<h3>Tabla resumen (imagen 5000×5000)</h3>
+<table>
+  <tr>
+    <th>Configuración</th>
+    <th>Tiempo</th>
+    <th>Speedup</th>
+    <th>Eficiencia</th>
+  </tr>
+  <tr>
+    <td>Secuencial</td>
+    <td>627.7 s</td>
+    <td>1.00x</td>
+    <td>100%</td>
+  </tr>
+  <tr>
+    <td>MPI 2 proc</td>
+    <td>514.1 s</td>
+    <td>1.22x</td>
+    <td>61%</td>
+  </tr>
+  <tr>
+    <td>MPI 4 proc</td>
+    <td>485.9 s</td>
+    <td>1.29x</td>
+    <td>32%</td>
+  </tr>
+  <tr>
+    <td><strong>MPI 8 proc</strong></td>
+    <td><strong>474.1 s</strong></td>
+    <td><strong>1.32x</strong></td>
+    <td><strong>16%</strong></td>
+  </tr>
+  <tr>
+    <td>OpenMP 8 threads</td>
+    <td>487.4 s</td>
+    <td>1.29x</td>
+    <td>16%</td>
+  </tr>
+  <tr>
+    <td>OpenMP 16 threads</td>
+    <td>486.7 s</td>
+    <td>1.29x</td>
+    <td>8%</td>
+  </tr>
+</table>
+
+<h3>Lo que aprendí</h3>
+
+<h4>Sobre programación paralela:</h4>
+<ul>
+  <li><strong>Ley de Amdahl es real:</strong> Si el 56% es secuencial, nunca pasarás de 1.63x</li>
+  <li><strong>Identificar el cuello de botella:</strong> En mi caso era el I/O, no el cómputo</li>
+  <li><strong>Más unidades ≠ más rápido:</strong> Hay un punto de saturación</li>
+  <li><strong>Memoria compartida no siempre gana:</strong> OpenMP tiene overhead oculto</li>
+</ul>
+
+<h4>Sobre la implementación:</h4>
+<ul>
+  <li><strong>Empezar simple:</strong> Versión secuencial primero, paralelizar después</li>
+  <li><strong>Medir todo:</strong> Sin datos, solo tienes intuiciones (y a veces fallan)</li>
+  <li><strong>Automatizar:</strong> El benchmark me ahorró días de trabajo manual</li>
+  <li><strong>Leer los errores:</strong> MS-MPI da mensajes crípticos pero útiles</li>
+</ul>
+
+<h4>Sobre Windows y C++:</h4>
+<ul>
+  <li><strong>MS-MPI funciona:</strong> Después de configurarlo correctamente</li>
+  <li><strong>Visual Studio es tu amigo:</strong> Debugger de MPI multiprocess es útil</li>
+  <li><strong>Paths relativos son un infierno:</strong> Usa paths absolutos en Windows</li>
+  <li><strong>NUL vs /dev/null:</strong> Pequeñas diferencias que importan</li>
+</ul>
+
+<hr/>
+
+<h2>Cómo mejorar los resultados</h2>
+<p>
+Si tuviera que rehacer el proyecto, haría esto:
+</p>
+
+<h3>1. Paralelizar el I/O (ganancia esperada: +200%)</h3>
+<pre><code>
+// En lugar de:
+for (frame : frames) {
+    calculate(frame);
+    save(frame);  // Secuencial ❌
+}
+
+// Hacer:
+#pragma omp parallel sections
+{
+    #pragma omp section
+    { calculatePipeline(); }
+    
+    #pragma omp section
+    { savePipeline(); }  // Concurrente ✅
+}
+</code></pre>
+
+<h3>2. Buffering en memoria (ganancia: +100%)</h3>
+<pre><code>
+// Generar todo en RAM primero
+vector<ImageData> allFrames(96);
+
+#pragma omp parallel for
+for (int i = 0; i < 96; i++) {
+    allFrames[i] = computeFrame(i);
+}
+
+// Guardar después (o en paralelo)
+</code></pre>
+
+<h3>3. SIMD vectorization (ganancia: +100-200%)</h3>
+<pre><code>
+// Procesar 8 píxeles simultáneamente con AVX
+#include <immintrin.h>
+
+__m256 r = _mm256_loadu_ps(&red[i]);
+__m256 g = _mm256_loadu_ps(&green[i]);
+__m256 b = _mm256_loadu_ps(&blue[i]);
+
+__m256 gray = _mm256_fmadd_ps(r, coef_r,
+              _mm256_fmadd_ps(g, coef_g,
+              _mm256_mul_ps(b, coef_b)));
+</code></pre>
+
+<hr/>
+
+<h2>Consejos para quien empieza</h2>
+
+<h3>Si vas a hacer un proyecto similar:</h3>
+<ol>
+  <li><strong>Usa Linux si puedes:</strong> MPI/OpenMP son más fáciles de configurar</li>
+  <li><strong>Si estás en Windows:</strong> MS-MPI + Visual Studio funcionan bien juntos</li>
+  <li><strong>Mide desde el día 1:</strong> No asumas nada sobre performance</li>
+  <li><strong>Automatiza los tests:</strong> Ejecutar 36 configuraciones a mano es un infierno</li>
+  <li><strong>Entiende tu algoritmo:</strong> ¿Es compute-bound o I/O-bound?</li>
+  <li><strong>Lee sobre Ley de Amdahl:</strong> Explica por qué tus speedups no son lineales</li>
+  <li><strong>Empieza con imágenes pequeñas:</strong> Debuggear con 800×800 es más rápido</li>
+  <li><strong>Valida la corrección primero:</strong> Performance sin corrección no sirve</li>
+</ol>
+
+<h3>Recursos que me ayudaron:</h3>
+<ul>
+  <li><strong>Libro:</strong> "Introduction to Parallel Programming" de Pacheco</li>
+  <li><strong>Documentación:</strong> OpenMP.org tiene excelentes tutoriales</li>
+  <li><strong>Tutorial:</strong> MS-MPI Getting Started Guide</li>
+</ul>
+
+<hr/>
+
+<h2>Reflexión final</h2>
+<p>
+Este proyecto me enseñó que programación paralela no es magia.
+No todo se acelera linealmente, y a veces la versión simple es suficiente.
+</p>
+
+<p>
+Los speedups de 1.3x pueden parecer decepcionantes,
+pero cuando entiendes que el 56% del código no se puede paralelizar,
+te das cuenta de que alcanzar el 81% del máximo teórico es un éxito.
+</p>
+
+<p>
+Lo más valioso no fueron los speedups, sino entender por qué
+los números salieron así. Aprendí sobre cuellos de botella, overhead,
+Ley de Amdahl, y la diferencia entre teoría y práctica.
+</p>
+
+<p>
+Si estás pensando en aprender programación paralela:
+hazlo con un proyecto real.
+Los tutoriales están bien, pero nada te enseña más que
+pelear con compiladores, debuggear deadlocks,
+y ver tus speedups ser peores de lo esperado.
+</p>
+
+<p>
+¡Espero que mi experiencia te ayude en tu propio viaje con HPC! 
+</p>
+`,
+},
+//n8n
+{
+  slug: 'automatizacion-con-n8n-metodologia-investigacion',
+  title: 'Un Enfoque Metodológico desde la Investigación',
+  image: '/blog/n8n_automatizacion.jpg',
+  date: '2025-11-24',
+  tags: [
+    'n8n',
+    'Automatización',
+    'Metodología de la Investigación',
+    'PESTEL',
+    'Canva',
+    'Procesos'
+  ],
+  type: 'Metodología de la Investigación',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp'
+  },
+  readingTime: '11 min',
+  excerpt: 'Cómo abordamos la automatización de un sistema real utilizando n8n desde una perspectiva metodológica: análisis del problema, diseño de la solución, integración de herramientas y aprendizajes aplicables al desarrollo de software.',
+  content: `
+<h2>Introducción: la automatización como objeto de estudio, no como punto de partida</h2>
+
+<p>
+En la materia <strong>Metodología de la Investigación</strong>, el objetivo principal no fue aprender una herramienta específica, sino <strong>incorporar una forma estructurada de abordar problemas reales</strong>, formularlos correctamente y construir una solución con fundamento teórico, análisis previo y validación práctica.
+</p>
+
+<p>
+En ese contexto, la automatización de procesos se presentó como un <strong>campo de aplicación</strong> ideal para poner en práctica el enfoque metodológico. La elección de <strong>n8n</strong> no fue el punto de partida del proyecto, sino una consecuencia lógica del análisis previo: una herramienta adecuada para materializar una hipótesis investigable sobre mejora de procesos.
+</p>
+
+<p>
+Este trabajo no buscó responder “cómo usar n8n”, sino algo más profundo: <em>cómo abordar un proyecto tecnológico desde una lógica investigativa, justificando cada decisión técnica en función de un problema concreto</em>.
+</p>
+
+<hr/>
+
+<h2>Planteo del problema y formulación del proyecto</h2>
+
+<p>
+El proyecto surge a partir de una observación recurrente en entornos reales: la gestión manual de turnos en canchas deportivas suele generar errores, superposiciones, falta de trazabilidad y una alta dependencia de la intervención humana.
+</p>
+
+<p>
+Desde la metodología, esta observación se transformó en un problema investigable. No se trató simplemente de “automatizar por automatizar”, sino de analizar:
+</p>
+
+<ul>
+  <li>Qué procesos eran ineficientes</li>
+  <li>Dónde se producían los errores</li>
+  <li>Qué actores intervenían</li>
+  <li>Qué información circulaba y cómo</li>
+</ul>
+
+<p>
+A partir de ese análisis, se formuló una pregunta central orientadora del proyecto, que permitió delimitar el alcance y evitar soluciones sobredimensionadas o poco justificadas.
+</p>
+
+<hr/>
+
+<h2>El enfoque metodológico aplicado al desarrollo</h2>
+
+<p>
+Uno de los aprendizajes más importantes de la materia fue entender que <strong>un proyecto tecnológico no comienza escribiendo código</strong>. Comienza con investigación, relevamiento y modelado conceptual.
+</p>
+
+<p>
+Antes de definir cualquier herramienta, se trabajó sobre:
+</p>
+
+<ul>
+  <li>Identificación del contexto y de los actores involucrados</li>
+  <li>Definición de objetivos generales y específicos</li>
+  <li>Delimitación clara del alcance del sistema</li>
+  <li>Análisis de alternativas posibles</li>
+</ul>
+
+<p>
+Este proceso permitió justificar por qué una solución basada en automatización era más adecuada que otras opciones tradicionales, como un sistema completamente manual o un desarrollo a medida desde cero.
+</p>
+
+<hr/>
+
+<h2>La herramienta como medio: el rol de n8n</h2>
+
+<p>
+Recién en una etapa posterior aparece <strong>n8n</strong> como herramienta de implementación. Su elección se fundamentó en su capacidad para representar procesos de manera explícita y trazable, algo clave desde una perspectiva metodológica.
+</p>
+
+<p>
+Cada flujo automatizado funciona como un modelo del proceso real: se identifican eventos, decisiones, transformaciones de datos y resultados. Esta representación permitió analizar el sistema no solo desde lo técnico, sino también desde lo conceptual.
+</p>
+
+<p>
+Trabajar con n8n reforzó una idea central: <strong>la automatización es, en esencia, diseño de procesos</strong>. La herramienta solo materializa decisiones que previamente fueron pensadas, evaluadas y documentadas.
+</p>
+
+<hr/>
+
+<h2>De la investigación al diseño del sistema</h2>
+
+<p>
+El diseño del flujo automatizado fue el resultado directo del análisis previo. Cada paso del proceso responde a una necesidad detectada durante la etapa de investigación:
+</p>
+
+<ul>
+  <li>Recepción estructurada de solicitudes</li>
+  <li>Interpretación y validación de datos ingresados</li>
+  <li>Persistencia de la información</li>
+  <li>Generación de confirmaciones y notificaciones</li>
+</ul>
+
+<p>
+Más allá de la tecnología utilizada, el valor estuvo en comprender cómo <strong>traducir un problema del mundo real en un sistema formalizado</strong>, algo directamente aplicable al desarrollo de software en cualquier lenguaje o framework.
+</p>
+
+<hr/>
+
+<h2>Relación con el pensamiento computacional y la programación</h2>
+
+<p>
+Desde mi formación como programador, este trabajo aportó una perspectiva complementaria. Me permitió reforzar la idea de que programar no es solo implementar soluciones, sino <strong>entender profundamente el problema que se está resolviendo</strong>.
+</p>
+
+<p>
+El enfoque metodológico aplicado en este proyecto se traduce directamente en buenas prácticas de desarrollo:
+</p>
+
+<ul>
+  <li>Definir claramente entradas y salidas de un sistema</li>
+  <li>Separar responsabilidades dentro de un proceso</li>
+  <li>Anticipar errores y casos excepcionales</li>
+  <li>Documentar decisiones técnicas</li>
+</ul>
+
+<p>
+Incluso trabajando con una herramienta low-code, el criterio técnico y el razonamiento lógico fueron fundamentales. Esto reafirmó que <strong>las herramientas no reemplazan al pensamiento ingenieril</strong>.
+</p>
+
+<hr/>
+
+<h2>Conclusiones y aprendizajes</h2>
+
+<p>
+Este proyecto permitió integrar investigación, análisis y tecnología en un mismo proceso. Más allá del resultado funcional, el mayor valor estuvo en el camino recorrido: aprender a abordar un proyecto desde una lógica metodológica, justificando cada decisión.
+</p>
+
+<p>
+La automatización fue el objeto de estudio, n8n fue el medio, pero el verdadero eje del trabajo fue <strong>la forma de pensar el problema</strong>. Esta experiencia fortaleció mi enfoque como desarrollador, ayudándome a encarar proyectos con una visión más estructurada, crítica y fundamentada.
+</p>
+
+<p>
+Entender que la tecnología debe responder a una investigación previa, y no al revés, fue una de las lecciones más importantes que me dejó esta materia.
+</p>
+
+`
+},
+  // database bbdd
+  {
+  slug: 'diseno-base-datos-sistema-centros-salud',
+  title: 'Diseño de Base de Datos para un Sistema de Centros de Salud Municipal',
+  image: '/blog/database_health_system.png',
+  date: '2025-11-23',
+  tags: [
+    'PostgreSQL',
+    'Database Design',
+    'Healthcare',
+    'Backend',
+    'SQL',
+  ],
+  type: 'Base de Datos',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '15 min',
+  excerpt:
+    'Cómo diseñé e implementé una base de datos completa para gestionar centros de salud municipales: desde el modelado hasta triggers, procedimientos almacenados y consultas optimizadas.',
+  content: `
+<h2>Introducción: El desafío de digitalizar la salud pública</h2>
+<p>
+Cuando me enfrenté al desafío de diseñar un sistema de gestión para centros de salud municipales,
+me di cuenta de que no era un CRUD simple.
+Tenía que manejar pacientes, médicos, historias clínicas, internaciones, obras sociales
+y todo con integridad referencial, auditoría y consultas complejas.
+</p>
+
+<p>
+Este proyecto me enseñó que el diseño de bases de datos no es solo crear tablas,
+sino modelar la realidad del negocio de forma eficiente y escalable.
+En este artículo comparto cómo abordé el problema, qué decisiones tomé
+y las mejores prácticas que apliqué.
+</p>
+
+<hr/>
+
+<h2>El problema: requisitos complejos del sistema</h2>
+<p>
+Los requisitos del sistema eran claros pero desafiantes:
+</p>
+
+<ul>
+  <li>Múltiples centros de salud organizados por zonas y barrios</li>
+  <li>Médicos con múltiples especialidades trabajando en varios centros</li>
+  <li>Pacientes con historias clínicas detalladas</li>
+  <li>Internaciones con gestión de camas</li>
+  <li>Integración con obras sociales</li>
+  <li>Auditoría de todas las operaciones críticas</li>
+  <li>Consultas complejas para reportes y estadísticas</li>
+</ul>
+
+<p>
+Un mal diseño aquí significaría: datos inconsistentes, consultas lentas
+y pesadillas de mantenimiento.
+</p>
+
+<hr/>
+
+<h2>Fase 1: Modelado conceptual y normalización</h2>
+<p>
+Lo primero fue identificar las entidades principales
+y sus relaciones:
+</p>
+
+<ul>
+  <li><strong>Zona → Barrio → Centro de Salud</strong> (relación jerárquica)</li>
+  <li><strong>Médico ↔ Especialidad</strong> (relación N:N)</li>
+  <li><strong>Paciente → Historia Clínica → Médico/Centro</strong></li>
+  <li><strong>Internación → Cama → Centro de Salud</strong></li>
+  <li><strong>Paciente → Obra Social</strong> (relación N:1)</li>
+</ul>
+
+<p>
+Apliqué normalización hasta 3FN para evitar redundancia,
+pero sin obsesionarme (a veces un poco de desnormalización mejora el rendimiento).
+</p>
+
+<pre><code>
+-- Ejemplo: relación N:N entre Médico y Especialidad
+CREATE TABLE Medico (
+    id_medico SERIAL PRIMARY KEY,
+    matricula VARCHAR(50) UNIQUE,
+    nombres VARCHAR(255) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    -- más campos...
+);
+
+CREATE TABLE EspecialidadesMedicas (
+    id_especialidad SERIAL PRIMARY KEY,
+    nombre_especialidad VARCHAR(255) NOT NULL UNIQUE
+);
+
+-- Tabla asociativa
+CREATE TABLE MedicoEspecialidad (
+    id_medico INT NOT NULL,
+    id_especialidad INT NOT NULL,
+    PRIMARY KEY (id_medico, id_especialidad),
+    FOREIGN KEY (id_medico) REFERENCES Medico(id_medico) ON DELETE CASCADE,
+    FOREIGN KEY (id_especialidad) REFERENCES EspecialidadesMedicas(id_especialidad) ON DELETE CASCADE
+);
+</code></pre>
+
+<p>
+Las <strong>tablas asociativas</strong> fueron clave para manejar relaciones muchos-a-muchos.
+</p>
+
+<hr/>
+
+<h2>Fase 2: Constraints y reglas de negocio</h2>
+<p>
+La integridad de datos no es opcional en salud.
+Implementé múltiples restricciones:
+</p>
+
+<ul>
+  <li><strong>UNIQUE</strong> en DNI de pacientes y matrícula de médicos</li>
+  <li><strong>NOT NULL</strong> en campos críticos</li>
+  <li><strong>Foreign Keys</strong> con ON DELETE CASCADE/SET NULL según el caso</li>
+  <li><strong>CHECK constraints</strong> (aunque finalmente usé triggers para validaciones complejas)</li>
+</ul>
+
+<pre><code>
+-- Paciente con DNI único y FK a obra social
+CREATE TABLE Paciente (
+    id_paciente SERIAL PRIMARY KEY,
+    dni BIGINT UNIQUE NOT NULL,
+    nombres VARCHAR(255) NOT NULL,
+    apellidos VARCHAR(255) NOT NULL,
+    id_obra_social INT,
+    CONSTRAINT fk_paciente_obrasocial 
+        FOREIGN KEY (id_obra_social) 
+        REFERENCES ObraSocial(id_obra_social)
+);
+</code></pre>
+
+<p>
+Aprendí que <strong>la base de datos debe ser el primer guardián de la integridad</strong>,
+no la aplicación.
+</p>
+
+<hr/>
+
+<h2>Fase 3: Triggers para lógica compleja</h2>
+<p>
+Algunos requisitos no podían resolverse con constraints simples.
+Los <strong>triggers</strong> fueron la solución:
+</p>
+
+<h3>Trigger 1: Director único por centro</h3>
+<pre><code>
+CREATE OR REPLACE FUNCTION fn_verificar_director_unico()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM CentroSalud
+        WHERE director = NEW.director
+          AND id_centro_salud <> COALESCE(NEW.id_centro_salud, -1)
+    ) THEN
+        RAISE EXCEPTION 'Este director ya está asociado a otro centro de salud';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_director_unico
+BEFORE INSERT OR UPDATE ON CentroSalud
+FOR EACH ROW
+EXECUTE FUNCTION fn_verificar_director_unico();
+</code></pre>
+
+<h3>Trigger 2: Validar disponibilidad de cama</h3>
+<pre><code>
+CREATE OR REPLACE FUNCTION fn_validar_disponibilidad_cama()
+RETURNS TRIGGER AS $$
+DECLARE
+    ocupada INT;
+BEGIN
+    IF NEW.id_cama IS NULL THEN
+        RETURN NEW;
+    END IF;
+
+    -- Solo cuenta camas con internaciones activas
+    SELECT COUNT(*) INTO ocupada
+    FROM Internacion
+    WHERE id_cama = NEW.id_cama
+      AND fecha_alta IS NULL;
+
+    IF ocupada > 0 THEN
+        RAISE EXCEPTION 'La cama (id: %) está ocupada.', NEW.id_cama;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+</code></pre>
+
+<p>
+Los triggers me permitieron validar reglas de negocio complejas
+directamente en la base de datos.
+</p>
+
+<hr/>
+
+<h2>Fase 4: Auditoría automática</h2>
+<p>
+En sistemas de salud, saber quién cambió qué y cuándo es crítico.
+Implementé una tabla de auditoría con triggers:
+</p>
+
+<pre><code>
+CREATE TABLE Auditoria (
+    id_auditoria SERIAL PRIMARY KEY,
+    tabla_afectada VARCHAR(255) NOT NULL,
+    tipo_operacion VARCHAR(50) NOT NULL,
+    id_registro_afectado INT,
+    usuario_operacion VARCHAR(255),
+    detalle_operacion TEXT,
+    fecha_hora TIMESTAMP DEFAULT now(),
+    id_usuario INT
+);
+
+-- Trigger de auditoría en Paciente
+CREATE OR REPLACE FUNCTION fn_audit_paciente()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF TG_OP = 'INSERT' THEN
+        INSERT INTO Auditoria(tabla_afectada, tipo_operacion, id_registro_afectado, 
+                              usuario_operacion, detalle_operacion, fecha_hora)
+        VALUES ('Paciente', TG_OP, NEW.id_paciente, CURRENT_USER, 
+                'INSERT Paciente', NOW());
+        RETURN NEW;
+    ELSIF TG_OP = 'UPDATE' THEN
+        INSERT INTO Auditoria(tabla_afectada, tipo_operacion, id_registro_afectado, 
+                              usuario_operacion, detalle_operacion, fecha_hora)
+        VALUES ('Paciente', TG_OP, NEW.id_paciente, CURRENT_USER, 
+                'UPDATE Paciente', NOW());
+        RETURN NEW;
+    ELSIF TG_OP = 'DELETE' THEN
+        INSERT INTO Auditoria(tabla_afectada, tipo_operacion, id_registro_afectado, 
+                              usuario_operacion, detalle_operacion, fecha_hora)
+        VALUES ('Paciente', TG_OP, OLD.id_paciente, CURRENT_USER, 
+                'DELETE Paciente', NOW());
+        RETURN OLD;
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+</code></pre>
+
+<p>
+Ahora cada cambio en pacientes queda registrado automáticamente.
+</p>
+
+<hr/>
+
+<h2>Fase 5: Procedimientos almacenados</h2>
+<p>
+Para operaciones comunes, creé stored procedures
+que encapsulan lógica compleja:
+</p>
+
+<pre><code>
+-- Insertar paciente con validación
+CREATE OR REPLACE FUNCTION sp_insertar_paciente(
+    p_nombres VARCHAR,
+    p_apellidos VARCHAR,
+    p_dni BIGINT,
+    p_telefono VARCHAR,
+    p_domicilio VARCHAR,
+    p_email VARCHAR,
+    p_fecha_nacimiento DATE,
+    p_id_obra_social INT,
+    p_numero_afiliado VARCHAR
+) RETURNS INT AS $$
+DECLARE
+    new_id INT;
+BEGIN
+    INSERT INTO Paciente(
+        nombres, apellidos, dni, telefono, domicilio, email,
+        fecha_nacimiento, id_obra_social, numero_afiliado
+    )
+    VALUES (
+        p_nombres, p_apellidos, p_dni, p_telefono, p_domicilio, p_email,
+        p_fecha_nacimiento, p_id_obra_social, p_numero_afiliado
+    )
+    RETURNING id_paciente INTO new_id;
+    RETURN new_id;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Uso:
+-- SELECT sp_insertar_paciente('Juan', 'Pérez', 40123456, ...);
+</code></pre>
+
+<p>
+Los SPs centralizan lógica y mejoran la seguridad (permisos granulares).
+</p>
+
+<hr/>
+
+<h2>Fase 6: Consultas complejas y optimización</h2>
+<p>
+Los requisitos incluían consultas complejas como:
+</p>
+
+<ul>
+  <li>Cantidad de consultas por mes y centro</li>
+  <li>Camas disponibles en tiempo real</li>
+  <li>Pacientes sin obra social</li>
+  <li>Centros que atienden traumatología</li>
+</ul>
+
+<h3>Ejemplo: Camas disponibles</h3>
+<pre><code>
+CREATE OR REPLACE FUNCTION consulta_camas_disponibles()
+RETURNS TABLE(
+    nombre_centro VARCHAR,
+    total_camas BIGINT,
+    camas_disponibles BIGINT,
+    camas_ocupadas BIGINT
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        cs.nombre AS nombre_centro,
+        COUNT(c.id_cama) AS total_camas,
+        SUM(CASE WHEN NOT EXISTS (
+            SELECT 1 FROM Internacion i 
+            WHERE i.id_cama = c.id_cama AND i.fecha_alta IS NULL
+        ) THEN 1 ELSE 0 END) AS camas_disponibles,
+        SUM(CASE WHEN EXISTS (
+            SELECT 1 FROM Internacion i 
+            WHERE i.id_cama = c.id_cama AND i.fecha_alta IS NULL
+        ) THEN 1 ELSE 0 END) AS camas_ocupadas
+    FROM CentroSalud cs
+    LEFT JOIN Cama c ON cs.id_centro_salud = c.id_centro_salud
+    GROUP BY cs.id_centro_salud, cs.nombre;
+END;
+$$ LANGUAGE plpgsql;
+</code></pre>
+
+<p>
+Para optimizar, agregué índices estratégicos:
+</p>
+
+<pre><code>
+CREATE INDEX idx_internacion_fecha_alta ON Internacion(fecha_alta);
+CREATE INDEX idx_historia_fecha ON HistoriaClinica(fecha_hora);
+CREATE INDEX idx_paciente_obra_social ON Paciente(id_obra_social);
+</code></pre>
+
+<hr/>
+
+<h2>Fase 7: Vistas para simplificar consultas</h2>
+<p>
+Creé vistas que abstraen la complejidad de los JOINs:
+</p>
+
+<pre><code>
+CREATE OR REPLACE VIEW VistaCentroSaludCompleta AS
+SELECT 
+    cs.id_centro_salud,
+    cs.nombre AS nombre_centro,
+    cs.direccion,
+    cs.director,
+    z.nombre_zona,
+    b.nombre_barrio,
+    (SELECT COUNT(*) FROM Cama c 
+     WHERE c.id_centro_salud = cs.id_centro_salud) AS total_camas,
+    (SELECT COUNT(*) FROM Cama c 
+     WHERE c.id_centro_salud = cs.id_centro_salud 
+     AND c.disponible = TRUE) AS camas_disponibles,
+    (SELECT COUNT(*) FROM Internacion i 
+     WHERE i.id_centro_salud = cs.id_centro_salud 
+     AND i.fecha_alta IS NULL) AS internaciones_activas
+FROM CentroSalud cs
+LEFT JOIN Zona z ON cs.id_zona = z.id_zona
+LEFT JOIN Barrio b ON cs.id_barrio = b.id_barrio;
+
+-- Uso simple:
+-- SELECT * FROM VistaCentroSaludCompleta WHERE nombre_zona = 'Zona Norte';
+</code></pre>
+
+<hr/>
+
+<h2>Fase 8: Seguridad y gestión de errores</h2>
+<p>
+Implementé múltiples capas de protección:
+</p>
+
+<ul>
+  <li>Validación en triggers (evitar datos inválidos)</li>
+  <li>Procedimiento seguro para eliminar centros (verifica dependencias)</li>
+  <li>Prevención de eliminación de médicos con historias clínicas</li>
+  <li>Manejo de errores con RAISE EXCEPTION</li>
+</ul>
+
+<pre><code>
+-- Eliminar centro solo si no tiene dependencias
+CREATE OR REPLACE FUNCTION sp_eliminar_centro_salud_seguro(
+    p_id_centro INT
+) RETURNS TEXT AS $$
+DECLARE
+    v_count_internaciones INT;
+    v_count_historias INT;
+BEGIN
+    SELECT COUNT(*) INTO v_count_internaciones 
+    FROM Internacion WHERE id_centro_salud = p_id_centro;
+    
+    SELECT COUNT(*) INTO v_count_historias 
+    FROM HistoriaClinica WHERE id_centro_salud = p_id_centro;
+    
+    IF v_count_internaciones > 0 OR v_count_historias > 0 THEN
+        RETURN FORMAT('No se puede eliminar: %s internaciones, %s historias',
+                      v_count_internaciones, v_count_historias);
+    END IF;
+    
+    DELETE FROM CentroSalud WHERE id_centro_salud = p_id_centro;
+    RETURN 'Centro de salud eliminado correctamente';
+END;
+$$ LANGUAGE plpgsql;
+</code></pre>
+
+<hr/>
+
+<h2>Fase 9: Testing y datos de prueba</h2>
+<p>
+Creé un script completo con datos de prueba realistas:
+</p>
+
+<ul>
+  <li>5 zonas y barrios</li>
+  <li>5 centros de salud</li>
+  <li>Obras sociales (PAMI, OSDE, Swiss Medical...)</li>
+  <li>Médicos con múltiples especialidades</li>
+  <li>Pacientes con historias clínicas</li>
+  <li>Internaciones activas y cerradas</li>
+</ul>
+
+<p>
+Esto me permitió probar todas las consultas y validar triggers
+antes de producción.
+</p>
+
+<hr/>
+
+<h2>Lecciones aprendidas</h2>
+
+<ul>
+  <li>Normalizar correctamente (evité redundancia sin obsesionarme)</li>
+  <li>Usar triggers para reglas de negocio complejas</li>
+  <li>Implementar auditoría desde el inicio</li>
+  <li>Crear procedimientos almacenados para operaciones críticas</li>
+  <li>Agregar índices estratégicos (no todos los campos necesitan índice)</li>
+  <li>Usar vistas para simplificar consultas recurrentes</li>
+</ul>
+
+<h3>Errores que cometí:</h3>
+<ul>
+  <li>Al principio, no consideré ON DELETE CASCADE/SET NULL (causó bugs)</li>
+  <li>Olvidé índices en campos de búsqueda frecuente (lentitud en consultas)</li>
+  <li>Inicialmente hardcodeé algunos valores que debían ser configurables</li>
+  <li>No documenté suficientemente los triggers al inicio</li>
+</ul>
+
+<hr/>
+
+<h2>Escalabilidad y mantenibilidad</h2>
+<p>
+El diseño final es:
+</p>
+
+<ul>
+  <li>Escalable: agregar centros, médicos o servicios no requiere cambios en el esquema</li>
+  <li>Mantenible: la lógica está encapsulada en procedures y triggers</li>
+  <li>Seguro: validaciones en múltiples capas</li>
+  <li>Auditable: cada cambio crítico queda registrado</li>
+  <li>Performante: índices estratégicos + vistas optimizadas</li>
+</ul>
+
+<hr/>
+
+<h2>Conclusión</h2>
+<p>
+Diseñar esta base de datos me enseñó que el modelado de datos
+es el 70% del éxito de un sistema.
+</p>
+
+<p>
+Un buen diseño permite:
+</p>
+
+<ul>
+  <li>Integridad de datos garantizada por la BD, no solo por la app</li>
+  <li>Consultas complejas de forma eficiente</li>
+  <li>Mantenimiento sencillo a largo plazo</li>
+  <li>Escalabilidad sin reescribir todo</li>
+</ul>
+
+<p>
+Si tuviera que dar un consejo a mi yo del pasado:
+invierte tiempo en el diseño inicial, documenta tus decisiones,
+y no tengas miedo de usar features avanzadas de PostgreSQL como triggers,
+procedures y constraints complejos.
+</p>
+
+<p>
+La base de datos no es solo un lugar para guardar datos,
+es el corazón de la aplicación.
+</p>
+`,
+},
+  //regresion y correlacion con colab en bbddaa
+{
+  slug: 'primer-proyecto-analisis-datos-machine-learning',
+  title: 'Mi Primer Proyecto Real de Análisis de Datos y Machine Learning',
+  image: '/blog/data_analisis.jpg',
+  date: '2025-11-17',
+  tags: [
+    'Python',
+    'Data Science',
+    'Machine Learning',
+    'Pandas',
+    'Scikit-learn',
+    'Análisis de Datos',
+  ],
+  type: 'Data Science',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '18 min',
+  excerpt:
+    'Cómo enfrenté mi primer proyecto de análisis de datos desde cero: desde datasets caóticos hasta modelos predictivos funcionales, pasando por todos los errores y aprendizajes.',
+  content: `
+<h2>El comienzo: un trabajo práctico intimidante</h2>
+<p>
+Todo empezó con un trabajo de la universidad: analizar datasets públicos, 
+limpiar datos, hacer visualizaciones y construir modelos de machine learning.
+Sonaba simple en teoría, pero cuando abrí los archivos Excel con 357 filas en uno 
+y 226.631 en otro, supe que esto iba a ser un reto.
+</p>
+
+<p>
+Los datasets eran de empleo y ventas empresariales en Argentina (2014), 
+del sitio de datos abiertos del gobierno. Mi objetivo: predecir ventas basándome en 
+empleo, región y tamaño de empresa.
+</p>
+
+<p>
+Este artículo documenta mi proceso completo, los errores que cometí, 
+y las lecciones que aprendí.
+</p>
+
+<hr/>
+
+<h2>Primer error: cargar sin entender</h2>
+<p>
+Mi primer instinto fue hacer lo que vi en tutoriales:
+</p>
+
+<pre><code>
+import pandas as pd
+df = pd.read_excel('datos.xlsx')
+print(df.head())
+</code></pre>
+
+<p>
+Pero cuando vi los datos, no entendía nada:
+</p>
+
+<ul>
+  <li>¿Qué significaba cada columna?</li>
+  <li>¿Por qué había valores como -99?</li>
+  <li>¿Las ventas estaban en pesos o millones?</li>
+  <li>¿Cómo se relacionaban ambos datasets?</li>
+</ul>
+
+<p>
+<strong>Lección #1</strong>: Antes de tocar código, lee la documentación del dataset. 
+Entiende qué representa cada fila y columna.
+</p>
+
+<hr/>
+
+<h2>Exploración: conocer los datos antes de analizarlos</h2>
+<p>
+Aprendí que la fase de Análisis Exploratorio de Datos (EDA)
+no es opcional, es fundamental. Empecé con lo básico:
+</p>
+
+<pre><code>
+# Dimensiones
+print(f"Filas: {df.shape[0]}, Columnas: {df.shape[1]}")
+
+# Tipos de datos
+print(df.info())
+
+# Valores nulos
+print(df.isna().sum())
+
+# Valores únicos en columnas categóricas
+print(df['REGION'].value_counts())
+</code></pre>
+
+<p>
+Esto me reveló cosas importantes:
+</p>
+
+<ul>
+  <li>Había <strong>3 tamaños de empresa</strong>: Grande, Mediana, Pequeña</li>
+  <li>Había <strong>7 regiones</strong>: CABA y GBA, Pampeana, Cuyo, etc.</li>
+  <li>Los datos tenían <strong>formato "largo"</strong>: una fila por combinación región-tamaño-variable</li>
+  <li>Había valores <strong>-99 que representaban datos faltantes</strong></li>
+</ul>
+
+<p>
+<strong>Lección #2</strong>: Las primeras 30 líneas de código deben ser solo exploración, 
+no transformación.
+</p>
+
+<hr/>
+
+<h2>Limpieza: el 80% del trabajo</h2>
+<p>
+Aquí es donde pasé más tiempo. Los datos "reales" nunca vienen limpios.
+</p>
+
+<h3>Problema 1: Formato pivoteado</h3>
+<p>
+Los datos tenían este formato:
+</p>
+
+<pre><code>
+REGION        | TAM     | VARIABLE      | VALOR
+CABA y GBA    | Grande  | Empleo total  | 257,561
+CABA y GBA    | Grande  | VENTAS        | 536,347,266,473
+</code></pre>
+
+<p>
+Pero para modelar necesitaba:
+</p>
+
+<pre><code>
+REGION        | TAM     | Empleo_total | VENTAS
+CABA y GBA    | Grande  | 257,561      | 536,347,266,473
+</code></pre>
+
+<p>
+La solución fue <strong>pivotear</strong>:
+</p>
+
+<pre><code>
+pivot_df = df.pivot_table(
+    index=['ANIO', 'REGION', 'TAM'],
+    columns='VARIABLE',
+    values='VALOR',
+    aggfunc='sum'
+).reset_index()
+</code></pre>
+
+<h3>Problema 2: Valores -99 como "faltantes"</h3>
+<pre><code>
+# Reemplazar -99 por NaN
+empleo.replace(-99, np.nan, inplace=True)
+</code></pre>
+
+<h3>Problema 3: Nombres inconsistentes</h3>
+<pre><code>
+# Normalizar nombres de columnas
+df.columns = df.columns.str.strip().str.lower()
+pivot_df.rename(columns={
+    'empleo total': 'Empleo_total',
+    'ventas': 'VENTAS'
+}, inplace=True)
+</code></pre>
+
+<p>
+<strong>Lección #3</strong>: La limpieza de datos no es glamorosa, 
+pero es donde se ganan o pierden los proyectos.
+</p>
+
+<hr/>
+
+<h2>Visualización: contar historias con datos</h2>
+<p>
+Después de limpiar, quería <strong>ver patrones</strong>. 
+Las visualizaciones me ayudaron a entender relaciones que 
+las tablas no mostraban.
+</p>
+
+<h3>Correlación entre Empleo y Ventas</h3>
+<pre><code>
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(
+    data=pivot_df,
+    x='Empleo_total',
+    y='VENTAS',
+    hue='TAM',
+    palette='viridis',
+    s=100
+)
+plt.title('¿Más empleados = Más ventas?')
+plt.show()
+</code></pre>
+
+<p>
+Resultado: <strong>Sí, correlación positiva fuerte (0.80)</strong>. 
+Las empresas con más empleados generan más ventas.
+</p>
+
+<h3>Matriz de correlación</h3>
+<pre><code>
+corr_matrix = pivot_df[['Empleo_total', 'VENTAS', 'VENTAS_por_empleado']].corr()
+
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title('Matriz de Correlación')
+plt.show()
+</code></pre>
+
+<p>
+<strong>Lección #4</strong>: Una buena visualización vale más que 1000 filas de datos.
+</p>
+
+<hr/>
+
+<h2>Integración: unir múltiples datasets</h2>
+<p>
+El verdadero desafío fue integrar dos datasets diferentes:
+</p>
+
+<ol>
+  <li><strong>Dataset 1</strong>: Empleo y ventas por región/tamaño</li>
+  <li><strong>Dataset 2</strong>: Empleo registrado por provincia</li>
+</ol>
+
+<p>
+El problema: uno tenía <strong>regiones</strong>, el otro <strong>provincias</strong>.
+</p>
+
+<h3>Solución: Mapeo manual</h3>
+<pre><code>
+mapa_regiones = {
+    'BUENOS AIRES': 'Pampeana',
+    'CABA': 'CABA y GBA',
+    'MENDOZA': 'Cuyo',
+    'CHACO': 'NEA',
+    # ... 24 provincias en total
+}
+
+empleo_agrupado['REGION'] = empleo_agrupado['PROVINCIA'].map(mapa_regiones)
+</code></pre>
+
+<h3>Merge de datasets</h3>
+<pre><code>
+merged_df = pd.merge(
+    pivot_df,
+    empleo_region,
+    on=['ANIO', 'REGION'],
+    how='inner'
+)
+</code></pre>
+
+<p>
+<strong>Lección #5</strong>: La integración de datos requiere conocimiento del dominio. 
+No hay función mágica que sepa que "Mendoza pertenece a Cuyo".
+</p>
+
+<hr/>
+
+<h2>Outliers: el dilema de qué hacer con ellos</h2>
+<p>
+Cuando hice boxplots, vi valores extremos:
+</p>
+
+<pre><code>
+def detectar_outliers_iqr(df, columna):
+    Q1 = df[columna].quantile(0.25)
+    Q3 = df[columna].quantile(0.75)
+    IQR = Q3 - Q1
+    limite_inf = Q1 - 1.5 * IQR
+    limite_sup = Q3 + 1.5 * IQR
+    outliers = (df[columna] < limite_inf) | (df[columna] > limite_sup)
+    return outliers
+</code></pre>
+
+<p>
+Resultado: 15% de outliers en empleo, 11% en ventas.
+</p>
+
+<p>
+Aquí tuve que tomar una decisión:
+</p>
+
+<ul>
+  <li>Eliminarlos todos: perdería información valiosa</li>
+  <li>Mantenerlos todos: sesgarían el modelo</li>
+  <li>Crear dos versiones: dataset completo para EDA, 
+      dataset limpio para modelado</li>
+</ul>
+
+<p>
+<strong>Lección #6</strong>: Los outliers no siempre son errores. 
+A veces son las observaciones más interesantes.
+</p>
+
+<hr/>
+
+<h2>Machine Learning: primer intento fallido</h2>
+<p>
+Mi primer modelo fue un desastre:
+</p>
+
+<pre><code>
+# Intento 1: Directo sin preparación
+from sklearn.linear_model import LinearRegression
+
+X = merged_df[['Empleo_total', 'REGION', 'TAM']]  # ERROR: region y tam son strings
+y = merged_df['VENTAS']
+
+model = LinearRegression()
+model.fit(X, y)
+# ValueError: could not convert string to float
+</code></pre>
+
+<p>
+Aprendí que necesitaba <strong>preprocesamiento</strong>:
+</p>
+
+<h3>Paso 1: Codificar variables categóricas</h3>
+<pre><code>
+from sklearn.preprocessing import LabelEncoder
+
+le_region = LabelEncoder()
+le_tam = LabelEncoder()
+
+merged_df['REGION_ENC'] = le_region.fit_transform(merged_df['REGION'])
+merged_df['TAM_ENC'] = le_tam.fit_transform(merged_df['TAM'])
+</code></pre>
+
+<h3>Paso 2: Separar train/test</h3>
+<pre><code>
+from sklearn.model_selection import train_test_split
+
+X = merged_df[['Empleo_total', 'REGION_ENC', 'TAM_ENC']]
+y = merged_df['VENTAS']
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+</code></pre>
+
+<h3>Paso 3: Escalar features</h3>
+<pre><code>
+from sklearn.preprocessing import RobustScaler
+
+scaler = RobustScaler()  # Más robusto a outliers que StandardScaler
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+</code></pre>
+
+<p>
+<strong>Lección #7</strong>: Los modelos no leen strings ni entienden escalas. 
+El preprocesamiento es obligatorio.
+</p>
+
+<hr/>
+
+<h2>Comparación de modelos: ¿cuál funciona mejor?</h2>
+<p>
+En lugar de apostar por un solo modelo, probé varios:
+</p>
+
+<pre><code>
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+
+modelos = {
+    'Regresión Lineal': LinearRegression(),
+    'Ridge': Ridge(alpha=10.0),
+    'Random Forest': RandomForestRegressor(max_depth=5, n_estimators=100),
+    'Gradient Boosting': GradientBoostingRegressor(max_depth=3)
+}
+
+resultados = {}
+for nombre, modelo in modelos.items():
+    modelo.fit(X_train_scaled, y_train)
+    y_pred = modelo.predict(X_test_scaled)
+    
+    r2 = r2_score(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    
+    resultados[nombre] = {'R²': r2, 'MAE': mae}
+</code></pre>
+
+<h3>Resultados</h3>
+
+<table>
+  <tr>
+    <th>Modelo</th>
+    <th>R² Test</th>
+    <th>MAE</th>
+  </tr>
+  <tr>
+    <td>Regresión Lineal</td>
+    <td><strong>0.81</strong></td>
+    <td>58 mil millones</td>
+  </tr>
+  <tr>
+    <td>Ridge</td>
+    <td>0.79</td>
+    <td>57 mil millones</td>
+  </tr>
+  <tr>
+    <td>Random Forest</td>
+    <td>0.78</td>
+    <td>55 mil millones</td>
+  </tr>
+  <tr>
+    <td>Gradient Boosting</td>
+    <td>0.52</td>
+    <td>62 mil millones</td>
+  </tr>
+</table>
+
+<p>
+El modelo más simple de Regresión Lineal había ganado.
+</p>
+
+<p>
+¿Por qué? Con solo 72 observaciones después de limpiar outliers, 
+modelos complejos como Random Forest y Gradient Boosting sufrían de overfitting.
+</p>
+
+<p>
+<strong>Lección #8</strong>: Más complejo ≠ mejor. Con datasets pequeños, 
+la simplicidad gana.
+</p>
+
+<hr/>
+
+<h2>Análisis de errores: ¿dónde falla el modelo?</h2>
+<p>
+No basta con obtener un R² alto. Necesitaba entender <strong>dónde y por qué</strong> 
+el modelo se equivoca.
+</p>
+
+<h3>Residuos por región</h3>
+<pre><code>
+test_results = pd.DataFrame({
+    'Real': y_test,
+    'Predicho': y_pred_test,
+    'Error_Pct': np.abs((y_test - y_pred_test) / y_test) * 100,
+    'REGION': merged_df.loc[y_test.index, 'REGION']
+})
+
+error_region = test_results.groupby('REGION')['Error_Pct'].mean()
+print(error_region.sort_values())
+</code></pre>
+
+<p>
+Descubrí que el modelo predecía peor en <strong>regiones con pocos datos</strong> 
+(Norte Grande, NEA). Esto tiene sentido: menos muestras = peor aprendizaje.
+</p>
+
+<p>
+<strong>Lección #9</strong>: Analiza errores por segmento. 
+Un modelo "bueno en promedio" puede ser malo para ciertos grupos.
+</p>
+
+<hr/>
+
+<h2>Validación cruzada: ¿el modelo es consistente?</h2>
+<p>
+Un R² de 0.81 en test está bien, pero ¿fue suerte? 
+Para saberlo, usé validación cruzada:
+</p>
+
+<pre><code>
+from sklearn.model_selection import cross_val_score
+
+cv_scores = cross_val_score(
+    modelo, 
+    X_train_scaled, 
+    y_train, 
+    cv=5,  # 5 folds
+    scoring='r2'
+)
+
+print(f"R² promedio: {cv_scores.mean():.3f} ± {cv_scores.std():.3f}")
+# Output: R² promedio: 0.776 ± 0.082
+</code></pre>
+
+<p>
+Esto me confirmó que el modelo es robusto, 
+no dependía de una división afortunada de train/test.
+</p>
+
+<p>
+<strong>Lección #10</strong>: La validación cruzada es tu seguro contra resultados engañosos.
+</p>
+
+<hr/>
+
+<h2>Problemas que enfrenté y cómo los resolví</h2>
+
+<h3>Problema 1: R² negativo (-41.81 en train)</h3>
+<p>
+Esto ocurrió cuando usé transformación logarítmica mal aplicada:
+</p>
+
+<pre><code>
+# ❌ MAL
+y_log = np.log1p(y_train)
+modelo.fit(X_train, y_log)
+y_pred = modelo.predict(X_test)
+r2 = r2_score(y_test, y_pred)  # Compara log vs original → desastre
+</code></pre>
+
+<p>
+Solución: volver a escala original antes de calcular métricas:
+</p>
+
+<pre><code>
+# ✅ BIEN
+y_pred_log = modelo.predict(X_test_scaled)
+y_pred = np.expm1(y_pred_log)  # De log a original
+r2 = r2_score(y_test, y_pred)
+</code></pre>
+
+<h3>Problema 2: Dataset muy pequeño (72 filas)</h3>
+<p>
+Estrategias que probé:
+</p>
+
+<ul>
+  <li>Regularización (Ridge/Lasso) para evitar overfitting</li>
+  <li>Reducir complejidad de Random Forest (max_depth=5)</li>
+  <li>Validación cruzada para aprovechar todos los datos</li>
+  <li>❌ Data augmentation: no tiene sentido con datos estructurados reales</li>
+</ul>
+
+<h3>Problema 3: Interpretabilidad vs Performance</h3>
+<p>
+Random Forest daba feature importances claras, pero Regresión Lineal 
+predecía mejor. Elegí Regresión Lineal por interpretabilidad:
+</p>
+
+<pre><code>
+# Coeficientes del modelo
+coef_df = pd.DataFrame({
+    'Variable': ['Empleo_total', 'REGION', 'TAM'],
+    'Coeficiente': modelo.coef_
+})
+
+# Interpretación: cada empleado adicional aumenta las ventas en X pesos
+</code></pre>
+
+<hr/>
+
+<h2>Herramientas y librerías que aprendí</h2>
+
+<h3>Análisis de datos</h3>
+<ul>
+  <li><strong>Pandas</strong>: manipulación de dataframes (merge, pivot, groupby)</li>
+  <li><strong>NumPy</strong>: operaciones numéricas eficientes</li>
+</ul>
+
+<h3>Visualización</h3>
+<ul>
+  <li><strong>Matplotlib</strong>: gráficos básicos personalizables</li>
+  <li><strong>Seaborn</strong>: visualizaciones estadísticas hermosas</li>
+</ul>
+
+<h3>Machine Learning</h3>
+<ul>
+  <li><strong>Scikit-learn</strong>: modelos, métricas, preprocesamiento, validación</li>
+  <li><strong>train_test_split</strong>: división train/test estratificada</li>
+  <li><strong>StandardScaler / RobustScaler</strong>: normalización</li>
+  <li><strong>LabelEncoder</strong>: codificación de categóricas</li>
+</ul>
+
+<h3>Flujo de trabajo</h3>
+<ul>
+  <li><strong>Google Colab</strong>: notebooks en la nube sin setup</li>
+  <li><strong>Git</strong>: versionado de código y notebooks</li>
+</ul>
+
+<hr/>
+
+<h2>Experimentaciones futuras</h2>
+<p>
+Este fue mi primer proyecto, pero identifiqué mejoras:
+</p>
+
+<ol>
+  <li><strong>Más datos</strong>: conseguir información de 2015-2024</li>
+  <li><strong>Feature engineering</strong>: crear variables como "crecimiento año a año"</li>
+  <li><strong>Variables externas</strong>: inflación, tipo de cambio, PBI</li>
+  <li><strong>Modelos por segmento</strong>: un modelo específico para cada región</li>
+  <li><strong>Series temporales</strong>: si tuviera datos de múltiples años</li>
+  <li><strong>Deep Learning</strong>: probar redes neuronales (aunque probablemente sea overkill)</li>
+</ol>
+
+<hr/>
+
+<h2>Conclusión: de intimidado a confiado</h2>
+<p>
+Lo que empezó como un trabajo universitario intimidante se convirtió en 
+un <strong>proyecto completo de data science</strong>. Aprendí que:
+</p>
+
+<ol>
+  <li>La limpieza de datos es el 80% del trabajo</li>
+  <li>La visualización revela insights que las tablas ocultan</li>
+  <li>Probar múltiples modelos es mejor que apostar por uno</li>
+  <li>Con datasets pequeños, la simplicidad gana</li>
+  <li>Los errores son esperables, analizarlos es clave</li>
+  <li>La validación rigurosa separa modelos buenos de flukes</li>
+</ol>
+
+<p>
+Mi consejo para quien empieza: no busques el proyecto perfecto. 
+Empieza con datos reales, por caóticos que sean. Los mejores aprendizajes 
+vienen de enfrentar problemas reales.
+</p>
+
+<p>
+¿Tu turno? Busca un dataset que te interese en 
+<a href="https://datos.gob.ar" target="_blank">datos.gob.ar</a>, 
+<a href="https://www.kaggle.com" target="_blank">Kaggle</a> o 
+<a href="https://archive.ics.uci.edu/ml/index.php" target="_blank">UCI</a> 
+y empieza a ensuciarte las manos.
+</p>
+`,
+},
+  //redes y comunicacion como se asocia con las tecnologias
+{
+  slug: 'comunicacion-y-redes-enfoque-para-desarrollo-de-software',
+  title: 'Cómo Comprender la Red Mejoró Mi Forma de Programar',
+  image: '/blog/redes_comunicacion.jpg',
+  date: '2025-12-15',
+  tags: [
+    'Comunicación y Redes',
+    'Modelo OSI',
+    'TCP',
+    'UDP',
+    'WebSockets',
+    'VLANs',
+    'Cisco Packet Tracer'
+  ],
+  type: 'Formación Técnica',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp'
+  },
+  readingTime: '15 min',
+  excerpt: 'Un recorrido por cómo el estudio profundo de Comunicación y Redes transformó mi enfoque como desarrollador: desde una experiencia previa en la capa física como técnico de fibra óptica hasta una comprensión integral de protocolos, arquitectura de red y su impacto directo en el diseño de software.',
+  content: `
+<h2>Introducción</h2>
+
+<p>
+Antes de abordar formalmente el estudio de Comunicación y Redes, mi experiencia estaba fuertemente ligada a la capa física. Como técnico de fibra óptica, trabajaba diariamente con enlaces, niveles de señal, empalmes y diagnósticos de conectividad. Mi foco estaba en garantizar que “el enlace funcione”.
+</p>
+
+<p>
+Sin embargo, esa experiencia también tenía un límite claro: cuando algo funcionaba mal más allá de lo físico, la explicación quedaba incompleta. La materia permitió romper ese límite y ampliar la mirada, incorporando las capas lógicas de la comunicación y, sobre todo, entendiendo cómo esas capas influyen directamente en el desarrollo de software.
+</p>
+
+<hr/>
+
+<h2>El Modelo OSI como herramienta para pensar sistemas</h2>
+
+<p>
+Uno de los aprendizajes más relevantes fue adoptar el Modelo OSI no como una clasificación académica, sino como una herramienta mental para analizar problemas. Entender la responsabilidad de cada capa permitió separar correctamente las causas de un fallo y evitar diagnósticos superficiales.
+</p>
+
+<p>
+Desde el punto de vista de la programación, esto cambió mi forma de pensar errores de comunicación. Dejé de ver los problemas como “la API anda mal” o “el servidor no responde” y empecé a preguntarme en qué capa se está produciendo realmente el conflicto: direccionamiento, transporte, control de flujo o incluso señal.
+</p>
+
+<p>
+Este enfoque resulta clave al desarrollar sistemas distribuidos, donde los errores no siempre son evidentes ni reproducibles localmente.
+</p>
+
+<hr/>
+
+<h2>Protocolos, confiabilidad y decisiones de diseño</h2>
+
+<p>
+El estudio de protocolos como TCP y UDP permitió comprender que la red no es un simple canal transparente, sino un componente activo que impone reglas, tiempos y limitaciones. Cada protocolo refleja decisiones de diseño que impactan directamente en el comportamiento de las aplicaciones.
+</p>
+
+<p>
+Desde la programación, este aprendizaje se tradujo en una mayor conciencia sobre:
+</p>
+
+<ul>
+  <li>El costo real de la confiabilidad</li>
+  <li>La relación entre latencia y experiencia de usuario</li>
+  <li>El impacto del control de errores y flujo en aplicaciones concurrentes</li>
+</ul>
+
+<p>
+Esto influyó directamente en cómo diseño APIs, manejo reintentos, timeouts y comunicación entre servicios.
+</p>
+
+<hr/>
+
+<h2>Comunicación persistente y sistemas en tiempo real</h2>
+
+<p>
+El análisis de modelos de comunicación persistente, como los utilizados en sistemas en tiempo real, ayudó a comprender un cambio fundamental respecto al modelo request–response tradicional.
+</p>
+
+<p>
+Desde el desarrollo de software, esto implica asumir que la comunicación no siempre es puntual, sino continua, y que el sistema debe estar preparado para gestionar estados, conexiones activas y fallos parciales.
+</p>
+
+<p>
+Este aprendizaje resultó especialmente valioso para entender arquitecturas modernas basadas en eventos, notificaciones y sincronización entre múltiples clientes.
+</p>
+
+<hr/>
+
+<h2>Diseño de redes y su impacto en la arquitectura de software</h2>
+
+<p>
+El trabajo con redes locales, segmentación mediante VLANs y diseño jerárquico permitió comprender que la infraestructura condiciona profundamente al software que se ejecuta sobre ella.
+</p>
+
+<p>
+Simular redes empresariales en Cisco Packet Tracer ayudó a visualizar cómo una mala segmentación o un enrutamiento incorrecto pueden afectar el rendimiento, la seguridad y la escalabilidad de un sistema.
+</p>
+
+<p>
+Desde la programación, esto reforzó la importancia de diseñar aplicaciones que asuman la existencia de redes complejas, con distintos dominios, latencias variables y políticas de seguridad.
+</p>
+
+<hr/>
+
+<h2>Simulación como puente entre teoría y práctica</h2>
+
+<p>
+La simulación de escenarios reales permitió experimentar situaciones que normalmente quedan fuera del alcance del desarrollador. Poder observar el recorrido de los paquetes, los tiempos de respuesta y los puntos de falla aportó una comprensión más profunda de cómo se comportan los sistemas en condiciones reales.
+</p>
+
+<p>
+Este enfoque fortaleció una mentalidad de diseño más preventiva, anticipando problemas de comunicación antes de que aparezcan en producción.
+</p>
+
+<hr/>
+
+<h2>Señales, transmisión y límites del software</h2>
+
+<p>
+El estudio de los fundamentos de transmisión permitió comprender que no todos los problemas se resuelven con optimización de código. Conceptos como ancho de banda, relación señal/ruido y multiplexación explican límites físicos que afectan directamente al rendimiento.
+</p>
+
+<p>
+Este conocimiento ayudó a desarrollar expectativas realistas al programar sistemas que dependen fuertemente de la comunicación, evitando soluciones puramente lógicas para problemas físicos.
+</p>
+
+<hr/>
+
+<h2>Integración de redes y desarrollo de software</h2>
+
+<p>
+El mayor aporte de esta materia fue integrar el conocimiento de redes al proceso de desarrollo. Hoy diseño software considerando la red como parte del sistema, no como un detalle externo.
+</p>
+
+<p>
+Esto se refleja en decisiones como:
+</p>
+
+<ul>
+  <li>Diseño de APIs tolerantes a fallos</li>
+  <li>Manejo consciente de latencias</li>
+  <li>Uso adecuado de comunicación síncrona y asíncrona</li>
+  <li>Arquitecturas preparadas para escalar</li>
+</ul>
+<br/>
+<hr/>
+<br/>
+<p>
+La materia no solo amplió mi conocimiento técnico, sino que transformó mi forma de programar. Pasar de una visión centrada en la capa física a una comprensión integral de la comunicación permitió diseñar sistemas más robustos, eficientes y realistas.
+</p>
+
+<p>
+Entender cómo fluye la información, cuáles son sus límites y cómo se toman decisiones en la red es hoy una parte fundamental de mi enfoque como desarrollador.
+</p>
+`
+},
+  //aprendiendo integracion aws desde cero
+  {
+  slug: 'aprendiendo-integracion-aws-desde-cero',
+  title: 'Cómo Abordé y Aprendí la Integración con AWS en Proyectos Backend',
+  image: '/blog/aws_integracion.jpg',
+  date: '2025-11-12',
+  tags: [
+    'AWS',
+    'Backend',
+    'Arquitectura de Software',
+    'Cloud Computing',
+    'Buenas Prácticas',
+  ],
+  type: 'Experiencia',
+  author: {
+    name: 'Camilo Escar',
+    avatar: '/profile.webp',
+  },
+  readingTime: '14 min',
+  excerpt:
+    'Un recorrido práctico sobre cómo abordé el aprendizaje e integración de AWS en proyectos backend, enfrentando errores reales, tomando decisiones de arquitectura y aplicando buenas prácticas.',
+  content: `
+<h2>Introducción</h2>
+<p>
+Integrar AWS por primera vez en un proyecto backend puede ser intimidante.
+No solo implica aprender nuevos servicios,
+sino también cambiar la forma en la que pensamos la arquitectura,
+la persistencia de datos y la responsabilidad del servidor.
+</p>
+
+<p>
+En este artículo quiero contar <strong>cómo abordé el aprendizaje de AWS desde un enfoque práctico</strong>,
+qué decisiones tomé, qué errores cometí
+y qué conceptos terminé entendiendo realmente al integrarlo en un proyecto real.
+</p>
+
+<hr/>
+
+<h2>El error inicial: pensar AWS solo como infraestructura</h2>
+<p>
+Al principio cometí un error común:
+pensar AWS únicamente como un lugar donde “subir” una aplicación.
+</p>
+
+<p>
+Rápidamente entendí que AWS no es solo infraestructura,
+sino un <strong>ecosistema de servicios</strong>
+que influye directamente en cómo diseñamos el software.
+</p>
+
+<ul>
+  <li>No es lo mismo una base local que DynamoDB</li>
+  <li>No es lo mismo guardar logs en archivos que en un servicio gestionado</li>
+  <li>No es lo mismo manejar conexiones propias que usar servicios serverless</li>
+</ul>
+
+<p>
+Ese cambio de mentalidad fue el primer aprendizaje importante.
+</p>
+
+<hr/>
+
+<h2>Primer paso: entender el rol del backend frente a AWS</h2>
+<p>
+En lugar de conectar directamente el cliente a AWS,
+decidí que el backend debía ser el <strong>único punto de acceso</strong>
+a los servicios cloud.
+</p>
+
+<p>
+Esto me permitió:
+</p>
+
+<ul>
+  <li>Centralizar credenciales y configuración</li>
+  <li>Controlar validaciones y errores</li>
+  <li>Agregar auditoría y logging</li>
+  <li>Evitar exponer detalles de AWS al cliente</li>
+</ul>
+
+<p>
+Desde ese momento, AWS pasó a ser una dependencia del backend,
+no del usuario final.
+</p>
+
+<hr/>
+
+<h2>Manejo de credenciales: primeros errores y aprendizajes</h2>
+<p>
+Uno de los primeros problemas reales fue el manejo de credenciales.
+</p>
+
+<p>
+Aprendí que:
+</p>
+
+<ul>
+  <li>Las credenciales <strong>no deben estar hardcodeadas</strong></li>
+  <li>AWS CLI y <code>aws configure</code> simplifican el setup</li>
+  <li><code>boto3</code> puede reutilizar credenciales del entorno</li>
+</ul>
+
+<p>
+Entender cómo AWS gestiona identidades y permisos
+me ayudó a comprender por qué la seguridad es parte del diseño,
+no un agregado posterior.
+</p>
+
+<hr/>
+
+<h2>DynamoDB: pensar diferente la persistencia</h2>
+<p>
+Trabajar con DynamoDB fue otro punto clave de aprendizaje.
+</p>
+
+<p>
+A diferencia de bases relacionales,
+acá entendí que:
+</p>
+
+<ul>
+  <li>La clave primaria es obligatoria y central</li>
+  <li>El diseño del acceso importa más que el esquema</li>
+  <li>Los errores de validación vienen del modelo, no del código</li>
+</ul>
+
+<p>
+Errores como <em>“Missing the key id in the item”</em>
+me ayudaron a entender que AWS valida estrictamente los datos
+y obliga a diseñar correctamente desde el inicio.
+</p>
+
+<hr/>
+
+<h2>Aplicando patrones para integrar AWS</h2>
+<p>
+Para evitar un acoplamiento fuerte con AWS,
+decidí aplicar patrones de diseño en el backend.
+</p>
+
+<ul>
+  <li><strong>Singleton</strong>: una única instancia de acceso a DynamoDB</li>
+  <li><strong>Proxy</strong>: el servidor controla y audita todas las operaciones</li>
+  <li><strong>Observer</strong>: notificación automática de cambios</li>
+</ul>
+
+<p>
+Esto me permitió tratar a AWS como un recurso compartido,
+controlado y reemplazable,
+en lugar de algo accedido de forma directa desde cualquier parte del código.
+</p>
+
+<hr/>
+
+<h2>AWS como dependencia, no como protagonista</h2>
+<p>
+Una decisión importante fue <strong>no mezclar lógica de negocio con llamadas a AWS</strong>.
+</p>
+
+<p>
+El backend se encarga de:
+</p>
+
+<ul>
+  <li>Validar datos</li>
+  <li>Decidir qué guardar</li>
+  <li>Manejar errores</li>
+</ul>
+
+<p>
+Mientras que AWS solo cumple el rol de persistencia y servicios gestionados.
+</p>
+
+<p>
+Esto significa que, si mañana DynamoDB se reemplaza por otro sistema,
+el impacto en el código sería mínimo.
+</p>
+
+<hr/>
+
+<h2>Manejo de errores reales en integración cloud</h2>
+<p>
+Trabajar con AWS me enseñó que los errores no son excepciones raras,
+sino parte del flujo normal.
+</p>
+
+<p>
+Aprendí a:
+</p>
+
+<ul>
+  <li>Leer errores de AWS y no ignorarlos</li>
+  <li>Validar datos antes de enviar un <code>PutItem</code></li>
+  <li>Registrar logs claros en lugar de fallos silenciosos</li>
+</ul>
+
+<p>
+Esto mejoró notablemente la robustez del backend.
+</p>
+
+<hr/>
+
+<h2>Qué cambió en mi forma de diseñar backend</h2>
+<p>
+Después de integrar AWS, mi forma de pensar el backend cambió:
+</p>
+
+<ul>
+  <li>Diseño primero, implementación después</li>
+  <li>Separación clara de responsabilidades</li>
+  <li>Infraestructura como parte del diseño</li>
+  <li>Menos acoplamiento, más abstracción</li>
+</ul>
+
+<p>
+AWS dejó de ser “algo externo”
+y pasó a formar parte consciente de la arquitectura.
+</p>
+
+
+<p>
+Aprender a integrar AWS no fue solo aprender servicios,
+sino aprender a <strong>diseñar mejor software</strong>.
+</p>
+
+<p>
+Trabajar con servicios cloud obliga a pensar en arquitectura,
+responsabilidades, seguridad y escalabilidad desde el inicio.
+</p>
+
+<p>
+Hoy veo AWS no como un obstáculo,
+sino como una herramienta que,
+bien integrada,
+eleva la calidad del backend y del desarrollador.
+</p>
+`,
+},  
   //herramientas esenciales para node
   {
   slug: 'herramientas-esenciales-nodejs',
@@ -223,7 +2816,7 @@ Invertir tiempo en aprender estas librerías se traduce en
 proyectos más profesionales, mantenibles y escalables.
 </p>
 `,
-},
+  },
   //patrones de diseño node
   {
   slug: 'nodejs-design-patterns',
@@ -516,8 +3109,8 @@ Entender cuándo usarlos y adaptarlos al estilo de JavaScript moderno
 es una habilidad clave para cualquier desarrollador backend.
 </p>
 `,
-}
-,  //extensiones-vs-code
+  },  
+  //extensiones-vs-code
   {
     slug: 'extensiones-vscode',
     title: 'Guía Completa sobre Extensiones de Visual Studio Code',
@@ -621,7 +3214,7 @@ es una habilidad clave para cualquier desarrollador backend.
   slug: 'arquitectura-llamado-multiples-apis-nodejs',
   title: 'Arquitectura para el Llamado de Múltiples APIs en Node.js',
   image: '/blog/nodejs_design_patterns.webp',
-  date: '2025-01-23',
+  date: '2025-12-15',
   tags: [
     'Node.js',
     'Arquitectura de Software',
@@ -845,8 +3438,8 @@ la arquitectura deja de ser un detalle y pasa a ser una necesidad.
 Separar responsabilidades, aplicar patrones de diseño
 y tratar a las APIs externas como dependencias reemplazables
 es clave para construir sistemas robustos y profesionales.
-</p>
-`},  
+</p>`
+  },  
   //guia-para-entender-el-proceso-TDD
   {
     slug: 'tdd-guia-completa',
