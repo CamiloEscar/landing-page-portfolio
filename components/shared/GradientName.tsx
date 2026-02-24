@@ -4,7 +4,7 @@ interface GradientNameProps {
   children: React.ReactNode;
   size?: 'small' | 'medium' | 'large';
   className?: string;
-  technology?: string;
+  technology?: TechnologyName;
 }
 
 type TechnologyColorScheme = {
@@ -77,7 +77,7 @@ const TECHNOLOGY_COLORS: TechnologyColors = {
     dark: ['#FFFFFF', '#AAAAAA', '#CCCCCC']
   }
 };
-
+export type TechnologyName = keyof typeof TECHNOLOGY_COLORS;
 // Colores específicos para tecnologías
 
 
@@ -112,23 +112,19 @@ export default function GradientName({
 interface LightDarkGradientProps {
   children: React.ReactNode;
   mode: 'light' | 'dark';
-  technology?: string;
+  technology?: TechnologyName;
 }
 
 function LightDarkGradient({ children, mode, technology }: LightDarkGradientProps) {
   const selectedPalette = useMemo(() => {
-    if (technology) {
-      const techKey = Object.keys(TECHNOLOGY_COLORS).find(
-        key => key.toLowerCase() === technology.toLowerCase()
-      );
-      if (techKey && TECHNOLOGY_COLORS[techKey]) {
-        return TECHNOLOGY_COLORS[techKey][mode];
-      }
-    }
-    const palettes = COLOR_PALETTES[mode];
-    const randomIndex = Math.floor(Math.random() * palettes.length);
-    return palettes[randomIndex];
-  }, [mode, technology]);
+  if (technology && TECHNOLOGY_COLORS[technology]) {
+    return TECHNOLOGY_COLORS[technology][mode];
+  }
+
+  const palettes = COLOR_PALETTES[mode];
+  const randomIndex = Math.floor(Math.random() * palettes.length);
+  return palettes[randomIndex];
+}, [mode, technology]);
 
   const [fromColor, viaColor, toColor] = selectedPalette;
 

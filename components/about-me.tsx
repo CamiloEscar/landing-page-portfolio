@@ -11,6 +11,8 @@ interface TimelineEvent {
   period: string;
   description: string;
   type: 'education' | 'work';
+  // Unique key that combines type + id to avoid duplicates
+  uniqueKey: string;
 }
 
 const TimelineItem = ({ event, side }: { event: TimelineEvent; side: 'left' | 'right' }) => {
@@ -42,7 +44,10 @@ const TimelineItem = ({ event, side }: { event: TimelineEvent; side: 'left' | 'r
         {event.type === 'work' ? (
           <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 text-sm">
             {event.description.split('\n').map((item, index) => (
-              <li key={index} className="leading-tight mb-0.5">{item.trim()}</li>
+              // ✅ key combina uniqueKey + index → siempre único
+              <li key={`${event.uniqueKey}-desc-${index}`} className="leading-tight mb-0.5">
+                {item.trim()}
+              </li>
             ))}
           </ul>
         ) : (
@@ -58,47 +63,46 @@ export default function CenteredTimeline() {
     ...educationTimeline.map(edu => ({
       ...edu,
       subtitle: edu.institution,
-      type: 'education' as const
+      type: 'education' as const,
+      // ✅ "edu-1", "edu-2" — nunca choca con work
+      uniqueKey: `edu-${edu.id}`,
     })),
     ...workExperience.map(work => ({
       ...work,
       title: work.position,
       subtitle: work.company,
-      type: 'work' as const
-    }))
+      type: 'work' as const,
+      // ✅ "work-1", "work-2" — nunca choca con education
+      uniqueKey: `work-${work.id}`,
+    })),
   ].sort((a, b) => b.period.localeCompare(a.period));
 
   return (
-    <section className="py-6" id='timeline'>
+    <section className="py-6" id="timeline">
       <div className="container mx-auto px-4 backdrop-blur-md bg-white/10 dark:bg-gray-900/10 border-white/20 dark:border-gray-700/20 shadow-xl rounded-md">
         <div className="grid grid-cols-2 gap-4 mb-4 pt-4">
           <div className="text-right">
-
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center justify-end">
-              <GradientName>
-              Educación
-              </GradientName>
+              <GradientName>Educación</GradientName>
               <Calendar className="w-6 h-6 ml-2 text-green-500" />
             </h2>
           </div>
           <div>
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white flex items-center">
               <Building className="w-6 h-6 mr-2 text-green-500" />
-              <GradientName>
-
-              Experiencia Laboral
-              </GradientName>
+              <GradientName>Experiencia Laboral</GradientName>
             </h2>
           </div>
         </div>
-        
+
         <div className="relative wrap overflow-hidden">
           <div className="absolute border-opacity-20 border-gray-400 dark:border-gray-600 h-full border left-1/2"></div>
-          
+
           {allEvents.map((event) => (
-            <TimelineItem 
-              key={event.id} 
-              event={event} 
+            // ✅ uniqueKey garantiza que nunca haya duplicados
+            <TimelineItem
+              key={event.uniqueKey}
+              event={event}
               side={event.type === 'education' ? 'left' : 'right'}
             />
           ))}

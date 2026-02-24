@@ -22,17 +22,18 @@ import {
   FaWhatsapp,
 } from 'react-icons/fa';
 import { Github } from 'lucide-react';
+import { TechnologyName } from './components/shared/GradientName';
 
 interface Introduccion {
   greetings: string[];
   roles: string[];
   description: {
     before: string;
-    reactText: string;
+    reactText: TechnologyName;
     middle: string;
-    nodeText: string;
+    nodeText: TechnologyName;
     y: string;
-    nextText: string;
+    nextText: TechnologyName;
     after: string;
   };
   link: {
@@ -113,53 +114,62 @@ export interface ExperienceCategoryMinimal {
   experience: ExperienceItemMinimal[];
 }
 
-export const dataIntroduction: Introduccion [] = [
-  {greetings: ['Hola 👋, soy',
-    'Hi 👋, I am',
-     'Ciao 👋, sono',
+export const dataIntroduction: Introduccion[] = [
+  {
+    greetings: [
+      'Hola 👋, soy',
+      'Hi 👋, I am',
+      'Ciao 👋, sono',
     ],
-  roles: ['Desarrollador Web', 'Estudiante de Sistemas'],
-  description: {
-    before: 'Me dedico en crear sitios web rápidos, amigables y bien diseñados utilizando tecnologías modernas como',
+    roles: [
+      'Analista en Sistemas de Información',
+      'Full Stack Developer',
+    ],
+    description: {
+    before:
+      'Analista en Sistemas de Información y Desarrollador Full Stack con más de 3 años de experiencia construyendo aplicaciones web modernas. Trabajo principalmente con',
     nodeText: 'JavaScript',
-    middle: ',',
+    middle: ' y ',
     reactText: 'React',
-    y: 'y ',
-    nextText: 'NodeJs',
-    after: '.\n Mi enfoque está en además de la parte técnica, es que cada sitio mantenga el espíritu de cada empresa o proyecto que mis clientes llevan a cabo, ya que en la actualidad no sólo alcanza con estar en Internet, sinó de la manera en la que se lo representa.',
+    y: ' y creando APIs y servicios backend con ',
+    nextText: 'Node.js',
+    after:
+      '. También tengo experiencia con TypeScript, NextJs, Laravel, bases de datos SQL y NoSQL, diseño y consumo de APIs REST, Docker y AWS. Mi enfoque está en desarrollar soluciones rápidas, escalables y mantenibles, alineadas a objetivos de negocio y con una experiencia de usuario cuidada.'
   },
-  link: {
-    linkedin: 'in/camiloescar/',
-    github: 'CamiloEscar',
-    whatsapp: '3442-475466',
-    blog: 'Blog',
-    Portfolio: 'Portfolio',
-    Miniportfolio: 'Portfolio Impreso',
-    home: 'Portfolio',
-    contacto:'camiloescar1995@gmail.com'
-  },
-  buttons: {
-    home: 'Portfolio',
-    contact: 'Contacto',
-    portfolioPage: 'Proyectos',
-    portfolio: 'Mini Portfolio',
-    blog: 'Blog Personal',
-  },
-  socialLinks: {
-    github: 'GitHub',
-    linkedin: 'LinkedIn',
-  },
-  cv: {
-    button: 'Curriculum',
-    dialog: {
-      title: 'Curriculum Vitae',
-      description: 'Estás viendo la versión en Español. Cambia el idioma o descarga usando los botones debajo.',
-      switchLanguage: 'Switch to English',
-      close: 'Cerrar',
-      download: 'Descargar CV',
+    link: {
+      linkedin: 'in/camiloescar/',
+      github: 'CamiloEscar',
+      whatsapp: '3442-475466',
+      blog: 'Blog',
+      Portfolio: 'Portfolio',
+      Miniportfolio: 'Portfolio Impreso',
+      home: 'Portfolio',
+      contacto: 'camiloescar1995@gmail.com'
     },
-  },
-  scroll: 'Desplazar',}
+    buttons: {
+      home: 'Portfolio',
+      contact: 'Contacto',
+      portfolioPage: 'Proyectos',
+      portfolio: 'Mini Portfolio',
+      blog: 'Blog Personal',
+    },
+    socialLinks: {
+      github: 'GitHub',
+      linkedin: 'LinkedIn',
+    },
+    cv: {
+      button: 'Curriculum',
+      dialog: {
+        title: 'Curriculum Vitae',
+        description:
+          'Estás viendo la versión en Español. Puedes cambiar el idioma o descargar el CV utilizando los botones debajo.',
+        switchLanguage: 'Switch to English',
+        close: 'Cerrar',
+        download: 'Descargar CV',
+      },
+    },
+    scroll: 'Desplazar',
+  }
 ];
 
 export const dataAboutMe = [
@@ -272,7 +282,7 @@ export const itemsNavbar = [
     id: 2,
     title: 'Sobre Mi',
     icon: <UserRound size={20} />,
-    link: 'https://docs.google.com/document/d/1CvRZx0hI_KiiFPk9ok56dn2o5snL49w4cCidnHRFnXs/edit?tab=t.0',
+    link: '#about-me',
   },
   {
     id: 3,
@@ -328,10 +338,8 @@ export const dataSlider = [
 export const aboutMe = {
   age: 30,
   location: 'Concepción del Uruguay, Entre Ríos, Argentina',
-  // description:
-  //   'Soy estudiante de Licenciatura en Sistemas de Información y cuento con experiencia en el desarrollo de proyectos de forma independiente. Desde el diseño inicial hasta la implementación final. Estoy en constante aprendizaje de nuevas tecnologías y metodologías para escribir código más limpio y escalable. En cuanto al trabajo en equipo, mis habilidades y experiencia me permiten colaborar de manera efectiva y contribuir a un ambiente de trabajo positivo. Busco una oportunidad en un entorno que sea a la vez desafiante y colaborativo, donde pueda seguir creciendo profesionalmente. Me gustaría aplicar mis conocimientos para ayudar a mi equipo y a la empresa a alcanzar sus metas.',
   description:
-    'Soy estudiante de la Licenciatura en Sistemas de Información y cuento con experiencia en el desarrollo de proyectos de forma independiente, participando en todas las etapas: desde el diseño inicial hasta la implementación final. Estoy en constante aprendizaje de nuevas tecnologías y metodologías que me permiten escribir código más limpio, escalable y eficiente. Mi enfoque está en crear soluciones web rápidas, intuitivas y estéticamente atractivas, adaptadas a un entorno donde los usuarios esperan acceder a la información de manera inmediata. Además de desarrollar sitios web desde cero, también me especializo en potenciar proyectos ya iniciados e implementar soluciones de e-commerce, ayudando a empresas a mejorar su presencia y ventas online.',
+    'Actualmente me encuentro finalizando la Licenciatura en Sistemas de Información. He participado en proyectos de punta a punta, desde el análisis y diseño hasta la implementación y despliegue, incluyendo plataformas e-commerce y sistemas de gestión. Estoy en constante aprendizaje de nuevas tecnologías y metodologías que me permiten escribir código más limpio, mantenible y orientado a negocio. Busco seguir creciendo profesionalmente en entornos desafiantes donde pueda aportar soluciones reales y escalables.'
 };
 
 export const dataPortfolio: PortfolioItem[] = [
