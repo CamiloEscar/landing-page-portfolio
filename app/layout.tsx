@@ -10,13 +10,18 @@ export const metadata: Metadata = {
   title: 'Portfolio de Camilo Escar | Desarrollador Web',
   description:
     'Explora el portfolio de Camilo Escar, desarrollador web especializado en Next.js y React. Proyectos, habilidades y experiencia.',
-  keywords: ['desarrollo web', 'Next.js', 'React', 'portfolio', 'Camilo Escar'],
+  keywords: ['desarrollo web', 'Next.js', 'React', 'portfolio', 'Camilo Escar', 'Desarrollador React Argentina',
+  'Desarrollador Next.js Argentina',
+  'Backend Laravel Argentina',
+  'Full Stack Developer Entre Ríos',
+  'Desarrollo de sistemas empresariales',
+  'CRM ERP a medida'],
   authors: [{ name: 'Camilo Escar', url: 'https://camiloescar.vercel.app/' }],
   creator: 'Camilo Escar',
   metadataBase: new URL('https://camiloescar.vercel.app/'),
 
   openGraph: {
-    title: 'Portfolio de Camilo Escar | Desarrollador Web',
+    title: 'Camilo Escar | Desarrollador Full Stack en Argentina',
     description:
       'Explora el portfolio de Camilo Escar, desarrollador web especializado en Next.js y React.',
     type: 'website',
@@ -64,6 +69,7 @@ export default function RootLayout({
     <html lang="es">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <meta name="google-site-verification" content="n2-q9JwiOQkuC28j9l_rknBcMiQcCnwnjJReYvfTY9s" />
       </head>
       <body className={urbanist.className}>
         <ThemeProvider
