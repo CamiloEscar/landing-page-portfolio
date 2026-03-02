@@ -172,7 +172,8 @@ const FlipCard = () => {
         <div className="flip-card-back w-full h-full rotate-y-180 rounded-2xl overflow-hidden">
           <div className="w-full h-full flex flex-col items-center justify-center bg-white dark:bg-gray-800 p-4">
             <QRCodeCanvas
-              value={typeof window !== 'undefined' ? window.location.href : ''}
+              // value={typeof window !== 'undefined' ? window.location.href : ''}
+              value="https://wa.me/5493442475466?text=Hola%20Camilo%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarme%20con%20vos%20"
               size={qrSize} bgColor="#ffffff" fgColor="#000000" level="H"
               imageSettings={{ src: '/', x: undefined, y: undefined, height: qrSize * 0.2, width: qrSize * 0.2, excavate: true }}
               className="w-full h-auto"

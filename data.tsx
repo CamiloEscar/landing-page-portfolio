@@ -114,6 +114,20 @@ export interface ExperienceCategoryMinimal {
   experience: ExperienceItemMinimal[];
 }
 
+export interface TechModalData {
+  key: string;           // debe coincidir con IconMapKey
+  image: string;         // ruta de imagen personalizada ej: '/tech/react.webp'
+  level: 'Básico' | 'Intermedio' | 'Avanzado';
+  yearsExp: string;      // ej: '3 años'
+  summary: string;       // párrafo corto de qué hacés con esta tech
+  highlights: string[];  // bullets de logros/usos
+  relatedProjects: {
+    title: string;
+    url?: string;
+    description: string;
+  }[];
+}
+
 export const dataIntroduction: Introduccion[] = [
   {
     greetings: [
@@ -754,25 +768,25 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'HTML & CSS',
             subtitle: 'Intermedio',
-            value: 60,
+            value: 65,
             experience:
-              'Más de 3 años de experiencia creando estructuras web semánticas y accesibles.',
+              'Más de 3 años construyendo interfaces semánticas, accesibles y responsivas. Uso Grid y Flexbox para layouts complejos, variables CSS para sistemas de diseño consistentes y animaciones personalizadas con keyframes.',
             technologies: ['html5', 'css3'],
           },
           {
             name: 'JavaScript',
             subtitle: 'Intermedio',
-            value: 60,
+            value: 65,
             experience:
-              'Dominio de ES6+ y experiencia en desarrollo de aplicaciones SPA y PWA.',
+              'Dominio sólido de ES6+: destructuring, async/await, módulos, optional chaining y Fetch API. Base de todos mis proyectos, tanto SPAs en vanilla JS como aplicaciones con frameworks modernos.',
             technologies: ['javascript'],
           },
           {
             name: 'TypeScript',
-            subtitle: 'Basico',
+            subtitle: 'Básico',
             value: 40,
             experience:
-              'Conocimiento básico de TypeScript y experiencia en desarrollo de aplicaciones.',
+              'Uso TypeScript en proyectos React y Node para tipar props, interfaces de API y reducir errores en tiempo de desarrollo. Configuración de tsconfig, tipos genéricos y strict mode.',
             technologies: ['typescript'],
           },
         ],
@@ -783,31 +797,19 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'React',
             subtitle: 'Intermedio',
-            value: 60,
+            value: 70,
             experience:
-              'Desarrollo de aplicaciones complejas utilizando React y su ecosistema.',
-            technologies: [
-              'react',
-              'next-js',
-            ],
+              'Mi framework principal con más de 3 años de uso. Hooks (useState, useEffect, useRef, useMemo, useCallback), Context API, composición de componentes, Framer Motion para animaciones y shadcn/ui para UI accesible.',
+            technologies: ['react', 'next-js'],
           },
           {
             name: 'Angular',
             subtitle: 'Intermedio',
-            value: 60,
+            value: 55,
             experience:
-              'Desarrollo de aplicaciones complejas utilizando React y su ecosistema.',
-            technologies: [
-              'angular',
-            ],
+              'Desarrollo del frontend del ecommerce fullstack con Angular. Módulos, servicios con inyección de dependencias, routing con guards, RxJS para estado reactivo e integración con APIs Laravel.',
+            technologies: ['angular'],
           },
-          // {
-          //   name: 'Svelte',
-          //   subtitle: 'Basico',
-          //   value: 20,
-          //   experience: 'Diseño de web simulando a Google Translate.',
-          //   technologies: ['svelte', 'Astro'],
-          // },
         ],
       },
       {
@@ -816,31 +818,33 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'Vite',
             subtitle: 'Intermedio',
+            value: 60,
+            experience:
+              'Herramienta de build preferida para proyectos React y TypeScript. Configuración de path aliases, variables de entorno, plugins y builds optimizados para producción.',
             technologies: ['vite'],
           },
-          // {
-          //   name: 'Accessibility',
-          //   subtitle: 'Intermedio',
-          //   technologies: ['accessibility'],
-          // },
-          // {
-          //   name: 'Styled-components',
-          //   subtitle: 'Intermedio',
-          //   technologies: ['styled-components'],
-          // },
           {
             name: 'Tailwind CSS',
             subtitle: 'Intermedio',
+            value: 65,
+            experience:
+              'Framework de estilos principal. Diseño responsive mobile-first, dark mode con next-themes, CVA para variantes de componentes e integración con shadcn/ui y Radix UI.',
             technologies: ['tailwindcss'],
           },
           {
             name: 'Webpack',
-            subtitle: 'Basico',
+            subtitle: 'Básico',
+            value: 30,
+            experience:
+              'Conocimiento para leer y modificar configuraciones existentes: loaders, plugins, path aliases y separación de entornos dev/prod.',
             technologies: ['webpack'],
           },
           {
             name: 'Babel',
-            subtitle: 'Basico',
+            subtitle: 'Básico',
+            value: 30,
+            experience:
+              'Transpilación de ES6+ con preset-env, soporte de JSX con preset-react e integración en pipelines de Webpack y Jest.',
             technologies: ['babel'],
           },
         ],
@@ -857,25 +861,25 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'Node JS',
             subtitle: 'Básico',
-            value: 30,
+            value: 45,
             experience:
-              'Desarrollo de APIs RESTful, GraphQL y aplicaciones en tiempo real con Node.js, Express y Socket.io.',
-            technologies: ['NodeJs'],
+              'Desarrollo de APIs REST con Express, autenticación con JWT, comunicación en tiempo real con Socket.io y manejo de archivos con Multer. Backend principal en proyectos MERN.',
+            technologies: ['nodejs'],
           },
           {
             name: 'Python',
             subtitle: 'Básico',
             value: 40,
             experience:
-              'Uso de Python para desarrollo web con Django y Flask, scripts de automatización y análisis de datos.',
+              'Scripts de automatización interna, análisis de datos con Pandas y NumPy, APIs básicas con Flask y procesamiento de archivos CSV/JSON en contextos laborales y académicos.',
             technologies: ['python'],
           },
           {
             name: 'PHP',
             subtitle: 'Intermedio',
-            value: 60,
+            value: 55,
             experience:
-              'Desarrollo de backend con PHP y Laravel, incluyendo APIs RESTful y aplicaciones web dinámicas.',
+              'Backend del ecommerce fullstack con Laravel: Eloquent ORM, autenticación con Sanctum, API Resources, jobs asíncronos, Blade templates y manejo completo con Artisan CLI.',
             technologies: ['php'],
           },
         ],
@@ -886,16 +890,25 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'Express',
             subtitle: 'Básico',
+            value: 45,
+            experience:
+              'Framework principal para APIs Node.js. Routing modular, middlewares de auth y error handling, integración con Mongoose, validación con express-validator y seguridad con helmet.',
             technologies: ['express'],
           },
           {
             name: 'Django',
             subtitle: 'Básico',
+            value: 30,
+            experience:
+              'Exploración en proyectos académicos. ORM con relaciones y migraciones, Django REST Framework para APIs, panel de administración automático y autenticación integrada.',
             technologies: ['django'],
           },
           {
             name: 'Laravel',
             subtitle: 'Básico',
+            value: 50,
+            experience:
+              'Framework PHP del ecommerce. Eloquent con relaciones hasMany/belongsTo, Sanctum para auth de SPA, API Resources, Jobs para emails y Tinker para exploración del modelo.',
             technologies: ['laravel'],
           },
         ],
@@ -906,31 +919,49 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'Socket.io',
             subtitle: 'Básico',
+            value: 40,
+            experience:
+              'Comunicación bidireccional en tiempo real: rooms y namespaces para chats, indicadores de escritura, lista de usuarios conectados y reconexión automática.',
             technologies: ['socket-io'],
           },
           {
             name: 'GraphQL',
             subtitle: 'Básico',
+            value: 25,
+            experience:
+              'Conocimiento exploratorio: schemas, resolvers, queries y mutations con Apollo Server integrado en Express y consumo desde cliente con Apollo Client.',
             technologies: ['graphql'],
           },
           {
             name: 'Axios',
-            subtitle: 'Basico',
+            subtitle: 'Básico',
+            value: 50,
+            experience:
+              'Cliente HTTP en proyectos React y Node. Instancias con baseURL, interceptors para tokens JWT automáticos, manejo centralizado de errores y cancelación de requests.',
             technologies: ['axios'],
           },
           {
             name: 'Docker',
             subtitle: 'Básico',
+            value: 35,
+            experience:
+              'Containerización para entornos reproducibles. Dockerfile para Node y PHP, Docker Compose para orquestar base de datos, backend y frontend con persistencia en volúmenes.',
             technologies: ['docker'],
           },
           {
             name: 'OAuth',
             subtitle: 'Básico',
+            value: 30,
+            experience:
+              'Login social con Google y GitHub mediante flujo Authorization Code. Implementado con Passport.js en proyectos Node y Laravel Socialite en proyectos PHP.',
             technologies: ['oauth'],
           },
           {
             name: 'JWT',
             subtitle: 'Básico',
+            value: 50,
+            experience:
+              'Autenticación stateless en todas mis APIs REST. Access tokens de corta duración, refresh tokens con rotación, middleware de auth en Express y almacenamiento en httpOnly cookies.',
             technologies: ['jwt'],
           },
         ],
@@ -949,15 +980,15 @@ export const dataExperience: ExperienceCategory[] = [
             subtitle: 'Básico',
             value: 40,
             experience:
-              'Creación de dashboards interactivos y visualizaciones de datos para la toma de decisiones.',
+              'Creación de dashboards interactivos para métricas operativas. Conexión a Excel y CSV, DAX básico para métricas calculadas y reportes automáticos para gestión en Video Digital SRL.',
             technologies: ['powerbi'],
           },
           {
             name: 'Tableau',
             subtitle: 'Básico',
-            value: 40,
+            value: 35,
             experience:
-              'Desarrollo de visualizaciones complejas y análisis de datos en tiempo real.',
+              'Visualizaciones analíticas en contexto académico. Conexión a fuentes de datos tabulares, calculated fields para métricas derivadas y dashboards con filtros interactivos.',
             technologies: ['tableau'],
           },
         ],
@@ -974,25 +1005,25 @@ export const dataExperience: ExperienceCategory[] = [
           {
             name: 'PostgreSQL',
             subtitle: 'Básico',
-            value: 20,
+            value: 35,
             experience:
-              'Diseño de esquemas de bases de datos, optimización de consultas y gestión de transacciones.',
+              'Diseño de esquemas relacionales normalizados, JOINs y CTEs para consultas complejas, índices para optimización e integración con Prisma ORM y Supabase en proyectos serverless.',
             technologies: ['postgresql'],
           },
           {
             name: 'MongoDB',
             subtitle: 'Básico',
-            value: 20,
+            value: 45,
             experience:
-              'Diseño y modelado de datos en bases de datos NoSQL, optimización de rendimiento.',
+              'Base de datos principal en proyectos MERN. Mongoose schemas con validaciones, populate para referencias, pipeline de aggregations para estadísticas y Atlas para producción en la nube.',
             technologies: ['mongodb'],
           },
           {
             name: 'MySQL',
             subtitle: 'Básico',
-            value: 20,
+            value: 40,
             experience:
-              'Diseño y modelado de datos en bases de datos SQL.',
+              'Diseño relacional con foreign keys, consultas SQL con JOINs y subqueries, migraciones con Laravel Artisan, transacciones para operaciones críticas y modelado visual con MySQL Workbench.',
             technologies: ['mysql'],
           },
         ],
@@ -1184,3 +1215,594 @@ export const dataContact = [
 //   },
 // ];
 
+
+// ─── Datos del modal por tecnología ──────────────────────────────────────
+export const dataTechModal: TechModalData[] = [
+    {
+    key: 'html5',
+    image: '/tech/html5.webp',
+    level: 'Intermedio',
+    yearsExp: '+3 años',
+    summary:
+      'La base de todo lo que construyo. Escribo HTML5 semántico poniendo foco en la estructura correcta, accesibilidad con ARIA y compatibilidad con motores de búsqueda.',
+    highlights: [
+      'Marcado semántico: article, section, nav, aside',
+      'Formularios con validación nativa (required, pattern)',
+      'Metaetiquetas, Open Graph y SEO básico',
+      'Canvas API para herramientas visuales',
+      'Integración con Blade (Laravel) y Jinja (Django)',
+    ],
+    relatedProjects: [
+      { title: 'Imagen Compresor',  url: 'https://imagencompressor.netlify.app/',   description: 'Interfaz con File API y Canvas HTML5' },
+      { title: 'FlyBondi Clone',    url: 'https://flybondi-challenge.netlify.app/', description: 'Maquetado semántico responsive' },
+      { title: 'SPA VanillaCoin',   url: 'https://spavanillacoin.netlify.app/',     description: 'SPA sin frameworks, HTML5 puro' },
+    ],
+  },
+
+  {
+    key: 'css3',
+    image: '/tech/css3.webp',
+    level: 'Intermedio',
+    yearsExp: '+3 años',
+    summary:
+      'Diseño visual de interfaces desde cero con CSS3 moderno. Uso Grid y Flexbox para layouts complejos, variables CSS para sistemas de diseño y animaciones fluidas.',
+    highlights: [
+      'CSS Grid y Flexbox para layouts avanzados',
+      'Variables CSS (custom properties) para theming',
+      'Keyframes y transiciones personalizadas',
+      'Responsive design mobile-first',
+      'Dark mode con prefers-color-scheme',
+    ],
+    relatedProjects: [
+      { title: 'SPA VanillaCoin',  url: 'https://spavanillacoin.netlify.app/',     description: 'Layout completo sin librerías CSS' },
+      { title: 'Imagen Compresor', url: 'https://imagencompressor.netlify.app/',   description: 'UI con animaciones CSS puras' },
+      { title: 'FlyBondi Clone',   url: 'https://flybondi-challenge.netlify.app/', description: 'Diseño responsive con CSS moderno' },
+    ],
+  },
+
+  {
+    key: 'javascript',
+    image: '/tech/javascript.webp',
+    level: 'Intermedio',
+    yearsExp: '+3 años',
+    summary:
+      'Mi lenguaje principal. Lo uso en frontend y backend a diario: lógica de negocio, integración con APIs, manipulación del DOM y programación asíncrona con async/await.',
+    highlights: [
+      'ES6+: destructuring, spread, optional chaining, nullish coalescing',
+      'Async/await, Promises y manejo de errores',
+      'Fetch API y consumo de REST APIs',
+      'Manipulación avanzada del DOM y eventos',
+      'SPAs completas sin frameworks (vanilla JS)',
+    ],
+    relatedProjects: [
+      { title: 'SPA VanillaCoin',  url: 'https://spavanillacoin.netlify.app/',   description: 'SPA completa en JavaScript puro' },
+      { title: 'Imagen Compresor', url: 'https://imagencompressor.netlify.app/', description: 'Compresión con File API y Canvas API' },
+      { title: 'FlyBondi Clone',   url: 'https://flybondi-challenge.netlify.app/', description: 'Buscador de vuelos con JS y filtros dinámicos' },
+    ],
+  },
+
+  {
+    key: 'typescript',
+    image: '/modaltypescript.jpg',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Uso TypeScript para agregar tipado estático en proyectos React y Node, lo que reduce errores en tiempo de desarrollo y mejora el autocompletado del editor.',
+    highlights: [
+      'Tipado de props, estados y eventos en React',
+      'Interfaces y tipos para respuestas de API',
+      'Tipos genéricos básicos (Array<T>, Promise<T>)',
+      'Strict mode y configuración de tsconfig',
+      'Integración con ESLint y Prettier',
+    ],
+    relatedProjects: [
+      { title: 'Divipagos',             url: 'https://divi-pagos.vercel.app/',   description: 'App de gastos React + TypeScript' },
+      { title: 'Colección de Juegos',   url: 'https://gameshub-eta.vercel.app/', description: 'SPA de juegos con Vite + TS' },
+      { title: 'Google Traductor Clon', description: 'Integración OpenAI completamente tipada en TS' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // FRONTEND — Frameworks
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'react',
+    image: '/modalreact.png',
+    level: 'Intermedio',
+    yearsExp: '+3 años',
+    summary:
+      'Mi framework principal de frontend. Construyo componentes reutilizables, gestiono estado con hooks y context, e integro librerías del ecosistema como Framer Motion y shadcn/ui.',
+    highlights: [
+      'Hooks: useState, useEffect, useRef, useMemo, useCallback, useContext',
+      'Context API para estado global sin Redux',
+      'Composición de componentes y custom hooks',
+      'Animaciones con Framer Motion',
+      'UI accesible con shadcn/ui y Radix UI',
+    ],
+    relatedProjects: [
+      { title: 'Pizzeria Web',     url: 'https://pizzeria-donatello.vercel.app/',   description: 'Menú interactivo y carrito de compras' },
+      { title: 'MERN CRUD',        description: 'Autenticación y CRUD completo con React' },
+      { title: 'Sala de Chat',     description: 'UI en tiempo real con React y Socket.io' },
+      { title: 'FlyBondi Clone',   url: 'https://flybondi-challenge.netlify.app/', description: 'Buscador y reserva de vuelos' },
+      { title: 'Divipagos',        url: 'https://divi-pagos.vercel.app/',           description: 'App de gastos compartidos' },
+    ],
+  },
+
+  {
+    key: 'next-js',
+    image: '/tech/nextjs.webp',
+    level: 'Intermedio',
+    yearsExp: '2 años',
+    summary:
+      'Uso Next.js cuando necesito SSR, SSG o API Routes. Este portfolio está construido en Next.js con App Router, Server Components y despliegue en Vercel.',
+    highlights: [
+      'App Router con layouts anidados y loading.tsx',
+      'SSG e ISR para rendimiento en producción',
+      'API Routes para backend liviano integrado',
+      'Optimización automática de imágenes (next/image)',
+      'Metadata API para SEO avanzado',
+    ],
+    relatedProjects: [
+      { title: 'Portfolio Personal', description: 'Este sitio — Next.js 14 + App Router + Vercel' },
+      { title: 'Pizzeria Web',       url: 'https://pizzeria-donatello.vercel.app/', description: 'Landing con SSG y pedidos online' },
+    ],
+  },
+
+  {
+    key: 'angular',
+    image: '/ecommerce.gif',
+    level: 'Intermedio',
+    yearsExp: '~1 año',
+    summary:
+      'Utilicé Angular en el frontend del ecommerce fullstack. Su arquitectura opinionada con módulos, servicios e inyección de dependencias es ideal para aplicaciones empresariales grandes.',
+    highlights: [
+      'Componentes, módulos y lazy loading',
+      'Servicios e inyección de dependencias',
+      'Routing con guards y resolvers',
+      'RxJS y Observables para estado reactivo',
+      'Integración con APIs Laravel (HttpClient)',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'Frontend Angular + backend Laravel + MySQL con panel admin' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // FRONTEND — Tecnologías
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'vite',
+    image: '/tech/vite.webp',
+    level: 'Intermedio',
+    yearsExp: '2 años',
+    summary:
+      'Mi herramienta de build preferida para proyectos React y TypeScript. Su HMR instantáneo y arranque ultrarrápido hacen que el desarrollo fluya sin fricción.',
+    highlights: [
+      'Configuración desde cero con React + TS template',
+      'Path aliases para imports limpios (@/components)',
+      'Variables de entorno con import.meta.env',
+      'Build optimizado con code splitting automático',
+      'Plugins: compression, svg, PWA',
+    ],
+    relatedProjects: [
+      { title: 'Divipagos',             url: 'https://divi-pagos.vercel.app/',   description: 'React + TypeScript bootstrapeado con Vite' },
+      { title: 'Colección de Juegos',   url: 'https://gameshub-eta.vercel.app/', description: 'SPA de juegos con Vite + TS' },
+      { title: 'Google Traductor Clon', description: 'Vite + React + OpenAI API' },
+    ],
+  },
+
+  {
+    key: 'tailwindcss',
+    image: '/tech/tailwind.webp',
+    level: 'Intermedio',
+    yearsExp: '2 años',
+    summary:
+      'Mi framework de estilos principal. Lo combino con shadcn/ui para componentes accesibles, CVA para variantes y clases condicionales para dark mode completo.',
+    highlights: [
+      'Diseño responsive mobile-first con breakpoints',
+      'Dark mode con clase dark: y next-themes',
+      'CVA (Class Variance Authority) para variantes',
+      'Integración con shadcn/ui y Radix UI',
+      'Animaciones con tailwind-animate y Framer Motion',
+    ],
+    relatedProjects: [
+      { title: 'Portfolio Personal', description: 'Este sitio — Tailwind + shadcn/ui + dark mode' },
+      { title: 'Pizzeria Web',       url: 'https://pizzeria-donatello.vercel.app/',        description: 'UI completa con Tailwind y componentes' },
+      { title: 'Arquitecto Page',    url: 'https://landing-page-arquitecto.vercel.app/',   description: 'Landing elegante con Tailwind y Astro' },
+    ],
+  },
+
+  {
+    key: 'webpack',
+    image: '/tech/webpack.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Conocimiento básico de Webpack para leer, entender y modificar configuraciones en proyectos existentes. Sé cómo funcionan los loaders, plugins y el flujo de bundling.',
+    highlights: [
+      'Loaders: babel-loader, css-loader, file-loader',
+      'Plugins: HtmlWebpackPlugin, DefinePlugin',
+      'Path aliases con resolve.alias',
+      'Separación de config dev/prod',
+    ],
+    relatedProjects: [
+      { title: 'Proyectos CRA legacy', description: 'Modificación de config Webpack ejected' },
+    ],
+  },
+
+  {
+    key: 'babel',
+    image: '/tech/babel.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Uso Babel para transpilar JavaScript moderno a versiones compatibles con navegadores más antiguos, y para habilitar características experimentales en proyectos con Webpack.',
+    highlights: [
+      '@babel/preset-env con targets de browsers',
+      '@babel/preset-react para JSX',
+      'Plugins para class properties y decoradores',
+      'Integración con Jest para testing',
+    ],
+    relatedProjects: [
+      { title: 'Proyectos con Webpack', description: 'Pipeline de transpilación en stack legacy' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BACKEND — Lenguajes
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'nodejs',
+    image: '/tech/nodejs.webp',
+    level: 'Básico',
+    yearsExp: '2 años',
+    summary:
+      'Desarrollo el backend de aplicaciones MERN con Node.js. Construyo APIs REST con Express, manejo autenticación con JWT y comunicación en tiempo real con Socket.io.',
+    highlights: [
+      'APIs RESTful con Express y middlewares',
+      'Autenticación con JWT + bcrypt',
+      'WebSockets en tiempo real con Socket.io',
+      'Subida de archivos con Multer',
+      'Variables de entorno con dotenv',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD',        description: 'API completa con auth JWT y operaciones CRUD' },
+      { title: 'Sala de Chat',     description: 'Server Node + Express + Socket.io' },
+      { title: 'Reserva Fútbol 5', description: 'Backend de reservas con Node y MongoDB' },
+      { title: 'Fulbito F5',       url: 'https://fulbito-f5.vercel.app/', description: 'API para gestión de partidos y estadísticas' },
+    ],
+  },
+
+  {
+    key: 'python',
+    image: '/tech/python.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Uso Python para automatizar tareas repetitivas, procesar datos con Pandas y construir APIs simples con Flask. También lo aplico en scripts internos en mi trabajo actual.',
+    highlights: [
+      'Scripts de automatización de procesos',
+      'Análisis y limpieza de datos con Pandas',
+      'APIs REST básicas con Flask',
+      'Web scraping con BeautifulSoup y requests',
+      'Procesamiento de CSV, JSON y Excel',
+    ],
+    relatedProjects: [
+      { title: 'Scripts internos',     description: 'Automatización de reportes en Video Digital SRL' },
+      { title: 'Chat PDF',             description: 'Procesamiento de documentos con Python y IA' },
+      { title: 'Proyecto académico',   description: 'Análisis de datos con Pandas para UADER' },
+    ],
+  },
+
+  {
+    key: 'php',
+    image: '/tech/php.webp',
+    level: 'Intermedio',
+    yearsExp: '~1 año',
+    summary:
+      'Uso PHP con Laravel para construir backends robustos. Construí el ecommerce completo con autenticación, panel admin, carrito y gestión de pedidos en PHP/Laravel.',
+    highlights: [
+      'Eloquent ORM para modelado de datos',
+      'Autenticación con Laravel Sanctum',
+      'API Resources y transformers',
+      'Blade templates para vistas del servidor',
+      'Migraciones, seeders y factories con Artisan',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'Backend PHP/Laravel + panel admin + API para Angular' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BACKEND — Frameworks
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'express',
+    image: '/tech/express.webp',
+    level: 'Básico',
+    yearsExp: '2 años',
+    summary:
+      'Framework minimalista de Node.js con el que construyo todas mis APIs backend en proyectos MERN. Lo combino con Mongoose, JWT y middlewares de seguridad.',
+    highlights: [
+      'Routing con Express Router modular',
+      'Middlewares: auth, error handling, logger',
+      'CORS configurable y seguridad con helmet',
+      'Validación de inputs con express-validator',
+      'Integración con Mongoose y Sequelize',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD',        description: 'API REST completa con auth JWT' },
+      { title: 'Sala de Chat',     description: 'Server Express + Socket.io integrados' },
+      { title: 'Reserva Fútbol 5', description: 'CRUD completo de reservas y usuarios' },
+    ],
+  },
+
+  {
+    key: 'django',
+    image: '/tech/django.webp',
+    level: 'Básico',
+    yearsExp: '< 1 año',
+    summary:
+      'Framework Python que he explorado en proyectos académicos. Lo valoro por su ORM potente, panel admin automático y Django REST Framework para construir APIs rápidamente.',
+    highlights: [
+      'Modelos y ORM con relaciones y migraciones',
+      'Django REST Framework para APIs',
+      'Panel de administración automático',
+      'Autenticación integrada con sesiones',
+      'Class-based views para operaciones CRUD',
+    ],
+    relatedProjects: [
+      { title: 'Proyecto académico', description: 'CRUD universitario con Django + PostgreSQL' },
+    ],
+  },
+
+  {
+    key: 'laravel',
+    image: '/modallaravel.png',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Framework PHP que uso para el ecommerce fullstack. Su ecosistema elegante (Eloquent, Sanctum, Artisan) me permite construir backends completos de forma rápida y organizada.',
+    highlights: [
+      'Eloquent ORM con relaciones hasMany, belongsTo',
+      'Autenticación con Sanctum (SPA y API tokens)',
+      'Jobs y queues para emails y notificaciones',
+      'API Resources para respuestas JSON limpias',
+      'Tinker para explorar el modelo desde consola',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'Backend Laravel + MySQL + API para Angular' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BACKEND — Tecnologías
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'socket-io',
+    image: '/tech/socketio.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Implementé comunicación bidireccional en tiempo real para la sala de chat: mensajes instantáneos, indicadores de escritura y presencia de usuarios conectados.',
+    highlights: [
+      'Rooms y namespaces para chats múltiples',
+      'Eventos personalizados cliente ↔ servidor',
+      'Indicador de "escribiendo..." en tiempo real',
+      'Lista de usuarios conectados por sala',
+      'Reconexión automática con back-off',
+    ],
+    relatedProjects: [
+      { title: 'Sala de Chat', description: 'Chat en tiempo real con rooms y Socket.io' },
+    ],
+  },
+
+  {
+    key: 'graphql',
+    image: '/tech/graphql.webp',
+    level: 'Básico',
+    yearsExp: '< 1 año',
+    summary:
+      'Conocimiento básico de GraphQL como alternativa a REST para evitar over-fetching. He construido schemas, resolvers y queries/mutations con Apollo Server en proyectos de aprendizaje.',
+    highlights: [
+      'Definición de tipos y schemas',
+      'Queries y mutations con resolvers',
+      'Apollo Server integrado con Express',
+      'Consumo con Apollo Client desde React',
+    ],
+    relatedProjects: [
+      { title: 'API exploratorio', description: 'Schema GraphQL con Apollo + MongoDB' },
+    ],
+  },
+
+  {
+    key: 'axios',
+    image: '/tech/axios.webp',
+    level: 'Básico',
+    yearsExp: '2 años',
+    summary:
+      'Cliente HTTP que uso en proyectos React y Node para consumir APIs externas e internas. Lo configuro con interceptors para manejo centralizado de auth y errores.',
+    highlights: [
+      'Instancias con baseURL y headers globales',
+      'Interceptors para tokens JWT automáticos',
+      'Manejo centralizado de errores (401, 500)',
+      'Cancelación de requests con AbortController',
+      'Integración con React Query y SWR',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD',     description: 'Consumo de API interna con interceptors JWT' },
+      { title: 'Ecommerce',     description: 'Requests desde Angular con HttpClient y Axios' },
+    ],
+  },
+
+  {
+    key: 'docker',
+    image: '/tech/docker.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Containerización para entornos de desarrollo reproducibles. Uso Docker Compose para levantar base de datos, backend y frontend con un solo comando y sin conflictos de versiones.',
+    highlights: [
+      'Dockerfile multistage para Node.js y PHP',
+      'Docker Compose con servicios interdependientes',
+      'Volúmenes para persistencia de base de datos',
+      'Variables de entorno con .env en Compose',
+      'Redes internas para comunicación entre contenedores',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'Stack Laravel + MySQL + Angular con Compose' },
+    ],
+  },
+
+  {
+    key: 'oauth',
+    image: '/tech/oauth.webp',
+    level: 'Básico',
+    yearsExp: '< 1 año',
+    summary:
+      'Implementación de login social con OAuth 2.0 para que los usuarios puedan autenticarse con Google o GitHub sin crear una contraseña nueva.',
+    highlights: [
+      'Flujo Authorization Code con PKCE',
+      'Login con Google y GitHub',
+      'Passport.js en proyectos Node/Express',
+      'Laravel Socialite en proyectos PHP',
+      'Almacenamiento seguro de tokens',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD', description: 'Login social con Google via Passport.js' },
+    ],
+  },
+
+  {
+    key: 'jwt',
+    image: '/tech/jwt.webp',
+    level: 'Básico',
+    yearsExp: '2 años',
+    summary:
+      'Autenticación stateless en todas mis APIs REST. Genero access tokens de corta duración y refresh tokens para sesiones persistentes, almacenándolos en httpOnly cookies para mayor seguridad.',
+    highlights: [
+      'Access token (15min) + refresh token (7d)',
+      'Rotación de refresh tokens en cada uso',
+      'Middleware de auth en Express',
+      'httpOnly cookies para evitar XSS',
+      'Blacklist de tokens en logout',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD',        description: 'Sistema auth completo con JWT + refresh tokens' },
+      { title: 'Reserva Fútbol 5', description: 'Protección de rutas privadas con JWT middleware' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // DATA ANALYTICS
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'powerbi',
+    image: '/tech/powerbi.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Creación de dashboards interactivos para análisis de datos operativos. Lo usé para visualizar métricas de reclamos y tiempos de respuesta en Video Digital SRL.',
+    highlights: [
+      'Dashboards interactivos con filtros dinámicos',
+      'Conexión a Excel, CSV y bases SQL',
+      'DAX básico para métricas calculadas',
+      'Visualizaciones: barras, KPI, mapas de calor',
+      'Reportes automáticos para gestión',
+    ],
+    relatedProjects: [
+      { title: 'Dashboard operativo', description: 'Métricas de reclamos en Video Digital SRL' },
+      { title: 'Análisis académico',  description: 'Visualización de datos para materias de UADER' },
+    ],
+  },
+
+  {
+    key: 'tableau',
+    image: '/tech/tableau.webp',
+    level: 'Básico',
+    yearsExp: '< 1 año',
+    summary:
+      'Exploración de datos y creación de visualizaciones analíticas con Tableau. Lo he usado en contextos académicos para análisis exploratorio y presentación de resultados.',
+    highlights: [
+      'Visualizaciones drag-and-drop',
+      'Conexión a CSV y bases de datos',
+      'Calculated fields para métricas derivadas',
+      'Dashboards con filtros interactivos',
+      'Publicación en Tableau Public',
+    ],
+    relatedProjects: [
+      { title: 'Proyecto académico', description: 'Análisis de datos con Tableau para UADER' },
+    ],
+  },
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BASE DE DATOS
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  {
+    key: 'postgresql',
+    image: '/tech/postgresql.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Base de datos relacional robusta que uso cuando necesito integridad referencial y consultas complejas. Lo integro con Prisma ORM en proyectos Node y con Django ORM en Python.',
+    highlights: [
+      'Diseño de esquemas relacionales normalizados',
+      'JOINs, subconsultas y CTEs',
+      'Índices para optimización de consultas lentas',
+      'Migraciones con Prisma y Django ORM',
+      'Integración con Supabase para proyectos serverless',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'BD relacional completa con Laravel/Eloquent' },
+      { title: 'Proyecto académico',  description: 'Sistema CRUD con Django + PostgreSQL' },
+    ],
+  },
+
+  {
+    key: 'mongodb',
+    image: '/tech/mongodb.webp',
+    level: 'Básico',
+    yearsExp: '2 años',
+    summary:
+      'Base de datos NoSQL que uso en todos mis proyectos MERN. Modelo documentos con Mongoose, defino schemas con validaciones y uso Atlas para el hosting en producción.',
+    highlights: [
+      'Modelado de documentos con Mongoose schemas',
+      'Populate para referencias entre colecciones',
+      'Pipeline de aggregations para estadísticas',
+      'Índices compuestos para búsquedas optimizadas',
+      'MongoDB Atlas para despliegue en la nube',
+    ],
+    relatedProjects: [
+      { title: 'MERN CRUD',        description: 'Usuarios, posts y sesiones en MongoDB' },
+      { title: 'Sala de Chat',     description: 'Mensajes y salas persistidas en MongoDB' },
+      { title: 'Reserva Fútbol 5', description: 'Reservas, canchas y usuarios' },
+      { title: 'Fulbito F5',       url: 'https://fulbito-f5.vercel.app/', description: 'Partidos, equipos y estadísticas' },
+    ],
+  },
+
+  {
+    key: 'mysql',
+    image: '/tech/mysql.webp',
+    level: 'Básico',
+    yearsExp: '~1 año',
+    summary:
+      'Base de datos relacional que uso en proyectos PHP/Laravel. Diseño las tablas con Eloquent migrations, escribo queries SQL directas cuando hace falta y uso MySQL Workbench para modelado visual.',
+    highlights: [
+      'Tablas relacionadas con foreign keys',
+      'Consultas SQL: JOINs, GROUP BY, subqueries',
+      'Migraciones y seeders con Laravel Artisan',
+      'MySQL Workbench para diseño de ERD',
+      'Transacciones para operaciones críticas',
+    ],
+    relatedProjects: [
+      { title: 'Ecommerce Fullstack', description: 'BD MySQL con productos, pedidos, usuarios y pagos' },
+    ],
+  },
+];

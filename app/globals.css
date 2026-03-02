@@ -107,48 +107,59 @@ html, body {
     --ring: 240 4.9% 83.9%;
   }
 
+  /* ── Sunrise ────────────────────────────────────────────────────────────────
+     Fondo casi blanco con muy leve tinte cálido — los colores del cielo
+     los maneja AnimatedBackground, no el CSS de shadcn.
+     Saturación baja para que los botones/cards no queden amarillos.
+  ── */
   .sunrise {
-    --background: 45 100% 94%;
-    --foreground: 20 14.3% 4.1%;
-    --card: 45 100% 98%;
-    --card-foreground: 20 14.3% 4.1%;
-    --popover: 45 100% 98%;
-    --popover-foreground: 20 14.3% 4.1%;
-    --primary: 20 100% 50%;
-    --primary-foreground: 45 100% 94%;
-    --secondary: 45 100% 90%;
-    --secondary-foreground: 20 14.3% 4.1%;
-    --muted: 45 100% 90%;
-    --muted-foreground: 20 14.3% 30%;
-    --accent: 45 100% 90%;
-    --accent-foreground: 20 14.3% 4.1%;
+    --background: 40 20% 98%;           /* blanco con leve tinte cálido */
+    --foreground: 25 20% 8%;            /* marrón oscuro suave */
+    --card: 38 18% 97%;
+    --card-foreground: 25 20% 8%;
+    --popover: 38 18% 97%;
+    --popover-foreground: 25 20% 8%;
+    --primary: 35 85% 48%;              /* dorado — solo en botones primarios */
+    --primary-foreground: 38 100% 97%;
+    --secondary: 38 15% 92%;
+    --secondary-foreground: 25 20% 12%;
+    --muted: 38 12% 93%;
+    --muted-foreground: 25 12% 42%;
+    --accent: 38 15% 92%;
+    --accent-foreground: 25 20% 12%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 45 100% 94%;
-    --border: 20 14.3% 80%;
-    --input: 20 14.3% 80%;
-    --ring: 20 100% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 35 15% 86%;
+    --input: 35 15% 86%;
+    --ring: 35 85% 48%;
+    --radius: 0.75rem;
   }
 
+  /* ── Sunset ─────────────────────────────────────────────────────────────────
+     Fondo oscuro con leve tinte cálido — evita el naranja invasivo anterior.
+     El color del cielo lo pone AnimatedBackground.
+  ── */
   .sunset {
-    --background: 20 100% 94%;
-    --foreground: 240 10% 3.9%;
-    --card: 20 100% 98%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 20 100% 98%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 340 100% 50%;
-    --primary-foreground: 20 100% 94%;
-    --secondary: 20 100% 90%;
-    --secondary-foreground: 240 10% 3.9%;
-    --muted: 20 100% 90%;
-    --muted-foreground: 240 10% 30%;
-    --accent: 20 100% 90%;
-    --accent-foreground: 240 10% 3.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 20 100% 94%;
-    --border: 240 10% 80%;
-    --input: 240 10% 80%;
-    --ring: 340 100% 50%;
+    --background: 20 18% 6%;            /* casi negro con tinte cálido */
+    --foreground: 28 20% 92%;           /* crema claro */
+    --card: 20 15% 9%;
+    --card-foreground: 28 20% 92%;
+    --popover: 20 15% 9%;
+    --popover-foreground: 28 20% 92%;
+    --primary: 22 90% 55%;              /* naranja — solo en botones primarios */
+    --primary-foreground: 20 18% 6%;
+    --secondary: 20 14% 14%;
+    --secondary-foreground: 28 20% 88%;
+    --muted: 20 12% 13%;
+    --muted-foreground: 25 10% 52%;
+    --accent: 20 14% 14%;
+    --accent-foreground: 28 20% 88%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 20 14% 16%;
+    --input: 20 14% 16%;
+    --ring: 22 90% 55%;
+    --radius: 0.75rem;
   }
 }
 
@@ -159,10 +170,29 @@ html, body {
   }
 
   @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0%   { background-position: 0% 50%;   }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%;   }
   }
+}
+
+/* ── Transición suave entre temas ───────────────────────────────────────────
+   Anima background-color, color y border-color al cambiar de clase en <html>.
+   Sin esto el cambio es instantáneo y se ve como un flash.
+── */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.3s ease,
+    border-color     0.3s ease,
+    color            0.2s ease;
+}
+
+/* Excluir animaciones que no deben verse afectadas por la transition global */
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
 }
 
 .scrolling-touch {

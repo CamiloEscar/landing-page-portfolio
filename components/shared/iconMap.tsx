@@ -70,7 +70,10 @@ import {
   SiAstro,
   SiGooglesheets,
   SiOpenai,
+  SiAxios,
+  SiPowerbi,
 } from 'react-icons/si';
+import { MdOutlineBarChart } from 'react-icons/md';
 
 export type IconMapKey =
   | 'html5'
@@ -144,6 +147,9 @@ export type IconMapKey =
   | 'appsheets'
   | 'sheets'
   | 'openai'
+  | 'axios'
+  | 'powerbi'
+  | 'tableau'
 
 export const iconMap: Record<IconMapKey, React.ReactElement> = {
   svelte: <SiSvelte className='w-5 h-5' />,
@@ -217,4 +223,7 @@ export const iconMap: Record<IconMapKey, React.ReactElement> = {
   'react-native': <SiReact className="w-5 h-5" />,
   flutter: <SiFlutter className="w-5 h-5" />,
   kotlin: <SiKotlin className="w-5 h-5" />,
+  axios:   <SiAxios   className="w-5 h-5" />,
+  powerbi: <SiPowerbi className="w-5 h-5" />,
+  tableau: <MdOutlineBarChart className="w-5 h-5" />,
 };
