@@ -158,26 +158,74 @@ const FlipCard = () => {
         className={`flip-card-inner w-full h-full transition-transform duration-300 ${isFlipped ? 'rotate-y-180' : ''}`}
         style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) ${isFlipped ? 'rotateY(180deg)' : ''}` }}
       >
+        {/* FRONT */}
         <div className="flip-card-front w-full h-full">
-          <div className="absolute inset-0 rounded-2xl overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-sky-500/20 backdrop-blur-3xl" />
-            <div className="absolute inset-0 border-[16px] border-white/10 dark:border-gray-800/10 rounded-2xl z-10" />
-            <Image src="/profile.webp" alt="Profile" fill style={{ objectFit: 'cover' }} className="rounded-xl z-0" priority />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10 rounded-xl" />
-            <Button className="absolute bottom-4 right-4 z-20 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-700 text-gray-800 dark:text-white">
+          <div className="absolute inset-0 rounded-3xl overflow-hidden">
+
+            {/* Fondo glassmorphism estilo iOS */}
+            <div className="absolute inset-0 rounded-3xl"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%)',
+                backdropFilter: 'blur(24px) saturate(180%)',
+                WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+                border: '1px solid rgba(255,255,255,0.35)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.5)',
+              }}
+            />
+
+            {/* Orbes de color difuminados detrás (dan el efecto iOS colorido) */}
+            <div className="absolute -top-8 -left-8 w-40 h-40 rounded-full opacity-40 blur-2xl"
+              style={{ background: 'radial-gradient(circle, #34d399, transparent)' }} />
+            <div className="absolute -bottom-8 -right-8 w-40 h-40 rounded-full opacity-40 blur-2xl"
+              style={{ background: 'radial-gradient(circle, #38bdf8, transparent)' }} />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full opacity-20 blur-2xl"
+              style={{ background: 'radial-gradient(circle, #a78bfa, transparent)' }} />
+
+            {/* Imagen con fondo transparente, más grande */}
+            <div className="absolute inset-0 flex items-end justify-center">
+              <Image
+                src="/profile2.png"
+                alt="Profile"
+                fill
+                style={{ objectFit: 'contain', objectPosition: 'bottom' }}
+                className="z-10 scale-110 drop-shadow-2xl"
+                priority
+              />
+            </div>
+
+            {/* Borde interno sutil (rim light estilo iOS) */}
+            <div className="absolute inset-0 rounded-3xl z-20 pointer-events-none"
+              style={{
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(0,0,0,0.05) 100%)',
+              }}
+            />
+
+            {/* Botón QR */}
+            <Button className="absolute bottom-4 right-4 z-30 backdrop-blur-md bg-white/30 hover:bg-white/50 dark:bg-white/20 dark:hover:bg-white/30 text-gray-800 dark:text-white border border-white/40 shadow-lg rounded-xl transition-all duration-200">
               <QrCode className="w-4 h-4" />
             </Button>
           </div>
         </div>
-        <div className="flip-card-back w-full h-full rotate-y-180 rounded-2xl overflow-hidden">
-          <div className="w-full h-full flex flex-col items-center justify-center bg-white dark:bg-gray-800 p-4">
+
+        {/* BACK */}
+        <div className="flip-card-back w-full h-full rotate-y-180 rounded-3xl overflow-hidden">
+          <div className="w-full h-full flex flex-col items-center justify-center p-4 rounded-3xl"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%)',
+              backdropFilter: 'blur(24px) saturate(180%)',
+              WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+              border: '1px solid rgba(255,255,255,0.35)',
+              boxShadow: '0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.5)',
+            }}
+          >
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 font-medium tracking-wide uppercase">Contacto rápido</p>
             <QRCodeCanvas
-              // value={typeof window !== 'undefined' ? window.location.href : ''}
-              value="https://wa.me/5493442475466?text=Hola%20Camilo%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarme%20con%20vos%20"
-              size={qrSize} bgColor="#ffffff" fgColor="#000000" level="H"
+              value="https://wa.me/5493442475466?text=Hola%20Camilo%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarme%20contigo%20%F0%9F%91%8B"
+              size={qrSize} bgColor="transparent" fgColor="#1a1a1a" level="H"
               imageSettings={{ src: '/', x: undefined, y: undefined, height: qrSize * 0.2, width: qrSize * 0.2, excavate: true }}
-              className="w-full h-auto"
+              className="w-full h-auto rounded-xl"
             />
+            <p className="text-xs text-gray-400 mt-3">Escaneá para escribirme por WhatsApp</p>
           </div>
         </div>
       </div>

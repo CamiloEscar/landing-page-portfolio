@@ -86,7 +86,7 @@ export default function TechModal({ techKey, onClose }: TechModalProps) {
   // Colores base del panel izquierdo
   const panelBg  = isDark ? 'rgba(6,8,20,0.98)'    : 'rgba(18,18,28,0.96)';
   const modalBg  = isDark ? 'rgba(9,11,26,0.98)'   : 'rgba(252,252,255,0.99)';
-  const rightBgR = isDark ? '9,11,26'              : '252,252,255';
+  // const rightBgR = isDark ? '9,11,26'              : '252,252,255';
 
   return (
     <AnimatePresence>
