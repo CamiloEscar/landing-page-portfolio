@@ -3,6 +3,7 @@ import { Urbanist } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import React from 'react';
+import CommandPalette from '@/components/shared/CommandPalette';
 
 const urbanist = Urbanist({ subsets: ['latin'] });
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           themes={['light', 'dark', 'sunrise', 'sunset']}
         >
           {children}
+          <CommandPalette showTrigger={false} />
         </ThemeProvider>
       </body>
     </html>

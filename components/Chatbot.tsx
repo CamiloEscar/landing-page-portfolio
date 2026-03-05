@@ -144,14 +144,12 @@ export default function ImprovedChatBot() {
   const findBestMatch = (input: string, node: ChatNode): string | null => {
     const inputWords = input.toLowerCase().split(/\s+/);
     
-    // Check for exact matches in answers
     for (const [key, value] of Object.entries(node.answers)) {
       if (value.toLowerCase() === input.toLowerCase()) {
         return key;
       }
     }
 
-    // Check for keyword matches
     if (node.keywords) {
       let bestMatch = null;
       let maxMatchCount = 0;
@@ -172,7 +170,6 @@ export default function ImprovedChatBot() {
       }
     }
 
-    // If no match found, return null
     return null;
   };
 
@@ -289,7 +286,7 @@ export default function ImprovedChatBot() {
           </motion.div>
         )}
         {msg.profile_image && (
-          <Image src={msg.profile_image} width={240} height={120} alt="Profile" className="mt-3 rounded-lg max-w-xs" />
+          <Image src={msg.profile_image} width={240} height={120} alt="Profile" className="mt-3 rounded-lg max-w-full h-auto" />
         )}
         {msg.contact_methods && (
           <div className="mt-3 space-y-2">
@@ -299,13 +296,13 @@ export default function ImprovedChatBot() {
                 href={details.action}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 text-primary hover:underline"
+                className="flex items-center space-x-2 text-primary hover:underline break-all"
               >
-                {method === 'email' && <Mail className="h-4 w-4" />}
-                {method === 'linkedin' && <Linkedin className="h-4 w-4" />}
-                {method === 'github' && <Github className="h-4 w-4" />}
-                {method === 'website' && <Globe className="h-4 w-4" />}
-                <span>{details.description}</span>
+                {method === 'email' && <Mail className="h-4 w-4 shrink-0" />}
+                {method === 'linkedin' && <Linkedin className="h-4 w-4 shrink-0" />}
+                {method === 'github' && <Github className="h-4 w-4 shrink-0" />}
+                {method === 'website' && <Globe className="h-4 w-4 shrink-0" />}
+                <span className="truncate">{details.description}</span>
               </a>
             ))}
           </div>
@@ -366,7 +363,7 @@ export default function ImprovedChatBot() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 sm:bottom-8 sm:right-8">
+    <div className="fixed bottom-24 right-4 z-50 sm:bottom-24 sm:right-8">
       <AnimatePresence>
         {isOpen ? (
           <motion.div
@@ -374,24 +371,26 @@ export default function ImprovedChatBot() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="bg-background rounded-lg shadow-xl w-[95vw] sm:w-[400px] flex flex-col h-[85vh] sm:h-[600px]"
+            className="relative bg-background rounded-lg shadow-xl w-[calc(100vw-2rem)] max-w-full sm:w-[400px] flex flex-col h-[80vh] sm:h-[600px] max-h-[800px]"
           >
             {/* Header */}
-            <div className="bg-primary text-primary-foreground p-4 rounded-t-lg flex justify-between items-center">
-              <div className="flex items-center space-x-3">
-                <div className="relative">
+            <div className="bg-primary text-primary-foreground p-3 sm:p-4 rounded-t-lg flex justify-between items-center shrink-0">
+              {/* Añadido min-w-0 para permitir truncar texto */}
+              <div className="flex items-center space-x-3 min-w-0 overflow-hidden pr-2">
+                <div className="relative shrink-0">
                   <Avatar>
                     <AvatarImage src="/robotito.png" alt="ChatBot Avatar" />
                     <AvatarFallback>CB</AvatarFallback>
                   </Avatar>
                   <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-background"></span>
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-medium">Botito el Asistente Virtual</span>
-                  <span className="text-xs text-primary-foreground/80">Activo ahora</span>
+                {/* Añadido truncate para que un nombre largo no empuje el div hacia la derecha */}
+                <div className="flex flex-col min-w-0">
+                  <span className="font-medium truncate text-sm sm:text-base">Botito el Asistente Virtual</span>
+                  <span className="text-xs text-primary-foreground/80 truncate">Activo ahora</span>
                 </div>
               </div>
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-1 shrink-0">
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -399,7 +398,7 @@ export default function ImprovedChatBot() {
                         variant="ghost"
                         size="icon"
                         onClick={resetChat}
-                        className="text-primary-foreground hover:bg-primary-foreground/20"
+                        className="text-primary-foreground hover:bg-primary-foreground/20 h-8 w-8 sm:h-10 sm:w-10"
                         disabled={isTyping || messages.length === 0}
                       >
                         <RefreshCcw className="h-4 w-4" />
@@ -415,7 +414,7 @@ export default function ImprovedChatBot() {
                   variant="ghost"
                   size="icon"
                   onClick={() => setIsOpen(false)}
-                  className="text-primary-foreground hover:bg-primary-foreground/20"
+                  className="text-primary-foreground hover:bg-primary-foreground/20 h-8 w-8 sm:h-10 sm:w-10"
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -442,7 +441,7 @@ export default function ImprovedChatBot() {
                       <AvatarFallback>CB</AvatarFallback>
                     </Avatar>
                   )}
-                  <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[80%]`}>
+                  <div className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} max-w-[85%]`}>
                     <div
                       className={`rounded-lg p-3 ${
                         msg.sender === 'user'
@@ -468,7 +467,7 @@ export default function ImprovedChatBot() {
                   animate={{ opacity: 1 }}
                   className="flex items-center space-x-2"
                 >
-                  <Avatar className="w-8 h-8">
+                  <Avatar className="w-8 h-8 shrink-0">
                     <AvatarImage src="/robotito.png" />
                     <AvatarFallback>CB</AvatarFallback>
                   </Avatar>
@@ -491,14 +490,14 @@ export default function ImprovedChatBot() {
               </Button>
             )}
 
-            <div className="border-t p-4">
+            <div className="border-t p-3 sm:p-4 shrink-0 bg-background rounded-b-lg">
               <div className="flex space-x-2">
                 <Button
                   variant="outline"
                   size="icon"
                   onClick={handleGoBack}
                   disabled={history.length === 0}
-                  className="hover:bg-secondary"
+                  className="hover:bg-secondary shrink-0"
                 >
                   <ArrowLeft className="h-4 w-4" />
                 </Button>
@@ -509,12 +508,12 @@ export default function ImprovedChatBot() {
                   onChange={(e) => setInputMessage(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleInputSubmit()}
                   placeholder="Escribe un mensaje..."
-                  className="flex-1"
+                  className="flex-1 min-w-0"
                 />
                 <Button 
                   onClick={handleInputSubmit}
                   disabled={!inputMessage.trim()}
-                  className="bg-primary hover:bg-primary/90"
+                  className="bg-primary hover:bg-primary/90 shrink-0"
                 >
                   <Send className="h-4 w-4" />
                 </Button>
@@ -533,19 +532,20 @@ export default function ImprovedChatBot() {
             <Button
               onClick={() => setIsOpen(true)}
               size="icon"
-              className="rounded-full h-14 w-14 shadow-lg"
+              className="rounded-full h-14 w-14 shadow-lg p-0 overflow-hidden"
             >
+              {/* CORRECCIÓN: Se ajusta la imagen para no desbordar el contenedor circular */}
               <Image
-                src="/robotitoicon.png" // Replace with your 3D robot image path
+                src="/robotitoicon.png" 
                 alt="3D Robot Chat Icon"
-                width={112}
-                height={112}
-                className="object-cover"
+                width={56}
+                height={56}
+                className="object-cover w-full h-full"
               />
               {unreadCount > 0 && (
                 <Badge 
                   variant="destructive" 
-                  className="absolute -top-2 -right-2 h-6 w-6 rounded-full flex items-center justify-center"
+                  className="absolute -top-1 -right-1 h-6 w-6 rounded-full flex items-center justify-center text-xs border-2 border-background"
                 >
                   {unreadCount}
                 </Badge>

@@ -54,6 +54,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
+import CommandPalette from './CommandPalette';
 
 const links = [
   { id: 1, title: 'Home',          icon: <Paperclip className="h-4 w-4" />, link: '/'        },
@@ -224,6 +225,11 @@ export default function EnhancedNavBar() {
 
                 {/* Acciones derechas */}
                 <div className="flex items-center gap-1">
+
+                  <CommandPalette
+                    showTrigger={true}
+                    className="hidden md:flex"   // oculto en mobile si querés
+                  />
 
                   {/* Botón de tema — cicla los 4 */}
                   <TooltipProvider>

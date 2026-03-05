@@ -250,3 +250,8 @@ html, body {
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+.palette-open .fixed.z-\[100\] > div:first-child {
+  backdrop-filter: none !important;
+  background-color: rgba(0,0,0,0.85) !important;
+}

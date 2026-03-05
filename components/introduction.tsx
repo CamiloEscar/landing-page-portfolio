@@ -147,18 +147,24 @@ const FlipCard = () => {
   return (
     <div
       ref={cardRef}
-      className="flip-card w-full h-full cursor-pointer"
+      className="flip-card w-full h-full cursor-pointer select-none"
       onClick={handleClick}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={(e) => { const t = e.touches[0]; setStartPosition({ x: t.clientX, y: t.clientY }); }}
+      onTouchEnd={(e) => {
+        const t = e.changedTouches[0];
+        if (Math.abs(t.clientX - startPosition.x) < 12 && Math.abs(t.clientY - startPosition.y) < 12) {
+          setIsFlipped(f => !f);
+        }
+      }}
     >
       <div
         className={`flip-card-inner w-full h-full transition-transform duration-300 ${isFlipped ? 'rotate-y-180' : ''}`}
         style={{ transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) ${isFlipped ? 'rotateY(180deg)' : ''}` }}
       >
-        {/* FRONT */}
         <div className="flip-card-front w-full h-full">
           <div className="absolute inset-0 rounded-3xl overflow-hidden">
 
@@ -223,7 +229,7 @@ const FlipCard = () => {
               value="https://wa.me/5493442475466?text=Hola%20Camilo%2C%20vi%20tu%20portfolio%20y%20me%20gustar%C3%ADa%20contactarme%20contigo%20%F0%9F%91%8B"
               size={qrSize} bgColor="transparent" fgColor="#1a1a1a" level="H"
               imageSettings={{ src: '/', x: undefined, y: undefined, height: qrSize * 0.2, width: qrSize * 0.2, excavate: true }}
-              className="w-full h-auto rounded-xl"
+              className="w-full h-auto"
             />
             <p className="text-xs text-gray-400 mt-3">Escaneá para escribirme por WhatsApp</p>
           </div>
@@ -249,6 +255,7 @@ export default function Introduction() {
   const [currentGreetingIndex, setCurrentGreetingIndex] = useState(0);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const [viewType, setViewType] = useState('pdf');
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef      = useRef<HTMLDivElement>(null);
@@ -256,7 +263,16 @@ export default function Introduction() {
 
   const { greetings, roles, description, buttons, socialLinks, cv, scroll } = dataIntroduction[0];
 
+  // Detect mobile to disable parallax
   useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile) return; // no parallax on mobile
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
@@ -267,7 +283,7 @@ export default function Introduction() {
     };
     document.addEventListener('mousemove', handleMouseMove);
     return () => document.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const handleScroll = () => setShowScrollIndicator(window.scrollY <= 100);
@@ -294,11 +310,13 @@ export default function Introduction() {
   const getSwitchLanguageText = () => cvLanguage === 'en' ? 'Ver CV en Español' : 'View CV in English';
 
   return (
+    // ✅ CRÍTICO: overflow-hidden REMOVIDO de la section.
+    // Era lo que recortaba el efecto cohete/viento del HeroWindSection.
     <section
       className="relative w-full min-h-screen flex items-center justify-center"
       ref={containerRef}
     >
-      <div className="container mx-auto px-4 py-12 lg:py-16">
+      <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-10 lg:py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 relative">
           <motion.div
             ref={cardRef}
@@ -308,8 +326,8 @@ export default function Introduction() {
             transition={{ duration: 0.8 }}
             style={{ transition: 'transform 0.3s ease-out' }}
           >
-            <Card data-hero-card className="w-full backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-white/20 dark:border-gray-700/20 shadow-xl">
-              <CardContent className="p-8 sm:p-10">
+            <Card className="w-full backdrop-blur-md bg-white/40 dark:bg-gray-900/40 border-white/20 dark:border-gray-700/20 shadow-xl">
+              <CardContent className="p-4 sm:p-7 lg:p-10">
                 <AnimatePresence mode="wait">
                   <motion.h3
                     key={currentGreetingIndex}
@@ -317,7 +335,7 @@ export default function Introduction() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5 }}
-                    className="text-xl sm:text-2xl mb-4 text-gray-600 dark:text-gray-400 font-light"
+                    className="text-base sm:text-xl mb-2 sm:mb-4 text-gray-600 dark:text-gray-400 font-light"
                   >
                     {greetings[currentGreetingIndex]}
                   </motion.h3>
@@ -327,13 +345,13 @@ export default function Introduction() {
                   Camilo Escar
                 </GradientName>
 
-                <div className="h-[40px] mb-6">
+                <div className="h-[32px] sm:h-[40px] mb-4 sm:mb-6">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl text-gray-800 dark:text-gray-200">
                     <Typewriter words={roles} loop cursor cursorStyle="|" typeSpeed={70} deleteSpeed={50} delaySpeed={1500} />
                   </h2>
                 </div>
 
-                <p className="text-base sm:text-lg lg:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+                <p className="text-sm sm:text-base lg:text-xl text-gray-700 dark:text-gray-300 mb-5 sm:mb-8 leading-relaxed line-clamp-4 sm:line-clamp-none">
                   {description.before}
                   <GradientName size="small" className="mx-1 font-bold font-mono" technology={description.nodeText}>{description.nodeText}</GradientName>
                   {description.middle}
@@ -343,13 +361,20 @@ export default function Introduction() {
                   {description.after}
                 </p>
 
-                <div className="flex flex-wrap gap-4 mb-8">
+                {/* Foto en mobile — entre descripción y botones */}
+                <div className="block lg:hidden mb-4 sm:mb-6">
+                  <div className="relative aspect-square max-w-[160px] sm:max-w-[220px] mx-auto">
+                    <FlipCard />
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 mb-5 sm:mb-8">
                   <ActionButton text={buttons.portfolioPage} icon={Briefcase} color="green" href="/portfolio" />
                   <ActionButton text={buttons.portfolio}     icon={Layers}    color="blue"  href="/minimal" />
                   <ActionButton text={buttons.blog}          icon={Pen}       color="purple" href="/blog" />
                 </div>
 
-                <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex flex-wrap gap-2 sm:gap-4 mb-5 sm:mb-8">
                   <SocialLink href="https://github.com/CamiloEscar"           icon={Github}   label={socialLinks.github}   color="gray" />
                   <SocialLink href="https://www.linkedin.com/in/camiloescar/" icon={Linkedin} label={socialLinks.linkedin} color="blue" />
                   <DropdownMenu>
@@ -377,13 +402,13 @@ export default function Introduction() {
 
           <motion.div
             ref={imageRef}
-            className="w-full lg:w-2/5 lg:absolute lg:right-20 z-30"
-            initial={{ opacity: 0, scale: 0.8 }}
+            className="hidden lg:block lg:w-2/5 lg:absolute lg:right-20 z-30"
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.75, delay: 0.1 }}
             style={{ transition: 'transform 0.3s ease-out' }}
           >
-            <div className="relative aspect-square max-w-[280px] sm:max-w-[320px] lg:max-w-[400px] mx-auto lg:ml-auto">
+            <div className="relative aspect-square max-w-[380px] mx-auto">
               <FlipCard />
             </div>
           </motion.div>
